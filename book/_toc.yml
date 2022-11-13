@@ -8,11 +8,18 @@ parts:
     chapters:
       - file: part_1/01_audio-effects
       - file: part_1/02_music-production
+        sections:
+        - file: part_1/music-production/01_mixing
+        - file: part_1/music-production/02_equalization
+        - file: part_1/music-production/03_reveberation
+        - file: part_1/music-production/04_compression
+        - file: part_1/music-production/05_aesthetics
 
-  - caption: Approaches  # part 2
+  - caption: Automatic Mixing  # part 2
     chapters:
       - file: part_2/01_imp
-      - file: part_2/02_automatic-mixing
+      - file: part_2/02_problem
+      - file: part_2/03_methods
         sections:
         - file: part_2/methods/01_mixwaveunet
         - file: part_2/methods/02_enc-dec

@@ -3,7 +3,7 @@
 
 This is a web book written for a [tutorial session](https://ismir2022.ismir.net/program/tutorials/) of [the 23rd International Society for Music Information Retrieval Conference](https://ismir2022.ismir.net/index), Dec 4-8, 2022 held at Bengaluru, India in hybrid format. The [ISMIR conference](https://ismir.net/) is the world’s leading research forum on processing, searching, organising and accessing music-related data.
 
-## Abstract
+## Overview
 
 Mixing is a central task within audio post-production where expert knowledge is required to deliver professional quality content, encompassing both technical and creative considerations. 
 Recently, deep learning approaches have been introduced that aim to address this challenge by generating a cohesive mixture of a set of recordings as would an audio engineer.
