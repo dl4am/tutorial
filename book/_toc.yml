@@ -1,0 +1,36 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: landing-page
+parts:
+  - caption: Audio Engineering # part 1
+    chapters:
+      - file: part_1/01_audio-effects
+      - file: part_1/02_music-production
+
+  - caption: Approaches  # part 2
+    chapters:
+      - file: part_2/01_imp
+      - file: part_2/02_automatic-mixing
+        sections:
+        - file: part_2/methods/01_mixwaveunet
+        - file: part_2/methods/02_enc-dec
+        - file: part_2/methods/03_dmc
+
+  - caption: Implementation # part 3
+    chapters:
+        - file: part_3/01_inference.ipynb
+        - file: part_3/02_datasets
+        - file: part_3/03_training.ipynb
+
+  - caption: Evaluation # part 4
+    chapters:
+      - file: part_4/01_metrics
+      - file: part_4/02_listening-tests
+
+  - caption: Conclusion # part 5
+    chapters:
+      - file: part_5/01_future-directions
+      - file: part_5/02_conclusion
+      - file: part_5/03_references
