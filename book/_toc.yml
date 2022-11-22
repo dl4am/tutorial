@@ -22,8 +22,9 @@ parts:
       - file: part_2/03_methods
         sections:
         - file: part_2/methods/01_mixwaveunet
-        - file: part_2/methods/02_enc-dec
-        - file: part_2/methods/03_dmc
+        - file: part_2/methods/02_dmc
+      - file: part_2/04_loss-functions
+      - file: part_2/05_diffsp
 
   - caption: Implementation # part 3
     chapters:
