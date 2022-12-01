@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>MixWaveUNet &#8212; Deep Learning for Automatic Mixing</title>
+    <title>Mix-Wave-U-Net &#8212; Deep Learning for Automatic Mixing</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Encoder-Decoder" href="02_enc-dec.html" />
-    <link rel="prev" title="Automatic mixing" href="../02_automatic-mixing.html" />
+    <link rel="next" title="Differentiable Mixing Console" href="02_dmc.html" />
+    <link rel="prev" title="Methods" href="../03_methods.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -124,15 +126,47 @@ const thebe_selector_output = ".output, .cell_output"
    Audio Effects
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../../part_1/02_music-production.html">
    Music Production
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_1/music-production/01_mixing.html">
+     Mixing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_1/music-production/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_1/music-production/03_reveberation.html">
+     Reverberation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_1/music-production/04_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_1/music-production/05_aesthetics.html">
+     Aesthetics
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Approaches
+  Automatic Mixing
  </span>
 </p>
 <ul class="current nav bd-sidenav">
@@ -141,32 +175,42 @@ const thebe_selector_output = ".output, .cell_output"
    Intelligent Music Production
   </a>
  </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../02_automatic-mixing.html">
-   Automatic mixing
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02_problem.html">
+   Problem Formulation
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../03_methods.html">
+   Methods
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul class="current">
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     MixWaveUNet
+     Mix-Wave-U-Net
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="02_enc-dec.html">
-     Encoder-Decoder
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="03_dmc.html">
+    <a class="reference internal" href="02_dmc.html">
      Differentiable Mixing Console
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05_diffsp.html">
+   Differentiable signal processing
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -182,11 +226,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../../part_3/02_datasets.html">
-   Datasets
+   Datasets for automix systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../part_3/03_training.html">
+  <a class="reference internal" href="../../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/04_training.html">
    Training
   </a>
  </li>
@@ -203,8 +252,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/02_listening-tests.html">
-   Listening tests
+  <a class="reference internal" href="../../part_4/05_evaluate.html">
+   Evaluation
   </a>
  </li>
 </ul>
@@ -384,23 +433,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wave-u-net">
+   Wave-U-Net
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   Mix-Wave-U-Net
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>MixWaveUNet</h1>
+                <h1>Mix-Wave-U-Net</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#wave-u-net">
+   Wave-U-Net
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   Mix-Wave-U-Net
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -408,8 +504,26 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="mixwaveunet">
-<h1>MixWaveUNet<a class="headerlink" href="#mixwaveunet" title="Permalink to this headline">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="mix-wave-u-net">
+<h1>Mix-Wave-U-Net<a class="headerlink" href="#mix-wave-u-net" title="Permalink to this headline">#</a></h1>
+<p>The Mix-Wave-U-Net <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id12" title="M Martinez Ramirez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MRSM21</a>]</span> is based upon the Wave-U-Net architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id17" title="Daniel Stoller, Sebastian Ewert, and Simon Dixon. Wave-u-net: a multi-scale neural network for end-to-end audio source separation. ISMIR, 2018.">SED18</a>]</span>, a model proposed for music source separation. This approach leverages the fact that the generation of a multitrack mix in many ways is the inverse task of separating the sources in a mixture, the focus of music source separation systems. In this work, the authors demonstrated how to train a Wave-U-Net model to map individual recordings to the final mixture by simply adjusting the number of inputs to the system to accept the multitrack input, and adjusting the number of outputs to two, which produces a stereo mix.</p>
+<figure class="align-center" id="id3">
+<img alt="Mix-Wave-U-Net" src="../../_images/mix-wave-u-net.svg" /><figcaption>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Network architecture for the Mix-Wave-Net.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="wave-u-net">
+<h2>Wave-U-Net<a class="headerlink" href="#wave-u-net" title="Permalink to this headline">#</a></h2>
+<p>The Wave-U-Net model itself is actually based on an early model proposed in computer vision, known at the U-Net architecture, which was proposed for image segmentation . Unlike other source separation models that operate on magnitude or complex spectrograms, Wave-U-Net operates on the mixture directly in the time domain, using 1-d convolutions to progressively process the signal. It can be viewed as an encoder-decoder or autoencoder network.</p>
+<p>In the encoder the signal is progressively downsampled until a certain resolution is reached, which is a function of the number of downsampling operations. This is achieved by stacking a number of downsampling blocks in series. Each downsampling block follows a similar structure. It includes a 1-d convolution followed by a nonlinear activation (in the original implementation this is  LeakyReLU). After these operations a downsampling or decimation operation is performed which decreases the temporal resolution of the intermediate activations by a factor of two. In the original paper the authors implement this with a straightforward decimation, but it can also be implemented with a strided convolution.</p>
+<p>At each downsampling block, the temporal resolution is repeatedly decreased. This results in a shorter and shorter signal in the time domain, while the number of convolutional channels is increased by <span class="math notranslate nohighlight">\(F_c=24\)</span> at each block. At the final downsampling block another 1-d convolution is applied, before the signal is passed on to a series of upsampling blocks which in some sense mirror the downsampling blocks.</p>
+<p>The downsampled representation is sent through a decoding process and the intermediate activations are progressively upsampled. Unique to the U-Net-like architectures is the inclusion of skip connections (denoted as dashed arrows) that shuttle information from each layer of the encoder to their respective layer in the decoder. This enables combining information from the downsampled signal at various temporal resolutions to the upsampling process during signal reconstruction. Empirically this has been shown to lead to improved performance and accuracy in the reconstruction quality.</p>
+<p>It should be noted that Wave-U-Net also has close connection to other encoder-decoder architectures for audio signal processing, most noticeable of which is Demucs and its variants <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id18" title="Alexandre Défossez, Nicolas Usunier, Léon Bottou, and Francis Bach. Music source separation in the waveform domain. arXiv preprint arXiv:1911.13254, 2019.">DefossezUBB19</a>]</span>. Demucs builds on</p>
+</section>
+<section id="id5">
+<h2>Mix-Wave-U-Net<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>As a direct transformation method, Mix-Wave-U-Net was shown to produce impressive results in that it was able to mimic the mixes in the ENST-drums dataset. This meant the system was capable of mimicking the equalization, compression, and reverberation of the target mixes without any explicit knowledge of these effects. However,</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -439,17 +553,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../02_automatic-mixing.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../03_methods.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Automatic mixing</p>
+            <p class="prev-next-title">Methods</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_enc-dec.html" title="next page">
+    <a class='right-next' id="next-link" href="02_dmc.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Encoder-Decoder</p>
+        <p class="prev-next-title">Differentiable Mixing Console</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

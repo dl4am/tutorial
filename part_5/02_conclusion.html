@@ -124,26 +124,9 @@ const thebe_selector_output = ".output, .cell_output"
    Audio Effects
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../part_1/02_music-production.html">
    Music Production
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Approaches
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/01_imp.html">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/02_automatic-mixing.html">
-   Automatic mixing
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -152,21 +135,80 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/01_mixing.html">
+     Mixing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/03_reveberation.html">
+     Reverberation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/04_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/05_aesthetics.html">
+     Aesthetics
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_2/03_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
     <a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">
-     MixWaveUNet
+     Mix-Wave-U-Net
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/02_enc-dec.html">
-     Encoder-Decoder
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/03_dmc.html">
+    <a class="reference internal" href="../part_2/methods/02_dmc.html">
      Differentiable Mixing Console
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/04_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/05_diffsp.html">
+   Differentiable signal processing
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -182,11 +224,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../part_3/02_datasets.html">
-   Datasets
+   Datasets for automix systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/03_training.html">
+  <a class="reference internal" href="../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/04_training.html">
    Training
   </a>
  </li>
@@ -203,8 +250,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening tests
+  <a class="reference internal" href="../part_4/05_evaluate.html">
+   Evaluation
   </a>
  </li>
 </ul>

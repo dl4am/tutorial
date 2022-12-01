@@ -1,0 +1,3 @@
+# Methods
+
+As introduced in the previous section, existing approaches for automatic mixing are categorized into those that perform a direct mapping from the input recordings to the final mixture, which contrast with those that instead manipulate the parameters of a mixing console and set of audio effects. In this section, we consider one example of each of these systems that has been proposed in the literature. We will walk through the design details of these architectures and discuss their tradeoffs in the context of the considerations introduced in the previous section. We will cover how to implement these models and show how they are trained in Section 3, which focuses on the implementation. 

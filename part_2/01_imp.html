@@ -52,8 +52,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Automatic mixing" href="02_automatic-mixing.html" />
-    <link rel="prev" title="Music Production" href="../part_1/02_music-production.html" />
+    <link rel="next" title="Problem Formulation" href="02_problem.html" />
+    <link rel="prev" title="Aesthetics" href="../part_1/music-production/05_aesthetics.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -124,26 +124,9 @@ const thebe_selector_output = ".output, .cell_output"
    Audio Effects
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../part_1/02_music-production.html">
    Music Production
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Approaches
- </span>
-</p>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="02_automatic-mixing.html">
-   Automatic mixing
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -152,21 +135,80 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/01_mixing.html">
+     Mixing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/03_reveberation.html">
+     Reverberation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/04_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/05_aesthetics.html">
+     Aesthetics
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="03_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
     <a class="reference internal" href="methods/01_mixwaveunet.html">
-     MixWaveUNet
+     Mix-Wave-U-Net
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="methods/02_enc-dec.html">
-     Encoder-Decoder
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="methods/03_dmc.html">
+    <a class="reference internal" href="methods/02_dmc.html">
      Differentiable Mixing Console
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_diffsp.html">
+   Differentiable signal processing
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -182,11 +224,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../part_3/02_datasets.html">
-   Datasets
+   Datasets for automix systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/03_training.html">
+  <a class="reference internal" href="../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/04_training.html">
    Training
   </a>
  </li>
@@ -203,8 +250,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening tests
+  <a class="reference internal" href="../part_4/05_evaluate.html">
+   Evaluation
   </a>
  </li>
 </ul>
@@ -407,18 +454,40 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#knowledge-based-systems">
-   Knowledge-based systems
+  <a class="reference internal nav-link" href="#high-level-aims">
+   High-Level Aims
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#machine-learning-based-systems">
-   Machine Learning-based systems
+  <a class="reference internal nav-link" href="#history">
+   History
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#deep-learning-based-system">
-   Deep Learning-based system
+  <a class="reference internal nav-link" href="#approaches">
+   Approaches
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#knowledge-based-systems">
+     Knowledge-based Systems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classical-machine-learning">
+     Classical Machine Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-learning-systems">
+     Deep Learning Systems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#considerations">
+   Considerations
   </a>
  </li>
 </ul>
@@ -441,18 +510,40 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#knowledge-based-systems">
-   Knowledge-based systems
+  <a class="reference internal nav-link" href="#high-level-aims">
+   High-Level Aims
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#machine-learning-based-systems">
-   Machine Learning-based systems
+  <a class="reference internal nav-link" href="#history">
+   History
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#deep-learning-based-system">
-   Deep Learning-based system
+  <a class="reference internal nav-link" href="#approaches">
+   Approaches
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#knowledge-based-systems">
+     Knowledge-based Systems
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classical-machine-learning">
+     Classical Machine Learning
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#deep-learning-systems">
+     Deep Learning Systems
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#considerations">
+   Considerations
   </a>
  </li>
 </ul>
@@ -467,14 +558,48 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="intelligent-music-production">
 <h1>Intelligent Music Production<a class="headerlink" href="#intelligent-music-production" title="Permalink to this headline">#</a></h1>
+<p>Intelligent music prodution is a research field that aims to develop algorithms that provide assistance in the process of recording, mixing, or mastering a musical production. The systems can range from being assisitive, providing feedback and recommendations, to completely autonomous wherein they could control the mixing consoles end-to-end or based on certain criteria or conditioning. The field focuses not only on automatic mixing systems but also on smart signal processing units that can be used to either transform or enhance audio signals.</p>
+<p>Several approaches have been taken for designing these kind of systems ranging from models that produce appropriate parameterization of the pre-existing signal processing devices like the mixing console to direct transformation systems that directly operate on the input to produce output. Both the types of systems have their own pros and cons. The end-to-end natured systems offer less control to the user, produce less interpretable results, however, offer the possibility for more creativity, expressivity and astonishing chanced-outcomes.</p>
+<section id="high-level-aims">
+<h2>High-Level Aims<a class="headerlink" href="#high-level-aims" title="Permalink to this headline">#</a></h2>
+<p>The advanced technology today has made creating, publishing and distributing content more affordable and simple than ever before. This has led to a positively increasing number of people becoming interested in creating art and putting it out to the world. Hence, the demand for smart sytems that produce quick, affordable, and quality results is also rising. There are two potential audience for these kind of systems, namely, the amateurs/hobbyists and the profesionals. The designed systems should ideally be able to cater to both the categories of users. This means that systems should be able to provide quick, affordable and quality results while offering enough control and interpretability.</p>
+</section>
+<section id="history">
+<h2>History<a class="headerlink" href="#history" title="Permalink to this headline">#</a></h2>
+<p>For close to half a century, several attempts to design these kind of smart attempts have been made. The earliest of the known systems was presented by Dugan in 1975 at the AES Convention, Los angeles. He designed a simple system for automatic microphone mixing that aimed to control the gain of multiple microphones for speech adaptively by monitoring the level of other microphones without any feedback[]. These mixers, which have developed through the years and are still in use in the industry, are only intended to give straightforward control over the volume of several channels in situations where a skilled audio engineer is not necessary. However, the limited control and versatality that these systems offered made them not very useful in more complex applications. However after several years, an interest was observed in the field around 2000s when Pachet and Delerue developed a system design that allowed listeners to adjust the spatialization of a multitrack mix while meeting a set of constraints set by the audio engineer[]. This work framed multitrack mixing as an optimization problem, which influenced the work done in the field for the years to come.</p>
+<p>The approaches taken for the system design from then to now can be categorised into three major brackets, namely, knowledge-based systems, machine learning-based systems and deep learning-based systems.</p>
+</section>
+<section id="approaches">
+<h2>Approaches<a class="headerlink" href="#approaches" title="Permalink to this headline">#</a></h2>
 <section id="knowledge-based-systems">
-<h2>Knowledge-based systems<a class="headerlink" href="#knowledge-based-systems" title="Permalink to this headline">#</a></h2>
+<h3>Knowledge-based Systems<a class="headerlink" href="#knowledge-based-systems" title="Permalink to this headline">#</a></h3>
+<p>The earliest works posed various multitrack mixing tasks as an optimisation problem that aimed at reducing perceptual masking. The expert knowledge was used to define certain rules that controlled the system to function in the desired manner. Most of these systems had two signal paths: the main signal path, which applied the transformation, and the side-chain, that aimed at analysing and extracting features from the incoming signal and generating conditional information that directed the main signal path to apply the transformation in a specific manner[]. The main signal path was optimised based on an optimisation algorithm or a rule base. Most of these systems were based on the assumption that perceptual models used for masking were representative of human perception and the set of underlying rules and constraints truly aligned with the internal goal of mixing engineers.</p>
+<p><em>~Diagram~ [knowledge-based systems]</em></p>
+<p>In 2007, an autonomous sytem for panning multitracks in a multitrack mixture was proposed []. Through a straightforward prioritisation structure and a filter bank of K filters that assess the energy inside each band of each input, this method seeks to lessen spectral masking among K input tracks. With the intention of eliminating spectral masking by spacing apart sources with comparable spectral content, these values are then utilised to guide the panning of each source over various panning steps in the stereo field. Thereafter, other tasks associated with multitrack mixing like balance[], equalisaion[], delay correction[] were also optimised in similar way. Though these systems were state-of-the-art at that time, they still lacked versatility to be able to cater to the entire spectrum of the real world projects and were very sensitive to the parameter tuning. Perez Gonzalez incorporated all these systems into one unified system and presented in his PhD thesis[]. The next few years saw attempts in improving the performance and accuracy of perceptual models. Some researchers also examined approaches that sought to achieve an equal loudness criteria across input channels were also examined, in addition to the objective of decreasing spectral masking within a mix[][][]. More through examination of the mixing practices were also conducted by some researchers to improve the rule base, thus improving the performance of knowledge-based sytems[].  All in all, these systems produced explainable results but couldn’t adapt well to the complexities of real world projects.</p>
 </section>
-<section id="machine-learning-based-systems">
-<h2>Machine Learning-based systems<a class="headerlink" href="#machine-learning-based-systems" title="Permalink to this headline">#</a></h2>
+<section id="classical-machine-learning">
+<h3>Classical Machine Learning<a class="headerlink" href="#classical-machine-learning" title="Permalink to this headline">#</a></h3>
+<p>With the popularity of machine learning in the early 21st century, some researchers began to explore these directions for multitrack mixing system. These systems leverage large amount of parametric data collected from pros to train systems to do a specific task. Kolasinski[] utilised genetic algorithm and extracted audio features for leveling tracks[]. Scott et al utilized linear dynamical systems to predict time varying gains based on extracted audio features and a dataset of mutlitrack mixes[]. Investigations were also made into designing more complex processing units like dynamic range compression[], reverberation[], and equalisation[] which was not possible with knowledge-based systems.</p>
+<p>However, the lack of availability of enough parametric data (parameter values for the processor along with the dry and processed audio) proved to be a limitation in the further development of this field.</p>
 </section>
-<section id="deep-learning-based-system">
-<h2>Deep Learning-based system<a class="headerlink" href="#deep-learning-based-system" title="Permalink to this headline">#</a></h2>
+<section id="deep-learning-systems">
+<h3>Deep Learning Systems<a class="headerlink" href="#deep-learning-systems" title="Permalink to this headline">#</a></h3>
+<p>In the recent years, the advancement in the deep learning-based approaches have given a new framework for approaching the multitrack mixing problem. Through the use of several layers of parameterized computations, the machine learning area of deep learning offers a framework for learning complicated, nonlinear relationships from data. These methods are often characterised by the use of neural network designs with numerous layers, the optimization of parameters using an appropriate loss function, stochastic gradient descent, and backpropagation. We train models that develop more potent representations that are tailored for the task at hand instead of employing features that are hand-crafted for each sort of input data and task as in earlier machine learning approaches.</p>
+<p>Deep learning based approaches heavily rely on the data used for training. However, the lack of availability of copyright-free multitrack data has been the major challenge in designing systems using these approaches. Deep learning based approaches used in audio domain are mostly inspired by the successful models in the computer vision domain. This means that the audio data is converted into a STFT(Short time fourier transform) before being processed like an image. The transformation produces a STFT as the output which needs to be converted back to an audio. This approach has the limitation in the sense that the phase information is lost in the process. Even though algorithms like the Griffin-Lim algorithm do a good job at reconstructing the phase information, the results sometimes still end up having undesirable artifacts. Another class of approaches directly work on audio and predict audio as outputs. The model is allowed to discover the best representations of the audio waveforms directly, unlike earlier spectrogram-based methods, which required intermediary, hand-designed representations to be created during pre- and post-processing. However, these models require a lot more computing resources to train and perform well.</p>
+<p>Some of the notable works using this approach have involved either implementing full-on end-to-end mixing systems or emulating audio effects using various methods to make them differentiable.</p>
+</section>
+</section>
+<section id="considerations">
+<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">#</a></h2>
+<p>Some important considerations for an automatic mixing system include interpretability, controllability, efficiency, permutation invariance, the requirement for specific input taxonomy, ability to handle a varying number of input recordings, fidelity, and the expressivity of the signal manipulation in mix creation. There are a lot of details to unpack there. Let’s introduce these eight considerations as we will keep them in mind as we discuss the details of different approaches in the following sections.</p>
+<p><em>Interpretability</em>: While it might not be critical to have a fully explainable model (in the XAI sense~\cite{}), it is often desirable for an automatic mixing system to convey what kind of manipulation is applied to each input recording in the creation of the mix. For example, this can easily be achieved by parameter estimation approaches, but is somewhat problematic for direct transformation approaches.</p>
+<p><em>Controllability</em>: Similar to interpretability, a system with a level of controllability will enable the user to not only understand what signal transformations have been applied, but also enable adjustment of these transformations. Again, parameter estimation approaches enable this behavior by default, but direct transformation methods could also achieve controllability if they incorporate specialized conditioning mechanisms in the model.</p>
+<p><em>Context</em>: Closely related to controllability, although distinct, is the notion of context, or context-aware systems <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id11">LBFM21</a>]</span>. As discussed in Section 1, context plays a central role in shaping the final outcome in the audio production process. As a result, it is important to consider to what degree an automatic mixing system is capable of understanding and adapting to the context.</p>
+<p><em>Permutation Invariance</em>: An important realization is that the input recordings provided to the system are an unordered set. This means that the order in which the recordings are provided to our system should ideally not change the results. Some systems address this by adopting a fixed input taxonomy, but this restricts the system flexibility. Other approaches might deal with this by treating the input recordings as a set, often achieving this with weight sharing across the input recordings. We will discuss this further in the following sections.</p>
+<p><em>Input taxonomy</em>: As alluded to in the previous point, it is often beneficial to define a fixed input taxonomy. This means the system is trained using a dataset and model where the kind and number of sources that are passed to the system are fixed during training and inference. For example, in a system that mixes drum recordings, the inputs might always be presented to the system as an ordered set: “kick, snare, hi-hat, overhead left, overhead right, tom 1, tom 2”. While this often makes the process of creating an automatic mixing system simpler, it limits the ability of the system to be deployed in real-world scenarios wherein there exists limited structure with regards to the input recordings.</p>
+<p><em>Number of inputs</em>: Closely related to the input taxonomy is how the system handles a variable number of input recordings. Some systems might handle this by simply defining a maximum number of input recordings, inserting silence when an example contains fewer than the maximum. Other approaches that utilize weight sharing can potentially work around this and adapt to a variable number of sources, even those greater than seen during training since they treat the input recordings as a set and not a fixed vector.</p>
+<p><em>Fidelity</em>: In audio engineering providing transformations to the sound that limit noise and distortion is critical. While noise, distortion, and other destructive transformations have applications in music production, the default assumption is that systems for processing audio signals will not impact unwanted artifacts. This is an important consideration as the utility of our automatic mixing system is largely dependent on the ability to produce a desirable mixture to the user that contains no audible artifacts.</p>
+<p><em>Expressivity</em>: An important consideration is to ensure that the process employed to create a mixture in the automatic mixing system is capable of producing the mix in the dataset. This can be a challenge for parameter estimation models.</p>
 </section>
 </section>
 
@@ -505,17 +630,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../part_1/02_music-production.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../part_1/music-production/05_aesthetics.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Music Production</p>
+            <p class="prev-next-title">Aesthetics</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_automatic-mixing.html" title="next page">
+    <a class='right-next' id="next-link" href="02_problem.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Automatic mixing</p>
+        <p class="prev-next-title">Problem Formulation</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

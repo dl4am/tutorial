@@ -50,10 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Conclusions" href="02_conclusion.html" />
-    <link rel="prev" title="Listening tests" href="../part_4/02_listening-tests.html" />
+    <link rel="prev" title="Evaluation" href="../part_4/05_evaluate.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -124,26 +126,9 @@ const thebe_selector_output = ".output, .cell_output"
    Audio Effects
   </a>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../part_1/02_music-production.html">
    Music Production
-  </a>
- </li>
-</ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Approaches
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/01_imp.html">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/02_automatic-mixing.html">
-   Automatic mixing
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -152,21 +137,80 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/01_mixing.html">
+     Mixing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/03_reveberation.html">
+     Reverberation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/04_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/05_aesthetics.html">
+     Aesthetics
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_2/03_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
     <a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">
-     MixWaveUNet
+     Mix-Wave-U-Net
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/02_enc-dec.html">
-     Encoder-Decoder
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/03_dmc.html">
+    <a class="reference internal" href="../part_2/methods/02_dmc.html">
      Differentiable Mixing Console
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/04_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/05_diffsp.html">
+   Differentiable signal processing
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -182,11 +226,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../part_3/02_datasets.html">
-   Datasets
+   Datasets for automix systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/03_training.html">
+  <a class="reference internal" href="../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/04_training.html">
    Training
   </a>
  </li>
@@ -203,8 +252,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening tests
+  <a class="reference internal" href="../part_4/05_evaluate.html">
+   Evaluation
   </a>
  </li>
 </ul>
@@ -384,12 +433,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differentiable-signal-processing">
+   Differentiable signal processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generative-models">
+   Generative models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datasets">
+   Datasets
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -401,6 +484,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differentiable-signal-processing">
+   Differentiable signal processing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generative-models">
+   Generative models
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#datasets">
+   Datasets
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -410,6 +516,19 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="future-directions">
 <h1>Future Directions<a class="headerlink" href="#future-directions" title="Permalink to this headline">#</a></h1>
+<section id="differentiable-signal-processing">
+<h2>Differentiable signal processing<a class="headerlink" href="#differentiable-signal-processing" title="Permalink to this headline">#</a></h2>
+<p>As discussed in Section 2.3, differentiable signal processing provides a method to integrate existing signal processing devices, such as audio effects, directly into the end-to-end gradient-based training framework. This facilitates the ability to build neural networks that inference with audio effects in the context of creating automatic mixing models. While the Differentiable Mixing Console explored this idea in the context of automatic mixing, significant advances in extending techniques in differentiable signal processing have been made. For example, recent works have proposed explicitly differentiable implementations of audio effects such as parametric and graphic equalizers <span id="id1">[<a class="reference internal" href="03_references.html#id39" title="Joseph T Colonel and Joshua Reiss. Reverse engineering of a recording mix with differentiable digital signal processing. The Journal of the Acoustical Society of America, 150(1):608–619, 2021.">CR21</a>, <a class="reference internal" href="03_references.html#id36" title="Joseph T Colonel, Christian J Steinmetz, Marcus Michelen, and Joshua D Reiss. Direct design of biquad filter cascades with deep learning by sampling random polynomials. In ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 3104–3108. IEEE, 2022.">CSMR22</a>, <a class="reference internal" href="03_references.html#id35" title="Boris Kuznetsov, Julian D Parker, and Fabián Esqueda. Differentiable iir filters for machine learning applications. In Proc. Int. Conf. Digital Audio Effects (eDAFx-20), 297–303. 2020.">KPE20</a>, <a class="reference internal" href="03_references.html#id37" title="Shahan Nercessian. Neural parametric equalizer matching using differentiable biquads. In Proc. Int. Conf. Digital Audio Effects (eDAFx-20), 265–272. 2020.">Ner20</a>, <a class="reference internal" href="03_references.html#id38" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. Journal of the Audio Engineering Society, 2022.">SBR22</a>]</span>, artificial reverberation <span id="id2">[<a class="reference internal" href="03_references.html#id45" title="Samuel Clarke, Negin Heravi, Mark Rau, Ruohan Gao, Jiajun Wu, Doug James, and Jeannette Bohg. Diffimpact: differentiable rendering and identification of impact sounds. In Conference on Robot Learning, 662–673. PMLR, 2022.">CHR+22</a>, <a class="reference internal" href="03_references.html#id43" title="Sungho Lee, Hyeong-Seok Choi, and Kyogu Lee. Differentiable artificial reverberation. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 30:2541–2556, 2022.">LCL22</a>, <a class="reference internal" href="03_references.html#id46" title="Søren Vøgg Lyster and Cumhur Erkut. A differentiable neural network approach to parameter estimation of reverberation. In 19th Sound and Music Computing Conference, SMC 2022, 358–364. Sound and Music Computing Network, 2022.">LE22</a>, <a class="reference internal" href="03_references.html#id44" title="Christian J Steinmetz, Vamsi Krishna Ithapu, and Paul Calamia. Filtered noise shaping for time domain room impulse response estimation from reverberant speech. In 2021 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA), 221–225. IEEE, 2021.">SIC21</a>]</span>, waveshaping distortion <span id="id3">[<a class="reference internal" href="03_references.html#id40" title="Joseph T Colonel, Marco Comunità, and Joshua Reiss. Reverse engineering memoryless distortion effects with differentiable waveshapers. In 153rd Convention of the Audio Engineering Society. Audio Engineering Society, 2022.">CComunitaR22</a>]</span>, as well as dynamic range compression <span id="id4">[<a class="reference internal" href="03_references.html#id41" title="Joseph Colonel, Joshua D Reiss, and others. Approximating ballistics in a differentiable dynamic range compressor. In Audio Engineering Society Convention 153. Audio Engineering Society, 2022.">CR+22</a>, <a class="reference internal" href="03_references.html#id38" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. Journal of the Audio Engineering Society, 2022.">SBR22</a>, <a class="reference internal" href="03_references.html#id42" title="Alec Wright, Vesa Välimäki, and others. Grey-box modelling of dynamic range compression. In Proc. Int. Conf. Digital Audio Effects (DAFX), Vienna, Austria, 304–311. 2022.">WValimaki+22</a>]</span>. A clear direction of future work involves the integration of these ideas into a framework similar to DMC with the ability to efficiently extend the expressivity of the mixing console that is controlled by a neural network.</p>
+<p>However, recent work has demonstrated that while</p>
+</section>
+<section id="generative-models">
+<h2>Generative models<a class="headerlink" href="#generative-models" title="Permalink to this headline">#</a></h2>
+<p>Through this tutorial we have observed some of the potential limitations of treating the process of creating a multitrack mix as a one-to-one mapping between the input recordings and the mix present within a dataset (i.e. a discriminative model). However, we now know that due to the subjective and largely artistic nature of audio engineering, there clearly exist multiple valid mixtures for any given set of input recordings. This motivates a generative modeling approach where we construct a model <span class="math notranslate nohighlight">\(p(\mathbf{Y} | \mathbf{x}_1,  \mathbf{x}_2,  ..., \mathbf{x}_N )\)</span> that explicitly models the data generation process of producing a mixture given the observed input recordings. Thus far, no generative approaches have been applied to this task, but they could provide an important path forward towards building more powerful automatic mixing systems.</p>
+</section>
+<section id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Permalink to this headline">#</a></h2>
+<p>As mentioned throughout the tutorial, one of the main challenges in building powerful automatic mixing systems remains the lack of high-quality annotated datasets. Recently, this has been addressed in part by constructing systems that leverage datasets intended for music source separation <span id="id5">[<a class="reference internal" href="03_references.html#id31" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>]</span>. There has been significant work in developing these datasets and due to the connection between music source separation and multitrack mixing there is the potential to leverage these datasets. In addition, there has been an interest in leveraging the advancements in music source separation models in order to construct multitrack datasets for the purpose of training automatic mixing systems <span id="id6">[<a class="reference internal" href="03_references.html#id47" title="Dominic Ward, Hagen Wierstorf, Russell Mason, Mark Plumbley, and Christopher Hummersone. Estimating the loudness balance of musical mixtures using audio source separation. In Proceedings of the 3rd Workshop on Intelligent Music Production (WIMP). 2017.">WWM+17</a>]</span>. However, there are some limitations to this approach <span id="id7">[<a class="reference internal" href="03_references.html#id48" title="Christian J Steinmetz. Deep learning for automatic mixing: challenges and next steps. In MDX Workshop at ISMIR. 2021.">Ste21</a>]</span>. Future work in extending source separation models to separate mixes into more than four sources in addition to audio effect removal or normalization may be required before this method for dataset creation is viable.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -439,11 +558,11 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../part_4/02_listening-tests.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../part_4/05_evaluate.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Listening tests</p>
+            <p class="prev-next-title">Evaluation</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="02_conclusion.html" title="next page">

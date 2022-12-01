@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Intelligent Music Production" href="../part_2/01_imp.html" />
+    <link rel="next" title="Mixing" href="music-production/01_mixing.html" />
     <link rel="prev" title="Audio Effects" href="01_audio-effects.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -124,15 +124,47 @@ const thebe_selector_output = ".output, .cell_output"
    Audio Effects
   </a>
  </li>
- <li class="toctree-l1 current active">
+ <li class="toctree-l1 current active has-children">
   <a class="current reference internal" href="#">
    Music Production
   </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="music-production/01_mixing.html">
+     Mixing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="music-production/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="music-production/03_reveberation.html">
+     Reverberation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="music-production/04_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="music-production/05_aesthetics.html">
+     Aesthetics
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  Approaches
+  Automatic Mixing
  </span>
 </p>
 <ul class="nav bd-sidenav">
@@ -141,32 +173,42 @@ const thebe_selector_output = ".output, .cell_output"
    Intelligent Music Production
   </a>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/02_automatic-mixing.html">
-   Automatic mixing
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/02_problem.html">
+   Problem Formulation
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_2/03_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">
-     MixWaveUNet
+     Mix-Wave-U-Net
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/02_enc-dec.html">
-     Encoder-Decoder
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/03_dmc.html">
+    <a class="reference internal" href="../part_2/methods/02_dmc.html">
      Differentiable Mixing Console
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/04_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/05_diffsp.html">
+   Differentiable signal processing
+  </a>
  </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
@@ -182,11 +224,16 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../part_3/02_datasets.html">
-   Datasets
+   Datasets for automix systems
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/03_training.html">
+  <a class="reference internal" href="../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/04_training.html">
    Training
   </a>
  </li>
@@ -203,8 +250,8 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening tests
+  <a class="reference internal" href="../part_4/05_evaluate.html">
+   Evaluation
   </a>
  </li>
 </ul>
@@ -410,6 +457,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="music-production">
 <h1>Music Production<a class="headerlink" href="#music-production" title="Permalink to this headline">#</a></h1>
+<div class="toctree-wrapper compound">
+</div>
 </section>
 
     <script type="text/x-thebe-config">
@@ -446,10 +495,10 @@ title="Print to PDF"
             <p class="prev-next-title">Audio Effects</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../part_2/01_imp.html" title="next page">
+    <a class='right-next' id="next-link" href="music-production/01_mixing.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Intelligent Music Production</p>
+        <p class="prev-next-title">Mixing</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

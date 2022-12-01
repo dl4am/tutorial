@@ -1,0 +1,1793 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Models &#8212; Deep Learning for Automatic Mixing</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Training" href="04_training.html" />
+    <link rel="prev" title="Datasets for automix systems" href="02_datasets.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../landing-page.html">
+                    Deep Learning for Automatic Mixing 
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Audio Engineering
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_1/01_audio-effects.html">
+   Audio Effects
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_1/02_music-production.html">
+   Music Production
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/01_mixing.html">
+     Mixing
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/03_reveberation.html">
+     Reverberation
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/04_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/music-production/05_aesthetics.html">
+     Aesthetics
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_2/03_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">
+     Mix-Wave-U-Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_2/methods/02_dmc.html">
+     Differentiable Mixing Console
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/04_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/05_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Implementation
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_inference.html">
+   Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_datasets.html">
+   Datasets for automix systems
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="04_training.html">
+   Training
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Evaluation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/01_metrics.html">
+   Metrics
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/05_evaluate.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_5/01_future-directions.html">
+   Future Directions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_5/02_conclusion.html">
+   Conclusions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_5/03_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/part_3/03_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://colab.research.google.com/github/executablebooks/jupyter-book/blob/master/docs/part_3/03_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpart_3/03_models.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/part_3/03_models.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Models
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixwaveunet">
+   MixWaveUNet
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downsampling-block">
+     Downsampling Block
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upsampling-block">
+     Upsampling Block
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encoder">
+     Encoder
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embedding-latent">
+     Embedding/Latent
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decoder">
+     Decoder
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     Output
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forward">
+     Forward
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differentiable-mixing-console-dmc">
+   Differentiable Mixing Console (DMC)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Encoder
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#post-processor">
+     Post-Processor
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixer">
+     Mixer
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generating-embeddings">
+       Generating embeddings
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#context-embedding">
+       “Context” embedding
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#estimate-mixing-parameters">
+       Estimate mixing parameters
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generate-the-mix">
+       Generate the mix
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Models</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Models
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixwaveunet">
+   MixWaveUNet
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#downsampling-block">
+     Downsampling Block
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#upsampling-block">
+     Upsampling Block
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#encoder">
+     Encoder
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#embedding-latent">
+     Embedding/Latent
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#decoder">
+     Decoder
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     Output
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#forward">
+     Forward
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#differentiable-mixing-console-dmc">
+   Differentiable Mixing Console (DMC)
+  </a>
+  <ul class="visible nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Encoder
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#post-processor">
+     Post-Processor
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#mixer">
+     Mixer
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generating-embeddings">
+       Generating embeddings
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#context-embedding">
+       “Context” embedding
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#estimate-mixing-parameters">
+       Estimate mixing parameters
+      </a>
+     </li>
+     <li class="toc-h3 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#generate-the-mix">
+       Generate the mix
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="models">
+<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">#</a></h1>
+<p>In this notebook we will dig into how the two automatic mixing models we discussed can be implemented in PyTorch.
+As usual, we will assume you have already installed the <code class="docutils literal notranslate"><span class="pre">automix</span></code> package from automix-toolkit.
+If not you can do it with the following command:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install git+https://github.com/csteinmetz1/automix-toolkit
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
+Collecting git+https://github.com/csteinmetz1/automix-toolkit
+  Cloning https://github.com/csteinmetz1/automix-toolkit to /tmp/pip-req-build-1oqnd8_1
+  Running command git clone -q https://github.com/csteinmetz1/automix-toolkit /tmp/pip-req-build-1oqnd8_1
+Requirement already satisfied: torch in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.12.1+cu113)
+Requirement already satisfied: torchvision in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.13.1+cu113)
+Requirement already satisfied: torchaudio in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.12.1+cu113)
+Requirement already satisfied: pytorch_lightning in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.8.3.post1)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (4.64.1)
+Requirement already satisfied: numpy in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.21.6)
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (3.2.2)
+Requirement already satisfied: pedalboard in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.6.6)
+Requirement already satisfied: scipy in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.7.3)
+Requirement already satisfied: auraloss in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.2.2)
+Requirement already satisfied: wget in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (3.2)
+Requirement already satisfied: pyloudnorm in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.1.0)
+Requirement already satisfied: sklearn in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.0.post1)
+Requirement already satisfied: librosa in /usr/local/lib/python3.8/dist-packages (from auraloss-&gt;automix-toolkit==0.0.1) (0.8.1)
+Requirement already satisfied: pooch&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.6.0)
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (21.3)
+Requirement already satisfied: joblib&gt;=0.14 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.2.0)
+Requirement already satisfied: soundfile&gt;=0.10.2 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.11.0)
+Requirement already satisfied: decorator&gt;=3.0.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (4.4.2)
+Requirement already satisfied: scikit-learn!=0.19.0,&gt;=0.14.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.0.2)
+Requirement already satisfied: resampy&gt;=0.2.2 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.4.2)
+Requirement already satisfied: numba&gt;=0.43.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.56.4)
+Requirement already satisfied: audioread&gt;=2.0.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.0)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (57.4.0)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.39.1)
+Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (4.13.0)
+Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /usr/local/lib/python3.8/dist-packages (from packaging&gt;=20.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.9)
+Requirement already satisfied: appdirs&gt;=1.3.0 in /usr/local/lib/python3.8/dist-packages (from pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.4.4)
+Requirement already satisfied: requests&gt;=2.19.0 in /usr/local/lib/python3.8/dist-packages (from pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.23.0)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.24.3)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.10)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2022.9.24)
+Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.4)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.8/dist-packages (from scikit-learn!=0.19.0,&gt;=0.14.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.1.0)
+Requirement already satisfied: cffi&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from soundfile&gt;=0.10.2-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.15.1)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.8/dist-packages (from cffi&gt;=1.0-&gt;soundfile&gt;=0.10.2-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.21)
+Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.8/dist-packages (from importlib-metadata-&gt;numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.10.0)
+Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (2.8.2)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (1.4.4)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (0.11.0)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.8/dist-packages (from python-dateutil&gt;=2.1-&gt;matplotlib-&gt;automix-toolkit==0.0.1) (1.15.0)
+Requirement already satisfied: future&gt;=0.16.0 in /usr/local/lib/python3.8/dist-packages (from pyloudnorm-&gt;automix-toolkit==0.0.1) (0.16.0)
+Requirement already satisfied: lightning-utilities==0.3.* in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.3.0)
+Requirement already satisfied: PyYAML&gt;=5.4 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (6.0)
+Requirement already satisfied: fsspec[http]&gt;2021.06.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (2022.11.0)
+Requirement already satisfied: typing-extensions&gt;=4.0.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (4.1.1)
+Requirement already satisfied: torchmetrics&gt;=0.7.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.11.0)
+Requirement already satisfied: tensorboardX&gt;=2.2 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.5.1)
+Requirement already satisfied: fire in /usr/local/lib/python3.8/dist-packages (from lightning-utilities==0.3.*-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.4.0)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.8/dist-packages (from fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (3.8.3)
+Requirement already satisfied: aiosignal&gt;=1.1.2 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.3.1)
+Requirement already satisfied: async-timeout&lt;5.0,&gt;=4.0.0a3 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (4.0.2)
+Requirement already satisfied: attrs&gt;=17.3.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (22.1.0)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (6.0.2)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.3.3)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.8.1)
+Requirement already satisfied: charset-normalizer&lt;3.0,&gt;=2.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.1.1)
+Requirement already satisfied: protobuf&lt;=3.20.1,&gt;=3.8.0 in /usr/local/lib/python3.8/dist-packages (from tensorboardX&gt;=2.2-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (3.19.6)
+Requirement already satisfied: termcolor in /usr/local/lib/python3.8/dist-packages (from fire-&gt;lightning-utilities==0.3.*-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.1.1)
+Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /usr/local/lib/python3.8/dist-packages (from torchvision-&gt;automix-toolkit==0.0.1) (7.1.2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">automix.utils</span> <span class="kn">import</span> <span class="n">count_parameters</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="mixwaveunet">
+<h1>MixWaveUNet<a class="headerlink" href="#mixwaveunet" title="Permalink to this headline">#</a></h1>
+<p>First, we will take a look at the <a class="reference external" href="https://www.aes.org/e-lib/browse.cfm?elib=21023">Mix-Wave-U-Net</a>. Recall that this model is based on <a class="reference external" href="https://arxiv.org/abs/1806.03185">Wave-U-Net</a> a time domain audio source separation model that is itself based on the famous <a class="reference external" href="https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/">U-Net</a> architecture.</p>
+<p>The overall architecture for the network is comprised of two types of blocks: the Downsampling blocks (shown on the left) and the Upsampling blocks (shown on the right). In the network we apply a certain number of these blocks, downsampling and then upsampling the signal at different temporal resolutions. Unique to U-Net like architectuers is the characteratistic skip connections that carry information from the each level in the downsampling branch to the respective branch in the upsampling brach.</p>
+<img width = "70%" src="https://csteinmetz1.github.io/automix-toolkit/docs/assets/mix-wave-u-net.svg"/><p>We can start by importing the <code class="docutils literal notranslate"><span class="pre">MixWaveUNet</span></code> class</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">automix.models.mixwaveunet</span> <span class="kn">import</span> <span class="n">MixWaveUNet</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can construct this model supplying the desired hyperparameters.
+Below we will create a version of the model that accepts 8 input channels and produces a stereo (2) mix. We will use the default downsampling and upsampling kernel size of 13 and use a kernel size of 5 for the final output convolution. As in the original MixWaveUNet we use 12 down and upsampling blocks and increase the number of convolutional channels by 24 at each block. We also have the option to use either additive “add” or concatative “concat” skip connections. In this case, we will follow the original model and use concatenation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">MixWaveUNet</span><span class="p">(</span> 
+    <span class="n">ninputs</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>    <span class="c1"># the number of input recordings we can mix (this is fixed at training)</span>
+    <span class="n">noutputs</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>   <span class="c1"># the number of channels for the mix. Normally this is 2 for stereo mix</span>
+    <span class="n">ds_kernel</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="c1"># kernel size for the convolutional layers in the Downsampling Blocks</span>
+    <span class="n">us_kernel</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span> <span class="c1"># kernel size for the convolutional layers in the Upsampling Blocks</span>
+    <span class="n">out_kernel</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="c1"># kernel size for the convolutional layer in the final layer</span>
+    <span class="n">layers</span> <span class="o">=</span> <span class="mi">12</span><span class="p">,</span>    <span class="c1"># Number of blocks in the upsampling and downsampling paths</span>
+    <span class="n">ch_growth</span> <span class="o">=</span> <span class="mi">24</span><span class="p">,</span> <span class="c1"># Number convolutional channels to add at each layer</span>
+    <span class="n">skip</span> <span class="o">=</span> <span class="s2">&quot;concat&quot;</span> <span class="c1"># We can use either &quot;add&quot; or &quot;concat&quot; skip connections. (&quot;add&quot; will save parameters and memory)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Then we can count the number of parameters in this model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">count_parameters</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">/</span><span class="mf">1e6</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2"> M&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>17.833 M
+</pre></div>
+</div>
+</div>
+</div>
+<p>This model is currently untrained, but we can demonstrate how we can generate a mix from this model. The model expects as input a tensor of shape (batch_size, num_tracks, seq_len). In this case <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code> is equal to the number of input recordings that we want to mix together and <code class="docutils literal notranslate"><span class="pre">seq_len</span></code> corresponds to the number of samples in each recording. Since we will stack this into a single tensor it requires that each recording is of the same length. Let’s consider the following example of how we could generate mix from this untrained model.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">num_tracks</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">seq_length</span> <span class="o">=</span> <span class="mi">262144</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">)</span>
+<span class="n">y_hat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_hat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 8, 262144]) torch.Size([2, 2, 262144])
+</pre></div>
+</div>
+</div>
+</div>
+<p>You can see that after passing in 8 tracks we will get two stereo mixes, one for each of the batch items. Importantly, note that calling <code class="docutils literal notranslate"><span class="pre">model(x)</span></code> will return two values. The first, <code class="docutils literal notranslate"><span class="pre">y_hat</span></code> is the mixture. The second value representas the parameters that created the mix. However, the parameters will only be populated for models that use explicit parameters like the DMC. So in this case we can see that <code class="docutils literal notranslate"><span class="pre">p</span></code> is a zero tensor.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([0.])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Now that we understand the basic operation of the Mix-Wave-U-Net at a high level, let’s investigate the inner workings of the model. To do so, we will define and connect the inner components of the original <code class="docutils literal notranslate"><span class="pre">MixWaveUNet</span></code> class.</p>
+<section id="downsampling-block">
+<h2>Downsampling Block<a class="headerlink" href="#downsampling-block" title="Permalink to this headline">#</a></h2>
+<p>Let’s start with the <code class="docutils literal notranslate"><span class="pre">DownsamplingBlock</span></code>. Here we have reproduced the implementation from the <code class="docutils literal notranslate"><span class="pre">automix</span></code> package.
+It is composed of a few basic submodules. It starts with a <code class="docutils literal notranslate"><span class="pre">Conv1d</span></code>, <code class="docutils literal notranslate"><span class="pre">BatchNorm1d</span></code>, then <code class="docutils literal notranslate"><span class="pre">PReLU</span></code> activation, and a final <code class="docutils literal notranslate"><span class="pre">Conv1d</span></code> that has <code class="docutils literal notranslate"><span class="pre">stride=2</span></code>. While the original Wave-U-Net used decimation to downsample we can also use a strided convolution to achieve a similar downsampling operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">DownsamplingBlock</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ch_in</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ch_out</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="n">kernel_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span>  <span class="c1"># kernel must be odd length</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="n">kernel_size</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># calculate same padding</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="n">ch_in</span><span class="p">,</span>
+            <span class="n">ch_out</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">ch_out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prelu</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">PReLU</span><span class="p">(</span><span class="n">ch_out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="n">ch_out</span><span class="p">,</span>
+            <span class="n">ch_out</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+            <span class="n">stride</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prelu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x_ds</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x_ds</span><span class="p">,</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note that the <code class="docutils literal notranslate"><span class="pre">forward()</span></code> will return two tensors:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x_ds</span></code> - the downsampled (by factor of 2) signal.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> - the processed signal before any downsampling.</p></li>
+</ul>
+<p>This is so we can save the itermediate tensors before downsampling so they can be used in the upsampling process when we employ the skip connections.</p>
+</section>
+<section id="upsampling-block">
+<h2>Upsampling Block<a class="headerlink" href="#upsampling-block" title="Permalink to this headline">#</a></h2>
+<p>As we see below, the <code class="docutils literal notranslate"><span class="pre">UpsamplingBlock</span></code> follows a very similar pattern to the <code class="docutils literal notranslate"><span class="pre">DownsamplingBlock</span></code> with the exceptation that is upsamples the signals (of course) but also that we have to handle aggregating information from the skip connections. As before we have a similar series connection of convolution, batch normalization, activations, and in this case a linear upsampling block.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">UpsamplingBlock</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">ch_in</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ch_out</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">kernel_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="n">skip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;add&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+        <span class="k">assert</span> <span class="n">kernel_size</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span>  <span class="c1"># kernel must be odd length</span>
+        <span class="n">padding</span> <span class="o">=</span> <span class="n">kernel_size</span> <span class="o">//</span> <span class="mi">2</span>  <span class="c1"># calculate same padding</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">skip</span> <span class="o">=</span> <span class="n">skip</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conv</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+            <span class="n">ch_in</span><span class="p">,</span>
+            <span class="n">ch_out</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">kernel_size</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="n">padding</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bn</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">BatchNorm1d</span><span class="p">(</span><span class="n">ch_out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prelu</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">PReLU</span><span class="p">(</span><span class="n">ch_out</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">us</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Upsample</span><span class="p">(</span><span class="n">scale_factor</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">skip</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">us</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># upsample by x2</span>
+
+        <span class="c1"># handle skip connections</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip</span> <span class="o">==</span> <span class="s2">&quot;add&quot;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">skip</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip</span> <span class="o">==</span> <span class="s2">&quot;concat&quot;</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">skip</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">skip</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
+
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prelu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">x</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can see here a unique part of the <code class="docutils literal notranslate"><span class="pre">forward()</span></code> in the <code class="docutils literal notranslate"><span class="pre">UpsamplingBlock</span></code> is that takes as input two tensors:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">x</span></code> - the output of the previous upsampling layer.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">skip</span></code> - the output of the respective downsampling layer (same resolution) which creates a skip connection.</p></li>
+</ul>
+<p>We can then see that we first upsample the input tensor <code class="docutils literal notranslate"><span class="pre">x</span></code> and then combine it with the <code class="docutils literal notranslate"><span class="pre">skip</span></code> connection. In our implementation we include a few different options. In the case of <code class="docutils literal notranslate"><span class="pre">&quot;add&quot;</span></code> we will simply sum the two tensors which is a pointwise sum between the signals in each channel. This is not as expressive but saves memory and lower the parameter count. In the <code class="docutils literal notranslate"><span class="pre">&quot;concat&quot;</span></code> case we will concatenate the two tensors along the channel dimension which will result in a new tensor that has twice the number of channels. However, this provides more flexibility since the convolutional layer that follows can decide how to mix these signals together. Finally, there is also the option to forgo the skip connections.</p>
+</section>
+<section id="encoder">
+<h2>Encoder<a class="headerlink" href="#encoder" title="Permalink to this headline">#</a></h2>
+<p>Now let’s use these building blocks to construct the Mix-Wave-U-Net.  We will start with the Encoder, which is composed of series connection of <code class="docutils literal notranslate"><span class="pre">DownsamplingBlocks</span></code>. We will use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to construct each layer and then store them in a <code class="docutils literal notranslate"><span class="pre">ModuleList</span></code>. At the first layer, we will ensure the convolution accepts that same number of channels as there are input recordings (<code class="docutils literal notranslate"><span class="pre">ninputs</span></code>). For the other blocks, we will increase the number of channels by <code class="docutils literal notranslate"><span class="pre">ch_growth</span></code> each iteration (<code class="docutils literal notranslate"><span class="pre">ch_growth</span> <span class="pre">=</span> <span class="pre">24</span></code>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ninputs</span> <span class="o">=</span> <span class="mi">8</span>     <span class="c1"># the number of input recordings we can mix (this is fixed at training)</span>
+<span class="n">noutputs</span> <span class="o">=</span> <span class="mi">2</span>    <span class="c1"># the number of channels for the mix. Normally this is 2 for stereo mix</span>
+<span class="n">ds_kernel</span> <span class="o">=</span> <span class="mi">13</span>  <span class="c1"># kernel size for the convolutional layers in the Downsampling Blocks</span>
+<span class="n">us_kernel</span> <span class="o">=</span> <span class="mi">13</span>  <span class="c1"># kernel size for the convolutional layers in the Upsampling Blocks</span>
+<span class="n">out_kernel</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># kernel size for the convolutional layer in the final layer</span>
+<span class="n">layers</span> <span class="o">=</span> <span class="mi">12</span>     <span class="c1"># Number of blocks in the upsampling and downsampling paths</span>
+<span class="n">ch_growth</span> <span class="o">=</span> <span class="mi">24</span>  <span class="c1"># Number convolutional channels to add at each layer</span>
+<span class="n">skip</span> <span class="o">=</span> <span class="s2">&quot;concat&quot;</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">encoder</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">layers</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">ch_in</span> <span class="o">=</span> <span class="n">ninputs</span>
+        <span class="n">ch_out</span> <span class="o">=</span> <span class="n">ch_growth</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">ch_in</span> <span class="o">=</span> <span class="n">ch_out</span>
+        <span class="n">ch_out</span> <span class="o">=</span> <span class="n">ch_in</span> <span class="o">+</span> <span class="n">ch_growth</span>
+
+    <span class="n">encoder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DownsamplingBlock</span><span class="p">(</span><span class="n">ch_in</span><span class="p">,</span> <span class="n">ch_out</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="n">ds_kernel</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>And now we can see the layers we created.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">encoder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModuleList(
+  (0): DownsamplingBlock(
+    (conv1): Conv1d(8, 24, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=24)
+    (conv2): Conv1d(24, 24, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (1): DownsamplingBlock(
+    (conv1): Conv1d(24, 48, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=48)
+    (conv2): Conv1d(48, 48, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (2): DownsamplingBlock(
+    (conv1): Conv1d(48, 72, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=72)
+    (conv2): Conv1d(72, 72, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (3): DownsamplingBlock(
+    (conv1): Conv1d(72, 96, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=96)
+    (conv2): Conv1d(96, 96, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (4): DownsamplingBlock(
+    (conv1): Conv1d(96, 120, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=120)
+    (conv2): Conv1d(120, 120, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (5): DownsamplingBlock(
+    (conv1): Conv1d(120, 144, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=144)
+    (conv2): Conv1d(144, 144, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (6): DownsamplingBlock(
+    (conv1): Conv1d(144, 168, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(168, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=168)
+    (conv2): Conv1d(168, 168, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (7): DownsamplingBlock(
+    (conv1): Conv1d(168, 192, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=192)
+    (conv2): Conv1d(192, 192, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (8): DownsamplingBlock(
+    (conv1): Conv1d(192, 216, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(216, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=216)
+    (conv2): Conv1d(216, 216, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (9): DownsamplingBlock(
+    (conv1): Conv1d(216, 240, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=240)
+    (conv2): Conv1d(240, 240, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (10): DownsamplingBlock(
+    (conv1): Conv1d(240, 264, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(264, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=264)
+    (conv2): Conv1d(264, 264, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+  (11): DownsamplingBlock(
+    (conv1): Conv1d(264, 288, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(288, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=288)
+    (conv2): Conv1d(288, 288, kernel_size=(13,), stride=(2,), padding=(6,))
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="embedding-latent">
+<h2>Embedding/Latent<a class="headerlink" href="#embedding-latent" title="Permalink to this headline">#</a></h2>
+<p>In the middle of the network we will include a single convolutional layer to produce the latent embedding.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">embedding</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span><span class="n">ch_out</span><span class="p">,</span> <span class="n">ch_out</span><span class="p">,</span> <span class="n">kernel_size</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">embedding</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Conv1d(288, 288, kernel_size=(1,), stride=(1,))
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="decoder">
+<h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">#</a></h2>
+<p>In a similar manner to the encoder, we will construct the decoder by storing <code class="docutils literal notranslate"><span class="pre">UpsamplingBlocks</span></code> in a <code class="docutils literal notranslate"><span class="pre">ModuleList</span></code>. However, in this case we will count backwards (<code class="docutils literal notranslate"><span class="pre">step=-1</span></code>) as we create the layers, starting with the number of channels in the final layer of the encoder, decrementing this value by <code class="docutils literal notranslate"><span class="pre">ch_growth</span></code> at each iteration. Note also that when we use <code class="docutils literal notranslate"><span class="pre">&quot;concat&quot;</span></code> skip connections we will double the number of channels in each block to accomidate the additional channels from the skip connections.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">decoder</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">ModuleList</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">layers</span><span class="p">,</span> <span class="n">stop</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">step</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+
+    <span class="n">ch_in</span> <span class="o">=</span> <span class="n">ch_out</span>
+    <span class="n">ch_out</span> <span class="o">=</span> <span class="n">ch_in</span> <span class="o">-</span> <span class="n">ch_growth</span>
+
+    <span class="k">if</span> <span class="n">ch_out</span> <span class="o">&lt;</span> <span class="n">ch_growth</span><span class="p">:</span>
+        <span class="n">ch_out</span> <span class="o">=</span> <span class="n">ch_growth</span>
+
+    <span class="k">if</span> <span class="n">skip</span> <span class="o">==</span> <span class="s2">&quot;concat&quot;</span><span class="p">:</span>
+        <span class="n">ch_in</span> <span class="o">*=</span> <span class="mi">2</span>
+
+    <span class="n">decoder</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+        <span class="n">UpsamplingBlock</span><span class="p">(</span>
+            <span class="n">ch_in</span><span class="p">,</span>
+            <span class="n">ch_out</span><span class="p">,</span>
+            <span class="n">kernel_size</span><span class="o">=</span><span class="n">us_kernel</span><span class="p">,</span>
+            <span class="n">skip</span><span class="o">=</span><span class="n">skip</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">decoder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ModuleList(
+  (0): UpsamplingBlock(
+    (conv): Conv1d(576, 264, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(264, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=264)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (1): UpsamplingBlock(
+    (conv): Conv1d(528, 240, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=240)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (2): UpsamplingBlock(
+    (conv): Conv1d(480, 216, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(216, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=216)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (3): UpsamplingBlock(
+    (conv): Conv1d(432, 192, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=192)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (4): UpsamplingBlock(
+    (conv): Conv1d(384, 168, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(168, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=168)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (5): UpsamplingBlock(
+    (conv): Conv1d(336, 144, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=144)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (6): UpsamplingBlock(
+    (conv): Conv1d(288, 120, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=120)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (7): UpsamplingBlock(
+    (conv): Conv1d(240, 96, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=96)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (8): UpsamplingBlock(
+    (conv): Conv1d(192, 72, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=72)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (9): UpsamplingBlock(
+    (conv): Conv1d(144, 48, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=48)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (10): UpsamplingBlock(
+    (conv): Conv1d(96, 24, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=24)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+  (11): UpsamplingBlock(
+    (conv): Conv1d(48, 24, kernel_size=(13,), stride=(1,), padding=(6,))
+    (bn): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (prelu): PReLU(num_parameters=24)
+    (us): Upsample(scale_factor=2.0, mode=nearest)
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="output">
+<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">#</a></h2>
+<p>Finally we have the output convolution which will collect the output channels from the final layer of the decoder and map them to the stereo mixture (<code class="docutils literal notranslate"><span class="pre">noutputs=2</span></code>)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">output_conv</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Conv1d</span><span class="p">(</span>
+    <span class="n">ch_out</span> <span class="o">+</span> <span class="n">ninputs</span><span class="p">,</span>
+    <span class="n">noutputs</span><span class="p">,</span>
+    <span class="n">kernel_size</span><span class="o">=</span><span class="n">out_kernel</span><span class="p">,</span>
+    <span class="n">padding</span><span class="o">=</span><span class="n">out_kernel</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="forward">
+<h2>Forward<a class="headerlink" href="#forward" title="Permalink to this headline">#</a></h2>
+<p>The forward pass of the modell involves simply iterating over the blocks in the encoder and storing the outputs as well as the skip connections. We will just use a list to store these tensors. Then we pass the final output from the encoder to the <code class="docutils literal notranslate"><span class="pre">embedding()</span></code> layer and use another <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate over the blocks in the decoder. This time we process the signals each time passing the respective skip connection. We use <code class="docutils literal notranslate"><span class="pre">skips.pop()</span></code> to return the last skip connection from the encoder (LIFO). Finally we implement the last skip connection which uses the original input recordings <code class="docutils literal notranslate"><span class="pre">x_in</span></code>. Again, recall that we return a <code class="docutils literal notranslate"><span class="pre">torch.zeros(1)</span></code> as dummy tensor since this model does not give us interpretable parameters</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span> 
+    <span class="n">x_in</span> <span class="o">=</span> <span class="n">x</span>
+    <span class="n">skips</span> <span class="o">=</span> <span class="p">[]</span> <span class="c1"># storage </span>
+
+    <span class="k">for</span> <span class="n">enc</span> <span class="ow">in</span> <span class="n">encoder</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">skip</span> <span class="o">=</span> <span class="n">enc</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">skips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">skip</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">embedding</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">dec</span> <span class="ow">in</span> <span class="n">decoder</span><span class="p">:</span>
+        <span class="n">skip</span> <span class="o">=</span> <span class="n">skips</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">dec</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">skip</span><span class="p">)</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">x_in</span><span class="p">,</span> <span class="n">x</span><span class="p">),</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">output_conv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># return dummy parameters</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can then test the model just as we did before and see the results are the same.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">num_tracks</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">seq_length</span> <span class="o">=</span> <span class="mi">262144</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="n">seq_length</span><span class="p">)</span>
+<span class="n">y_hat</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">forward</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y_hat</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 8, 262144]) torch.Size([2, 2, 262144])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="differentiable-mixing-console-dmc">
+<h1>Differentiable Mixing Console (DMC)<a class="headerlink" href="#differentiable-mixing-console-dmc" title="Permalink to this headline">#</a></h1>
+<p>Now that we have seen how the Mix-Wave-U-Net, a direct transformation approach, can be implemented, we will shift our focus to the <span class="xref myst">Differentiable Mixing Console</span>, which is a parameter estimation approach.</p>
+<img width = "100%" src="https://csteinmetz1.github.io/automix-toolkit/docs/assets/dmc.svg"/><p>Similar to our explanation before we will first inspect the model from a high level and then go through the basic compotnents of the model so we can get an understanding of their operation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">automix.models.dmc</span> <span class="kn">import</span> <span class="n">DifferentiableMixingConsole</span><span class="p">,</span> <span class="n">PostProcessor</span><span class="p">,</span> <span class="n">Mixer</span><span class="p">,</span> <span class="n">ShortChunkCNN_Res</span>
+<span class="kn">from</span> <span class="nn">automix.utils</span> <span class="kn">import</span> <span class="n">restore_from_0to1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>First we will create the main modules of the system.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ShortChunkCNN_res</span></code> - This is our encoder. We use an encoder that operates on melspectrograms and has been pretrained.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PostProcessor</span></code> - This is a MLP that will project our embeddings to the parameters of the mixing console.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Mixer</span></code> - The differnetiable mixer class. In this case our mixer supports gain and stereo panning operations.</p></li>
+</ul>
+<p>We will also need to download the pretrained model checkpoint for the encoder.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;checkpoints&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="c1"># download the pretrained models for the encoder</span>
+<span class="o">!</span>wget https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/encoder.ckpt
+<span class="o">!</span>mv encoder.ckpt checkpoints/encoder.ckpt
+<span class="n">encoder_ckpt_path</span> <span class="o">=</span> <span class="s2">&quot;checkpoints/encoder.ckpt&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2022-12-01 17:45:50--  https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/encoder.ckpt
+Resolving huggingface.co (huggingface.co)... 54.147.99.175, 34.227.196.80, 2600:1f18:147f:e800:3df1:c2fc:20aa:9b45, ...
+Connecting to huggingface.co (huggingface.co)|54.147.99.175|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/90c13ab981715e1fc1ae079f15fb6da36d61d6aad29ae5dddd4d3bfd4594546a?response-content-disposition=attachment%3B%20filename%3D%22encoder.ckpt%22&amp;Expires=1670165721&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4tbGZzLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2VjL2VlL2VjZWUzOGRmMDQ3ZTNmMmRiMWJkOGMzMWE3NDJmM2EwOGY1NTc0NzBjZDY3Y2I0ODc0MDJhOWMzZWQ5MWI1ZWEvOTBjMTNhYjk4MTcxNWUxZmMxYWUwNzlmMTVmYjZkYTM2ZDYxZDZhYWQyOWFlNWRkZGQ0ZDNiZmQ0NTk0NTQ2YT9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmVuY29kZXIuY2twdCUyMiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY3MDE2NTcyMX19fV19&amp;Signature=OM9U4xAha2LJ6ZlsIeMttFhCj0R1H7lbUc8upKhS8ugMNRRLzV4mtBnpou568p0cIPK~VEXdd45hc45nhhMI548-IDjjiKglfp72TzTQ4mPQbJJplnDHHUuVoFM8mjgTnvik21kuvzllGxED0x0Pomf7RC4sa1GNpadwgL~YiPzL-12i2SfO72zlhEJt03PpVBpDzOGUu-QUK1uQZR1myWnK1B2F--SaEmz7JZ~04pmNjmQ5Rspn-GkSxtRI0oUBrenC5V7SBpWoZx53i2ESsxl9gIFuOS~5AJStW-LdgdHsUOeg44vW5svmGwJbmg48MxqbopcYWJx6-2LVOSZwjA__&amp;Key-Pair-Id=KVTP0A1DKRTAX [following]
+--2022-12-01 17:45:50--  https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/90c13ab981715e1fc1ae079f15fb6da36d61d6aad29ae5dddd4d3bfd4594546a?response-content-disposition=attachment%3B%20filename%3D%22encoder.ckpt%22&amp;Expires=1670165721&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4tbGZzLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2VjL2VlL2VjZWUzOGRmMDQ3ZTNmMmRiMWJkOGMzMWE3NDJmM2EwOGY1NTc0NzBjZDY3Y2I0ODc0MDJhOWMzZWQ5MWI1ZWEvOTBjMTNhYjk4MTcxNWUxZmMxYWUwNzlmMTVmYjZkYTM2ZDYxZDZhYWQyOWFlNWRkZGQ0ZDNiZmQ0NTk0NTQ2YT9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmVuY29kZXIuY2twdCUyMiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY3MDE2NTcyMX19fV19&amp;Signature=OM9U4xAha2LJ6ZlsIeMttFhCj0R1H7lbUc8upKhS8ugMNRRLzV4mtBnpou568p0cIPK~VEXdd45hc45nhhMI548-IDjjiKglfp72TzTQ4mPQbJJplnDHHUuVoFM8mjgTnvik21kuvzllGxED0x0Pomf7RC4sa1GNpadwgL~YiPzL-12i2SfO72zlhEJt03PpVBpDzOGUu-QUK1uQZR1myWnK1B2F--SaEmz7JZ~04pmNjmQ5Rspn-GkSxtRI0oUBrenC5V7SBpWoZx53i2ESsxl9gIFuOS~5AJStW-LdgdHsUOeg44vW5svmGwJbmg48MxqbopcYWJx6-2LVOSZwjA__&amp;Key-Pair-Id=KVTP0A1DKRTAX
+Resolving cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)... 13.249.85.23, 13.249.85.12, 13.249.85.116, ...
+Connecting to cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)|13.249.85.23|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 48624134 (46M) [binary/octet-stream]
+Saving to: ‘encoder.ckpt’
+
+encoder.ckpt        100%[===================&gt;]  46.37M  29.7MB/s    in 1.6s    
+
+2022-12-01 17:45:52 (29.7 MB/s) - ‘encoder.ckpt’ saved [48624134/48624134]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id1">
+<h2>Encoder<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>The role of the encoder is extract information from each input recording that will be used in order to create a mix. This implicitly involves determining the identity of the source (e.g. drums, guitar, vocal, etc.) as well as other factors such as the level. We adopt a very standard 2d convolutional network that operates on log melspectrograms. In the original paper that authors used the <a class="reference external" href="https://github.com/harritaylor/torchvggish">VGGish</a> architecture pretrained on <a class="reference external" href="https://research.google.com/audioset/">AudioSet</a>.</p>
+<p>To faciliate faster training and simpler code we opt to the <a class="reference external" href="https://github.com/minzwon/sota-music-tagging-models">Short Chunk CNN</a> (with residual connections) which is very similar but faciliates easy computation of melspectrograms with <a class="reference external" href="https://pytorch.org/audio/stable/index.html">torchaudio</a>. In addition, we use a pretrained checkpoint after training the model on a music tagging task, which should aid in learning. We will not go into detail of how the encoder itself is implemented but you can see the details <span class="xref myst">here</span>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">44100</span>
+<span class="n">encoder</span> <span class="o">=</span> <span class="n">ShortChunkCNN_Res</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">,</span> <span class="n">ckpt_path</span><span class="o">=</span><span class="n">encoder_ckpt_path</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">encoder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Loaded weights from checkpoints/encoder.ckpt
+ShortChunkCNN_Res(
+  (spec): MelSpectrogram(
+    (spectrogram): Spectrogram()
+    (mel_scale): MelScale()
+  )
+  (to_db): AmplitudeToDB()
+  (spec_bn): BatchNorm2d(1, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (layer1): Res_2d(
+    (conv_1): Conv2d(1, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(1, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (layer2): Res_2d(
+    (conv_1): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(128, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (layer3): Res_2d(
+    (conv_1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (layer4): Res_2d(
+    (conv_1): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (layer5): Res_2d(
+    (conv_1): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (layer6): Res_2d(
+    (conv_1): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(256, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (layer7): Res_2d(
+    (conv_1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (bn_2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (conv_3): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+    (bn_3): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    (relu): ReLU()
+  )
+  (dense1): Linear(in_features=512, out_features=512, bias=True)
+  (bn): BatchNorm1d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (dense2): Linear(in_features=512, out_features=50, bias=True)
+  (dropout): Dropout(p=0.5, inplace=False)
+  (relu): ReLU()
+  (resample): Resample()
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="post-processor">
+<h2>Post-Processor<a class="headerlink" href="#post-processor" title="Permalink to this headline">#</a></h2>
+<p>The role of the Post-Processor is to take the track embedding and context embedding (for each track and context pair) and compute a set of control parameters for the current track. We can implement this as a simple multi-layer perceptron (MLP) with three layers. This network will use a sigmoid activation function to map all outputs between 0 and 1. This is the format our <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> expects. Inside the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> these parameters will be denormalized to the correct ranges. In the original paper the authors use a tanh activation so that parameters are scaled between -1 and 1, but this is just a design choice.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PostProcessor</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num_params</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">d_embed</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">d_embed</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">PReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="mf">0.2</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">PReLU</span><span class="p">(),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="n">num_params</span><span class="p">),</span>
+            <span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Sigmoid</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">z</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mlp</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+    
+<span class="n">postprocessor</span> <span class="o">=</span> <span class="n">PostProcessor</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">encoder</span><span class="o">.</span><span class="n">d_embed</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">postprocessor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PostProcessor(
+  (mlp): Sequential(
+    (0): Linear(in_features=1024, out_features=256, bias=True)
+    (1): Dropout(p=0.2, inplace=False)
+    (2): PReLU(num_parameters=1)
+    (3): Linear(in_features=256, out_features=256, bias=True)
+    (4): Dropout(p=0.2, inplace=False)
+    (5): PReLU(num_parameters=1)
+    (6): Linear(in_features=256, out_features=2, bias=True)
+    (7): Sigmoid()
+  )
+)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="mixer">
+<h2>Mixer<a class="headerlink" href="#mixer" title="Permalink to this headline">#</a></h2>
+<p>The role of the mixer is to process the individual channels in a mix given the control parameters and produce a stereo mix. In the original paper the mixer included the Transformation Network. This network was first pretrained to emulate common audio effects like an equalizer, compressor, and reveberation model. In our setup we will consider the simple case for the Transformation Network which uses only gain (level) and panning parameters. Since these operations are differentiable we do not need to worry about the proxy method or any other differentiable signal processing techniques.</p>
+<p>As you can see below we will implement the differentiable mixer by simply applying the gain and panning operations, which enables the use of autodiff for the gradient computation during training. This is both fast and memory efficient. An extension of our implemntation could add in more effects like equalization or compression.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Mixer</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">sample_rate</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">min_gain_dB</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mf">48.0</span><span class="p">,</span>
+        <span class="n">max_gain_dB</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mf">24.0</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">num_params</span> <span class="o">=</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">param_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Gain dB&quot;</span><span class="p">,</span> <span class="s2">&quot;Pan&quot;</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sample_rate</span> <span class="o">=</span> <span class="n">sample_rate</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">min_gain_dB</span> <span class="o">=</span> <span class="n">min_gain_dB</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_gain_dB</span> <span class="o">=</span> <span class="n">max_gain_dB</span>
+
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Generate a mix of stems given mixing parameters normalized to (0,1).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            x (torch.Tensor): Batch of waveform stem tensors with shape (bs, num_tracks, seq_len).</span>
+<span class="sd">            p (torch.Tensor): Batch of normalized mixing parameters (0,1) for each stem with shape (bs, num_tracks, num_params)</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            y (torch.Tensor): Batch of stereo waveform mixes with shape (bs, 2, seq_len)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="n">seq_len</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+
+        <span class="c1"># ------------- apply gain -------------</span>
+        <span class="n">gain_dB</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1"># get gain parameter</span>
+        <span class="n">gain_dB</span> <span class="o">=</span> <span class="n">restore_from_0to1</span><span class="p">(</span><span class="n">gain_dB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_gain_dB</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">max_gain_dB</span><span class="p">)</span>
+        <span class="n">gain_lin</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">gain_dB</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># convert gain from dB scale to linear</span>
+        <span class="n">gain_lin</span> <span class="o">=</span> <span class="n">gain_lin</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># reshape for multiplication</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">gain_lin</span>  <span class="c1"># apply gain (bs, num_tracks, seq_len)</span>
+
+        <span class="c1"># ------------- apply panning -------------</span>
+        <span class="c1"># expand mono stems to stereo, then apply panning</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (bs, num_tracks, 1, seq_len)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># (bs, num_tracks, 2, seq_len)</span>
+
+        <span class="n">pan</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># get pan parameter</span>
+        <span class="n">pan_theta</span> <span class="o">=</span> <span class="n">pan</span> <span class="o">*</span> <span class="n">torch</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">left_gain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">pan_theta</span><span class="p">)</span>
+        <span class="n">right_gain</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">pan_theta</span><span class="p">)</span>
+        <span class="n">pan_gains_lin</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">left_gain</span><span class="p">,</span> <span class="n">right_gain</span><span class="p">],</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">pan_gains_lin</span> <span class="o">=</span> <span class="n">pan_gains_lin</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># reshape for multiply</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">*</span> <span class="n">pan_gains_lin</span>  <span class="c1"># (bs, num_tracks, 2, seq_len)</span>
+
+        <span class="c1"># ----------------- apply mix -------------</span>
+        <span class="c1"># generate a mix for each batch item by summing stereo tracks</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (bs, 2, seq_len)</span>
+
+        <span class="n">p</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">(</span>
+            <span class="p">(</span>
+                <span class="n">gain_dB</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+                <span class="n">pan</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+            <span class="p">),</span>
+            <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">y</span><span class="p">,</span> <span class="n">p</span>
+<span class="n">mixer</span> <span class="o">=</span> <span class="n">Mixer</span><span class="p">(</span><span class="n">sample_rate</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">mixer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mixer()
+</pre></div>
+</div>
+</div>
+</div>
+<p>Here we will set up some inputs that we can use for our example. You can adjust these values to see how the results change. In this case we will use a batch size of 2, mixes with 8 input recordings each approx 3 sec in length (at a sample rate of 44100). Then we will generate a tensor of noise to represent theses tracks.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">batch_size</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">num_tracks</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">num_samples</span> <span class="o">=</span> <span class="mi">131072</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">batch_size</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="n">num_samples</span><span class="p">)</span>
+<span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="n">seq_len</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="generating-embeddings">
+<h3>Generating embeddings<a class="headerlink" href="#generating-embeddings" title="Permalink to this headline">#</a></h3>
+<p>As first the step we will need to generate embeddings with our encoder for each of the input recordings in each batch item.
+Since each batch item will contain multiple tracks (in this case 4) one option would be to loop over each track and pass them to the encoder one-by-one. However, this will create an unnecessary bottleneck. Instead, we use a small trick to compute all of the embeddings in the batch at once.</p>
+<p>We do this simply by moving all of the input recordings into the batch dimension. This will give us an effective batch size of <code class="docutils literal notranslate"><span class="pre">eff_bs</span> <span class="pre">=</span> <span class="pre">bs</span> <span class="pre">*</span> <span class="pre">num_tracks</span></code>. After moving all the recordings to the batch dimension, we can then pass them to the encoder, which expects a tensor of shape <code class="docutils literal notranslate"><span class="pre">(bs,</span> <span class="pre">seq_len)</span></code>. After generating these embeddings <code class="docutils literal notranslate"><span class="pre">e</span></code> it is simply a matter of reshaping the tensor so we can restore each embedding from the respective mix to the original dimension, which gives us a tensor of shape <code class="docutils literal notranslate"><span class="pre">(bs,</span> <span class="pre">num_tracks,</span> <span class="pre">d_embed)</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># move tracks to the batch dimension to fully parallelize embedding computation</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span> <span class="o">*</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We get </span><span class="si">{</span><span class="n">bs</span><span class="si">}</span><span class="s2">x</span><span class="si">{</span><span class="n">num_tracks</span><span class="si">}</span><span class="s2"> items in first dim: </span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># generate single embedding for each track</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="n">z</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (bs, num_tracks, d_embed)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;We get </span><span class="si">{</span><span class="n">num_tracks</span><span class="si">}</span><span class="s2"> embeddings of size </span><span class="si">{</span><span class="n">encoder</span><span class="o">.</span><span class="n">d_embed</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">z</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>We get 2x4 items in first dim: torch.Size([8, 131072])
+We get 4 embeddings of size 512: torch.Size([2, 4, 512])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="context-embedding">
+<h3>“Context” embedding<a class="headerlink" href="#context-embedding" title="Permalink to this headline">#</a></h3>
+<img width= "40%" src="https://csteinmetz1.github.io/automix-toolkit/docs/assets/dmc-context.svg"/>
+<p>Key to the DMC is the concept of the “context” emebdding which enables effective cross-channel communication between the recordings within a mixture when the post-processor will make a decision about the parameters for each channel. We compute the context embedding by simply taking the mean of all the track embeddings for each batch item. We can see this in the figure about represented as <span class="math notranslate nohighlight">\(z_\mu\)</span>. After taking this mean we then copy (using <code class="docutils literal notranslate"><span class="pre">torch.repeat</span></code>) the mean embedding once for each track. This way we can then concatenate these copied embeddings with each of the track embeddings.</p>
+<p>However, recall that during training we use a fixed number of tracks and therefore some songs may have less than <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code> <em>active</em> tracks where the other tracks are simply silence. These empty tracks will corrupt our context embedding. One way to handle this is to use the <code class="docutils literal notranslate"><span class="pre">track_mask</span></code> which is also provided by the dataset. This will be a tensor of boolean values telling us which tracks are not active, and show be masked. For example, consider the case where we have four total tracks but only the first three are active in the first batch item and all are active in the second. We would use the following <code class="docutils literal notranslate"><span class="pre">track_mask</span></code>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">track_mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">(</span>
+    <span class="p">[[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">],</span> 
+     <span class="p">[</span><span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">False</span><span class="p">]])</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">track_mask</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tensor([[False, False, False,  True],
+        [False, False, False, False]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate the &quot;context&quot; embedding</span>
+<span class="n">c</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">bidx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">bs</span><span class="p">):</span> <span class="c1"># loop over each batch for &quot;dynamic&quot; context computation</span>
+    <span class="n">c_n</span> <span class="o">=</span> <span class="n">z</span><span class="p">[</span><span class="n">bidx</span><span class="p">,</span> <span class="o">~</span><span class="n">track_mask</span><span class="p">[</span><span class="n">bidx</span><span class="p">,</span> <span class="p">:],</span> <span class="p">:]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span>
+        <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdim</span><span class="o">=</span><span class="kc">True</span>
+    <span class="p">)</span>  <span class="c1"># (bs, 1, d_embed)</span>
+    <span class="n">c_n</span> <span class="o">=</span> <span class="n">c_n</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="n">num_tracks</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># (bs, num_tracks, d_embed)</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c_n</span><span class="p">)</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">stack</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 4, 512])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Note: Another way to implement this could be to fill the embeddings for non-active tracks with zeros and then take the sum across each batch item. Then to get the mean we could divide each sum by the number of <code class="docutils literal notranslate"><span class="pre">False</span></code> values in each <code class="docutils literal notranslate"><span class="pre">track_mask</span></code>. This would enable us to avoid the <code class="docutils literal notranslate"><span class="pre">for</span></code> loop.</p>
+<p>At the end of this process we will have <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code> embeddings each of size <code class="docutils literal notranslate"><span class="pre">d_embed*2</span></code> after the concatentation.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># fuse the track embs and context embs</span>
+<span class="n">z_final</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">cat</span><span class="p">((</span><span class="n">z</span><span class="p">,</span> <span class="n">c</span><span class="p">),</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (bs, num_tracks, d_embed*2)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;final embedding&quot;</span><span class="p">,</span> <span class="n">z_final</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>final embedding torch.Size([2, 4, 1024])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="estimate-mixing-parameters">
+<h3>Estimate mixing parameters<a class="headerlink" href="#estimate-mixing-parameters" title="Permalink to this headline">#</a></h3>
+<p>Now that we have the embeddings for ecah track we will use the Post-processor to estimate the mixing parameters (gain and panning) for each track. This will require running each of the <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code> embeddings through the Post-Processor. However, the MLP class in PyTorch enables us to compute these in parallel automatically. So by passing our final embedding tensor of shape <code class="docutils literal notranslate"><span class="pre">(bs,</span> <span class="pre">num_tracks,</span> <span class="pre">d_embed*2)</span></code> into the Post-Processor we can generate all the mixing parameters. As we see below, we will get a parameter tensor containing 2 parameters (gain and pan) for each of the <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code>. Almost there, now the final step is to use these parameters and the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> to create the mix.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># estimate mixing parameters for each track (in parallel)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">postprocessor</span><span class="p">(</span><span class="n">z_final</span><span class="p">)</span>  <span class="c1"># (bs, num_tracks, num_params)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 4, 2])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="generate-the-mix">
+<h3>Generate the mix<a class="headerlink" href="#generate-the-mix" title="Permalink to this headline">#</a></h3>
+<p>We already discussed how the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> is implemented. Here we will call the mixer passing in the tracks as well as the parameters we just predicted. Inside the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> these parameters will be denormalized from 0 to 1 to their full range.</p>
+<p>We can see that we get two return values from calling the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code>. The first is the stereo mix, which is the same length as the inputs but has only two channels. We also get a new tensor for the parameters, which is the same shape. This tensor contains the parameter values, but in their denormalized state. This will enable us to inspect what parameters were estimated by the model in the human interpretable form.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># generate the stereo mix</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">bs</span><span class="p">,</span> <span class="n">num_tracks</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># move tracks back from batch dim</span>
+<span class="n">y</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">mixer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>  <span class="c1"># (bs, 2, seq_len) # and denormalized params</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">p</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>torch.Size([2, 2, 131072]) torch.Size([2, 4, 2])
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can easily print out the parameters for each track as follows. In this example all of the parameters are very similar since we are using an untrained network and noise as input.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">tidx</span><span class="p">,</span> <span class="n">track_params</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="o">...</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">tidx</span><span class="si">}</span><span class="s2"> gain dB:</span><span class="si">{</span><span class="n">track_params</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">  pan:</span><span class="si">{</span><span class="n">track_params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">0.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 gain dB:-11.366  pan:0.511
+1 gain dB:-11.391  pan:0.510
+2 gain dB:-11.411  pan:0.513
+3 gain dB:-11.231  pan:0.509
+</pre></div>
+</div>
+</div>
+</div>
+<p>That concludes the section on the models. Hopefully this provided some insight into the innerworkings of these two automatic mixing models. Both implementations are simple and could be built on to extend their features.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./part_3"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02_datasets.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Datasets for automix systems</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_training.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Training</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
