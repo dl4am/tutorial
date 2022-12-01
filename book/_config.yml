@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/config.html
 
 title: Deep Learning for Automatic Mixing
-author: Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham 
+author: Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham 
 logo: assets/logo.png #needs to be changed
 
 # Force re-execution of notebooks on each build.
