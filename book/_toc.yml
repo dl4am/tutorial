@@ -6,10 +6,10 @@ root: landing-page
 parts:
   - caption: Audio Engineering # part 1
     chapters:
-      - file: part_1/01_audio-effects
-      - file: part_1/02_music-production
+      - file: part_1/01_music-production
         sections:
         - file: part_1/music-production/01_mixing
+        - file: part_1/music-production/02_audio_effects
         - file: part_1/music-production/02_equalization
         - file: part_1/music-production/03_reveberation
         - file: part_1/music-production/04_compression
