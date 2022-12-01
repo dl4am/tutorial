@@ -121,13 +121,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_1/01_audio-effects.html">
-   Audio Effects
-  </a>
- </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_1/02_music-production.html">
+  <a class="reference internal" href="../part_1/01_music-production.html">
    Music Production
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -351,7 +346,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/dl4am/tutorial"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -368,7 +363,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpart_2/02_problem.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/02_problem.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -534,11 +529,11 @@ title="Print to PDF"
 <p>As discussed in Section 1, the process of creating these constituent recordings is largely unstructured, meaning that different productions can have vastly different recordings in terms of the number of sources and their identity. The task of an automatic mixing system involves analyzing and then manipulating these individual recordings to create a mixture similar to a trained audio engineer. Due to these complexities, there are a number of challenges that arise in constructing an automatic system that can learn from data, which are addressed by systems in different ways.</p>
 <figure class="align-center" id="types-of-systems">
 <img alt="Types of systems" src="../_images/types-of-systems.svg" /><figcaption>
-<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Three formulations for deep learning based automatic mixing systems.</span><a class="headerlink" href="#types-of-systems" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Three formulations for deep learning based automatic mixing systems.</span><a class="headerlink" href="#types-of-systems" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The problem formulation adopted by a particular approach depends primarily on the form of the data that will be used for training the automatic mixing system. The two predominant formulations can be described as <strong>direct transformation</strong>, where the input recordings are directly mapped to the output mixture (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 1</span></a>a), or <strong>parameter estimation</strong>, where the parameters of a mixing console are estimated by a model and then used in downstream mixing console to produce a mix, as shown in Figure <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 1</span></a>b and c.</p>
-<p>There are two general forms of parameter estimation that depend on the form of the dataset and loss function used. When a dataset of both input recordings and parameter is available we can compute the loss in the parameter space (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 1</span></a>b) and when parameters not available, only the final mixtures, we can instead compute the loss in the audio domain (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 1</span></a>c). However the second form requires that the mixing console <span class="math notranslate nohighlight">\(h\)</span> is differentiable. We will introduce these formulations in the following subsections in a general sense and discuss their tradeoffs. Then in Section 2.3 we will discuss the Mix-Wave-U-Net and Differentiable Mixing Console, which are examples of these two different formulations.</p>
+<p>The problem formulation adopted by a particular approach depends primarily on the form of the data that will be used for training the automatic mixing system. The two predominant formulations can be described as <strong>direct transformation</strong>, where the input recordings are directly mapped to the output mixture (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>a), or <strong>parameter estimation</strong>, where the parameters of a mixing console are estimated by a model and then used in downstream mixing console to produce a mix, as shown in Figure <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>b and c.</p>
+<p>There are two general forms of parameter estimation that depend on the form of the dataset and loss function used. When a dataset of both input recordings and parameter is available we can compute the loss in the parameter space (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>b) and when parameters not available, only the final mixtures, we can instead compute the loss in the audio domain (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>c). However the second form requires that the mixing console <span class="math notranslate nohighlight">\(h\)</span> is differentiable. We will introduce these formulations in the following subsections in a general sense and discuss their tradeoffs. Then in Section 2.3 we will discuss the Mix-Wave-U-Net and Differentiable Mixing Console, which are examples of these two different formulations.</p>
 <section id="direct-transformation">
 <h2>Direct Transformation<a class="headerlink" href="#direct-transformation" title="Permalink to this headline">#</a></h2>
 <p>In the direct transformation approach we consider a dataset of <span class="math notranslate nohighlight">\(E\)</span> examples <span class="math notranslate nohighlight">\(\mathcal{D}_{i=1}^E  \{  \mathbf{x}_{i,1}, \mathbf{x}_{i,2}, ..., \mathbf{x}_{i,N}, \mathbf{Y}_i \}\)</span> each containing <span class="math notranslate nohighlight">\(N_i\)</span> recordings <span class="math notranslate nohighlight">\(\mathbf{x}_{i,1}, \mathbf{x}_{i,2}, ..., \mathbf{x}_{i,N}\)</span> along with a mixture of these recordings <span class="math notranslate nohighlight">\(\mathbf{Y}_i\)</span> created by an audio engineer. We do not need knowledge of the underlying signal processing devices that were used (audio effects, digital audio workstation, etc.) in this approach. We construct a model <span class="math notranslate nohighlight">\(f_\theta\)</span> that takes as input the recordings and is trained to produce an estimate of the mix <span class="math notranslate nohighlight">\(\hat{\mathbf{Y}}_i\)</span> from the dataset that corresponds to the input tracks <span class="math notranslate nohighlight">\(\mathbf{Y}_i\)</span>. This involves optimizing the parameters of the model <span class="math notranslate nohighlight">\(\bm{\theta}\)</span> according to a loss operating on the audio signals <span class="math notranslate nohighlight">\(\mathcal{L}_a\)</span> (in either the time or frequency domains, or both). This formulation makes limited assumptions and depending on the flexibility of <span class="math notranslate nohighlight">\(f_\theta\)</span> can enable learning to reproduce common audio effects without any direct supervision or knowledge of these devices beyond the mapping between the input recordings and mixes.</p>

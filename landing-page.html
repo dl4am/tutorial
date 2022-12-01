@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Audio Effects" href="part_1/01_audio-effects.html" />
+    <link rel="next" title="Music Production" href="part_1/01_music-production.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -118,13 +118,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="part_1/01_audio-effects.html">
-   Audio Effects
-  </a>
- </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="part_1/02_music-production.html">
+  <a class="reference internal" href="part_1/01_music-production.html">
    Music Production
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -348,7 +343,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/dl4am/tutorial"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -365,7 +360,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Flanding-page.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Flanding-page.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -549,8 +544,8 @@ title="Print to PDF"
 <p>Mixing is a central task within audio post-production where expert knowledge is required to deliver professional quality content, encompassing both technical and creative considerations.
 Recently, deep learning approaches have been introduced that aim to address this challenge by generating a cohesive mixture of a set of recordings as would an audio engineer.
 These approaches leverage large-scale datasets and therefore have the potential to outperform traditional approaches based on expert systems, but bring their own unique set of challenges.
-In this tutorial, we will begin by providing an introduction to the mixing process from the perspective of an audio engineer, along with a discussion of the tools used in the process from a signal processing perspective.</p>
-<p>We will then discuss a series of recent deep learning approaches and relevant datasets, providing code to build, train, and evaluate these systems.
+In this tutorial, we begin by providing an introduction to the mixing process from the perspective of an audio engineer, along with a discussion of the tools used in the process from a signal processing perspective.
+We then discuss a series of recent deep learning approaches and relevant datasets, providing code to build, train, and evaluate these systems.
 Future directions and challenges will be discussed, including new deep learning systems, evaluation methods, and approaches to address dataset availability.
 Our goal is to provide a starting point for researchers working in MIR who have little to no experience in audio engineering so they can easily begin addressing problems in this domain.
 In addition, our tutorial may be of interest to researchers outside of MIR, but with a background in audio engineering or signal processing, who are interested in gaining exposure to current approaches in deep learning.</p>
@@ -558,21 +553,21 @@ In addition, our tutorial may be of interest to researchers outside of MIR, but 
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
 <p>Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content <span id="id1">[]</span>.
-This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation<span id="id2">[<a class="reference internal" href="part_5/03_references.html#id9" title="Thomas Wilmering, David Moffat, Alessia Milo, and Mark B Sandler. A history of audio effects. Applied Sciences, 10(3):791, 2020.">WMMS20</a>]</span>.<br />
-Due to this complexity, the field of intelligent music production (IMP) <span id="id3">[<a class="reference internal" href="part_5/03_references.html#id5" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span> has focused on the design of systems that automate tasks in audio engineering.
-These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals <span id="id4">[<a class="reference internal" href="part_5/03_references.html#id6" title="David Moffat and Mark B Sandler. Approaches in intelligent music production. Arts, 8(5):14, September 2019.">MS19b</a>]</span>.</p>
+This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation<span id="id2">[<a class="reference internal" href="part_5/03_references.html#id29" title="Thomas Wilmering, David Moffat, Alessia Milo, and Mark B Sandler. A history of audio effects. Applied Sciences, 10(3):791, 2020.">WMMS20</a>]</span>.<br />
+Due to this complexity, the field of intelligent music production (IMP) <span id="id3">[<a class="reference internal" href="part_5/03_references.html#id6" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span> has focused on the design of systems that automate tasks in audio engineering.
+These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals <span id="id4">[<a class="reference internal" href="part_5/03_references.html#id7" title="David Moffat and Mark B Sandler. Approaches in intelligent music production. Arts, 8(5):14, September 2019.">MS19b</a>]</span>.</p>
 <p>In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer<span id="id5">[]</span>.
-Existing approaches include adaptive signal processing<span id="id6">[<a class="reference internal" href="part_5/03_references.html#id7" title="Enrique Perez-Gonzalez and Joshua Reiss. Automatic equalization of multichannel audio using cross-adaptive methods. In 127th Audio Engineering Society Convention. 2009.">PGR09</a>]</span>, rule-based <span id="id7">[<a class="reference internal" href="part_5/03_references.html#id19" title="Brecht De Man and Joshua D Reiss. A knowledge-engineered autonomous mixing system. In 135th Convention of the Audio Engineering Society. Audio Engineering Society, 2013.">DMR13</a>]</span>, machine learning<span id="id8">[<a class="reference internal" href="part_5/03_references.html#id8" title="Dave Moffat and Mark Sandler. Machine learning multitrack gain mixing of drums. In 147th Audio Engineering Society Convention. 2019.">MS19a</a>]</span>, and most recently deep learning<span id="id9">[<a class="reference internal" href="part_5/03_references.html#id12" title="M Martinez Ramirez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MRSM21</a>, <a class="reference internal" href="part_5/03_references.html#id13" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span> approaches.
+Existing approaches include adaptive signal processing<span id="id6">[<a class="reference internal" href="part_5/03_references.html#id12" title="Enrique Perez-Gonzalez and Joshua Reiss. Automatic gain and fader control for live mixing. In 2009 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics, 1–4. IEEE, 2009.">PGR09</a>]</span>, rule-based <span id="id7">[<a class="reference internal" href="part_5/03_references.html#id35" title="Brecht De Man and Joshua D Reiss. A knowledge-engineered autonomous mixing system. In 135th Audio Engineering Society Convention. Audio Engineering Society, 2013.">DMR13</a>]</span>, machine learning<span id="id8">[<a class="reference internal" href="part_5/03_references.html#id28" title="Dave Moffat and Mark Sandler. Machine learning multitrack gain mixing of drums. In 147th Audio Engineering Society Convention. 2019.">MS19a</a>]</span>, and most recently deep learning<span id="id9">[<a class="reference internal" href="part_5/03_references.html#id30" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>, <a class="reference internal" href="part_5/03_references.html#id31" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span> approaches.
 While deep learning approaches that leverage large-scale datasets have the potential to outperform traditional approaches, their performance is still far from professional audio engineers motivating further investigation in the design and evaluation of these systems.</p>
 <p>While applications of deep learning in MIR have continued to broaden, applications in audio engineering still remain under-investigated leaving a number of open research questions.
-However, the growing body of research in MIR tasks such as music source separation<span id="id10">[<a class="reference internal" href="part_5/03_references.html#id28" title="Fabian-Robert Stöter, Stefan Uhlich, Antoine Liutkus, and Yuki Mitsufuji. Open-unmix-a reference implementation for music source separation. Journal of Open Source Software, 4(41):1667, 2019.">StoterULM19</a>]</span>, music generation<span id="id11">[<a class="reference internal" href="part_5/03_references.html#id29" title="Jean-Pierre Briot, Gaëtan Hadjeres, and François-David Pachet. Deep learning techniques for music generation–a survey. arXiv:1709.01620, 2017.">BHP17</a>]</span>, and music classification<span id="id12">[<a class="reference internal" href="part_5/03_references.html#id30" title="Minz Won, Andres Ferraro, Dmitry Bogdanov, and Xavier Serra. Evaluation of cnn-based automatic music tagging models. In Proc. of 17th Sound and Music Computing. 2020.">WFBS20</a>]</span> provide insights into advancing applications in audio engineering.
+However, the growing body of research in MIR tasks such as music source separation<span id="id10">[<a class="reference internal" href="part_5/03_references.html#id45" title="Fabian-Robert Stöter, Stefan Uhlich, Antoine Liutkus, and Yuki Mitsufuji. Open-unmix-a reference implementation for music source separation. Journal of Open Source Software, 4(41):1667, 2019.">StoterULM19</a>]</span>, music generation<span id="id11">[<a class="reference internal" href="part_5/03_references.html#id46" title="Jean-Pierre Briot, Gaëtan Hadjeres, and François-David Pachet. Deep learning techniques for music generation–a survey. arXiv:1709.01620, 2017.">BHP17</a>]</span>, and music classification<span id="id12">[<a class="reference internal" href="part_5/03_references.html#id47" title="Minz Won, Andres Ferraro, Dmitry Bogdanov, and Xavier Serra. Evaluation of cnn-based automatic music tagging models. In Proc. of 17th Sound and Music Computing. 2020.">WFBS20</a>]</span> provide insights into advancing applications in audio engineering.
 Therefore, the ISMIR community stands to benefit from a tutorial that introduces the basics and intricacies of music mixing as along with the discussion on existing approaches and open challenges.
 Our hope is to raise awareness of MIR from the perspective of audio engineering and further stimulate research interest in this area within the MIR community.</p>
 </section>
 <section id="about-the-authors">
 <h2>About the authors<a class="headerlink" href="#about-the-authors" title="Permalink to this headline">#</a></h2>
 <a class="reference internal image-reference" href="_images/cjs.jpeg"><img alt="Christian Steinmetz" class="align-left" src="_images/cjs.jpeg" style="width: 100px;" /></a>
-<p><a class="reference external" href="https://www.christiansteinmetz.com/"><strong>Christian Steinmetz</strong></a> is PhD researcher working with Prof. Joshua D. Reiss within the Centre for Digital Music at Queen Mary University of London. He researches applications of machine learning in audio with a focus on differentiable signal processing. Currently, his research revolves around applications in high fidelity audio and music production, which involves enhancing audio recordings, intelligent systems for audio engineering, as well as applications that augment and extend creativity. He has worked as a Research Scientist Intern at Adobe, Facebook Reality Labs, and Dolby Labs. Christian holds a BS in Electrical Engineering and BA in Audio Technology from Clemson University, as well as an MSc in Sound and Music Computing from the Music Technology Group at Universitat Pompeu Fabra.</p>
+<p><a class="reference external" href="https://www.christiansteinmetz.com/"><strong>Christian J. Steinmetz</strong></a> is PhD researcher working with Prof. Joshua D. Reiss within the Centre for Digital Music at Queen Mary University of London. He researches applications of machine learning in audio with a focus on differentiable signal processing. Currently, his research revolves around applications in high fidelity audio and music production, which involves enhancing audio recordings, intelligent systems for audio engineering, as well as applications that augment and extend creativity. He has worked as a Research Scientist Intern at Adobe, Facebook Reality Labs, and Dolby Labs. Christian holds a BS in Electrical Engineering and BA in Audio Technology from Clemson University, as well as an MSc in Sound and Music Computing from the Music Technology Group at Universitat Pompeu Fabra.</p>
 <a class="reference internal image-reference" href="_images/ssv.jpeg"><img alt="CSoumya Sai Vanka" class="align-left" src="_images/ssv.jpeg" style="width: 100px;" /></a>
 <p><a class="reference external" href="https://www.saisoumya.com/"><strong>Soumya Sai Vanka</strong></a> is a first year PhD researcher at the Centre for Digital Music, Queen Mary University of London. She is part of the AI and Music, Centre for Doctoral Training. Her research focus is mainly on exploring the idea of Music Mix similarity, Music Mix Style transfer, and Intelligent Multitrack Mixing using Self-Supervised, Semi-Supervised, and Unsupervised Learning architectures. She also writes music, produces and plays saxophone. Her educational background is a mixture of Masters in Physics and Courses in Music Production.</p>
 <a class="reference internal image-reference" href="_images/mamr.jpeg"><img alt="Marco Martínez" class="align-left" src="_images/mamr.jpeg" style="width: 100px;" /></a>
@@ -585,23 +580,21 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
 </section>
 <section id="citing-this-book">
 <h2>Citing this book<a class="headerlink" href="#citing-this-book" title="Permalink to this headline">#</a></h2>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@book</span><span class="p">{</span><span class="n">deeplearning_auto_mix</span><span class="p">:</span><span class="n">book</span><span class="p">,</span>
-    <span class="n">Author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Steinmetz</span><span class="p">,</span><span class="n">Christian</span> <span class="ow">and</span> <span class="n">Vanka</span><span class="p">,</span> <span class="n">Soumya</span> <span class="n">Sai</span> <span class="ow">and</span> <span class="n">Martínez</span><span class="p">,</span> <span class="n">Marco</span> <span class="ow">and</span> <span class="n">Bromham</span><span class="p">,</span> <span class="n">Gary</span><span class="p">},</span>
+<p>If you use this book or any of accompanying code in your work please consider citing this book.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@book</span><span class="p">{</span><span class="n">steinmetz2022automix</span><span class="p">,</span>
+    <span class="n">Author</span> <span class="o">=</span> <span class="p">{</span><span class="n">Steinmetz</span><span class="p">,</span> <span class="n">Christian</span> <span class="n">J</span><span class="o">.</span> <span class="ow">and</span> <span class="n">Vanka</span><span class="p">,</span> <span class="n">Soumya</span> <span class="n">Sai</span> <span class="ow">and</span> <span class="n">Martínez</span> <span class="n">Ramírez</span><span class="p">,</span> <span class="n">Marco</span> <span class="n">A</span><span class="o">.</span> <span class="ow">and</span> <span class="n">Bromham</span><span class="p">,</span> <span class="n">Gary</span><span class="p">},</span>
     <span class="n">Month</span> <span class="o">=</span> <span class="n">Dec</span><span class="o">.</span><span class="p">,</span>
-    <span class="n">Publisher</span> <span class="o">=</span> <span class="p">{</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dl4am</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">tutorial</span><span class="p">},</span>
+    <span class="n">Publisher</span> <span class="o">=</span> <span class="p">{</span><span class="n">ISMIR</span><span class="p">},</span>
     <span class="n">Title</span> <span class="o">=</span> <span class="p">{</span><span class="n">Deep</span> <span class="n">Learning</span> <span class="k">for</span> <span class="n">Automatic</span> <span class="n">Mixing</span><span class="p">},</span>
     <span class="n">Year</span> <span class="o">=</span> <span class="mi">2022</span><span class="p">,</span>
     <span class="n">Url</span> <span class="o">=</span> <span class="p">{</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">dl4am</span><span class="o">.</span><span class="n">github</span><span class="o">.</span><span class="n">io</span><span class="o">/</span><span class="n">tutorial</span><span class="p">},</span>
-    <span class="n">doi</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="note">
 <h2>Note<a class="headerlink" href="#note" title="Permalink to this headline">#</a></h2>
-<ul class="simple">
-<li><p>You can download a pdf of this book from <span class="xref myst">arXiv</span>. If the pdf is not up-to-date, you can <a class="reference external" href="https://github.com/dl4am/tutorial">build it by yourself</a> on your local machine.</p></li>
-</ul>
+<p>You can download a pdf of this book from <span class="xref myst">arXiv</span>. If the pdf is not up-to-date, you can <a class="reference external" href="https://github.com/dl4am/tutorial/scripts/build-book.sh">build it by yourself</a> on your local machine.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -642,10 +635,10 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="part_1/01_audio-effects.html" title="next page">
+    <a class='right-next' id="next-link" href="part_1/01_music-production.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Audio Effects</p>
+        <p class="prev-next-title">Music Production</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -8,9 +8,8 @@ This is a web book written for a [tutorial session](https://ismir2022.ismir.net/
 Mixing is a central task within audio post-production where expert knowledge is required to deliver professional quality content, encompassing both technical and creative considerations. 
 Recently, deep learning approaches have been introduced that aim to address this challenge by generating a cohesive mixture of a set of recordings as would an audio engineer.
 These approaches leverage large-scale datasets and therefore have the potential to outperform traditional approaches based on expert systems, but bring their own unique set of challenges. 
-In this tutorial, we will begin by providing an introduction to the mixing process from the perspective of an audio engineer, along with a discussion of the tools used in the process from a signal processing perspective.
-
-We will then discuss a series of recent deep learning approaches and relevant datasets, providing code to build, train, and evaluate these systems. 
+In this tutorial, we begin by providing an introduction to the mixing process from the perspective of an audio engineer, along with a discussion of the tools used in the process from a signal processing perspective.
+We then discuss a series of recent deep learning approaches and relevant datasets, providing code to build, train, and evaluate these systems. 
 Future directions and challenges will be discussed, including new deep learning systems, evaluation methods, and approaches to address dataset availability.
 Our goal is to provide a starting point for researchers working in MIR who have little to no experience in audio engineering so they can easily begin addressing problems in this domain.
 In addition, our tutorial may be of interest to researchers outside of MIR, but with a background in audio engineering or signal processing, who are interested in gaining exposure to current approaches in deep learning. 
@@ -38,7 +37,7 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
 :width: 100px
 :align: left
 ```
-[**Christian Steinmetz**](https://www.christiansteinmetz.com/) is PhD researcher working with Prof. Joshua D. Reiss within the Centre for Digital Music at Queen Mary University of London. He researches applications of machine learning in audio with a focus on differentiable signal processing. Currently, his research revolves around applications in high fidelity audio and music production, which involves enhancing audio recordings, intelligent systems for audio engineering, as well as applications that augment and extend creativity. He has worked as a Research Scientist Intern at Adobe, Facebook Reality Labs, and Dolby Labs. Christian holds a BS in Electrical Engineering and BA in Audio Technology from Clemson University, as well as an MSc in Sound and Music Computing from the Music Technology Group at Universitat Pompeu Fabra.
+[**Christian J. Steinmetz**](https://www.christiansteinmetz.com/) is PhD researcher working with Prof. Joshua D. Reiss within the Centre for Digital Music at Queen Mary University of London. He researches applications of machine learning in audio with a focus on differentiable signal processing. Currently, his research revolves around applications in high fidelity audio and music production, which involves enhancing audio recordings, intelligent systems for audio engineering, as well as applications that augment and extend creativity. He has worked as a Research Scientist Intern at Adobe, Facebook Reality Labs, and Dolby Labs. Christian holds a BS in Electrical Engineering and BA in Audio Technology from Clemson University, as well as an MSc in Sound and Music Computing from the Music Technology Group at Universitat Pompeu Fabra.
 
 ```{image} /assets/ssv.jpeg
 :alt: CSoumya Sai Vanka
@@ -68,18 +67,20 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
 
 
 ## Citing this book
+
+If you use this book or any of accompanying code in your work please consider citing this book.
+
 ```
-@book{deeplearning_auto_mix:book,
-    Author = {Steinmetz,Christian and Vanka, Soumya Sai and Martínez, Marco and Bromham, Gary},
+@book{steinmetz2022automix,
+    Author = {Steinmetz, Christian J. and Vanka, Soumya Sai and Martínez Ramírez, Marco A. and Bromham, Gary},
     Month = Dec.,
-    Publisher = {https://dl4am.github.io/tutorial},
+    Publisher = {ISMIR},
     Title = {Deep Learning for Automatic Mixing},
     Year = 2022,
     Url = {https://dl4am.github.io/tutorial},
-    doi = {}
 }
 ```
 
 ## Note
 
-- You can download a pdf of this book from [arXiv](). If the pdf is not up-to-date, you can [build it by yourself](https://github.com/dl4am/tutorial) on your local machine.  
+You can download a pdf of this book from [arXiv](). If the pdf is not up-to-date, you can [build it by yourself](https://github.com/dl4am/tutorial/scripts/build-book.sh) on your local machine.  

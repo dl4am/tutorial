@@ -119,13 +119,8 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_1/01_audio-effects.html">
-   Audio Effects
-  </a>
- </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_1/02_music-production.html">
+  <a class="reference internal" href="../part_1/01_music-production.html">
    Music Production
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -349,7 +344,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book"
+        <a href="https://github.com/dl4am/tutorial"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -366,7 +361,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fpart_2/01_imp.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/01_imp.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -594,7 +589,7 @@ title="Print to PDF"
 <p>Some important considerations for an automatic mixing system include interpretability, controllability, efficiency, permutation invariance, the requirement for specific input taxonomy, ability to handle a varying number of input recordings, fidelity, and the expressivity of the signal manipulation in mix creation. There are a lot of details to unpack there. Let’s introduce these eight considerations as we will keep them in mind as we discuss the details of different approaches in the following sections.</p>
 <p><em>Interpretability</em>: While it might not be critical to have a fully explainable model (in the XAI sense~\cite{}), it is often desirable for an automatic mixing system to convey what kind of manipulation is applied to each input recording in the creation of the mix. For example, this can easily be achieved by parameter estimation approaches, but is somewhat problematic for direct transformation approaches.</p>
 <p><em>Controllability</em>: Similar to interpretability, a system with a level of controllability will enable the user to not only understand what signal transformations have been applied, but also enable adjustment of these transformations. Again, parameter estimation approaches enable this behavior by default, but direct transformation methods could also achieve controllability if they incorporate specialized conditioning mechanisms in the model.</p>
-<p><em>Context</em>: Closely related to controllability, although distinct, is the notion of context, or context-aware systems <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id11">LBFM21</a>]</span>. As discussed in Section 1, context plays a central role in shaping the final outcome in the audio production process. As a result, it is important to consider to what degree an automatic mixing system is capable of understanding and adapting to the context.</p>
+<p><em>Context</em>: Closely related to controllability, although distinct, is the notion of context, or context-aware systems <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id53">LBFM21</a>]</span>. As discussed in Section 1, context plays a central role in shaping the final outcome in the audio production process. As a result, it is important to consider to what degree an automatic mixing system is capable of understanding and adapting to the context.</p>
 <p><em>Permutation Invariance</em>: An important realization is that the input recordings provided to the system are an unordered set. This means that the order in which the recordings are provided to our system should ideally not change the results. Some systems address this by adopting a fixed input taxonomy, but this restricts the system flexibility. Other approaches might deal with this by treating the input recordings as a set, often achieving this with weight sharing across the input recordings. We will discuss this further in the following sections.</p>
 <p><em>Input taxonomy</em>: As alluded to in the previous point, it is often beneficial to define a fixed input taxonomy. This means the system is trained using a dataset and model where the kind and number of sources that are passed to the system are fixed during training and inference. For example, in a system that mixes drum recordings, the inputs might always be presented to the system as an ordered set: “kick, snare, hi-hat, overhead left, overhead right, tom 1, tom 2”. While this often makes the process of creating an automatic mixing system simpler, it limits the ability of the system to be deployed in real-world scenarios wherein there exists limited structure with regards to the input recordings.</p>
 <p><em>Number of inputs</em>: Closely related to the input taxonomy is how the system handles a variable number of input recordings. Some systems might handle this by simply defining a maximum number of input recordings, inserting silence when an example contains fewer than the maximum. Other approaches that utilize weight sharing can potentially work around this and adapt to a variable number of sources, even those greater than seen during training since they treat the input recordings as a set and not a fixed vector.</p>
