@@ -1,0 +1,8 @@
+# Aesthetics
+
+Taste, preference and emotional context are key determinants in the choices that are made when mixing music. Mixing is an interdisciplinary task where technical considerations are made in conjunction with creative, artistic or aesthetic decisions. It is common practice for one action to inform the other, mapping a technical parameter space to a semantic or emotional space is a motivational factor when creating a mix.
+In the practical demonstration which forms a key part of our tutorial we try to communicate such challenges and creative thought processes. See \citet{izhaki2017mixing} for a comprehensive discussion on the virtues and benefits of creative thinking in the mix workplace.
+
+## Semantics
+
+Semantic descriptors are often used as a way of communicating ideas in the context of a mix. Articulating audio specific terms and descriptive language such as punchy, warm or aggressive from a technical perspective is a challenge for all audio engineers. Learning such actions In the context of intelligent mixing systems is somewhat problematic for similar reasons. \citet{deman2017ten}, \citet{moffat2019approaches}, and \citet{lefford2021context} have separately discussed these challenges from varying perspectives. \citet{stables2014safe} proposes a system for semantic feature extraction where descriptors are taken from adapting parameters in audio effect plugins. This is also discussed in our videos.

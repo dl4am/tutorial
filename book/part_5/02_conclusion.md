@@ -1,1 +1,4 @@
 # Conclusions
+
+This tutorial aims to serve as a starting point for researchers interested in applying the latest techniques in deep learning for the task of automatic multitrack mixing. We began the tutorial by motivating the task of automatic mixing and provided insights in the process from the perspective of an audio engineer. We then discussed approaches for this task predating the deep learning era and then focused our attention of the description of two recent deep learning automatic mixing systems, namely the Mix-Wave-U-Net and the Differentiable Mixing Console. We outlined the differing problem formulations (direct transformation vs. parameter estimation) and discussed the trade-offs between these approaches along with a number of important considerations for designing such systems.  
+While deep learning techniques has demonstrated, there is still much work needed in order to design deep learning techniques that produce powerful automatic mixing systems. 
