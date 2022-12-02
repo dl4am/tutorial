@@ -13,7 +13,6 @@ parts:
       - file: part_1/audio-effects/02_equalization
       - file: part_1/audio-effects/03_compression
       - file: part_1/audio-effects/04_reverberation
-    - file: part_1/03_aesthetics
 
   - caption: Automatic Mixing  # part 2
     chapters:
