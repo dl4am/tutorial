@@ -17,8 +17,7 @@ In addition, our tutorial may be of interest to researchers outside of MIR, but 
 ## Motivation
 
 Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content {cite:p}`deman2017ten`. 
-This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation{cite}`wilmering2020history`.    
-Due to this complexity, the field of intelligent music production (IMP) {cite}`IMPbook19` has focused on the design of systems that automate tasks in audio engineering.
+This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation{cite}`wilmering2020history`. Due to this complexity, the field of intelligent music production (IMP) {cite}`IMPbook19` has focused on the design of systems that automate tasks in audio engineering.
 These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals {cite}`moffat19approaches`.
 
 In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer{cite}`deman2017ten`.

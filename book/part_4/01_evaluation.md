@@ -11,20 +11,16 @@ Objective evaluation of music production tasks is not a straightforward task and
 
 With this in mind, we can approximate the objective evaluation of automatic mixing systems through audio features that relate to the most common audio effects used during mixing. Since audio effects generally manipulate audio characteristics such as frequency content, dynamics, spatialization, timbre, or pitch, we can use audio features that are associated with these audio characteristics as a way to numerically evaluate mixes.
 
-Considering the shortcomings of an objective evaluation when comparing mixtures, these features should only be taken as an indicator of performance when testing our models. An example of such flaws is a lack of ability to capture production quality or aesthetic improvements, or a lack of evidence of artifacts within the mix~\citep{IMPbook19}.
+Considering the shortcomings of an objective evaluation when comparing mixtures, these features should only be taken as an indicator of performance when testing our models. An example of such flaws is a lack of ability to capture production quality or aesthetic improvements, or a lack of evidence of artifacts within the mix {cite}`IMPbook19`.
 
- We can use the following audio features~\citep{colonel2021reverse}:
- \begin{itemize}
+ We can use the following audio features {cite}`colonel2021reverse`:
     
-\item \textbf{Spectral features} for EQ and reverberation: centroid, bandwidth, contrast, flatness, and roll-off~\citep{peeters2004large};
-\item \textbf{Spatialisation features} for panning: the Panning Root Mean Square (RMS)~\citep{tzanetakis2007stereo};
-\item \textbf{Dynamic features} for dynamic range processors: RMS level, dynamic spread and crest factor~\citep{ma2015intelligent}
-\item \textbf{Loudness features}: the integrated loudness level (LUFS) and peak loudness~\citep{itu2011itu}
-\end{itemize}
+- **Spectral features** for EQ and reverberation: centroid, bandwidth, contrast, flatness, and roll-off {cite}`peeters2004large`
+- **Spatialisation features** for panning: the Panning Root Mean Square (RMS) {cite}`tzanetakis2007stereo`
+- **Dynamic features** for dynamic range processors: RMS level, dynamic spread and crest factor {cite}`ma2015intelligent`
+- **Loudness features** the integrated loudness level (LUFS) and peak loudness {cite}`itu2011itu`
 
 
-To capture the dynamics of audio effects information we can compute the running mean over a fixed number of past frames~\citep{tzanetakis2007stereo}. We can calculate the mean absolute percentage error between the target and output features to get a better understanding of the overall relative error.
+To capture the dynamics of audio effects information we can compute the running mean over a fixed number of past frames {cite}`tzanetakis2007stereo`. We can calculate the mean absolute percentage error between the target and output features to get a better understanding of the overall relative error.
 
-Deep features such as the embedding output of the Fx encoder proposed in~\citep{koo2022music} could also be used as an indicator of similarity for audio effect information, although a further analysis of such embeddings is required. Likewise, this applies to general purpose deep features related to audio perception, such as the Fréchet Audio Distance~\citep{kilgour2019frechet}.
-
-## 
+Deep features such as the embedding output of the Fx encoder proposed in {cite}`koo2022music` could also be used as an indicator of similarity for audio effect information, although a further analysis of such embeddings is required. Likewise, this applies to general purpose deep features related to audio perception, such as the Fréchet Audio Distance {cite}`kilgour2019frechet`.
