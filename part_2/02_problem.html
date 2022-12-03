@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Methods" href="03_methods.html" />
+    <link rel="next" title="Differentiable signal processing" href="03_diffsp.html" />
     <link rel="prev" title="Intelligent Music Production" href="01_imp.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -121,9 +121,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="../part_1/01_music-production.html">
    Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_1/02_audio-effects.html">
+   Audio effects
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -132,28 +137,23 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/01_mixing.html">
-     Mixing
+    <a class="reference internal" href="../part_1/audio-effects/01_panning.html">
+     Panning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/02_equalization.html">
+    <a class="reference internal" href="../part_1/audio-effects/02_equalization.html">
      Equalization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/03_reveberation.html">
-     Reverberation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/04_compression.html">
+    <a class="reference internal" href="../part_1/audio-effects/03_compression.html">
      Compression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/05_aesthetics.html">
-     Aesthetics
+    <a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">
+     Reverberation
     </a>
    </li>
   </ul>
@@ -175,8 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
    Problem Formulation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="03_methods.html">
+  <a class="reference internal" href="04_methods.html">
    Methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -198,13 +203,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="04_loss-functions.html">
+  <a class="reference internal" href="05_loss-functions.html">
    Loss Functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_diffsp.html">
-   Differentiable signal processing
   </a>
  </li>
 </ul>
@@ -242,12 +242,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/01_metrics.html">
-   Metrics
+  <a class="reference internal" href="../part_4/01_evaluation.html">
+   Evaluation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/05_evaluate.html">
+  <a class="reference internal" href="../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/03_evaluate.html">
    Evaluation
   </a>
  </li>
@@ -525,35 +530,57 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="problem-formulation">
 <h1>Problem Formulation<a class="headerlink" href="#problem-formulation" title="Permalink to this headline">#</a></h1>
-<p>Generally, we consider that an automatic mixing system will take as input a set of <span class="math notranslate nohighlight">\(N\)</span> recordings <span class="math notranslate nohighlight">\(\mathbf{x_1}, \mathbf{x}_2, ..., \mathbf{x}_N\)</span> each containing <span class="math notranslate nohighlight">\(T\)</span> samples. These recordings, when processed and combined, will create the final stereophonic mixture <span class="math notranslate nohighlight">\(\hat{Y}\)</span>. In popular music, the input recordings generally contain isolated recordings of the individual instruments that make up the composition (e.g. vocals, guitar, bass, drums, etc.). In other genres, these recordings may come from microphones placed close to sources within an orchestra or ensemble while they were performing. Automatic mixing systems also have applications outside of music, so recordings may constitute multiple speakers in a podcast or the dialogue, sound effects, and score of a film.</p>
-<p>As discussed in Section 1, the process of creating these constituent recordings is largely unstructured, meaning that different productions can have vastly different recordings in terms of the number of sources and their identity. The task of an automatic mixing system involves analyzing and then manipulating these individual recordings to create a mixture similar to a trained audio engineer. Due to these complexities, there are a number of challenges that arise in constructing an automatic system that can learn from data, which are addressed by systems in different ways.</p>
+<p>Generally, an automatic mixing system will take as input a set of <span class="math notranslate nohighlight">\(N\)</span> recordings <span class="math notranslate nohighlight">\(\mathbf{x_1}, \mathbf{x}_2, ..., \mathbf{x}_N\)</span> each containing <span class="math notranslate nohighlight">\(T\)</span> samples. These recordings, when processed and combined, will create the final stereophonic mixture <span class="math notranslate nohighlight">\(\mathbf{Y} \in \mathbb{R}^{2 \times T}\)</span>. In popular music, the input recordings generally contain isolated recordings of the individual instruments that make up the composition (e.g. vocals, guitar, bass, drums, etc.). In other genres, these recordings may come from microphones placed close to sources within an orchestra or ensemble while they were performing. In electronic productions all of these sources may come from synthesized instruments. It is important to note automatic mixing systems also have applications outside of music, so recordings may constitute multiple speakers in a podcast or the dialogue, sound effects, and score of a film.</p>
+<p>As discussed, the process of creating these constituent recordings is largely unstructured, meaning that different productions may feature vastly different recordings in terms of the number of sources and their identity. The task of an automatic mixing system involves analyzing and then manipulating these individual recordings to create a mixture similar to a trained audio engineer. Due to these complexities, there are a number of challenges that arise in constructing an automatic system that can learn from data, which are often addressed by systems in different ways.</p>
 <figure class="align-center" id="types-of-systems">
 <img alt="Types of systems" src="../_images/types-of-systems.svg" /><figcaption>
-<p><span class="caption-number">Fig. 2 </span><span class="caption-text">Three formulations for deep learning based automatic mixing systems.</span><a class="headerlink" href="#types-of-systems" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 18 </span><span class="caption-text">Formulations for deep learning based automatic mixing systems.</span><a class="headerlink" href="#types-of-systems" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The problem formulation adopted by a particular approach depends primarily on the form of the data that will be used for training the automatic mixing system. The two predominant formulations can be described as <strong>direct transformation</strong>, where the input recordings are directly mapped to the output mixture (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>a), or <strong>parameter estimation</strong>, where the parameters of a mixing console are estimated by a model and then used in downstream mixing console to produce a mix, as shown in Figure <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>b and c.</p>
-<p>There are two general forms of parameter estimation that depend on the form of the dataset and loss function used. When a dataset of both input recordings and parameter is available we can compute the loss in the parameter space (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>b) and when parameters not available, only the final mixtures, we can instead compute the loss in the audio domain (shown in <a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 2</span></a>c). However the second form requires that the mixing console <span class="math notranslate nohighlight">\(h\)</span> is differentiable. We will introduce these formulations in the following subsections in a general sense and discuss their tradeoffs. Then in Section 2.3 we will discuss the Mix-Wave-U-Net and Differentiable Mixing Console, which are examples of these two different formulations.</p>
+<p>The problem formulation adopted by a particular approach depends primarily on the form of the data that will be used for training the automatic mixing system. The two predominant formulations can be described as \emph{direct transformation}, where the input recordings are directly mapped to the output mixture, as shown in Fig.~\ref{fig:types-of-systems}a, or \emph{parameter estimation}, where the parameters of a mixing console are estimated by a model and then used in downstream mixing console to produce a mix, as shown in Fig..<a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 18</span></a>b and c.
+There are two general forms of parameter estimation that depend on the form of the dataset and loss function used. When a dataset of both input recordings and parameter is available we can compute the loss in the parameter space (shown in Fig..<a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 18</span></a>b) and when parameters not available, only the final mixtures, we can instead compute the loss in the audio domain (shown in Fig.<a class="reference internal" href="#types-of-systems"><span class="std std-numref">Fig. 18</span></a>c). However the second form requires that the mixing console <span class="math notranslate nohighlight">\(h\)</span> is differentiable. We will introduce these formulations in the following subsections in a general sense and discuss their tradeoffs. Then we will discuss the Mix-Wave-U-Net <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id34" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>]</span> and Differentiable Mixing Console <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span>, which are examples of these two different formulations.</p>
 <section id="direct-transformation">
 <h2>Direct Transformation<a class="headerlink" href="#direct-transformation" title="Permalink to this headline">#</a></h2>
-<p>In the direct transformation approach we consider a dataset of <span class="math notranslate nohighlight">\(E\)</span> examples <span class="math notranslate nohighlight">\(\mathcal{D}_{i=1}^E  \{  \mathbf{x}_{i,1}, \mathbf{x}_{i,2}, ..., \mathbf{x}_{i,N}, \mathbf{Y}_i \}\)</span> each containing <span class="math notranslate nohighlight">\(N_i\)</span> recordings <span class="math notranslate nohighlight">\(\mathbf{x}_{i,1}, \mathbf{x}_{i,2}, ..., \mathbf{x}_{i,N}\)</span> along with a mixture of these recordings <span class="math notranslate nohighlight">\(\mathbf{Y}_i\)</span> created by an audio engineer. We do not need knowledge of the underlying signal processing devices that were used (audio effects, digital audio workstation, etc.) in this approach. We construct a model <span class="math notranslate nohighlight">\(f_\theta\)</span> that takes as input the recordings and is trained to produce an estimate of the mix <span class="math notranslate nohighlight">\(\hat{\mathbf{Y}}_i\)</span> from the dataset that corresponds to the input tracks <span class="math notranslate nohighlight">\(\mathbf{Y}_i\)</span>. This involves optimizing the parameters of the model <span class="math notranslate nohighlight">\(\bm{\theta}\)</span> according to a loss operating on the audio signals <span class="math notranslate nohighlight">\(\mathcal{L}_a\)</span> (in either the time or frequency domains, or both). This formulation makes limited assumptions and depending on the flexibility of <span class="math notranslate nohighlight">\(f_\theta\)</span> can enable learning to reproduce common audio effects without any direct supervision or knowledge of these devices beyond the mapping between the input recordings and mixes.</p>
-<p>While this approach is desirable due to its limited assumptions and flexibility, this comes with some potential drawbacks. One limitation arises from this flexibility, which can lead to the need for large scale datasets for satisfactory training and generalization. This is of particular importance since in general the availability of even unstructured multitrack data is quite limited. Furthermore, this flexibility can also lead to undesirable signal transformations, namely the introduction of artifacts, which are highly undesirable in the audio engineering context. In addition, both interpretability and controllability are limited in this approach. Users of a system of this nature are unable to both see the control parameters that give rise to the final output mix, and more importantly, they are unable to adapt or modify this mix using traditional control parameters, potentially limiting the utility of the system.</p>
+<p>In the direct transformation approach we consider a dataset of <span class="math notranslate nohighlight">\(E\)</span> examples</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{D} = \{  \mathbf{x}^{(i)}_{1}, \mathbf{x}^{(i)}_{2}, ..., \mathbf{x}^{(i)}_{N}, \mathbf{Y}^{(i)} \}_{i=1}^E,
+\]</div>
+<p>where each example contains a variable number of recordings <span class="math notranslate nohighlight">\(N^{(i)}\)</span> of the form <span class="math notranslate nohighlight">\(\mathbf{x}^{(i)}_{1}, \mathbf{x}^{(i)}_{2}, ..., \mathbf{x}^{(i)}_{N}\)</span>, along with a mixture of these recordings <span class="math notranslate nohighlight">\(\mathbf{Y}^{(i)}\)</span> created by an audio engineer.
+We do not need knowledge of the underlying signal processing devices that were used (audio effects, digital audio workstation, etc.) in this approach.
+We construct a model <span class="math notranslate nohighlight">\(f_\theta\)</span> that takes as input the recordings and is trained to produce an estimate of the mix <span class="math notranslate nohighlight">\(\hat{\mathbf{Y}}^{(i)}\)</span> that is as close as possible to the corresponding mix in the dataset <span class="math notranslate nohighlight">\(\mathbf{Y}^{(i)}\)</span>.
+This involves optimizing the parameters of the model <span class="math notranslate nohighlight">\(\theta\)</span> according to a loss that measures the difference between the predicted and ground truth mixes. <span class="math notranslate nohighlight">\(\mathcal{L}_a(\hat{\mathbf{Y}}^{(i)}, \mathbf{Y}^{(i)})\)</span>. This distance is often computed in either the time or frequency domains, or a linear combination of both.</p>
+<p>This formulation makes limited assumptions and depending on the flexibility of <span class="math notranslate nohighlight">\(f_\theta\)</span> can enable learning to reproduce common audio effects without any direct supervision or knowledge of these devices beyond the mapping between the input recordings and mixes.
+While this approach is desirable due to its limited assumptions and flexibility, this comes with some potential drawbacks. One limitation arises from this flexibility, which can lead to the need for large scale datasets for satisfactory training and generalization. This is of particular importance since in general the availability of even unstructured multitrack data is quite limited. Furthermore, this flexibility can also lead to undesirable signal transformations, namely the introduction of artifacts, which are highly undesirable in the audio engineering context. In addition, both interpretability and controllability are limited in this approach. Users of a system of this nature are unable to both see the control parameters that give rise to the final output mix, and more importantly, they are unable to adapt or modify this mix using traditional control parameters, potentially limiting the utility of the system.</p>
 </section>
 <section id="parameter-estimation">
 <h2>Parameter Estimation<a class="headerlink" href="#parameter-estimation" title="Permalink to this headline">#</a></h2>
-<p>The limitations of direct transformation approaches motivate parameter estimation approaches, which instead construct a model <span class="math notranslate nohighlight">\(f_\theta\)</span> that estimates the parameters of a particular mixing console. This mixing console is described by some function <span class="math notranslate nohighlight">\(h\)</span> takes a set of <span class="math notranslate nohighlight">\(N\)</span> input recordings and along with parameters for each recording to produce a final stereo mixture <span class="math notranslate nohighlight">\(\mathbf{Y} = h(\mathbf{x}_{1}, \mathbf{x}_{2}, ..., \mathbf{x}_{N}, \mathbf{p}_1, \mathbf{p}_2, ..., \mathbf{p}_N)\)</span>. In most configurations we assume that the signal processing chain operating on each input is the made of the same building blocks (e.g equaliser, dynamic range compressor, reverberation, etc.) and therefore the parameters for each input <span class="math notranslate nohighlight">\(\mathbf{p}_i\)</span> can all be represented by an <span class="math notranslate nohighlight">\(N \times K\)</span> matrix <span class="math notranslate nohighlight">\(\mathbf{P}\)</span> where <span class="math notranslate nohighlight">\(N\)</span> is the number of inputs and <span class="math notranslate nohighlight">\(K\)</span> is the number of control parameters for each instance of the signal chain.</p>
-<p>Is should be noted that this framing limits the expressivity of the system as compared to the direct transformation approach since we are limited to the capabilities of <span class="math notranslate nohighlight">\(h\)</span> when creating a mix. However, it reduces the work that must be done by the model <span class="math notranslate nohighlight">\(f_\theta\)</span>, since manipulation of the input recordings to create the mixture is handled by a predefined set of signal processing devices described by <span class="math notranslate nohighlight">\(h\)</span>.</p>
+<p>The limitations of direct transformation approaches motivate parameter estimation approaches, which instead construct a model <span class="math notranslate nohighlight">\(f_\theta\)</span> that estimates the parameters of a particular mixing console. This mixing console is described by some function <span class="math notranslate nohighlight">\(h\)</span> takes a set of <span class="math notranslate nohighlight">\(N\)</span> input recordings and parameters for each recording to produce a final stereo mixture <span class="math notranslate nohighlight">\(\mathbf{Y} = h(\mathbf{x}_{1}, \mathbf{x}_{2}, ..., \mathbf{x}_{N}, \mathbf{p}_1, \mathbf{p}_2, ..., \mathbf{p}_N)\)</span>. In most configurations we assume that the signal processing chain operating on each input is the made of the same building blocks, for example a series connection of an equaliser, dynamic range compressor, and reverberation.
+Is should be noted that this framing limits the expressivity of the system as compared to the direct transformation approach since we are limited to the capabilities of <span class="math notranslate nohighlight">\(h\)</span> when creating a mix. However, it reduces the work that must be done by the model <span class="math notranslate nohighlight">\(f_\theta\)</span> and provides a level of interpretability and controllability, since manipulation of the input recordings to create the mixture is handled by a predefined set of signal processing devices described by <span class="math notranslate nohighlight">\(h\)</span>.</p>
 <section id="parameter-loss">
 <h3>Parameter Loss<a class="headerlink" href="#parameter-loss" title="Permalink to this headline">#</a></h3>
-<p>Given a dataset <span class="math notranslate nohighlight">\(\mathcal{D}_{i=1}^E \{ \mathbf{x}_{i,1}, \mathbf{x}_{i,2}, ..., \mathbf{x}_{i,N}, \mathbf{p}_{i,1}, \mathbf{p}_{i,2}, ..., \mathbf{p}_{i,N} \}\)</span> that contains both the <span class="math notranslate nohighlight">\(N\)</span> input recordings along with the <span class="math notranslate nohighlight">\(K\)</span> parameters of a mixing console for each input selected by an audio engineer that will produce a mix of the recordings, we could design a model that learns to estimate these parameters computing a loss in the parameter space. This formulation is shown in Figure []b, where a model <span class="math notranslate nohighlight">\(f_\theta\)</span> is trained to estimate control parameters <span class="math notranslate nohighlight">\(\hat{\mathbf{P}}\)</span>. The weights of the network <span class="math notranslate nohighlight">\(\theta\)</span> are then trained according to a loss function <span class="math notranslate nohighlight">\(\mathcal{L}_p(\hat{\mathbf{P}}, \mathbf{P})\)</span> that measures the distance (e.g. mean squared error) between the estimated parameters and the ground truth parameters from the dataset. While this is a potentially desirable formulation since it provides a straightforward training setup, it is problematic for two main reasons.</p>
-<p><em>Datasets</em>: Foremost is the reality that data of this form is not widely available. While it is possible to collect data of this form, it is challenging due to the diversity of the tools utilized by audio engineers. We could export the settings that describe the mix from digital audio workstation projects, but due to the wide range of digital audio workstations and the audio effect implementations present (plugins), defining a singular ontology onto which all mixing parameters can be mapped will require significant effort and is likely to face many edge cases.</p>
-<p>For example, consider an equaliser effect. This effect is commonly used, however there are many different implementations of an equaliser. Some implementations may feature <strong>CONTINUE</strong>. Therefore, the only route towards constructing a dataset of this form would likely require defining a fixed mixing chain and asking audio engineers to use this to generate training data. However, this results in a significant compromise in data realism since audio engineers often utilize their preferred set of audio effects in different contexts and forcing the use of not only specific effect implementations but also a specific signal processing further limits the data realism.</p>
-<p><em>Overparameterization:</em> In addition, another consideration for parameter estimation approach is the potential overparameterization of the audio effects and mixing console. An audio effect or signal processing device is overparameterized when there exists many different configurations in the parameter space of the device that result in outputs that are very close in the audio domain. This could be close in the audio domain with respect to an established objective metric, such as the time domain error or spectral distance, but also in the perceptual space, which is significantly harder to measure, but more likely to cause effects to be overparameterized. This is an issue when using a loss in the parameter space since it is possible for the model to generate parameter predictions that produce a mix close to or similar to the ground truth mix from the dataset but are far apart in the parameter space, and hence penalized during training.</p>
+<p>The first variant of the parameter estimation method involves training our system using a loss in the parameter space. In this case we assume we are given a dataset</p>
+<div class="math notranslate nohighlight">
+\[
+    \mathcal{D} = \{ \mathbf{x}^{(i)}_{1}, \mathbf{x}^{(i)}_{2}, ..., \mathbf{x}^{(i)}_{N}, \mathbf{p}^{(i)}_{1}, \mathbf{p}^{(i)}_{2}, ..., \mathbf{p}^{(i)}_{N} \}_{i=1}^E,
+\]</div>
+<p>that contains the <span class="math notranslate nohighlight">\(N\)</span> input recordings and the <span class="math notranslate nohighlight">\(K\)</span> parameters of a mixing console for each of these inputs that were selected by an audio engineer to produce a mix.
+With this dataset we could design a model that learns to estimate these parameters computing a loss in the parameter space. This formulation is shown in Fig.~\ref{fig:types-of-systems}b, where a model <span class="math notranslate nohighlight">\(f_\theta\)</span> is trained to estimate control parameters. The weights of the network <span class="math notranslate nohighlight">\(\theta\)</span> are then trained according to a loss function <span class="math notranslate nohighlight">\(\mathcal{L}_p(\hat{\mathbf{p}}^{(i)}_{1}, \hat{\mathbf{p}}^{(i)}_{2}, ..., \hat{\mathbf{p}}^{(i)}_{N}, \mathbf{p}^{(i)}_{1}, \mathbf{p}^{(i)}_{2}, ..., \mathbf{p}^{(i)}_{N})\)</span> that measures the distance (e.g. mean squared error) between the estimated parameters and the ground truth parameters from the dataset. While this is a potentially desirable formulation since it provides a straightforward training setup, it is problematic for two main reasons.</p>
+<p><strong>Datasets</strong> Foremost is the reality that data of this form is not widely available. While it is possible to collect data of this form, it is challenging due to the diversity of the tools utilized by audio engineers. We could export the settings that describe the mix from digital audio workstation projects, but due to the wide range of digital audio workstations and the audio effect implementations present, defining a singular ontology onto which all mixing parameters can be mapped will require significant effort and is likely to face many edge cases. A route towards constructing a dataset of this form would likely require defining a fixed mixing chain and asking audio engineers to use this to generate training data. However, this results in a significant compromise in data realism.</p>
+<p><strong>Overparameterization</strong> Another consideration for parameter estimation approach is the potential overparameterization of the audio effects and mixing console. An audio effect or signal processing device is overparameterized when there exists many different configurations in the parameter space of the device that result in outputs that are very close in the audio domain.
+This could be close in the audio domain with respect to an established objective metric, such as the time domain error or spectral distance, but also in the perceptual space, which is significantly harder to measure, but more likely to cause effects to be overparameterized.
+This is an issue when using a loss in the parameter space since it is possible for the model to generate parameter predictions that produce a mix close to or similar to the ground truth mix from the dataset but are far apart in the parameter space, and hence penalized during training <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id26" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. arXiv preprint arXiv:2207.08759, 2022.">SBR22</a>]</span>.</p>
 </section>
 <section id="audio-loss">
 <h3>Audio Loss<a class="headerlink" href="#audio-loss" title="Permalink to this headline">#</a></h3>
-<p>As a result, existing parameter estimation systems for automatic mixing generally utilize a dataset that contains only input recordings and the stereo mix created by an audio engineer, without any knowledge of the underlying effect implementation or parameter configurations that were used. This approach uses the same dataset formulation as in the direct transformation approach, which addresses the limitations of the parameter space loss, however it introduces a</p>
-<p>Training then involves that process of learning to map the input recordings to a mix that is as close as possible to the target mix in the dataset according to a predefined error metric <span class="math notranslate nohighlight">\(\mathcal{L}(\hat{y}, y)\)</span>. Often this error metric is the <span class="math notranslate nohighlight">\(L_1\)</span> or <span class="math notranslate nohighlight">\(L_2\)</span> distance between the mixes in the time domain, or the distance between the magnitude spectrum of the mixes. We will discuss loss functions further in Section 2.4.</p>
+<p>As a result, existing parameter estimation systems for automatic mixing generally utilize a dataset that contains only input recordings and the stereo mix created by an audio engineer, without any knowledge of the underlying effect implementation or parameter configurations that were used. This approach uses the same dataset formulation as in the direct transformation approach, which addresses the limitations of the parameter space loss. Training then involves the process of learning to map the input recordings to a mix that is as close as possible to the target mix in the dataset according to a predefined error metric <span class="math notranslate nohighlight">\(\mathcal{L}_a(\hat{\mathbf{Y}}, \mathbf{Y})\)</span>. Often this error metric is the <span class="math notranslate nohighlight">\(L_1\)</span> or <span class="math notranslate nohighlight">\(L_2\)</span> distance between the mixes in the time domain, or the distance between the magnitude spectrum of the mixes.</p>
+<p>However, as mentioned earlier, this formulation requires that our mixing console, represented by a function <span class="math notranslate nohighlight">\(h\)</span>, is a continuous and differentiable function.
+This is required since computing the gradient of of the loss function with respect to the model parameters <span class="math notranslate nohighlight">\(\nabla_\theta \mathcal{L}\)</span> requires computing the gradient of the intermediate operations within the mixing console.
+Unfortunately, this is a non-trivial task.
+As a result, existing parameter estimation methods often focus on designing methods for working around this constraint to enable training.
+Recently, the field of differentiable signal processing has emerged to address these questions.
+In the following section we will introduce the general differentiable signal processing problem.
+Then we will outline existing methods for enabling the ability to use audio domain losses in training neural networks for controlling audio effects, which has clear applications for automatic mixing systems.</p>
 </section>
 </section>
 </section>
@@ -592,10 +619,10 @@ title="Print to PDF"
             <p class="prev-next-title">Intelligent Music Production</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="03_methods.html" title="next page">
+    <a class='right-next' id="next-link" href="03_diffsp.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Methods</p>
+        <p class="prev-next-title">Differentiable signal processing</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -606,7 +633,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

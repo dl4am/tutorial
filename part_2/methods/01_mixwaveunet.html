@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Differentiable Mixing Console" href="02_dmc.html" />
-    <link rel="prev" title="Methods" href="../03_methods.html" />
+    <link rel="prev" title="Methods" href="../04_methods.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -121,9 +121,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="../../part_1/01_music-production.html">
    Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../part_1/02_audio-effects.html">
+   Audio effects
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -132,28 +137,23 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/01_mixing.html">
-     Mixing
+    <a class="reference internal" href="../../part_1/audio-effects/01_panning.html">
+     Panning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/02_equalization.html">
+    <a class="reference internal" href="../../part_1/audio-effects/02_equalization.html">
      Equalization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/03_reveberation.html">
-     Reverberation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/04_compression.html">
+    <a class="reference internal" href="../../part_1/audio-effects/03_compression.html">
      Compression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/05_aesthetics.html">
-     Aesthetics
+    <a class="reference internal" href="../../part_1/audio-effects/04_reverberation.html">
+     Reverberation
     </a>
    </li>
   </ul>
@@ -175,8 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
    Problem Formulation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../03_methods.html">
+  <a class="reference internal" href="../04_methods.html">
    Methods
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -198,13 +203,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../04_loss-functions.html">
+  <a class="reference internal" href="../05_loss-functions.html">
    Loss Functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../05_diffsp.html">
-   Differentiable signal processing
   </a>
  </li>
 </ul>
@@ -242,12 +242,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/01_metrics.html">
-   Metrics
+  <a class="reference internal" href="../../part_4/01_evaluation.html">
+   Evaluation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/05_evaluate.html">
+  <a class="reference internal" href="../../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/03_evaluate.html">
    Evaluation
   </a>
  </li>
@@ -428,41 +433,12 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#wave-u-net">
-   Wave-U-Net
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   Mix-Wave-U-Net
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
@@ -474,24 +450,6 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#wave-u-net">
-   Wave-U-Net
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   Mix-Wave-U-Net
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -501,24 +459,19 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="mix-wave-u-net">
 <h1>Mix-Wave-U-Net<a class="headerlink" href="#mix-wave-u-net" title="Permalink to this headline">#</a></h1>
-<p>The Mix-Wave-U-Net <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id30" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>]</span> is based upon the Wave-U-Net architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id58" title="Daniel Stoller, Sebastian Ewert, and Simon Dixon. Wave-u-net: a multi-scale neural network for end-to-end audio source separation. ISMIR, 2018.">SED18</a>]</span>, a model proposed for music source separation. This approach leverages the fact that the generation of a multitrack mix in many ways is the inverse task of separating the sources in a mixture, the focus of music source separation systems. In this work, the authors demonstrated how to train a Wave-U-Net model to map individual recordings to the final mixture by simply adjusting the number of inputs to the system to accept the multitrack input, and adjusting the number of outputs to two, which produces a stereo mix.</p>
+<p>The Mix-Wave-U-Net <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id34" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>]</span> is based upon the Wave-U-Net architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id60" title="Daniel Stoller, Sebastian Ewert, and Simon Dixon. Wave-u-net: a multi-scale neural network for end-to-end audio source separation. ISMIR, 2018.">SED18</a>]</span>, a model proposed for music source separation. This approach leverages the fact that the generation of a multitrack mix in many ways is the inverse task of separating the sources in a mixture, the focus of music source separation systems. In this work, the authors demonstrated how to train a Wave-U-Net model to map individual recordings to the final mixture by adjusting the number of inputs to the system to accept the multitrack input, and adjusting the number of outputs to two, which produces a stereo mix.</p>
 <figure class="align-center" id="id3">
 <img alt="Mix-Wave-U-Net" src="../../_images/mix-wave-u-net.svg" /><figcaption>
-<p><span class="caption-number">Fig. 3 </span><span class="caption-text">Network architecture for the Mix-Wave-Net.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
+<p><span class="caption-number">Fig. 20 </span><span class="caption-text">Mix-Wave-U-Net architecture based upon the Wave-U-Net, which is composed of a series of downsampling and upsampling blocks with skip connections.</span><a class="headerlink" href="#id3" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<section id="wave-u-net">
-<h2>Wave-U-Net<a class="headerlink" href="#wave-u-net" title="Permalink to this headline">#</a></h2>
-<p>The Wave-U-Net model itself is actually based on an early model proposed in computer vision, known at the U-Net architecture, which was proposed for image segmentation . Unlike other source separation models that operate on magnitude or complex spectrograms, Wave-U-Net operates on the mixture directly in the time domain, using 1-d convolutions to progressively process the signal. It can be viewed as an encoder-decoder or autoencoder network.</p>
+<p>The Wave-U-Net model itself is actually based on a seminal model proposed for computer vision tasks known as the U-Net, which was proposed for image segmentation <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id93" title="Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. In International Conference on Medical image computing and computer-assisted intervention, 234–241. Springer, 2015.">RFB15</a>]</span>. Unlike other source separation models that operate on magnitude or complex spectrograms, Wave-U-Net operates on mixture directly in the time domain, using 1-d convolutions to progressively process the signal. It can be viewed as an encoder-decoder or autoencoder network.</p>
 <p>In the encoder the signal is progressively downsampled until a certain resolution is reached, which is a function of the number of downsampling operations. This is achieved by stacking a number of downsampling blocks in series. Each downsampling block follows a similar structure. It includes a 1-d convolution followed by a nonlinear activation (in the original implementation this is  LeakyReLU). After these operations a downsampling or decimation operation is performed which decreases the temporal resolution of the intermediate activations by a factor of two. In the original paper the authors implement this with a straightforward decimation, but it can also be implemented with a strided convolution.</p>
 <p>At each downsampling block, the temporal resolution is repeatedly decreased. This results in a shorter and shorter signal in the time domain, while the number of convolutional channels is increased by <span class="math notranslate nohighlight">\(F_c=24\)</span> at each block. At the final downsampling block another 1-d convolution is applied, before the signal is passed on to a series of upsampling blocks which in some sense mirror the downsampling blocks.</p>
 <p>The downsampled representation is sent through a decoding process and the intermediate activations are progressively upsampled. Unique to the U-Net-like architectures is the inclusion of skip connections (denoted as dashed arrows) that shuttle information from each layer of the encoder to their respective layer in the decoder. This enables combining information from the downsampled signal at various temporal resolutions to the upsampling process during signal reconstruction. Empirically this has been shown to lead to improved performance and accuracy in the reconstruction quality.</p>
-<p>It should be noted that Wave-U-Net also has close connection to other encoder-decoder architectures for audio signal processing, most noticeable of which is Demucs and its variants <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id59" title="Alexandre Défossez, Nicolas Usunier, Léon Bottou, and Francis Bach. Music source separation in the waveform domain. arXiv preprint arXiv:1911.13254, 2019.">DefossezUBB19</a>]</span>. Demucs builds on</p>
-</section>
-<section id="id5">
-<h2>Mix-Wave-U-Net<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>As a direct transformation method, Mix-Wave-U-Net was shown to produce impressive results in that it was able to mimic the mixes in the ENST-drums dataset. This meant the system was capable of mimicking the equalization, compression, and reverberation of the target mixes without any explicit knowledge of these effects. However,</p>
-</section>
+<p>It should be noted that Wave-U-Net also has close connection to other encoder-decoder architectures for audio signal processing, most noticeable of which is Demucs and its variants <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id61" title="Alexandre Défossez, Nicolas Usunier, Léon Bottou, and Francis Bach. Music source separation in the waveform domain. arXiv preprint arXiv:1911.13254, 2019.">DefossezUBB19</a>]</span>. Demucs builds on the Wave-U-Net with some architectural adjustments, namely the use of more aggressive downsampling operations, the use a recurrent neural network in the embedding layer, as well as transposed convolutions for upsampling. These modifications were shown to lead to improved source separation performance following a similar U-Net inspired architecture.</p>
+<p>As a direct transformation method, Mix-Wave-U-Net was shown to produce impressive results in that it was able to mimic the mixes in the ENST-drums dataset. This meant the system was capable of mimicking the equalization, compression, and reverberation of the target mixes without any explicit knowledge of these effects. However, this model has the ability to impart undesirable artifacts when out-of-distribution input recordings are used.
+In addition, since this is a direct transformation method users are not aware of the mixing process and have no control over the final result.</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -548,7 +501,7 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../03_methods.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../04_methods.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
@@ -569,7 +522,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

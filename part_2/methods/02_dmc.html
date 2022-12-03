@@ -50,9 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Loss Functions" href="../04_loss-functions.html" />
+    <link rel="next" title="Loss Functions" href="../05_loss-functions.html" />
     <link rel="prev" title="Mix-Wave-U-Net" href="01_mixwaveunet.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -119,9 +121,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="../../part_1/01_music-production.html">
    Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../part_1/02_audio-effects.html">
+   Audio effects
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -130,28 +137,23 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/01_mixing.html">
-     Mixing
+    <a class="reference internal" href="../../part_1/audio-effects/01_panning.html">
+     Panning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/02_equalization.html">
+    <a class="reference internal" href="../../part_1/audio-effects/02_equalization.html">
      Equalization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/03_reveberation.html">
-     Reverberation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/04_compression.html">
+    <a class="reference internal" href="../../part_1/audio-effects/03_compression.html">
      Compression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/music-production/05_aesthetics.html">
-     Aesthetics
+    <a class="reference internal" href="../../part_1/audio-effects/04_reverberation.html">
+     Reverberation
     </a>
    </li>
   </ul>
@@ -173,8 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
    Problem Formulation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
  <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../03_methods.html">
+  <a class="reference internal" href="../04_methods.html">
    Methods
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -196,13 +203,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../04_loss-functions.html">
+  <a class="reference internal" href="../05_loss-functions.html">
    Loss Functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../05_diffsp.html">
-   Differentiable signal processing
   </a>
  </li>
 </ul>
@@ -240,12 +242,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/01_metrics.html">
-   Metrics
+  <a class="reference internal" href="../../part_4/01_evaluation.html">
+   Evaluation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/05_evaluate.html">
+  <a class="reference internal" href="../../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/03_evaluate.html">
    Evaluation
   </a>
  </li>
@@ -509,17 +516,17 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="differentiable-mixing-console">
 <h1>Differentiable Mixing Console<a class="headerlink" href="#differentiable-mixing-console" title="Permalink to this headline">#</a></h1>
-<p>In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id55" title="Christian J Steinmetz. Learning to mix with neural audio effects in the waveform domain. MSc Thesis, 2020.">Ste20</a>, <a class="reference internal" href="../../part_5/03_references.html#id31" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span> is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.</p>
+<p>In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span>. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.</p>
 <figure class="align-center" id="dmc">
-<img alt="Differenetiable mixing console" src="../../_images/dmc.svg" /><figcaption>
-<p><span class="caption-number">Fig. 4 </span><span class="caption-text">Block digram for the complete differentiable mixing console along with the three subsystems: encoder, post-processor, and transformation network.</span><a class="headerlink" href="#dmc" title="Permalink to this image">#</a></p>
+<img alt="../../_images/dmc.svg" src="../../_images/dmc.svg" /><figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Complete Differentiable Mixing Console with subsystems</span><a class="headerlink" href="#dmc" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The differentiable mixing console (DMC) is comprised of three main subsystems, each implemented as a separate neural network module. To construct the complete system, the same instance of these modules are applied to each input recording, enabling weight sharing, which treats the input recordings as an unordered set. The encoder is tasked with extracting relevant features from each input recording. These embeddings are then combined to create a context embedding that captures information across all input recordings in a single embedding. Each input embedding is combined with the context embedding and passed to the post-processor that maps these inputs to the control parameter space of the mixing console for the respective channel of the mixing console. Finally, a transformation network takes the audio signal from the respective input recording along with the predicted parameters to process the manipulated recording. The final stereo mixture is then created by the summation of all of the manipulated recordings.</p>
 <p>This provides a number of unique benefits, namely permutation invariance with respect to the ordering of the input recordings, but more importantly the ability to adapt to a variable number of tracks and no assumed taxonomy for the input sources. This means that the system is capable of adapting to real-world scenarios wherein the number of inputs and their identity is highly variable. This contrasts with Mix-Wave-U-Net which accepts a fixed number and ordering of the input tracks. While this works in cases where the training dataset obeys a strict structure, it places a limitation on scenarios where the model can be applied. Now we will walk through each of the subsystems describing the overall operation of the system.</p>
 <section id="encoder">
 <h2>Encoder<a class="headerlink" href="#encoder" title="Permalink to this headline">#</a></h2>
-<p>In order to estimate mixing parameters for each input recording the model must first extract relevant information from each recording. To achieve this, DMC utilizes a standard CNN operating on spectrograms, in this case the VGGish architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id57" title="Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In ICASSP, 131–135. IEEE, 2017.">HCE+17</a>]</span>. This encoder produces one embedding for approximately each second of the input signal. This means that a series of embeddings will be produced for each input recording. To aggregate information over time the mean of these embeddings is computed, which equally weights each time step. More sophisticated temporal aggregation approaches could be considered here, however the original implementation considers the mean as it is the simplest aggregation method.</p>
+<p>In order to estimate mixing parameters for each input recording the model must first extract relevant information from each recording. To achieve this, DMC utilizes a standard CNN operating on spectrograms, in this case the VGGish architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id59" title="Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In ICASSP, 131–135. IEEE, 2017.">HCE+17</a>]</span>. This encoder produces one embedding for approximately each second of the input signal. This means that a series of embeddings will be produced for each input recording. To aggregate information over time the mean of these embeddings is computed, which equally weights each time step. More sophisticated temporal aggregation approaches could be considered here, however the original implementation considers the mean as it is the simplest aggregation method.</p>
 <p>It is important to note that the parameter estimation is a cross-dependant process that must consider the content of all other tracks when making a decision about the parameters for a single track. To address this DMC introduces a context embedding. The context embedding is simply the mean across all aggregated input recording embeddings. This creates a representation that captures all of the content present within the mix. Again more sophisticated aggregation methodologies could be considered, however the mean represents one of the most straightforward methods for permutation invariant aggregation. After computing the embedding for each input recording and using these embeddings to produce the context embedding (there is only a single context embedding for each mix), this set of embeddings will be passed on to the post-processor module in order to project the embeddings from each track into the parameter space of each channel of the mixing console.</p>
 </section>
 <section id="post-processor">
@@ -528,14 +535,27 @@ title="Print to PDF"
 </section>
 <section id="transformation-network">
 <h2>Transformation network<a class="headerlink" href="#transformation-network" title="Permalink to this headline">#</a></h2>
-<p><span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id56" title="Christian J Steinmetz and Joshua D Reiss. Efficient neural networks for real-time modeling of analog dynamic range compression. In 151st Convention of the Audio Engineering Society. Audio Engineering Society, 2022.">SR22</a>]</span></p>
-<p>One key contribution of this work was the introduction of the concept of <em>proxy networks</em>. Since our goal is to train an automatic mixing system in an end-to-end fashion using a loss computed in the audio domain (as opposed to the parameter space), this requires a method for computing gradients through each operation of the mixing console. In practice this entails computing gradients for potentially complex signal processing devices such as dynamic range compressors and artificial reverberators, which either might not be differentiable, have intractable gradients, or be black-box in nature. The proxy network approach</p>
-<figure class="align-center" id="proxy-network">
-<img alt="Proxy Network" src="../../_images/proxy-network.svg" /><figcaption>
-<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Structure of the conditional temporal convolutional network used in the proxy network approach.</span><a class="headerlink" href="#proxy-network" title="Permalink to this image">#</a></p>
+<p>One key contribution of this work was the introduction of the concept of <em>proxy networks</em>. Since our goal is to train an automatic mixing system in an end-to-end fashion using a loss computed in the audio domain (as opposed to the parameter space), this requires a method for computing gradients through each operation of the mixing console. In practice this entails computing gradients for potentially complex signal processing devices such as dynamic range compressors and artificial reverberators, which either might not be differentiable, have intractable gradients, or be black-box in nature. The proxy network approach provides an alternative by first training a neural network to emulate the behavior of the mixing console, which can then be used as a proxy during optimization.</p>
+<figure class="align-center" id="channel-strip">
+<img alt="../../_images/channel-strip.svg" src="../../_images/channel-strip.svg" /><figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Audio effects and their control parameters in the proposed transformation network.</span><a class="headerlink" href="#channel-strip" title="Permalink to this image">#</a></p>
 </figcaption>
 </figure>
-<p>In the original work, the authors construct two variants of the transformation network. In the first case, they use a complete transformation network that consists both of explicitly differentiable components such as gain and panning, along with a pretrained neural network that was previously trained to emulate the behavior of a chain of audio effects (equalisation, compression, and reverberation), as a function of their control parameters.</p>
+<p>In the original work, the authors construct two variants of what they call the transformation network, which is tasked with emulating the set of effects in each channel of the mixing console.
+In the first case, they use a simple transformation network that consists of only gain and panning, which can be implemented as differentiable components.
+In the second formulation they leverage a pretrained neural network that was trained to emulate the behavior of a chain of audio effects (equalisation, compression, and reverberation), as a function of their control parameters. This formulation is shown in <a class="reference internal" href="#channel-strip"><span class="std std-numref">Fig. 22</span></a>.</p>
+<figure class="align-center" id="proxy-network">
+<img alt="../../_images/proxy-network.svg" src="../../_images/proxy-network.svg" /><figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Proxy network architecture implemented as a temporal convolution network (TCN)</span><a class="headerlink" href="#proxy-network" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>To construct the proxy networks they leverage recent work in neural audio effects <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id119" title="Eero-Pekka Damskägg, Lauri Juvela, Vesa Välimäki, and others. Real-time modeling of audio distortion circuits with deep learning. In Proc. Int. Sound and Music Computing Conf.(SMC-19), Malaga, Spain, 332–339. 2019.">DamskaggJValimaki+19</a>]</span>.
+The basic architecture is shown in <a class="reference internal" href="#proxy-network"><span class="std std-numref">Fig. 23</span></a>.
+At the high level (left) the network is composed of a number of temporal convolutional network (TCN) <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id122" title="Shaojie Bai, J Zico Kolter, and Vladlen Koltun. An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. arXiv preprint arXiv:1803.01271, 2018.">BKK18</a>]</span> blocks along with a conditioning network implemented with an MLP.
+Each TCN block consists of a 1-d convolution, batch normalization, and a nonlinear activation function.
+In order to adapt the behavior of the network as a function of the control parameters feature-wise linear modulation <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id72" title="Ethan Perez, Florian Strub, Harm De Vries, Vincent Dumoulin, and Aaron Courville. Film: visual reasoning with a general conditioning layer. In Proceedings of the AAAI Conference on Artificial Intelligence, volume 32. 2018.">PSDV+18</a>]</span> is used.
+This technique enables adaptation by dynamically shifting and scaling the intermediate activations of the network as a function of the control parameters <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.
+This modulation technique is shown in <a class="reference internal" href="#proxy-network"><span class="std std-numref">Fig. 23</span></a> (right), where the latent embedding <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> produced by the MLP is projected to a set of scaling <span class="math notranslate nohighlight">\(\bm{\gamma}_n\)</span> and shifting <span class="math notranslate nohighlight">\(\bm{\beta}_n\)</span> parameters. These parameters operate on the output of the batch normalized signal to produce a modulated signal before passing through the nonlinearaity, which is implemented with a Parametric ReLU <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id126" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: surpassing human-level performance on imagenet classification. In Proceedings of the IEEE international conference on computer vision, 1026–1034. 2015.">HZRS15</a>]</span>.</p>
 </section>
 </section>
 
@@ -573,7 +593,7 @@ title="Print to PDF"
             <p class="prev-next-title">Mix-Wave-U-Net</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../04_loss-functions.html" title="next page">
+    <a class='right-next' id="next-link" href="../05_loss-functions.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Loss Functions</p>
@@ -587,7 +607,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

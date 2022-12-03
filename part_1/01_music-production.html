@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Mixing" href="music-production/01_mixing.html" />
+    <link rel="next" title="Audio effects" href="02_audio-effects.html" />
     <link rel="prev" title="Deep Learning for Automatic Mixing" href="../landing-page.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -119,39 +119,39 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
+ <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Music Production
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="02_audio-effects.html">
+   Audio effects
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="music-production/01_mixing.html">
-     Mixing
+    <a class="reference internal" href="audio-effects/01_panning.html">
+     Panning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="music-production/02_equalization.html">
+    <a class="reference internal" href="audio-effects/02_equalization.html">
      Equalization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="music-production/03_reveberation.html">
-     Reverberation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="music-production/04_compression.html">
+    <a class="reference internal" href="audio-effects/03_compression.html">
      Compression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="music-production/05_aesthetics.html">
-     Aesthetics
+    <a class="reference internal" href="audio-effects/04_reverberation.html">
+     Reverberation
     </a>
    </li>
   </ul>
@@ -173,8 +173,13 @@ const thebe_selector_output = ".output, .cell_output"
    Problem Formulation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/03_methods.html">
+  <a class="reference internal" href="../part_2/04_methods.html">
    Methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -196,13 +201,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/04_loss-functions.html">
+  <a class="reference internal" href="../part_2/05_loss-functions.html">
    Loss Functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/05_diffsp.html">
-   Differentiable signal processing
   </a>
  </li>
 </ul>
@@ -240,12 +240,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/01_metrics.html">
-   Metrics
+  <a class="reference internal" href="../part_4/01_evaluation.html">
+   Evaluation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/05_evaluate.html">
+  <a class="reference internal" href="../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/03_evaluate.html">
    Evaluation
   </a>
  </li>
@@ -426,12 +431,46 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixing">
+   Mixing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aesthetics">
+   Aesthetics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semantics">
+   Semantics
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -443,6 +482,29 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#mixing">
+   Mixing
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#aesthetics">
+   Aesthetics
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#semantics">
+   Semantics
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -456,8 +518,25 @@ title="Print to PDF"
 From composition to sound recording and editing through to mixing and mastering.
 Mixing is just a single role in the music production process and often takes place after the recording and editing of a song.
 After the process of mixing, a mastering stage is often undertaken to apply the final steps necessary for distribution.</p>
-<div class="toctree-wrapper compound">
-</div>
+<section id="mixing">
+<h2>Mixing<a class="headerlink" href="#mixing" title="Permalink to this headline">#</a></h2>
+<p>Mixing can be loosely defined as the process of taking recorded tracks and blending them together. Tracks are blended using various processes facilitated by audio effects processing such as equalization, compression, distortion and various spatial effects such as reverberation. The goal of mixing various elements together is to subjectively create a mix by adjusting levels, panning, frequency content and dynamics via various audio effects. A mix goes through a life cycle as seen in the screenshots taken from our session. We demonstrate some of these principles using the song Flare by the Swedish band Isolate. Figure \ref{logicmix} shows Apple Logic Pro’s mix page for the song which includes faders for adjusting relative levels between instruments and panpots for adjusting panorama of sounds within the stereo field. In our videos that accompany this tutorial we illustrate this point with the adjustment of the aforementioned parameters along with the manipulation of Equalisation (EQ), Dynamic Range Compression (DRC) and Reverberation. In addition, in the following sections, we will introduce the mixing tools from the standpoint of signal processing.</p>
+<figure class="align-center" id="logicmix">
+<img alt="Logic Mix Window" src="../_images/Logic-Mixer.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 1 </span><span class="caption-text">Multitrack mixing session in the Logic Pro digital audio workstation.</span><a class="headerlink" href="#logicmix" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="aesthetics">
+<h2>Aesthetics<a class="headerlink" href="#aesthetics" title="Permalink to this headline">#</a></h2>
+<p>Taste, preference and emotional context are key determinants in the choices that are made when mixing music. Mixing is an interdisciplinary task where technical considerations are made in conjunction with creative, artistic or aesthetic decisions. It is common practice for one action to inform the other, mapping a technical parameter space to a semantic or emotional space is a motivational factor when creating a mix.
+In the practical demonstration which forms a key part of our tutorial we try to communicate such challenges and creative thought processes. See \citet{izhaki2017mixing} for a comprehensive discussion on the virtues and benefits of creative thinking in the mix workplace.</p>
+</section>
+<section id="semantics">
+<h2>Semantics<a class="headerlink" href="#semantics" title="Permalink to this headline">#</a></h2>
+<p>Semantic descriptors are often used as a way of communicating ideas in the context of a mix. Articulating audio specific terms and descriptive language such as punchy, warm or aggressive from a technical perspective is a challenge for all audio engineers. Learning such actions In the context of intelligent mixing systems is somewhat problematic for similar reasons. \citet{deman2017ten}, \citet{moffat2019approaches}, and \citet{lefford2021context} have separately discussed these challenges from varying perspectives. \citet{stables2014safe} proposes a system for semantic feature extraction where descriptors are taken from adapting parameters in audio effect plugins. This is also discussed in our videos.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -494,10 +573,10 @@ After the process of mixing, a mastering stage is often undertaken to apply the 
             <p class="prev-next-title">Deep Learning for Automatic Mixing </p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="music-production/01_mixing.html" title="next page">
+    <a class='right-next' id="next-link" href="02_audio-effects.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Mixing</p>
+        <p class="prev-next-title">Audio effects</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -508,7 +587,7 @@ After the process of mixing, a mastering stage is often undertaken to apply the 
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

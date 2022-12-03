@@ -118,9 +118,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="part_1/01_music-production.html">
    Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="part_1/02_audio-effects.html">
+   Audio effects
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -129,28 +134,23 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="part_1/music-production/01_mixing.html">
-     Mixing
+    <a class="reference internal" href="part_1/audio-effects/01_panning.html">
+     Panning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="part_1/music-production/02_equalization.html">
+    <a class="reference internal" href="part_1/audio-effects/02_equalization.html">
      Equalization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="part_1/music-production/03_reveberation.html">
-     Reverberation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="part_1/music-production/04_compression.html">
+    <a class="reference internal" href="part_1/audio-effects/03_compression.html">
      Compression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="part_1/music-production/05_aesthetics.html">
-     Aesthetics
+    <a class="reference internal" href="part_1/audio-effects/04_reverberation.html">
+     Reverberation
     </a>
    </li>
   </ul>
@@ -172,8 +172,13 @@ const thebe_selector_output = ".output, .cell_output"
    Problem Formulation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="part_2/03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="part_2/03_methods.html">
+  <a class="reference internal" href="part_2/04_methods.html">
    Methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -195,13 +200,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="part_2/04_loss-functions.html">
+  <a class="reference internal" href="part_2/05_loss-functions.html">
    Loss Functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="part_2/05_diffsp.html">
-   Differentiable signal processing
   </a>
  </li>
 </ul>
@@ -239,12 +239,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="part_4/01_metrics.html">
-   Metrics
+  <a class="reference internal" href="part_4/01_evaluation.html">
+   Evaluation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="part_4/05_evaluate.html">
+  <a class="reference internal" href="part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="part_4/03_evaluate.html">
    Evaluation
   </a>
  </li>
@@ -463,18 +468,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#software">
-   Software
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#citing-this-book">
    Citing this book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#note">
-   Note
   </a>
  </li>
 </ul>
@@ -512,18 +507,8 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#software">
-   Software
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#citing-this-book">
    Citing this book
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#note">
-   Note
   </a>
  </li>
 </ul>
@@ -552,15 +537,14 @@ In addition, our tutorial may be of interest to researchers outside of MIR, but 
 </section>
 <section id="motivation">
 <h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
-<p>Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content <span id="id1">[]</span>.
-This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation<span id="id2">[<a class="reference internal" href="part_5/03_references.html#id29" title="Thomas Wilmering, David Moffat, Alessia Milo, and Mark B Sandler. A history of audio effects. Applied Sciences, 10(3):791, 2020.">WMMS20</a>]</span>.<br />
-Due to this complexity, the field of intelligent music production (IMP) <span id="id3">[<a class="reference internal" href="part_5/03_references.html#id6" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span> has focused on the design of systems that automate tasks in audio engineering.
-These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals <span id="id4">[<a class="reference internal" href="part_5/03_references.html#id7" title="David Moffat and Mark B Sandler. Approaches in intelligent music production. Arts, 8(5):14, September 2019.">MS19b</a>]</span>.</p>
-<p>In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer<span id="id5">[]</span>.
-Existing approaches include adaptive signal processing<span id="id6">[<a class="reference internal" href="part_5/03_references.html#id12" title="Enrique Perez-Gonzalez and Joshua Reiss. Automatic gain and fader control for live mixing. In 2009 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics, 1–4. IEEE, 2009.">PGR09</a>]</span>, rule-based <span id="id7">[<a class="reference internal" href="part_5/03_references.html#id35" title="Brecht De Man and Joshua D Reiss. A knowledge-engineered autonomous mixing system. In 135th Audio Engineering Society Convention. Audio Engineering Society, 2013.">DMR13</a>]</span>, machine learning<span id="id8">[<a class="reference internal" href="part_5/03_references.html#id28" title="Dave Moffat and Mark Sandler. Machine learning multitrack gain mixing of drums. In 147th Audio Engineering Society Convention. 2019.">MS19a</a>]</span>, and most recently deep learning<span id="id9">[<a class="reference internal" href="part_5/03_references.html#id30" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>, <a class="reference internal" href="part_5/03_references.html#id31" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span> approaches.
+<p>Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content <span id="id1">[<a class="reference internal" href="part_5/03_references.html#id9" title="Brecht De Man, Joshua D Reiss, and Ryan Stables. Ten years of automatic mixing. In 3rd AES Workshop on Intelligent Music Production. September 2017.">DMRS17</a>]</span>.
+This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation<span id="id2">[<a class="reference internal" href="part_5/03_references.html#id33" title="Thomas Wilmering, David Moffat, Alessia Milo, and Mark B Sandler. A history of audio effects. Applied Sciences, 10(3):791, 2020.">WMMS20</a>]</span>. Due to this complexity, the field of intelligent music production (IMP) <span id="id3">[<a class="reference internal" href="part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span> has focused on the design of systems that automate tasks in audio engineering.
+These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals <span id="id4">[<a class="reference internal" href="part_5/03_references.html#id11" title="David Moffat and Mark B Sandler. Approaches in intelligent music production. Arts, 8(5):14, September 2019.">MS19b</a>]</span>.</p>
+<p>In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer<span id="id5">[<a class="reference internal" href="part_5/03_references.html#id9" title="Brecht De Man, Joshua D Reiss, and Ryan Stables. Ten years of automatic mixing. In 3rd AES Workshop on Intelligent Music Production. September 2017.">DMRS17</a>]</span>.
+Existing approaches include adaptive signal processing<span id="id6">[<a class="reference internal" href="part_5/03_references.html#id16" title="Enrique Perez-Gonzalez and Joshua Reiss. Automatic gain and fader control for live mixing. In 2009 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics, 1–4. IEEE, 2009.">PGR09</a>]</span>, rule-based <span id="id7">[<a class="reference internal" href="part_5/03_references.html#id39" title="Brecht De Man and Joshua D Reiss. A knowledge-engineered autonomous mixing system. In 135th Audio Engineering Society Convention. Audio Engineering Society, 2013.">DMR13</a>]</span>, machine learning<span id="id8">[<a class="reference internal" href="part_5/03_references.html#id32" title="Dave Moffat and Mark Sandler. Machine learning multitrack gain mixing of drums. In 147th Audio Engineering Society Convention. 2019.">MS19a</a>]</span>, and most recently deep learning<span id="id9">[<a class="reference internal" href="part_5/03_references.html#id34" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>, <a class="reference internal" href="part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span> approaches.
 While deep learning approaches that leverage large-scale datasets have the potential to outperform traditional approaches, their performance is still far from professional audio engineers motivating further investigation in the design and evaluation of these systems.</p>
 <p>While applications of deep learning in MIR have continued to broaden, applications in audio engineering still remain under-investigated leaving a number of open research questions.
-However, the growing body of research in MIR tasks such as music source separation<span id="id10">[<a class="reference internal" href="part_5/03_references.html#id45" title="Fabian-Robert Stöter, Stefan Uhlich, Antoine Liutkus, and Yuki Mitsufuji. Open-unmix-a reference implementation for music source separation. Journal of Open Source Software, 4(41):1667, 2019.">StoterULM19</a>]</span>, music generation<span id="id11">[<a class="reference internal" href="part_5/03_references.html#id46" title="Jean-Pierre Briot, Gaëtan Hadjeres, and François-David Pachet. Deep learning techniques for music generation–a survey. arXiv:1709.01620, 2017.">BHP17</a>]</span>, and music classification<span id="id12">[<a class="reference internal" href="part_5/03_references.html#id47" title="Minz Won, Andres Ferraro, Dmitry Bogdanov, and Xavier Serra. Evaluation of cnn-based automatic music tagging models. In Proc. of 17th Sound and Music Computing. 2020.">WFBS20</a>]</span> provide insights into advancing applications in audio engineering.
+However, the growing body of research in MIR tasks such as music source separation<span id="id10">[<a class="reference internal" href="part_5/03_references.html#id47" title="Fabian-Robert Stöter, Stefan Uhlich, Antoine Liutkus, and Yuki Mitsufuji. Open-unmix-a reference implementation for music source separation. Journal of Open Source Software, 4(41):1667, 2019.">StoterULM19</a>]</span>, music generation<span id="id11">[<a class="reference internal" href="part_5/03_references.html#id48" title="Jean-Pierre Briot, Gaëtan Hadjeres, and François-David Pachet. Deep learning techniques for music generation–a survey. arXiv:1709.01620, 2017.">BHP17</a>]</span>, and music classification<span id="id12">[<a class="reference internal" href="part_5/03_references.html#id49" title="Minz Won, Andres Ferraro, Dmitry Bogdanov, and Xavier Serra. Evaluation of cnn-based automatic music tagging models. In Proc. of 17th Sound and Music Computing. 2020.">WFBS20</a>]</span> provide insights into advancing applications in audio engineering.
 Therefore, the ISMIR community stands to benefit from a tutorial that introduces the basics and intricacies of music mixing as along with the discussion on existing approaches and open challenges.
 Our hope is to raise awareness of MIR from the perspective of audio engineering and further stimulate research interest in this area within the MIR community.</p>
 </section>
@@ -575,9 +559,6 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
 <a class="reference internal image-reference" href="_images/gb.jpeg"><img alt="Gary Bromham*" class="align-left" src="_images/gb.jpeg" style="width: 100px;" /></a>
 <p><a class="reference external" href="https://c4dm.eecs.qmul.ac.uk/"><strong>Gary Bromham</strong></a> is a part-time PhD researcher at Queen Mary University of London, researching the role that traditional studio paradigms and retro aesthetics play in intelligent music production systems (2016 -). He has several publications in this field and has contributed a chapter to the recent Routledge publication, ‘Perspectives on Music Production: Mixing Music’ (2017). He was also a research assistant on the EPSRC funded project called FAST (Fusing Audio and Semantic Technologies) where he is employed as an industry advisor (2017 - 2020). In addition to his research interests, Gary is a practising music producer, songwriter and audio engineer, with over 30 years’ experience (1989 - 2020). He has worked with artists as diverse as Bjork, Wham, Blur and U2, during a period that has witnessed several technological changes. Gary is well versed in most popular music making software and has extensive knowledge of using analog hardware, acting as a product designer and specialist for the renowned mixing desk company, Solid State Logic. He is also a frequent guest lecturer and external advisor at several universities in the UK, Norway and Sweden; speaking on songwriting, music production aesthetics and audio engineering and bringing some of his extensive knowledge and experience to both Undergraduate and Master’s degree level programs.</p>
 </section>
-<section id="software">
-<h2>Software<a class="headerlink" href="#software" title="Permalink to this headline">#</a></h2>
-</section>
 <section id="citing-this-book">
 <h2>Citing this book<a class="headerlink" href="#citing-this-book" title="Permalink to this headline">#</a></h2>
 <p>If you use this book or any of accompanying code in your work please consider citing this book.</p>
@@ -591,10 +572,6 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
 <span class="p">}</span>
 </pre></div>
 </div>
-</section>
-<section id="note">
-<h2>Note<a class="headerlink" href="#note" title="Permalink to this headline">#</a></h2>
-<p>You can download a pdf of this book from <span class="xref myst">arXiv</span>. If the pdf is not up-to-date, you can <a class="reference external" href="https://github.com/dl4am/tutorial/scripts/build-book.sh">build it by yourself</a> on your local machine.</p>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -649,7 +626,7 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

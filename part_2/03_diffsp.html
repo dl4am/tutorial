@@ -1,0 +1,634 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Differentiable signal processing &#8212; Deep Learning for Automatic Mixing</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Methods" href="04_methods.html" />
+    <link rel="prev" title="Problem Formulation" href="02_problem.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../landing-page.html">
+                    Deep Learning for Automatic Mixing 
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Audio Engineering
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_1/01_music-production.html">
+   Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_1/02_audio-effects.html">
+   Audio effects
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/audio-effects/01_panning.html">
+     Panning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/audio-effects/02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/audio-effects/03_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">
+     Reverberation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Differentiable signal processing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="04_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="methods/01_mixwaveunet.html">
+     Mix-Wave-U-Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="methods/02_dmc.html">
+     Differentiable Mixing Console
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="05_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Implementation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/01_inference.html">
+   Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/02_datasets.html">
+   Datasets for automix systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_3/04_training.html">
+   Training
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Evaluation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/01_evaluation.html">
+   Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/03_evaluate.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_5/01_future-directions.html">
+   Future Directions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_5/02_conclusion.html">
+   Conclusions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_5/03_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/dl4am/tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/03_diffsp.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/part_2/03_diffsp.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-differentiation">
+   Automatic differentiation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-proxies">
+   Neural proxies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-approximation">
+   Gradient approximation
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Differentiable signal processing</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automatic-differentiation">
+   Automatic differentiation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#neural-proxies">
+   Neural proxies
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-approximation">
+   Gradient approximation
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="differentiable-signal-processing">
+<h1>Differentiable signal processing<a class="headerlink" href="#differentiable-signal-processing" title="Permalink to this headline">#</a></h1>
+<p>Differentiable signal processing involves the process of applying gradient-based optimization algorithms to control the parameters of some set of signal processing devices.
+In practice, this means using gradient-based optimization as a means of controlling synthesizers to reproduce reference sounds <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id83" title="Jesse Engel, Lamtharn Hantrakul, Chenjie Gu, and Adam Roberts. DDSP: differentiable digital signal processing. ICLR, 2021.">EHGR21</a>, <a class="reference internal" href="../part_5/03_references.html#id86" title="Naotake Masuda and Daisuke Saito. Synthesizer sound matching with differentiable dsp. In ISMIR, 428–434. 2021.">MS21</a>, <a class="reference internal" href="../part_5/03_references.html#id87" title="Siyuan Shan, Lamtharn Hantrakul, Jitong Chen, Matt Avent, and David Trevelyan. Differentiable wavetable synthesis. In ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 4598–4602. IEEE, 2022.">SHC+22</a>]</span>, reverse engineering audio effects <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id91" title="Joseph T Colonel, Marco Comunità, and Joshua Reiss. Reverse engineering memoryless distortion effects with differentiable waveshapers. In 153rd Convention of the Audio Engineering Society. Audio Engineering Society, 2022.">CComunitaR22</a>, <a class="reference internal" href="../part_5/03_references.html#id38" title="Joseph T Colonel and Joshua Reiss. Reverse engineering of a recording mix with differentiable digital signal processing. The Journal of the Acoustical Society of America, 150(1):608–619, 2021.">CR21</a>]</span>, automatic control of audio effects <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id84" title="Marco A Martínez-Ramírez, Oliver Wang, Paris Smaragdis, and Nicholas J Bryan. Differentiable signal processing with black-box audio effects. In ICASSP, 66–70. IEEE, 2021.">MartinezRamirezWSB21</a>, <a class="reference internal" href="../part_5/03_references.html#id89" title="Shahan Nercessian. Neural parametric equalizer matching using differentiable biquads. In Proc. Int. Conf. Digital Audio Effects (eDAFx-20), 265–272. 2020.">Ner20</a>, <a class="reference internal" href="../part_5/03_references.html#id26" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. arXiv preprint arXiv:2207.08759, 2022.">SBR22</a>]</span>, or other audio signal processing applications such as room acoustics <span id="id4">[<a class="reference internal" href="../part_5/03_references.html#id95" title="Christian J Steinmetz, Vamsi Krishna Ithapu, and Paul Calamia. Filtered noise shaping for time domain room impulse response estimation from reverberant speech. In 2021 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA), 221–225. IEEE, 2021.">SIC21</a>]</span>, hearing aids <span id="id5">[<a class="reference internal" href="../part_5/03_references.html#id81" title="Fotios Drakopoulos and Sarah Verhulst. A differentiable optimisation framework for the design of individualised dnn-based hearing-aid strategies. In ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 351–355. IEEE, 2022.">DV22</a>, <a class="reference internal" href="../part_5/03_references.html#id79" title="Zehai Tu, Ning Ma, and Jon Barker. Dhasp: differentiable hearing aid speech processing. In ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 296–300. IEEE, 2021.">TMB21</a>]</span>, and echo cancellation <span id="id6">[<a class="reference internal" href="../part_5/03_references.html#id80" title="Jonah Casebeer, Nicholas J Bryan, and Paris Smaragdis. Meta-af: meta-learning for adaptive filters. arXiv preprint arXiv:2204.11942, 2022.">CBS22</a>]</span>.
+This can involve online optimization applications where the parameters of the device are optimized directly, or training a neural network to predict these control parameters as a function of some external signal.
+Both cases require that we develop specialized techniques for facilitating gradient-based optimization.
+This is due to the fact that existing signal processing devices often include non-differentiable, discontinous, recursive, or otherwise problematic operations for applying gradient-based optimization techniques.</p>
+<figure class="align-center" id="ddsp">
+<a class="reference internal image-reference" href="../_images/ddsp.svg"><img alt="../_images/ddsp.svg" src="../_images/ddsp.svg" width="50%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 19 </span><span class="caption-text">General formulation of the differentiable signal processing problem.</span><a class="headerlink" href="#ddsp" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>The general formulation for neural network control of a signal processing device with differentiable signal processing is illustrated in <a class="reference internal" href="#ddsp"><span class="std std-numref">Fig. 19</span></a>.
+Here we have a neural network <span class="math notranslate nohighlight">\(f_\theta(\mathbf{x})\)</span> with weights <span class="math notranslate nohighlight">\(\theta\)</span> that takes as input an audio signal <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> and produces a set of control parameters <span class="math notranslate nohighlight">\(\hat{\mathbf{p}}\)</span> that will configure our signal processing device.
+This device is represented as a function <span class="math notranslate nohighlight">\(h(\mathbf{x}, \hat{\mathbf{p}})\)</span> that operates on the audio signal according to the supplied control parameters.
+As a result, it will produce a processed signal <span class="math notranslate nohighlight">\(\hat{\mathbf{y}}\)</span>.
+During training, given an appropriate dataset of desired input-output audio recordings, our goal is then to adjust the weights <span class="math notranslate nohighlight">\(\theta\)</span> such that the estimated parameters produce audio that minimizes an error metric or loss <span class="math notranslate nohighlight">\(\mathcal{L}\)</span> across all examples in the dataset.
+Applying backpropgation requires that we first compute the gradient of the loss with respect to the output signal <span class="math notranslate nohighlight">\(\nabla_{\hat{\mathbf{y}}} \mathcal{L}\)</span>, and then compute the gradient of the loss with respect to the estimated control parameters <span class="math notranslate nohighlight">\(\nabla_{\hat{\mathbf{p}}} \mathcal{L}\)</span>. As shown by the dashed line in <a class="reference internal" href="#ddsp"><span class="std std-numref">Fig. 19</span></a>, this requires taking into account the operations within our signal processing device <span class="math notranslate nohighlight">\(h\)</span>.
+Existing methods for differentiable signal processing are focused on providing techniques for computing <span class="math notranslate nohighlight">\(\nabla_{\hat{\mathbf{p}}} \mathcal{L}\)</span> to facilitate this kind of end-to-end learning when we do not have ground truth values for <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.</p>
+<section id="automatic-differentiation">
+<h2>Automatic differentiation<a class="headerlink" href="#automatic-differentiation" title="Permalink to this headline">#</a></h2>
+<p>The predominate approach in facilitating backpropagation through signal processing devices involves explicit gradient computation via automatic differentiation <span id="id7">[<a class="reference internal" href="../part_5/03_references.html#id69" title="Andreas Griewank and others. On automatic differentiation. Mathematical Programming: recent developments and applications, 6(6):83–107, 1989.">G+89</a>]</span>.
+In this approach we can leverage the power of automatic differentiation (AD) frameworks, like PyTorch <span id="id8">[<a class="reference internal" href="../part_5/03_references.html#id68" title="Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, and others. Pytorch: an imperative style, high-performance deep learning library. Advances in neural information processing systems, 2019.">PGM+19</a>]</span>, TensorFlow <span id="id9">[<a class="reference internal" href="../part_5/03_references.html#id70">A+15</a>]</span> or JAX <span id="id10">[<a class="reference internal" href="../part_5/03_references.html#id71">BFH+18</a>]</span>.
+By implementing the operations of our signal processing device directly in an AD framework we can enable computation of gradients for each operation within signal processing device.
+In the context of audio, this approach was popularized by  <span id="id11">[<a class="reference internal" href="../part_5/03_references.html#id83" title="Jesse Engel, Lamtharn Hantrakul, Chenjie Gu, and Adam Roberts. DDSP: differentiable digital signal processing. ICLR, 2021.">EHGR21</a>]</span>, which proposed a method for automatic control of a harmonic plus noise synthesis model in the reconstruction of monophonic musical instruments.</p>
+<p>While automatic differentiation provides a straightforward method for computing the desired gradients, it places a number of constraints on the signal processing device that we can use.
+It requires foremost that we have access or knowledge to the underlying algorithm implemented in our signal processing device, meaning this is considered a white-box approach.
+Not only does it require that we have knowledge of the signal processing operations, it also requires that these operations are differentiable, which excludes binary decisions, or other discrete operations.
+Finally, compute cost and efficiency must also be considered. While signal processing devices with recursive operations, such as infinite impulse response filters, are differentiable <span id="id12">[<a class="reference internal" href="../part_5/03_references.html#id85" title="Boris Kuznetsov, Julian D Parker, and Fabián Esqueda. Differentiable iir filters for machine learning applications. In Proc. Int. Conf. Digital Audio Effects (eDAFx-20), 297–303. 2020.">KPE20</a>]</span>, the application of these filters in the time domain can be problematic for gradient computation since backpropagation will require serial computation of the gradient at each timestep. This can lead to extremely slow or infeasible gradient computations when operating at audio samples (e.g. 44.1 kHz) <span id="id13">[<a class="reference internal" href="../part_5/03_references.html#id90" title="Alec Wright, Vesa Välimäki, and others. Grey-box modelling of dynamic range compression. In Proc. Int. Conf. Digital Audio Effects (DAFX), Vienna, Austria, 304–311. 2022.">WValimaki+22</a>]</span>.
+These limitations motivate alternative strategies for gradient computation that relax some of these constraints.</p>
+</section>
+<section id="neural-proxies">
+<h2>Neural proxies<a class="headerlink" href="#neural-proxies" title="Permalink to this headline">#</a></h2>
+<p>Neural proxies of audio effects enable a black-box approach by first training a neural network to emulate the behavior of the device and then use this continuous and differentiable proxy of the original device during optimization <span id="id14">[<a class="reference internal" href="../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span>.
+This does not require that the original signal processing device is differentiable or continuous. It only requires that we can generate input-output examples from this device over the range of its control parameters so we can train a neural network proxy to emulate its behavior.
+During training of our control network we can use this proxy to compute gradients.</p>
+<p>Recent work investigated the feasibility of neural proxy hybrids, where the pretrained proxy network is used only during the backward pass and the original signal processing implementation is used in the forward pass both during training and inference <span id="id15">[<a class="reference internal" href="../part_5/03_references.html#id26" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. arXiv preprint arXiv:2207.08759, 2022.">SBR22</a>]</span>.
+However, results indicate that this approach does not perform well in comparison as the input-output behavior with respect to the audio effect control parameters is often not sufficiently captured with existing neural proxy implementations.
+While this method provides the benefit of a fully black-box formulation, further work is required in developing the appropriate model architectures for creating accurate emulations of signal processing devices.</p>
+</section>
+<section id="gradient-approximation">
+<h2>Gradient approximation<a class="headerlink" href="#gradient-approximation" title="Permalink to this headline">#</a></h2>
+<p>Another black-box approach involves estimation of the gradient of the loss with respect to the parameters <span class="math notranslate nohighlight">\(\nabla_\mathbf{p} \mathcal{L}\)</span>.  <span id="id16">[<a class="reference internal" href="../part_5/03_references.html#id84" title="Marco A Martínez-Ramírez, Oliver Wang, Paris Smaragdis, and Nicholas J Bryan. Differentiable signal processing with black-box audio effects. In ICASSP, 66–70. IEEE, 2021.">MartinezRamirezWSB21</a>]</span> demonstrated how to apply this technique for the control of audio effects across a number of tasks. In their approach they leverage simultaneous perturbation stochastic approximation (SPSA) <span id="id17">[<a class="reference internal" href="../part_5/03_references.html#id82" title="James C Spall. A one-measurement form of simultaneous perturbation stochastic approximation. Automatica, 33(1):109–112, 1997.">Spa97</a>]</span>, which provides a more scalable alternative to finite differences.
+This approach generally involves generating multiple outputs from the device with a small random perturbation of the parameter values in order to compute a local estimate of the gradient.</p>
+<p>Under the right conditions with appropriate hyperparameter tuning this approach can enable backpropgation to train a neural network for the control of black-box audio effects without the need for a proxy network.
+However, this method has also been shown to struggle with instability and exhibit sensitivity to the hyperparameters selection <span id="id18">[<a class="reference internal" href="../part_5/03_references.html#id26" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. arXiv preprint arXiv:2207.08759, 2022.">SBR22</a>]</span>.
+In addition, there can be implementation challenges as the black-box audio effects often run only on CPU and may need to have independent state handled. This often requires efficient orchestration between the neural network on GPU and multiprocessing of CPU workers for the audio effect.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./part_2"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02_problem.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Problem Formulation</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_methods.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Methods</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

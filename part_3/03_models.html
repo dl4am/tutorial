@@ -121,9 +121,14 @@ const thebe_selector_output = ".output, .cell_output"
  </span>
 </p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1">
   <a class="reference internal" href="../part_1/01_music-production.html">
    Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../part_1/02_audio-effects.html">
+   Audio effects
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
@@ -132,28 +137,23 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/01_mixing.html">
-     Mixing
+    <a class="reference internal" href="../part_1/audio-effects/01_panning.html">
+     Panning
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/02_equalization.html">
+    <a class="reference internal" href="../part_1/audio-effects/02_equalization.html">
      Equalization
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/03_reveberation.html">
-     Reverberation
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/04_compression.html">
+    <a class="reference internal" href="../part_1/audio-effects/03_compression.html">
      Compression
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/music-production/05_aesthetics.html">
-     Aesthetics
+    <a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">
+     Reverberation
     </a>
    </li>
   </ul>
@@ -175,8 +175,13 @@ const thebe_selector_output = ".output, .cell_output"
    Problem Formulation
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_2/03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/03_methods.html">
+  <a class="reference internal" href="../part_2/04_methods.html">
    Methods
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -198,13 +203,8 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/04_loss-functions.html">
+  <a class="reference internal" href="../part_2/05_loss-functions.html">
    Loss Functions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/05_diffsp.html">
-   Differentiable signal processing
   </a>
  </li>
 </ul>
@@ -242,12 +242,17 @@ const thebe_selector_output = ".output, .cell_output"
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/01_metrics.html">
-   Metrics
+  <a class="reference internal" href="../part_4/01_evaluation.html">
+   Evaluation
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/05_evaluate.html">
+  <a class="reference internal" href="../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../part_4/03_evaluate.html">
    Evaluation
   </a>
  </li>
@@ -1767,7 +1772,7 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By Christian Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

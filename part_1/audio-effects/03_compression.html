@@ -1,0 +1,708 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Compression &#8212; Deep Learning for Automatic Mixing</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Reverberation" href="04_reverberation.html" />
+    <link rel="prev" title="Equalization" href="02_equalization.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../landing-page.html">
+                    Deep Learning for Automatic Mixing 
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Audio Engineering
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_music-production.html">
+   Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../02_audio-effects.html">
+   Audio effects
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_panning.html">
+     Panning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_reverberation.html">
+     Reverberation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../part_2/04_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_2/methods/01_mixwaveunet.html">
+     Mix-Wave-U-Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_2/methods/02_dmc.html">
+     Differentiable Mixing Console
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/05_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Implementation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/01_inference.html">
+   Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/02_datasets.html">
+   Datasets for automix systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/04_training.html">
+   Training
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Evaluation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/01_evaluation.html">
+   Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/03_evaluate.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/01_future-directions.html">
+   Future Directions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/02_conclusion.html">
+   Conclusions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/03_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/dl4am/tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_1/audio-effects/03_compression.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/part_1/audio-effects/03_compression.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nonlinear-effects">
+   Nonlinear effects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-range-processors">
+   Dynamic range processors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compressor">
+   Compressor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expander">
+   Expander
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiband-compressor">
+   Multiband Compressor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sidechain-compression">
+   Sidechain Compression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limiter">
+   Limiter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noise-gate">
+   Noise gate
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Compression</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#nonlinear-effects">
+   Nonlinear effects
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dynamic-range-processors">
+   Dynamic range processors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#compressor">
+   Compressor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#expander">
+   Expander
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multiband-compressor">
+   Multiband Compressor
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sidechain-compression">
+   Sidechain Compression
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#limiter">
+   Limiter
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#noise-gate">
+   Noise gate
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="compression">
+<h1>Compression<a class="headerlink" href="#compression" title="Permalink to this headline">#</a></h1>
+<p>Dynamic Range Compression is a nonlinear audio effect that is generally used to control the dynamic range of a sound or combination of sounds. The history of the dynamic range compressor is inextricably linked to changes in trends and styles in popular music production<span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id110" title="Gary Bromham, Dave Moffat, Mathieu Barthet, and György Fazekas. The impact of compressor ballistics on the perceived style of music. In Audio Engineering Society Convention 145. Audio Engineering Society, 2018.">BMBF18</a>]</span>. In our videos compression is used to add bite to the kick drum and also control the level of bass in a subsequent video which also demonstrates how sidechaining works. Fig. \ref{kickbass} depicts the mixing session, and the following sections explain the technical concepts behind nonlinear audio effects and dynamic range compression.</p>
+<figure class="align-center" id="kickbass">
+<a class="reference internal image-reference" href="../../_images/Flare-Kick-Bass-Sidechaining.png"><img alt="../../_images/Flare-Kick-Bass-Sidechaining.png" src="../../_images/Flare-Kick-Bass-Sidechaining.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 11 </span><span class="caption-text">Sidechain Compression for processing the kick drum in the context of a mix.</span><a class="headerlink" href="#kickbass" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<section id="nonlinear-effects">
+<h2>Nonlinear effects<a class="headerlink" href="#nonlinear-effects" title="Permalink to this headline">#</a></h2>
+<p>Nonlinear processors correspond to all the signal processing systems that do not satisfy the linearity condition, i.e. systems that do not have the homogeneous or additive property<span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id118" title="Chi-Tsong Chen. Linear system theory and design. Saunders college publishing, 1984.">Che84</a>]</span>.
+These systems have a purposeful or unintentional insertion of harmonic or inharmonic frequency components that are not present in the input signal, which is known as a harmonic and intermodulation distortion<span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>.
+When the system introduces energy at each harmonic or multiple of the input frequency, harmonic distortion occurs. When the system adds or subtracts frequencies between the frequency components of the input signal, intermodulation distortion results<span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>]</span>.
+In the case of musical signals, due to aesthetic reasons, harmonic distortion is a desirable property of nonlinear audio processors, while intermodulation distortion is generally avoided<span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>]</span>.</p>
+<p>Nonlinear audio effects are extensively used by musicians and sound engineers and, based on short-term and long-term memory capabilities, they can be classified into two main types of effects: dynamic range processors (DRC) such as compressors or limiters; and distortion effects such as tube amplifiers<span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>, <a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>.</p>
+</section>
+<section id="dynamic-range-processors">
+<h2>Dynamic range processors<a class="headerlink" href="#dynamic-range-processors" title="Permalink to this headline">#</a></h2>
+<p>DRC or compressors are traditionally used to reduce the dynamics of the input signal by applying a time-varying gain which alters the attack of the audio by effecting the transients of the input<span id="id7">[<a class="reference internal" href="../../part_5/03_references.html#id30" title="Udo Zölzer, Xavier Amatriain, Daniel Arfib, Jordi Bonada, Giovanni De Poli, Pierre Dutilleux, Gianpaolo Evangelista, Florian Keiler, Alex Loscos, Davide Rocchesso, and others. DAFX-Digital audio effects. John Wiley and Sons, 2002.">ZolzerAA+02</a>]</span>.
+The main purpose of dynamic range processors, which are nonlinear time-invariant audio effects with long temporal dependencies, is to change the variation in volume of the incoming audio. This is achieved with a varying amplification gain factor, which depends on an envelope follower along with a waveshaping nonlinearity, which distorts the shape of the incoming waveform. Long-term memory behavior describes these effects, since the output depends on the current and previous values of the input samples. These effects tend to introduce a low amount of harmonic distortion, while for distortion processors a high amount is desired<span id="id8">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>.</p>
+<p>Usually, the amount of gain depends on different parameters such as threshold, ratio, attack and release times and knee. For a compressor, threshold determines the level above which compression begins, and the ratio determines how much compression is used. Typically, ratio is set as the input/output rate for levels larger than the threshold. When the signal level crosses or drops below the threshold level, attack and release times determine how fast the compressor starts and stops applying compression, respectively. Knee controls the smoothness of the transition at the threshold point<span id="id9">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>The various types of dynamic range processors can be classified into the following types of effects<span id="id10">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>, <a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>, <a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>.</p>
+</section>
+<section id="compressor">
+<h2>Compressor<a class="headerlink" href="#compressor" title="Permalink to this headline">#</a></h2>
+<p>Reduces the dynamics of the input signal by applying a variable gain. Based on the ratio, this decreased gain is applied to the input signals that are above the threshold. This can further increase the overall levels of the output signal thus boosting the loudness.</p>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../../_images/compression.svg"><img alt="../../_images/compression.svg" src="../../_images/compression.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 12 </span><span class="caption-text">Dynamic range compressor static characteristic.</span><a class="headerlink" href="#id11" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="expander">
+<h2>Expander<a class="headerlink" href="#expander" title="Permalink to this headline">#</a></h2>
+<p>Peforms the opposite of the compressor by increasing the dynamics of the input signals. This is done by reducing amplitudes that are below the threshold.</p>
+<figure class="align-center" id="id12">
+<a class="reference internal image-reference" href="../../_images/expander.svg"><img alt="../../_images/expander.svg" src="../../_images/expander.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 13 </span><span class="caption-text">Expander static characteristic.</span><a class="headerlink" href="#id12" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="multiband-compressor">
+<h2>Multiband Compressor<a class="headerlink" href="#multiband-compressor" title="Permalink to this headline">#</a></h2>
+<p>Applies compression to selected frequency bands via a filter bank which splits the input signal, so each band is individually compressed.</p>
+</section>
+<section id="sidechain-compression">
+<h2>Sidechain Compression<a class="headerlink" href="#sidechain-compression" title="Permalink to this headline">#</a></h2>
+<p>Common practice within mixing tasks, where the compressor has an additional input (“side input”). When the level of the side input is above the threshold, the compressor is activated, and the dynamics of the input signal are reduced.</p>
+</section>
+<section id="limiter">
+<h2>Limiter<a class="headerlink" href="#limiter" title="Permalink to this headline">#</a></h2>
+<p>Eliminates any dynamics above the threshold by keeping the output level constant, i.e. ratio is <span class="math notranslate nohighlight">\(\infty\)</span>/1.</p>
+<figure class="align-center" id="id13">
+<a class="reference internal image-reference" href="../../_images/limiter.svg"><img alt="../../_images/limiter.svg" src="../../_images/limiter.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 14 </span><span class="caption-text">Limiter static characteristic.</span><a class="headerlink" href="#id13" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="noise-gate">
+<h2>Noise gate<a class="headerlink" href="#noise-gate" title="Permalink to this headline">#</a></h2>
+<p>Eliminates any dynamics below the threshold by keeping the output level muted.</p>
+<figure class="align-center" id="id14">
+<a class="reference internal image-reference" href="../../_images/noise-gate.svg"><img alt="../../_images/noise-gate.svg" src="../../_images/noise-gate.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 15 </span><span class="caption-text">Noise gate static characteristic.</span><a class="headerlink" href="#id14" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>See <span id="id15">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span> for a further review of other types of nonlinear audio processors such as distortion effects, de-esser, tape saturation, exciters and enhancers.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./part_1/audio-effects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="02_equalization.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Equalization</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="04_reverberation.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Reverberation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

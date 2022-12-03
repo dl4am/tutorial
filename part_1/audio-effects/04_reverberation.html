@@ -1,0 +1,651 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Reverberation &#8212; Deep Learning for Automatic Mixing</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Intelligent Music Production" href="../../part_2/01_imp.html" />
+    <link rel="prev" title="Compression" href="03_compression.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../landing-page.html">
+                    Deep Learning for Automatic Mixing 
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Audio Engineering
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_music-production.html">
+   Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../02_audio-effects.html">
+   Audio effects
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_panning.html">
+     Panning
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_equalization.html">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Reverberation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../part_2/04_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_2/methods/01_mixwaveunet.html">
+     Mix-Wave-U-Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_2/methods/02_dmc.html">
+     Differentiable Mixing Console
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/05_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Implementation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/01_inference.html">
+   Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/02_datasets.html">
+   Datasets for automix systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/04_training.html">
+   Training
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Evaluation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/01_evaluation.html">
+   Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/03_evaluate.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/01_future-directions.html">
+   Future Directions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/02_conclusion.html">
+   Conclusions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/03_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/dl4am/tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_1/audio-effects/04_reverberation.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/part_1/audio-effects/04_reverberation.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comb-and-allpass-filters">
+   Comb and Allpass filters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional">
+   Convolutional
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#electromechanical-reverberators">
+   Electromechanical reverberators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spring-reverb">
+   Spring reverb
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Reverberation</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#comb-and-allpass-filters">
+   Comb and Allpass filters
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#convolutional">
+   Convolutional
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#electromechanical-reverberators">
+   Electromechanical reverberators
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spring-reverb">
+   Spring reverb
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="reverberation">
+<h1>Reverberation<a class="headerlink" href="#reverberation" title="Permalink to this headline">#</a></h1>
+<p>Reverberation is the process of reflecting sound off different surfaces. In music production this can be created by the use of real space or artificially using algorithmic or convolution techniques. Types of reverberation vary from Room, Hall, Cathedral, Plate or Spring. Digital iterations and incarnations can be found in most commercial music software. The video shows the addition of a large reverb adding a stadium-like spatial effect to the snare sound. Fig. \ref{voxrev} depicts the reverberation processing for vocals mixing and below we introduce reverberation from a signal processing perspective.</p>
+<figure class="align-center" id="voxrev">
+<a class="reference internal image-reference" href="../../_images/Flare-Vocal-Processing.png"><img alt="../../_images/Flare-Vocal-Processing.png" src="../../_images/Flare-Vocal-Processing.png" style="width: 100%;" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 16 </span><span class="caption-text">Appliction of reverberation to the vocal in the context of a mix.</span><a class="headerlink" href="#voxrev" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>Artificial reverberation is often used to emulate an indoor space or to complement the acoustics of a recording <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id120" title="Pedro Duarte Pestana, Joshua D Reiss, and Álvaro Barbosa. User preference on artificial reverberation and delay time parameters. Journal of the Audio Engineering Society, 65(1/2):100–107, 2017.">PRB17</a>]</span>, it consists of frequency-dependent reflections of delayed and attenuated copies of the input <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id30" title="Udo Zölzer, Xavier Amatriain, Daniel Arfib, Jordi Bonada, Giovanni De Poli, Pierre Dutilleux, Gianpaolo Evangelista, Florian Keiler, Alex Loscos, Davide Rocchesso, and others. DAFX-Digital audio effects. John Wiley and Sons, 2002.">ZolzerAA+02</a>]</span>.</p>
+<p>Reverberation occurs when delayed and attenuated copies of the direct sound appear as reflections. Each reflection is frequency dependent and defined by the sound source’s directivity as well as the physical properties of the reflecting surfaces. <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>. The reflections that occur immediately after the sound event are considered early reflections. These are not perceived individually, but as a combination of all the reflections <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>Late reflections appear more randomly and are distinguished by an increase in echo density, or the quantity of echoes per unit of time, which produces a diffuse reverberation. These reflections are perceived as one continuous decaying sound. <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>]</span>. Therefore, the impulse response of an acoustic space is often divided into: direct sound, early reflections and late reflections.</p>
+<figure class="align-center" id="ir">
+<a class="reference internal image-reference" href="../../_images/IR.svg"><img alt="../../_images/IR.svg" src="../../_images/IR.svg" width="40%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 17 </span><span class="caption-text">Impulse response of an acoustic space.</span><a class="headerlink" href="#ir" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>In the music and film industry, artificial reverberation was initially developed as a way of approximating the reflections occurring in room acoustics. This led to techniques that simulate reverberation, such as chamber, plate, spring and digital reverberators <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id121" title="Vesa Välimäki, Julian D Parker, Lauri Savioja, Julius O Smith, and Jonathan S Abel. Fifty years of artificial reverberation. IEEE Transactions on Audio, Speech, and Language Processing, 20(5):1421–1448, 2012.">ValimakiPS+12</a>]</span></p>
+<p>Reverberation is approximately linear and time-invariant. As a result, the majority of digital techniques that simulate reverberation make an effort to mimic the perceptual traits of the respective impulse responses. There are various methods which rely on digital filters, delay networks and convolution-based algorithms <span id="id7">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<section id="comb-and-allpass-filters">
+<h2>Comb and Allpass filters<a class="headerlink" href="#comb-and-allpass-filters" title="Permalink to this headline">#</a></h2>
+<p><span id="id8">[<a class="reference internal" href="../../part_5/03_references.html#id123" title="Manfred R Schroeder and Benjamin F Logan. Colorless artificial reverberation. IRE Transactions on Audio, pages 209–214, 1961.">SL61</a>]</span> proposed a digital reverberator based on a parallel filter bank of feedback comb filters and a series of allpass filters. Allpass filters allow all frequencies, but modify the phase relationships of the frequencies of the input signal. In general, the cut-off frequency is where the phase response reaches <span class="math notranslate nohighlight">\(-90\)</span>. A comb filter consists of adding a delayed version of a signal to itself <span id="id9">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>The difference equation of a feedback comb filter is</p>
+<div class="math notranslate nohighlight">
+\[
+y(n) = x(n-M)+gy(n-M),
+\label{eq:differenceCombReverb}
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(M\)</span> and <span class="math notranslate nohighlight">\(N\)</span> are the input and output delay times respectively, and <span class="math notranslate nohighlight">\(g\)</span> is the feedback coefficient. When <span class="math notranslate nohighlight">\(M\)</span> is large, the impulse response of the filter is heard as discrete echoes or reflections that decay exponentially and are equally spaced in time. <span id="id10">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.
+Thus, by varying the delay time of each feedback comb filter, the parallel filter bank replicates the reverberant reflections of an acoustic environment.
+The late reflections are modeled by the allpass filters, for which the difference equation is</p>
+<div class="math notranslate nohighlight">
+\[
+y(n) = x(n-M)-gx(n)+gy(n-M).
+\label{eq:differenceAllpassReverb}
+\]</div>
+<p>Each allpass filter also generate a series of decaying echoes, which increases the overall echo density, by expanding the previous single reflections into many reflections. This simulates the diffuse characteristic of late reflections <span id="id11">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+</section>
+<section id="convolutional">
+<h2>Convolutional<a class="headerlink" href="#convolutional" title="Permalink to this headline">#</a></h2>
+<p>consists in convolving the input signal with a recorded or estimated impulse response of an acoustic environment. The impulse response can be measured via sinusoidal sweeps, where a linear or logarithmic sweep of constant amplitude is recorded in the respective acoustic space <span id="id12">[<a class="reference internal" href="../../part_5/03_references.html#id40" title="Angelo Farina. Simultaneous measurement of impulse response and distortion with a swept-sine technique. In Audio Engineering Society Convention 108. 2000.">Far00</a>]</span>.</p>
+<p>Convolutional reverb is implemented via FIR filtering, where each coefficient corresponds to each value of the impulse response and this often becomes computationally expensive for large impulse responses. Block-based convolutions, comb filters, and allpass filters are typical methods for reducing this computational load. <span id="id13">[<a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>]</span>. Thus, block-based convolutions via FIR filtering produce the early impulse response reflections, and IIR filters used in feedback comb and allpass filters produce the diffuse reverberation.</p>
+<p>Thus, convolution via FIR filtering generates the early reflections of the impulse response, and feedback comb and allpass IIR filters generate the diffuse reverberation.</p>
+</section>
+<section id="electromechanical-reverberators">
+<h2>Electromechanical reverberators<a class="headerlink" href="#electromechanical-reverberators" title="Permalink to this headline">#</a></h2>
+<p>such as plate and spring were first used and researched as means to substitute real room reverberation. They are now frequently used in music production for aesthetic reasons due to their unique sonic characteristics <span id="id14">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>\textit{Plate reverb} is based on a large metal plate which vibrates due to a moving-coil transducer attached to its centre. This transducer receives an amplified dry input signal, and plate vibrations are detected by a pickup sensor and amplified further <span id="id15">[<a class="reference internal" href="../../part_5/03_references.html#id124" title="Walter Kuhl. The acoustical and technological properties of the reverberation plate. EBU Review, Part A-Technical, 49:8–14, 1958.">Kuh58</a>]</span>. The sound of plate reverb differs from that of room acoustic reverberation because sound travels faster in metal than in air, increasing the echo density. <span id="id16">[<a class="reference internal" href="../../part_5/03_references.html#id125" title="Stefan Bilbao. Numerical sound synthesis: finite difference schemes and simulation in musical acoustics. John Wiley and Sons, 2009.">Bil09</a>]</span>.</p>
+<p>Thus, this particular sonic characteristics are due to the mechanical and physical characteristics of the plate.</p>
+</section>
+<section id="spring-reverb">
+<h2>Spring reverb<a class="headerlink" href="#spring-reverb" title="Permalink to this headline">#</a></h2>
+<p>is based on one or various helical springs suspended under low tension, attached to a magnetic bead and driven via an electromagnetic coupling <span id="id17">[<a class="reference internal" href="../../part_5/03_references.html#id4" title="Julian Parker and Stefan Bilbao. Spring reverberation: a physical perspective. In 12th International Conference on Digital Audio Effects (DAFx-09). 2009.">PB09</a>]</span>. The input audio source is transduced to spring vibrations which are detected by a pickup sensor at the other end of the spring.</p>
+<p>The distinct sound of spring reverb is caused by the various types of vibrations that occur, both transverse and longitudinal, resulting in an unusual combination of wave and dispersive propagation. <span id="id18">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>.</p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./part_1/audio-effects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03_compression.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Compression</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../../part_2/01_imp.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Intelligent Music Production</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

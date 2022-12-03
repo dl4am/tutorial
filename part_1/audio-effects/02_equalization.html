@@ -1,0 +1,681 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Equalization &#8212; Deep Learning for Automatic Mixing</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Compression" href="03_compression.html" />
+    <link rel="prev" title="Panning" href="01_panning.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../landing-page.html">
+                    Deep Learning for Automatic Mixing 
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Audio Engineering
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01_music-production.html">
+   Music Production
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="../02_audio-effects.html">
+   Audio effects
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="01_panning.html">
+     Panning
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Equalization
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_compression.html">
+     Compression
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="04_reverberation.html">
+     Reverberation
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Automatic Mixing
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/01_imp.html">
+   Intelligent Music Production
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/02_problem.html">
+   Problem Formulation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/03_diffsp.html">
+   Differentiable signal processing
+  </a>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../../part_2/04_methods.html">
+   Methods
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_2/methods/01_mixwaveunet.html">
+     Mix-Wave-U-Net
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../../part_2/methods/02_dmc.html">
+     Differentiable Mixing Console
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_2/05_loss-functions.html">
+   Loss Functions
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Implementation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/01_inference.html">
+   Inference
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/02_datasets.html">
+   Datasets for automix systems
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/03_models.html">
+   Models
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_3/04_training.html">
+   Training
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Evaluation
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/01_evaluation.html">
+   Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/02_listening-tests.html">
+   Listening Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_4/03_evaluate.html">
+   Evaluation
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Conclusion
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/01_future-directions.html">
+   Future Directions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/02_conclusion.html">
+   Conclusions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../part_5/03_references.html">
+   References
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/dl4am/tutorial"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_1/audio-effects/02_equalization.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/part_1/audio-effects/02_equalization.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lowpass">
+   Lowpass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#highpass">
+   Highpass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bandpass">
+   Bandpass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shelving">
+   Shelving
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#peaking">
+   Peaking
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Equalization</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#lowpass">
+   Lowpass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#highpass">
+   Highpass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#bandpass">
+   Bandpass
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#shelving">
+   Shelving
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#peaking">
+   Peaking
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="equalization">
+<h1>Equalization<a class="headerlink" href="#equalization" title="Permalink to this headline">#</a></h1>
+<p>EQ is an integral part of music production and widely used in the production and consumption of music, where a filter bank is used as a corrective filter to reduce masking <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id8" title="Vesa Välimäki and Joshua D Reiss. All about audio equalization: solutions and frontiers. Applied Sciences, 6(5):129, 2016.">ValimakiR16</a>]</span>, i.e. overlapping of sound sources, or as a creative tool to shape sonic characteristics <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>. It consists of the modification of frequency content through positive or negative gains which change the harmonic and timbral characteristics of the audio.</p>
+<p>This is done for a variety of reasons, such as a corrective or technical filter to lessen masking within mixes, to change a speaker system’s frequency response, or as an artistic or creative tool while recording a particular audio source <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>Thus, EQ is the process of altering or adjusting the amplitude of various frequencies of a sound. It can be used to enhance or sculpt a sound adding character or removing imperfections. In our video we show how equalisation of the vocal sound is used to add clarity and presence in the higher frequencies, around 3 kHz, along with warmth in the lower frequencies around 250 Hz (see Fig. \ref{snareeq}). The use of semantic descriptors to articulate technical changes is key to the process.</p>
+<figure class="align-center" id="snareeq">
+<img alt="Snare EQ" src="../../_images/Flare-Snare-Processing-2.png" />
+<figcaption>
+<p><span class="caption-number">Fig. 5 </span><span class="caption-text">Processing of the snare drum in Logic Pro.</span><a class="headerlink" href="#snareeq" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+<p>equalizer is normally implemented via a filter bank whose coefficients are obtained from the designed cut-off frequency <span class="math notranslate nohighlight">\(f_{c}\)</span> and quality factor <span class="math notranslate nohighlight">\(Q\)</span>.
+EQ can be implemented in both the time-domain and the frequency-domain and is often performed through a gain <span class="math notranslate nohighlight">\(G\)</span> at a given <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id5" title="Vincent Verfaille, U. Zölzer, and Daniel Arfib. Adaptive digital audio effects (A-DAFx): a new class of sound transformations. IEEE Transactions on Audio, Speech and Language Processing, 14(5):1817-1831, 2006.">VZolzerA06</a>]</span>.</p>
+<p>The filter bank consists of Finite Impulse Response (FIR) or Infinite Impulse Response (IIR) filters, whose main difference corresponds to the absence or presence of feedback loops <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id116" title="Patrick Gaydecki. Foundations of digital signal processing: theory, algorithms and hardware design. Volume 15. Iet, 2004.">Gay04</a>]</span>. The non-recursive FIR discrete difference equation is</p>
+<div class="math notranslate nohighlight">
+\[
+y(n) = \sum_{k=0}^{M-1} a_{k} \cdot x(n-k)
+\]</div>
+<p>where <span class="math notranslate nohighlight">\(y(n)\)</span> is the output signal, <span class="math notranslate nohighlight">\(x(n)\)</span> is the input signal and <span class="math notranslate nohighlight">\(a_{k}\)</span> corresponds to the <span class="math notranslate nohighlight">\(M\)</span> filter coefficients. This non-recursive system is characterized by being a weighted sum of delayed inputs, thus a general FIR filter consists of a feed-forward system with <span class="math notranslate nohighlight">\(M-\)</span>1 delay lines.
+The recursive IIR discrete difference equation is</p>
+<div class="math notranslate nohighlight">
+\[
+y(n) = \sum_{k=0}^{M-1} a_{k} \cdot x(n-k) - \sum_{k=1}^{N} b_{k} \cdot y(n-k)
+\]</div>
+<p>The IIR systems are characterized by a weighted sum of delayed inputs and outputs. This feedback system consists of an input delay line of <span class="math notranslate nohighlight">\(M-\)</span>1 elements and an output delay line of <span class="math notranslate nohighlight">\(N\)</span> elements. The recursive coefficients are <span class="math notranslate nohighlight">\(b_{k}\)</span>.% <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>The various types of filters can be classified into the following classes <span id="id7">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>. These types of filters can be implemented via FIR or IIR filters whose coefficients determine <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. Most of the widely used EQs are based on the following filter types.</p>
+<section id="lowpass">
+<h2>Lowpass<a class="headerlink" href="#lowpass" title="Permalink to this headline">#</a></h2>
+<p>Attenuates frequencies above <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> determines a boost or resonance of frequencies around <span class="math notranslate nohighlight">\(f_{c}\)</span>.</p>
+<figure class="align-center" id="id8">
+<a class="reference internal image-reference" href="../../_images/lowpass.svg"><img alt="../../_images/lowpass.svg" src="../../_images/lowpass.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 6 </span><span class="caption-text">Lowpass filter resopnse.</span><a class="headerlink" href="#id8" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="highpass">
+<h2>Highpass<a class="headerlink" href="#highpass" title="Permalink to this headline">#</a></h2>
+<p>Attenuates frequencies below <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> determines a boost or resonance of frequencies around <span class="math notranslate nohighlight">\(f_{c}\)</span>.</p>
+<figure class="align-center" id="id9">
+<a class="reference internal image-reference" href="../../_images/highpass.svg"><img alt="../../_images/highpass.svg" src="../../_images/highpass.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 7 </span><span class="caption-text">Highpass filter resopnse.</span><a class="headerlink" href="#id9" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="bandpass">
+<h2>Bandpass<a class="headerlink" href="#bandpass" title="Permalink to this headline">#</a></h2>
+<p>Attenuates frequencies above and below a frequency band with bandwidth <span class="math notranslate nohighlight">\(f_{b}\)</span> and center frequency <span class="math notranslate nohighlight">\(f_{c}\)</span>. <span class="math notranslate nohighlight">\(Q\)</span> is the relative bandwidth  <span class="math notranslate nohighlight">\(f_{c}\)</span>/ <span class="math notranslate nohighlight">\(f_{b}\)</span>. A bandreject filter attenuates frequencies within the frequency band.</p>
+<figure class="align-center" id="id10">
+<a class="reference internal image-reference" href="../../_images/bandpass.svg"><img alt="../../_images/bandpass.svg" src="../../_images/bandpass.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 8 </span><span class="caption-text">Bandpass filter resopnse.</span><a class="headerlink" href="#id10" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="shelving">
+<h2>Shelving<a class="headerlink" href="#shelving" title="Permalink to this headline">#</a></h2>
+<p>A low-frequency shelving filter (lowshelf) boosts or cuts frequencies below <span class="math notranslate nohighlight">\(f_{c}\)</span> while preserving frequencies above <span class="math notranslate nohighlight">\(f_{c}\)</span>. A high-frequency shelving filter (highshelf) boosts or cuts frequencies above <span class="math notranslate nohighlight">\(f_{c}\)</span> while preserving frequencies below <span class="math notranslate nohighlight">\(f_{c}\)</span>. <span class="math notranslate nohighlight">\(Q\)</span> determines the resonance of frequencies around <span class="math notranslate nohighlight">\(f_{c}\)</span>.</p>
+<figure class="align-center" id="id11">
+<a class="reference internal image-reference" href="../../_images/lowshelf.svg"><img alt="../../_images/lowshelf.svg" src="../../_images/lowshelf.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 9 </span><span class="caption-text">Shelving filter resopnse.</span><a class="headerlink" href="#id11" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+<section id="peaking">
+<h2>Peaking<a class="headerlink" href="#peaking" title="Permalink to this headline">#</a></h2>
+<p>This filter boosts frequencies between a bandwidth <span class="math notranslate nohighlight">\(f_{b}\)</span> with center frequency <span class="math notranslate nohighlight">\(f_{c}\)</span> while preserving frequencies outside this frequency band. A notch filter cuts frequencies within the frequency band.</p>
+<figure class="align-center" id="peak">
+<a class="reference internal image-reference" href="../../_images/peak.svg"><img alt="../../_images/peak.svg" src="../../_images/peak.svg" width="35%" /></a>
+<figcaption>
+<p><span class="caption-number">Fig. 10 </span><span class="caption-text">Peaking filter resopnse.</span><a class="headerlink" href="#peak" title="Permalink to this image">#</a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./part_1/audio-effects"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="01_panning.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Panning</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_compression.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Compression</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
