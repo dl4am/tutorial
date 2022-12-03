@@ -583,10 +583,79 @@ title="Print to PDF"
 <p>-<strong>Spatialisation features</strong> for panning: the Panning Root Mean Square (RMS)</p>
 <p>-<strong>Dynamic features</strong> for dynamic range processors: RMS level, dynamic spread and crest factor</p>
 <p>-<strong>Loudness features</strong>: the integrated loudness level (LUFS) and peak loudness</p>
+<p>To capture the dynamics of audio effects information we can compute the running mean over a fixed number of past frames. We can calculate the mean absolute percentage error (MAPE) between the target and output features to get a better understanding of the overall relative error.</p>
 <p>Note: This notebook assumes that you have already installed the <code class="docutils literal notranslate"><span class="pre">automix</span></code> package.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install git+https://github.com/csteinmetz1/automix-toolkit
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
+Collecting git+https://github.com/csteinmetz1/automix-toolkit
+  Cloning https://github.com/csteinmetz1/automix-toolkit to /tmp/pip-req-build-vm6pmjd1
+  Running command git clone -q https://github.com/csteinmetz1/automix-toolkit /tmp/pip-req-build-vm6pmjd1
+Requirement already satisfied: torch in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.12.1+cu113)
+Requirement already satisfied: torchvision in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.13.1+cu113)
+Requirement already satisfied: torchaudio in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.12.1+cu113)
+Requirement already satisfied: pytorch_lightning in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.8.3.post1)
+Requirement already satisfied: tqdm in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (4.64.1)
+Requirement already satisfied: numpy in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.21.6)
+Requirement already satisfied: matplotlib in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (3.2.2)
+Requirement already satisfied: pedalboard in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.6.6)
+Requirement already satisfied: scipy in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.7.3)
+Requirement already satisfied: auraloss in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.2.2)
+Requirement already satisfied: wget in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (3.2)
+Requirement already satisfied: pyloudnorm in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.1.0)
+Requirement already satisfied: sklearn in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.0)
+Requirement already satisfied: librosa in /usr/local/lib/python3.8/dist-packages (from auraloss-&gt;automix-toolkit==0.0.1) (0.8.1)
+Requirement already satisfied: audioread&gt;=2.0.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.0)
+Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (21.3)
+Requirement already satisfied: decorator&gt;=3.0.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (4.4.2)
+Requirement already satisfied: scikit-learn!=0.19.0,&gt;=0.14.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.0.2)
+Requirement already satisfied: joblib&gt;=0.14 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.2.0)
+Requirement already satisfied: pooch&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.6.0)
+Requirement already satisfied: resampy&gt;=0.2.2 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.4.2)
+Requirement already satisfied: soundfile&gt;=0.10.2 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.11.0)
+Requirement already satisfied: numba&gt;=0.43.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.56.4)
+Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (4.13.0)
+Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.39.1)
+Requirement already satisfied: setuptools in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (57.4.0)
+Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /usr/local/lib/python3.8/dist-packages (from packaging&gt;=20.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.9)
+Requirement already satisfied: appdirs&gt;=1.3.0 in /usr/local/lib/python3.8/dist-packages (from pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.4.4)
+Requirement already satisfied: requests&gt;=2.19.0 in /usr/local/lib/python3.8/dist-packages (from pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.23.0)
+Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2022.9.24)
+Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.10)
+Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.4)
+Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.24.3)
+Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.8/dist-packages (from scikit-learn!=0.19.0,&gt;=0.14.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.1.0)
+Requirement already satisfied: cffi&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from soundfile&gt;=0.10.2-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.15.1)
+Requirement already satisfied: pycparser in /usr/local/lib/python3.8/dist-packages (from cffi&gt;=1.0-&gt;soundfile&gt;=0.10.2-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.21)
+Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.8/dist-packages (from importlib-metadata-&gt;numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.10.0)
+Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (1.4.4)
+Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (0.11.0)
+Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (2.8.2)
+Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.8/dist-packages (from python-dateutil&gt;=2.1-&gt;matplotlib-&gt;automix-toolkit==0.0.1) (1.15.0)
+Requirement already satisfied: future&gt;=0.16.0 in /usr/local/lib/python3.8/dist-packages (from pyloudnorm-&gt;automix-toolkit==0.0.1) (0.16.0)
+Requirement already satisfied: typing-extensions&gt;=4.0.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (4.1.1)
+Requirement already satisfied: tensorboardX&gt;=2.2 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.5.1)
+Requirement already satisfied: fsspec[http]&gt;2021.06.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (2022.11.0)
+Requirement already satisfied: torchmetrics&gt;=0.7.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.11.0)
+Requirement already satisfied: lightning-utilities==0.3.* in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.3.0)
+Requirement already satisfied: PyYAML&gt;=5.4 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (6.0)
+Requirement already satisfied: fire in /usr/local/lib/python3.8/dist-packages (from lightning-utilities==0.3.*-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.4.0)
+Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.8/dist-packages (from fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (3.8.3)
+Requirement already satisfied: async-timeout&lt;5.0,&gt;=4.0.0a3 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (4.0.2)
+Requirement already satisfied: frozenlist&gt;=1.1.1 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.3.3)
+Requirement already satisfied: attrs&gt;=17.3.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (22.1.0)
+Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (6.0.2)
+Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.8.1)
+Requirement already satisfied: aiosignal&gt;=1.1.2 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.3.1)
+Requirement already satisfied: charset-normalizer&lt;3.0,&gt;=2.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.1.1)
+Requirement already satisfied: protobuf&lt;=3.20.1,&gt;=3.8.0 in /usr/local/lib/python3.8/dist-packages (from tensorboardX&gt;=2.2-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (3.19.6)
+Requirement already satisfied: termcolor in /usr/local/lib/python3.8/dist-packages (from fire-&gt;lightning-utilities==0.3.*-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.1.1)
+Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /usr/local/lib/python3.8/dist-packages (from torchvision-&gt;automix-toolkit==0.0.1) (7.1.2)
 </pre></div>
 </div>
 </div>
@@ -638,6 +707,44 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2022-12-03 08:04:13--  https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/drums-test-rock.zip
+Resolving huggingface.co (huggingface.co)... 54.147.99.175, 3.234.187.147, 2600:1f18:147f:e850:d78f:7d9d:6ec3:2aee, ...
+Connecting to huggingface.co (huggingface.co)|54.147.99.175|:443... connected.
+HTTP request sent, awaiting response... 302 Found
+Location: https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/78590471160237edbabf64fc347697793a647ed287bcff367bfa577753e93b70?response-content-disposition=attachment%3B%20filename%3D%22drums-test-rock.zip%22&amp;Expires=1670313854&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4tbGZzLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2VjL2VlL2VjZWUzOGRmMDQ3ZTNmMmRiMWJkOGMzMWE3NDJmM2EwOGY1NTc0NzBjZDY3Y2I0ODc0MDJhOWMzZWQ5MWI1ZWEvNzg1OTA0NzExNjAyMzdlZGJhYmY2NGZjMzQ3Njk3NzkzYTY0N2VkMjg3YmNmZjM2N2JmYTU3Nzc1M2U5M2I3MD9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmRydW1zLXRlc3Qtcm9jay56aXAlMjIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NzAzMTM4NTR9fX1dfQ__&amp;Signature=Prn4fZyhRQCIBC96YPwAsnUQCmNqnJnY5Mx6gJN0Fbt7YBwePUXYQbhsNAtaM2DkpLf-gaETgw4sc-ogIS1KxduhyugORvOt5oKtyRxD6n3dkTQmrclEK76~QSV4vuguiCxMjAY5YJZ8Ksdgu49l50JYIwl~LMbTONgPZOTgDFU5nHXUlMvdhs78TasqRRHAz9qWVNNtBs6ho72gGIlgCZXgK6y~fX7fsDal6-wt3RN5j9xIkwKP~Kc4tw7FdVtuatzR0PID9cbuofMcTq4rCc6IxWBtqIrTofhvX6aO9FiVxBZP~Riva1IIiaRvaQTP9PYmysXxKYeOJvHbE5om5g__&amp;Key-Pair-Id=KVTP0A1DKRTAX [following]
+--2022-12-03 08:04:13--  https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/78590471160237edbabf64fc347697793a647ed287bcff367bfa577753e93b70?response-content-disposition=attachment%3B%20filename%3D%22drums-test-rock.zip%22&amp;Expires=1670313854&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4tbGZzLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2VjL2VlL2VjZWUzOGRmMDQ3ZTNmMmRiMWJkOGMzMWE3NDJmM2EwOGY1NTc0NzBjZDY3Y2I0ODc0MDJhOWMzZWQ5MWI1ZWEvNzg1OTA0NzExNjAyMzdlZGJhYmY2NGZjMzQ3Njk3NzkzYTY0N2VkMjg3YmNmZjM2N2JmYTU3Nzc1M2U5M2I3MD9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmRydW1zLXRlc3Qtcm9jay56aXAlMjIiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE2NzAzMTM4NTR9fX1dfQ__&amp;Signature=Prn4fZyhRQCIBC96YPwAsnUQCmNqnJnY5Mx6gJN0Fbt7YBwePUXYQbhsNAtaM2DkpLf-gaETgw4sc-ogIS1KxduhyugORvOt5oKtyRxD6n3dkTQmrclEK76~QSV4vuguiCxMjAY5YJZ8Ksdgu49l50JYIwl~LMbTONgPZOTgDFU5nHXUlMvdhs78TasqRRHAz9qWVNNtBs6ho72gGIlgCZXgK6y~fX7fsDal6-wt3RN5j9xIkwKP~Kc4tw7FdVtuatzR0PID9cbuofMcTq4rCc6IxWBtqIrTofhvX6aO9FiVxBZP~Riva1IIiaRvaQTP9PYmysXxKYeOJvHbE5om5g__&amp;Key-Pair-Id=KVTP0A1DKRTAX
+Resolving cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)... 18.154.206.4, 18.154.206.28, 18.154.206.17, ...
+Connecting to cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)|18.154.206.4|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 20044145 (19M) [application/zip]
+Saving to: ‘drums-test-rock.zip’
+
+drums-test-rock.zip 100%[===================&gt;]  19.12M  65.1MB/s    in 0.3s    
+
+2022-12-03 08:04:14 (65.1 MB/s) - ‘drums-test-rock.zip’ saved [20044145/20044145]
+
+Archive:  drums-test-rock.zip
+   creating: drums-test-rock/
+  inflating: __MACOSX/._drums-test-rock  
+  inflating: drums-test-rock/.DS_Store  
+  inflating: __MACOSX/drums-test-rock/._.DS_Store  
+   creating: drums-test-rock/tracks/
+   creating: drums-test-rock/mix/
+  inflating: drums-test-rock/tracks/04_overhead_L_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/01_kick_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/03_hi-hat_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/02_snare_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/07_tom_2_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/06_tom_1_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/05_overhead_R_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/tracks/08_tom_3_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/mix/dry_mix_066_phrase_rock_complex_fast_sticks.wav  
+  inflating: drums-test-rock/mix/dry_mix_066_phrase_rock_complex_fast_sticks_DMC.wav  
+  inflating: drums-test-rock/mix/dry_mix_066_phrase_rock_complex_fast_sticks_MixWaveUNet.wav  
+</pre></div>
+</div>
+</div>
 </div>
 <section id="load-the-mixes">
 <h2>Load the mixes<a class="headerlink" href="#load-the-mixes" title="Permalink to this headline">#</a></h2>
@@ -666,7 +773,7 @@ title="Print to PDF"
     <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MixWaveUNet&#39;</span><span class="p">,</span> 
     <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">,</span> 
-    <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 
@@ -681,11 +788,25 @@ title="Print to PDF"
 
 <span class="n">dmc_audio</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">torchaudio</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">mix_auto_path_dmc</span><span class="p">)</span>
 <span class="n">dmc_audio</span> <span class="o">=</span> <span class="n">dmc_audio</span><span class="p">[:,</span> <span class="n">start_sample</span><span class="p">:</span> <span class="n">end_sample</span><span class="p">]</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span><span class="n">dmc_audio</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">SR</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DMC&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">waveshow</span><span class="p">(</span>
+    <span class="n">dmc_audio</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">numpy</span><span class="p">(),</span>
+    <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span>
+    <span class="n">sr</span><span class="o">=</span><span class="n">SR</span><span class="p">,</span>
+    <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DMC&#39;</span><span class="p">,</span> 
+    <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:orange&#39;</span><span class="p">,</span> 
+    <span class="n">ax</span><span class="o">=</span><span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> 
+    <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">c</span><span class="o">=</span><span class="s2">&quot;lightgray&quot;</span><span class="p">)</span>
 <span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x7ff452f98ac0&gt;
+</pre></div>
+</div>
+<img alt="../_images/03_evaluate_6_1.png" src="../_images/03_evaluate_6_1.png" />
 </div>
 </div>
 </section>
@@ -697,48 +818,108 @@ title="Print to PDF"
 <span class="n">wun_audio</span> <span class="o">=</span> <span class="n">wun_audio</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 <span class="n">dmc_audio</span> <span class="o">=</span> <span class="n">dmc_audio</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">target_audio</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">wun_audio</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">wun_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">target_audio</span><span class="p">,</span> <span class="n">wun_audio</span><span class="p">)</span>
+<span class="n">wun_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">target_audio</span><span class="p">,</span> <span class="n">wun_audio</span><span class="p">)</span>
 <span class="n">dmc_features</span> <span class="o">=</span> <span class="n">get_features</span><span class="p">(</span><span class="n">target_audio</span><span class="p">,</span> <span class="n">dmc_audio</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/usr/local/lib/python3.8/dist-packages/librosa/util/utils.py:198: UserWarning: librosa.util.frame called with axis=-1 on a non-contiguous input. This will result in a copy.
+  warnings.warn(
+/usr/local/lib/python3.8/dist-packages/librosa/util/utils.py:198: UserWarning: librosa.util.frame called with axis=-1 on a non-contiguous input. This will result in a copy.
+  warnings.warn(
+/usr/local/lib/python3.8/dist-packages/librosa/util/utils.py:198: UserWarning: librosa.util.frame called with axis=-1 on a non-contiguous input. This will result in a copy.
+  warnings.warn(
+/usr/local/lib/python3.8/dist-packages/librosa/util/utils.py:198: UserWarning: librosa.util.frame called with axis=-1 on a non-contiguous input. This will result in a copy.
+  warnings.warn(
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">wun_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mix Wave-U-Net - mean absolute percentage error per feature: &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">wun_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>   
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mix Wave-U-Net - mean absolute percentage error per feature: 
+lufs_loudness 0.10304796666518391
+peak_loudness 0.6153269159862367
+mean_mape_loudness 0.3591874413257103
+centroid 0.07771542129844329
+bandwidth 0.02074449515873549
+contrast_lows 0.03402423596487594
+contrast_mids 0.021213729113018307
+contrast_highs 0.020418530820661373
+rolloff 0.056812596999243334
+flatness 0.21573982
+mean_mape_spectral 0.06380983225460123
+panning_rms_total 0.05961496384304375
+panning_rms_lows 0.11983733716557873
+panning_rms_mids 0.07513031358751145
+panning_rms_highs 0.0574753023115106
+mean_mape_panning 0.07801447922691113
+rms_level 0.03705513649501611
+dynamic_spread 0.034629700876661895
+crest_factor 0.059185002409598134
+mean_mape_dynamic 0.04362327992709205
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dmc_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mix DMC - mean absolute percentage error per feature: &#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">dmc_features</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mix DMC - mean absolute percentage error per feature: 
+lufs_loudness 0.05079889059714656
+peak_loudness 0.31816527664650845
+mean_mape_loudness 0.1844820836218275
+centroid 0.1615137813187354
+bandwidth 0.0369705944258171
+contrast_lows 0.0534443574161947
+contrast_mids 0.014752917999981133
+contrast_highs 0.04878563928670107
+rolloff 0.11574088885944224
+flatness 0.33274597
+mean_mape_spectral 0.10913630694319619
+panning_rms_total 0.12243039715427145
+panning_rms_lows 0.04014840181011064
+panning_rms_mids 0.03167409177923675
+panning_rms_highs 0.13560620241244903
+mean_mape_panning 0.08246477328901697
+rms_level 0.19143726340696104
+dynamic_spread 0.08219802568137809
+crest_factor 0.2542721558061214
+mean_mape_dynamic 0.1759691482981535
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">wun_features</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MixWaveUNet&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">dmc_features</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;m&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DMC&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">wun_features</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;///&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;MixWaveUNet&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">dmc_features</span><span class="o">.</span><span class="n">items</span><span class="p">()),</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">hatch</span><span class="o">=</span><span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;DMC&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">2.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">10.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">15.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=-</span><span class="mi">90</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;MAPE&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_evaluate_11_0.png" src="../_images/03_evaluate_11_0.png" />
 </div>
 </div>
 </section>
