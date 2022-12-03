@@ -1,7 +1,8 @@
 # Reverberation
 
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tuIgIS2o-rU?start=218" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-Reverberation is the process of reflecting sound off different surfaces. In music production this can be created by the use of real space or artificially using algorithmic or convolution techniques. Types of reverberation vary from Room, Hall, Cathedral, Plate or Spring. Digital iterations and incarnations can be found in most commercial music software. The video shows the addition of a large reverb adding a stadium-like spatial effect to the snare sound. Fig. \ref{voxrev} depicts the reverberation processing for vocals mixing and below we introduce reverberation from a signal processing perspective. 
+Reverberation is the process of reflecting sound off different surfaces. In music production this can be created by the use of real space or artificially using algorithmic or convolution techniques. Types of reverberation vary from Room, Hall, Cathedral, Plate or Spring. Digital iterations and incarnations can be found in most commercial music software. The video shows the addition of a large reverb adding a stadium-like spatial effect to the snare sound. {numref}`voxrev` depicts the reverberation processing for vocals mixing and below we introduce reverberation from a signal processing perspective. 
 
 
 ```{figure} /assets/figures/mixing/Flare-Vocal-Processing.png
