@@ -17,15 +17,15 @@ In addition, our tutorial may be of interest to researchers outside of MIR, but 
 ## Motivation
 
 Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content {cite:p}`deman2017ten`. 
-This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation{cite}`wilmering2020history`. Due to this complexity, the field of intelligent music production (IMP) {cite}`IMPbook19` has focused on the design of systems that automate tasks in audio engineering.
+This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation {cite}`wilmering2020history`. Due to this complexity, the field of intelligent music production (IMP) {cite}`IMPbook19` has focused on the design of systems that automate tasks in audio engineering.
 These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals {cite}`moffat19approaches`.
 
-In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer{cite}`deman2017ten`.
-Existing approaches include adaptive signal processing{cite}`perez2009automatic`, rule-based {cite}`de2013knowledge`, machine learning{cite}`moffat2019machine`, and most recently deep learning{cite}`martinez2021deep, steinmetz2021automatic` approaches.
+In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer {cite}`deman2017ten`.
+Existing approaches include adaptive signal processing {cite}`perez2009automatic`, rule-based {cite}`de2013knowledge`, machine learning{cite}`moffat2019machine`, and most recently deep learning {cite}`martinez2021deep, steinmetz2021automatic` approaches.
 While deep learning approaches that leverage large-scale datasets have the potential to outperform traditional approaches, their performance is still far from professional audio engineers motivating further investigation in the design and evaluation of these systems. 
 
 While applications of deep learning in MIR have continued to broaden, applications in audio engineering still remain under-investigated leaving a number of open research questions. 
-However, the growing body of research in MIR tasks such as music source separation{cite}`stoter2019open`, music generation{cite}`briot2017deep`, and music classification{cite}`won2020evaluation` provide insights into advancing applications in audio engineering. 
+However, the growing body of research in MIR tasks such as music source separation {cite}`stoter2019open`, music generation {cite}`briot2017deep`, and music classification {cite}`won2020evaluation` provide insights into advancing applications in audio engineering. 
 Therefore, the ISMIR community stands to benefit from a tutorial that introduces the basics and intricacies of music mixing as along with the discussion on existing approaches and open challenges.
 Our hope is to raise awareness of MIR from the perspective of audio engineering and further stimulate research interest in this area within the MIR community.
 
