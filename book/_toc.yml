@@ -6,42 +6,41 @@ root: landing-page
 parts:
   - caption: Audio Engineering # part 1
     chapters:
-      - file: part_1/01_music-production
-        sections:
-        - file: part_1/music-production/01_mixing
-        - file: part_1/music-production/02_audio_effects
-        - file: part_1/music-production/02_equalization
-        - file: part_1/music-production/03_reveberation
-        - file: part_1/music-production/04_compression
-        - file: part_1/music-production/05_aesthetics
+    - file: part_1/01_music-production
+    - file: part_1/02_audio-effects
+      sections:
+      - file: part_1/audio-effects/01_panning
+      - file: part_1/audio-effects/02_equalization
+      - file: part_1/audio-effects/03_compression
+      - file: part_1/audio-effects/04_reverberation
 
   - caption: Automatic Mixing  # part 2
     chapters:
-      - file: part_2/01_imp
-      - file: part_2/02_problem
-      - file: part_2/03_methods
-        sections:
-        - file: part_2/methods/01_mixwaveunet
-        - file: part_2/methods/02_dmc
-      - file: part_2/04_loss-functions
-      - file: part_2/05_diffsp
+    - file: part_2/01_imp
+    - file: part_2/02_problem
+    - file: part_2/03_diffsp
+    - file: part_2/04_methods
+      sections:
+      - file: part_2/methods/01_mixwaveunet
+      - file: part_2/methods/02_dmc
+    - file: part_2/05_loss-functions
 
   - caption: Implementation # part 3
     chapters:
-        - file: part_3/01_inference.ipynb
-        - file: part_3/02_datasets.ipynb
-        - file: part_3/03_models.ipynb
-        - file: part_3/04_training.ipynb
+    - file: part_3/01_inference.ipynb
+    - file: part_3/02_datasets.ipynb
+    - file: part_3/03_models.ipynb
+    - file: part_3/04_training.ipynb
 
   - caption: Evaluation # part 4
     chapters:
-      - file: part_4/01_metrics
-      - file: part_4/02_listening-tests
-      - file: part_4/05_evaluate.ipynb
+    - file: part_4/01_evaluation
+    - file: part_4/02_listening-tests
+    - file: part_4/03_evaluate.ipynb
 
 
   - caption: Conclusion # part 5
     chapters:
-      - file: part_5/01_future-directions
-      - file: part_5/02_conclusion
-      - file: part_5/03_references
+    - file: part_5/01_future-directions
+    - file: part_5/02_conclusion
+    - file: part_5/03_references

@@ -1,13 +1,13 @@
 # Differentiable Mixing Console
 
-In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) {cite}`steinmetz2020learning,steinmetz2021automatic` is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.
+In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings {cite}`steinmetz2021automatic`. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.
+
 
 ```{figure} /assets/figures/dmc.svg
 :name: dmc
-:alt: Differenetiable mixing console
 :align: center
 
-Block digram for the complete differentiable mixing console along with the three subsystems: encoder, post-processor, and transformation network.
+Complete Differentiable Mixing Console with subsystems
 ```
 
 The differentiable mixing console (DMC) is comprised of three main subsystems, each implemented as a separate neural network module. To construct the complete system, the same instance of these modules are applied to each input recording, enabling weight sharing, which treats the input recordings as an unordered set. The encoder is tasked with extracting relevant features from each input recording. These embeddings are then combined to create a context embedding that captures information across all input recordings in a single embedding. Each input embedding is combined with the context embedding and passed to the post-processor that maps these inputs to the control parameter space of the mixing console for the respective channel of the mixing console. Finally, a transformation network takes the audio signal from the respective input recording along with the predicted parameters to process the manipulated recording. The final stereo mixture is then created by the summation of all of the manipulated recordings. 
@@ -26,17 +26,31 @@ Once the input embeddings and context embedding have been generated, it is the t
 
 ## Transformation network
 
-{cite}`steinmetz2022efficient`
+One key contribution of this work was the introduction of the concept of *proxy networks*. Since our goal is to train an automatic mixing system in an end-to-end fashion using a loss computed in the audio domain (as opposed to the parameter space), this requires a method for computing gradients through each operation of the mixing console. In practice this entails computing gradients for potentially complex signal processing devices such as dynamic range compressors and artificial reverberators, which either might not be differentiable, have intractable gradients, or be black-box in nature. The proxy network approach provides an alternative by first training a neural network to emulate the behavior of the mixing console, which can then be used as a proxy during optimization.
 
-One key contribution of this work was the introduction of the concept of *proxy networks*. Since our goal is to train an automatic mixing system in an end-to-end fashion using a loss computed in the audio domain (as opposed to the parameter space), this requires a method for computing gradients through each operation of the mixing console. In practice this entails computing gradients for potentially complex signal processing devices such as dynamic range compressors and artificial reverberators, which either might not be differentiable, have intractable gradients, or be black-box in nature. The proxy network approach
+```{figure} /assets/figures/channel-strip.svg
+:name: channel-strip
+:align: center
 
+Audio effects and their control parameters in the proposed transformation network.
+```
+
+In the original work, the authors construct two variants of what they call the transformation network, which is tasked with emulating the set of effects in each channel of the mixing console.
+In the first case, they use a simple transformation network that consists of only gain and panning, which can be implemented as differentiable components.
+In the second formulation they leverage a pretrained neural network that was trained to emulate the behavior of a chain of audio effects (equalisation, compression, and reverberation), as a function of their control parameters. This formulation is shown in {numref}`channel-strip`. 
 
 ```{figure} /assets/figures/proxy-network.svg
 :name: proxy-network
-:alt: Proxy Network
 :align: center
 
-Structure of the conditional temporal convolutional network used in the proxy network approach.
+Proxy network architecture implemented as a temporal convolution network (TCN)
 ```
 
-In the original work, the authors construct two variants of the transformation network. In the first case, they use a complete transformation network that consists both of explicitly differentiable components such as gain and panning, along with a pretrained neural network that was previously trained to emulate the behavior of a chain of audio effects (equalisation, compression, and reverberation), as a function of their control parameters.
+To construct the proxy networks they leverage recent work in neural audio effects {cite}`damskagg2019real`. 
+The basic architecture is shown in {numref}`proxy-network`.
+At the high level (left) the network is composed of a number of temporal convolutional network (TCN) {cite}`bai2018empirical` blocks along with a conditioning network implemented with an MLP. 
+Each TCN block consists of a 1-d convolution, batch normalization, and a nonlinear activation function. 
+In order to adapt the behavior of the network as a function of the control parameters feature-wise linear modulation {cite}`perez2018film` is used. 
+This technique enables adaptation by dynamically shifting and scaling the intermediate activations of the network as a function of the control parameters $\mathbf{p}$.
+This modulation technique is shown in {numref}`proxy-network` (right), where the latent embedding $\mathbf{z}$ produced by the MLP is projected to a set of scaling $\bm{\gamma}_n$ and shifting $\bm{\beta}_n$ parameters. These parameters operate on the output of the batch normalized signal to produce a modulated signal before passing through the nonlinearaity, which is implemented with a Parametric ReLU {cite}`he2015delving`.
+

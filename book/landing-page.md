@@ -16,12 +16,11 @@ In addition, our tutorial may be of interest to researchers outside of MIR, but 
   
 ## Motivation
 
-Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content {cite:p}`tenyearsautomix`. 
-This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation{cite}`wilmering2020history`.    
-Due to this complexity, the field of intelligent music production (IMP) {cite}`IMPbook19` has focused on the design of systems that automate tasks in audio engineering.
+Music mixing is a crucial task within audio post-production where expert knowledge is required to deliver professional music content {cite:p}`deman2017ten`. 
+This task encompasses both technical and creative considerations in the process of combining individual sources into a mixture, often involving the use of audio processors such as equalization, dynamic range compression, panning, and reverberation{cite}`wilmering2020history`. Due to this complexity, the field of intelligent music production (IMP) {cite}`IMPbook19` has focused on the design of systems that automate tasks in audio engineering.
 These systems aim to lower the difficulty in creating productions by novice users, as well as expedite or extend the workflow for professionals {cite}`moffat19approaches`.
 
-In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer{cite}`tenyearsautomix`.
+In recent years, researchers have investigated automatic mixing, the task of constructing a system to automatically create a cohesive mixture from a set of recordings as would a human audio engineer{cite}`deman2017ten`.
 Existing approaches include adaptive signal processing{cite}`perez2009automatic`, rule-based {cite}`de2013knowledge`, machine learning{cite}`moffat2019machine`, and most recently deep learning{cite}`martinez2021deep, steinmetz2021automatic` approaches.
 While deep learning approaches that leverage large-scale datasets have the potential to outperform traditional approaches, their performance is still far from professional audio engineers motivating further investigation in the design and evaluation of these systems. 
 
@@ -62,10 +61,6 @@ Our hope is to raise awareness of MIR from the perspective of audio engineering 
 [**Gary Bromham**](https://c4dm.eecs.qmul.ac.uk/) is a part-time PhD researcher at Queen Mary University of London, researching the role that traditional studio paradigms and retro aesthetics play in intelligent music production systems (2016 -). He has several publications in this field and has contributed a chapter to the recent Routledge publication, ‘Perspectives on Music Production: Mixing Music’ (2017). He was also a research assistant on the EPSRC funded project called FAST (Fusing Audio and Semantic Technologies) where he is employed as an industry advisor (2017 - 2020). In addition to his research interests, Gary is a practising music producer, songwriter and audio engineer, with over 30 years’ experience (1989 - 2020). He has worked with artists as diverse as Bjork, Wham, Blur and U2, during a period that has witnessed several technological changes. Gary is well versed in most popular music making software and has extensive knowledge of using analog hardware, acting as a product designer and specialist for the renowned mixing desk company, Solid State Logic. He is also a frequent guest lecturer and external advisor at several universities in the UK, Norway and Sweden; speaking on songwriting, music production aesthetics and audio engineering and bringing some of his extensive knowledge and experience to both Undergraduate and Master’s degree level programs.
 
 
-## Software
-
-
-
 ## Citing this book
 
 If you use this book or any of accompanying code in your work please consider citing this book.
@@ -80,7 +75,3 @@ If you use this book or any of accompanying code in your work please consider ci
     Url = {https://dl4am.github.io/tutorial},
 }
 ```
-
-## Note
-
-You can download a pdf of this book from [arXiv](). If the pdf is not up-to-date, you can [build it by yourself](https://github.com/dl4am/tutorial/scripts/build-book.sh) on your local machine.  
