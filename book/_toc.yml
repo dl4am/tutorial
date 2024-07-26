@@ -23,6 +23,7 @@ parts:
       sections:
       - file: part_2/methods/01_mixwaveunet
       - file: part_2/methods/02_dmc
+      - file: part_2/methods/03_diffmst
     - file: part_2/05_loss-functions
 
   - caption: Implementation # part 3
