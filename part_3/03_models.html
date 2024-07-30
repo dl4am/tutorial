@@ -1,112 +1,178 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Models &#8212; Deep Learning for Automatic Mixing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'part_3/03_models';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Training" href="04_training.html" />
     <link rel="prev" title="Datasets for automix systems" href="02_datasets.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../landing-page.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Deep Learning for Automatic Mixing - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Deep Learning for Automatic Mixing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,612 +181,328 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Audio Engineering
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Audio Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_1/01_music-production.html">
-   Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_1/02_audio-effects.html">
-   Audio effects
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/01_panning.html">
-     Panning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/02_equalization.html">
-     Equalization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/03_compression.html">
-     Compression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">
-     Reverberation
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_1/01_music-production.html">Music Production</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../part_1/02_audio-effects.html">Audio effects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/01_panning.html">Panning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/02_equalization.html">Equalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/03_compression.html">Compression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">Reverberation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Automatic Mixing
- </span>
-</p>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automatic Mixing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/01_imp.html">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/02_problem.html">
-   Problem Formulation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/03_diffsp.html">
-   Differentiable signal processing
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/04_methods.html">
-   Methods
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">
-     Mix-Wave-U-Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/02_dmc.html">
-     Differentiable Mixing Console
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/05_loss-functions.html">
-   Loss Functions
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/01_imp.html">Intelligent Music Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/02_problem.html">Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/03_diffsp.html">Differentiable signal processing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Implementation
- </span>
-</p>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/05_loss-functions.html">Loss Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Implementation</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_inference.html">
-   Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_datasets.html">
-   Datasets for automix systems
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="04_training.html">
-   Training
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_inference.html">Inference</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="02_datasets.html">Datasets for automix systems</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Models</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="04_training.html">Training</a></li>
+
+
+
+
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Evaluation
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/01_evaluation.html">
-   Evaluation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening Tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/03_evaluate.html">
-   Evaluation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/01_evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/02_listening-tests.html">Listening Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/03_evaluate.html">Evaluation</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Conclusion
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Conclusion</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_5/01_future-directions.html">
-   Future Directions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_5/02_conclusion.html">
-   Conclusions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_5/03_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_5/01_future-directions.html">Future Directions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_5/02_conclusion.html">Conclusions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_5/03_references.html">References</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/dl4am/tutorial/main?urlpath=tree/book/part_3/03_models.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://colab.research.google.com/github/dl4am/tutorial/blob/main/book/part_3/03_models.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Colab"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_colab.png">
-  </span>
-<span class="headerbtn__text-container">Colab</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/dl4am/tutorial/blob/main/book/part_3/03_models.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_3/03_models.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/part_3/03_models.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/dl4am/tutorial"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_3/03_models.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/part_3/03_models.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Models
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixwaveunet">
-   MixWaveUNet
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#downsampling-block">
-     Downsampling Block
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#upsampling-block">
-     Upsampling Block
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encoder">
-     Encoder
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#embedding-latent">
-     Embedding/Latent
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decoder">
-     Decoder
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#output">
-     Output
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#forward">
-     Forward
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#differentiable-mixing-console-dmc">
-   Differentiable Mixing Console (DMC)
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Encoder
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#post-processor">
-     Post-Processor
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mixer">
-     Mixer
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generating-embeddings">
-       Generating embeddings
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#context-embedding">
-       “Context” embedding
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#estimate-mixing-parameters">
-       Estimate mixing parameters
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generate-the-mix">
-       Generate the mix
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Models</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   Models
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#mixwaveunet">
-   MixWaveUNet
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#downsampling-block">
-     Downsampling Block
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#upsampling-block">
-     Upsampling Block
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#encoder">
-     Encoder
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#embedding-latent">
-     Embedding/Latent
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#decoder">
-     Decoder
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#output">
-     Output
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#forward">
-     Forward
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#differentiable-mixing-console-dmc">
-   Differentiable Mixing Console (DMC)
-  </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Encoder
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#post-processor">
-     Post-Processor
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#mixer">
-     Mixer
-    </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generating-embeddings">
-       Generating embeddings
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#context-embedding">
-       “Context” embedding
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#estimate-mixing-parameters">
-       Estimate mixing parameters
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#generate-the-mix">
-       Generate the mix
-      </a>
-     </li>
-    </ul>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Models</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mixwaveunet">MixWaveUNet</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downsampling-block">Downsampling Block</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upsampling-block">Upsampling Block</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-latent">Embedding/Latent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward">Forward</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiable-mixing-console-dmc">Differentiable Mixing Console (DMC)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processor">Post-Processor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixer">Mixer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-embeddings">Generating embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context-embedding">“Context” embedding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-mixing-parameters">Estimate mixing parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-mix">Generate the mix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="models">
-<h1>Models<a class="headerlink" href="#models" title="Permalink to this headline">#</a></h1>
+<h1>Models<a class="headerlink" href="#models" title="Link to this heading">#</a></h1>
 <p>In this notebook we will dig into how the two automatic mixing models we discussed can be implemented in PyTorch.
 As usual, we will assume you have already installed the <code class="docutils literal notranslate"><span class="pre">automix</span></code> package from automix-toolkit.
 If not you can do it with the following command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip install git+https://github.com/csteinmetz1/automix-toolkit
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/csteinmetz1/automix-toolkit
 </pre></div>
 </div>
 </div>
@@ -805,7 +587,7 @@ Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /usr/local/lib/python
 </div>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="mixwaveunet">
-<h1>MixWaveUNet<a class="headerlink" href="#mixwaveunet" title="Permalink to this headline">#</a></h1>
+<h1>MixWaveUNet<a class="headerlink" href="#mixwaveunet" title="Link to this heading">#</a></h1>
 <p>First, we will take a look at the <a class="reference external" href="https://www.aes.org/e-lib/browse.cfm?elib=21023">Mix-Wave-U-Net</a>. Recall that this model is based on <a class="reference external" href="https://arxiv.org/abs/1806.03185">Wave-U-Net</a> a time domain audio source separation model that is itself based on the famous <a class="reference external" href="https://lmb.informatik.uni-freiburg.de/people/ronneber/u-net/">U-Net</a> architecture.</p>
 <p>The overall architecture for the network is comprised of two types of blocks: the Downsampling blocks (shown on the left) and the Upsampling blocks (shown on the right). In the network we apply a certain number of these blocks, downsampling and then upsampling the signal at different temporal resolutions. Unique to U-Net like architectuers is the characteratistic skip connections that carry information from the each level in the downsampling branch to the respective branch in the upsampling brach.</p>
 <img width = "70%" src="https://csteinmetz1.github.io/automix-toolkit/docs/assets/mix-wave-u-net.svg"/><p>We can start by importing the <code class="docutils literal notranslate"><span class="pre">MixWaveUNet</span></code> class</p>
@@ -882,7 +664,7 @@ Below we will create a version of the model that accepts 8 input channels and pr
 </div>
 <p>Now that we understand the basic operation of the Mix-Wave-U-Net at a high level, let’s investigate the inner workings of the model. To do so, we will define and connect the inner components of the original <code class="docutils literal notranslate"><span class="pre">MixWaveUNet</span></code> class.</p>
 <section id="downsampling-block">
-<h2>Downsampling Block<a class="headerlink" href="#downsampling-block" title="Permalink to this headline">#</a></h2>
+<h2>Downsampling Block<a class="headerlink" href="#downsampling-block" title="Link to this heading">#</a></h2>
 <p>Let’s start with the <code class="docutils literal notranslate"><span class="pre">DownsamplingBlock</span></code>. Here we have reproduced the implementation from the <code class="docutils literal notranslate"><span class="pre">automix</span></code> package.
 It is composed of a few basic submodules. It starts with a <code class="docutils literal notranslate"><span class="pre">Conv1d</span></code>, <code class="docutils literal notranslate"><span class="pre">BatchNorm1d</span></code>, then <code class="docutils literal notranslate"><span class="pre">PReLU</span></code> activation, and a final <code class="docutils literal notranslate"><span class="pre">Conv1d</span></code> that has <code class="docutils literal notranslate"><span class="pre">stride=2</span></code>. While the original Wave-U-Net used decimation to downsample we can also use a strided convolution to achieve a similar downsampling operation.</p>
 <div class="cell docutils container">
@@ -933,7 +715,7 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 <p>This is so we can save the itermediate tensors before downsampling so they can be used in the upsampling process when we employ the skip connections.</p>
 </section>
 <section id="upsampling-block">
-<h2>Upsampling Block<a class="headerlink" href="#upsampling-block" title="Permalink to this headline">#</a></h2>
+<h2>Upsampling Block<a class="headerlink" href="#upsampling-block" title="Link to this heading">#</a></h2>
 <p>As we see below, the <code class="docutils literal notranslate"><span class="pre">UpsamplingBlock</span></code> follows a very similar pattern to the <code class="docutils literal notranslate"><span class="pre">DownsamplingBlock</span></code> with the exceptation that is upsamples the signals (of course) but also that we have to handle aggregating information from the skip connections. As before we have a similar series connection of convolution, batch normalization, activations, and in this case a linear upsampling block.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -990,7 +772,7 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 <p>We can then see that we first upsample the input tensor <code class="docutils literal notranslate"><span class="pre">x</span></code> and then combine it with the <code class="docutils literal notranslate"><span class="pre">skip</span></code> connection. In our implementation we include a few different options. In the case of <code class="docutils literal notranslate"><span class="pre">&quot;add&quot;</span></code> we will simply sum the two tensors which is a pointwise sum between the signals in each channel. This is not as expressive but saves memory and lower the parameter count. In the <code class="docutils literal notranslate"><span class="pre">&quot;concat&quot;</span></code> case we will concatenate the two tensors along the channel dimension which will result in a new tensor that has twice the number of channels. However, this provides more flexibility since the convolutional layer that follows can decide how to mix these signals together. Finally, there is also the option to forgo the skip connections.</p>
 </section>
 <section id="encoder">
-<h2>Encoder<a class="headerlink" href="#encoder" title="Permalink to this headline">#</a></h2>
+<h2>Encoder<a class="headerlink" href="#encoder" title="Link to this heading">#</a></h2>
 <p>Now let’s use these building blocks to construct the Mix-Wave-U-Net.  We will start with the Encoder, which is composed of series connection of <code class="docutils literal notranslate"><span class="pre">DownsamplingBlocks</span></code>. We will use a <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to construct each layer and then store them in a <code class="docutils literal notranslate"><span class="pre">ModuleList</span></code>. At the first layer, we will ensure the convolution accepts that same number of channels as there are input recordings (<code class="docutils literal notranslate"><span class="pre">ninputs</span></code>). For the other blocks, we will increase the number of channels by <code class="docutils literal notranslate"><span class="pre">ch_growth</span></code> each iteration (<code class="docutils literal notranslate"><span class="pre">ch_growth</span> <span class="pre">=</span> <span class="pre">24</span></code>).</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1111,7 +893,7 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 </div>
 </section>
 <section id="embedding-latent">
-<h2>Embedding/Latent<a class="headerlink" href="#embedding-latent" title="Permalink to this headline">#</a></h2>
+<h2>Embedding/Latent<a class="headerlink" href="#embedding-latent" title="Link to this heading">#</a></h2>
 <p>In the middle of the network we will include a single convolutional layer to produce the latent embedding.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1128,7 +910,7 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 </div>
 </section>
 <section id="decoder">
-<h2>Decoder<a class="headerlink" href="#decoder" title="Permalink to this headline">#</a></h2>
+<h2>Decoder<a class="headerlink" href="#decoder" title="Link to this heading">#</a></h2>
 <p>In a similar manner to the encoder, we will construct the decoder by storing <code class="docutils literal notranslate"><span class="pre">UpsamplingBlocks</span></code> in a <code class="docutils literal notranslate"><span class="pre">ModuleList</span></code>. However, in this case we will count backwards (<code class="docutils literal notranslate"><span class="pre">step=-1</span></code>) as we create the layers, starting with the number of channels in the final layer of the encoder, decrementing this value by <code class="docutils literal notranslate"><span class="pre">ch_growth</span></code> at each iteration. Note also that when we use <code class="docutils literal notranslate"><span class="pre">&quot;concat&quot;</span></code> skip connections we will double the number of channels in each block to accomidate the additional channels from the skip connections.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1237,7 +1019,7 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 </div>
 </section>
 <section id="output">
-<h2>Output<a class="headerlink" href="#output" title="Permalink to this headline">#</a></h2>
+<h2>Output<a class="headerlink" href="#output" title="Link to this heading">#</a></h2>
 <p>Finally we have the output convolution which will collect the output channels from the final layer of the decoder and map them to the stereo mixture (<code class="docutils literal notranslate"><span class="pre">noutputs=2</span></code>)</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1253,7 +1035,7 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 </div>
 </section>
 <section id="forward">
-<h2>Forward<a class="headerlink" href="#forward" title="Permalink to this headline">#</a></h2>
+<h2>Forward<a class="headerlink" href="#forward" title="Link to this heading">#</a></h2>
 <p>The forward pass of the modell involves simply iterating over the blocks in the encoder and storing the outputs as well as the skip connections. We will just use a list to store these tensors. Then we pass the final output from the encoder to the <code class="docutils literal notranslate"><span class="pre">embedding()</span></code> layer and use another <code class="docutils literal notranslate"><span class="pre">for</span></code> loop to iterate over the blocks in the decoder. This time we process the signals each time passing the respective skip connection. We use <code class="docutils literal notranslate"><span class="pre">skips.pop()</span></code> to return the last skip connection from the encoder (LIFO). Finally we implement the last skip connection which uses the original input recordings <code class="docutils literal notranslate"><span class="pre">x_in</span></code>. Again, recall that we return a <code class="docutils literal notranslate"><span class="pre">torch.zeros(1)</span></code> as dummy tensor since this model does not give us interpretable parameters</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1302,8 +1084,8 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 </section>
 </section>
 <section class="tex2jax_ignore mathjax_ignore" id="differentiable-mixing-console-dmc">
-<h1>Differentiable Mixing Console (DMC)<a class="headerlink" href="#differentiable-mixing-console-dmc" title="Permalink to this headline">#</a></h1>
-<p>Now that we have seen how the Mix-Wave-U-Net, a direct transformation approach, can be implemented, we will shift our focus to the <span class="xref myst">Differentiable Mixing Console</span>, which is a parameter estimation approach.</p>
+<h1>Differentiable Mixing Console (DMC)<a class="headerlink" href="#differentiable-mixing-console-dmc" title="Link to this heading">#</a></h1>
+<p>Now that we have seen how the Mix-Wave-U-Net, a direct transformation approach, can be implemented, we will shift our focus to the <a class="reference internal" href="#"><span class="xref myst">Differentiable Mixing Console</span></a>, which is a parameter estimation approach.</p>
 <img width = "100%" src="https://csteinmetz1.github.io/automix-toolkit/docs/assets/dmc.svg"/><p>Similar to our explanation before we will first inspect the model from a high level and then go through the basic compotnents of the model so we can get an understanding of their operation.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1324,8 +1106,8 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="s2">&quot;checkpoints&quot;</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1"># download the pretrained models for the encoder</span>
-<span class="o">!</span>wget https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/encoder.ckpt
-<span class="o">!</span>mv encoder.ckpt checkpoints/encoder.ckpt
+<span class="o">!</span>wget<span class="w"> </span>https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/encoder.ckpt
+<span class="o">!</span>mv<span class="w"> </span>encoder.ckpt<span class="w"> </span>checkpoints/encoder.ckpt
 <span class="n">encoder_ckpt_path</span> <span class="o">=</span> <span class="s2">&quot;checkpoints/encoder.ckpt&quot;</span>
 </pre></div>
 </div>
@@ -1351,9 +1133,9 @@ encoder.ckpt        100%[===================&gt;]  46.37M  29.7MB/s    in 1.6s
 </div>
 </div>
 <section id="id1">
-<h2>Encoder<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<h2>Encoder<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>The role of the encoder is extract information from each input recording that will be used in order to create a mix. This implicitly involves determining the identity of the source (e.g. drums, guitar, vocal, etc.) as well as other factors such as the level. We adopt a very standard 2d convolutional network that operates on log melspectrograms. In the original paper that authors used the <a class="reference external" href="https://github.com/harritaylor/torchvggish">VGGish</a> architecture pretrained on <a class="reference external" href="https://research.google.com/audioset/">AudioSet</a>.</p>
-<p>To faciliate faster training and simpler code we opt to the <a class="reference external" href="https://github.com/minzwon/sota-music-tagging-models">Short Chunk CNN</a> (with residual connections) which is very similar but faciliates easy computation of melspectrograms with <a class="reference external" href="https://pytorch.org/audio/stable/index.html">torchaudio</a>. In addition, we use a pretrained checkpoint after training the model on a music tagging task, which should aid in learning. We will not go into detail of how the encoder itself is implemented but you can see the details <span class="xref myst">here</span>.</p>
+<p>To faciliate faster training and simpler code we opt to the <a class="reference external" href="https://github.com/minzwon/sota-music-tagging-models">Short Chunk CNN</a> (with residual connections) which is very similar but faciliates easy computation of melspectrograms with <a class="reference external" href="https://pytorch.org/audio/stable/index.html">torchaudio</a>. In addition, we use a pretrained checkpoint after training the model on a music tagging task, which should aid in learning. We will not go into detail of how the encoder itself is implemented but you can see the details <a class="reference internal" href="#automix/models/dmc.py"><span class="xref myst">here</span></a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sample_rate</span> <span class="o">=</span> <span class="mi">44100</span>
@@ -1447,7 +1229,7 @@ ShortChunkCNN_Res(
 </div>
 </section>
 <section id="post-processor">
-<h2>Post-Processor<a class="headerlink" href="#post-processor" title="Permalink to this headline">#</a></h2>
+<h2>Post-Processor<a class="headerlink" href="#post-processor" title="Link to this heading">#</a></h2>
 <p>The role of the Post-Processor is to take the track embedding and context embedding (for each track and context pair) and compute a set of control parameters for the current track. We can implement this as a simple multi-layer perceptron (MLP) with three layers. This network will use a sigmoid activation function to map all outputs between 0 and 1. This is the format our <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> expects. Inside the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> these parameters will be denormalized to the correct ranges. In the original paper the authors use a tanh activation so that parameters are scaled between -1 and 1, but this is just a design choice.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1492,7 +1274,7 @@ ShortChunkCNN_Res(
 </div>
 </section>
 <section id="mixer">
-<h2>Mixer<a class="headerlink" href="#mixer" title="Permalink to this headline">#</a></h2>
+<h2>Mixer<a class="headerlink" href="#mixer" title="Link to this heading">#</a></h2>
 <p>The role of the mixer is to process the individual channels in a mix given the control parameters and produce a stereo mix. In the original paper the mixer included the Transformation Network. This network was first pretrained to emulate common audio effects like an equalizer, compressor, and reveberation model. In our setup we will consider the simple case for the Transformation Network which uses only gain (level) and panning parameters. Since these operations are differentiable we do not need to worry about the proxy method or any other differentiable signal processing techniques.</p>
 <p>As you can see below we will implement the differentiable mixer by simply applying the gain and panning operations, which enables the use of autodiff for the gradient computation during training. This is both fast and memory efficient. An extension of our implemntation could add in more effects like equalization or compression.</p>
 <div class="cell docutils container">
@@ -1512,7 +1294,7 @@ ShortChunkCNN_Res(
         <span class="bp">self</span><span class="o">.</span><span class="n">max_gain_dB</span> <span class="o">=</span> <span class="n">max_gain_dB</span>
 
     <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">torch</span><span class="o">.</span><span class="n">Tensor</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Generate a mix of stems given mixing parameters normalized to (0,1).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a mix of stems given mixing parameters normalized to (0,1).</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            x (torch.Tensor): Batch of waveform stem tensors with shape (bs, num_tracks, seq_len).</span>
@@ -1581,7 +1363,7 @@ ShortChunkCNN_Res(
 </div>
 </div>
 <section id="generating-embeddings">
-<h3>Generating embeddings<a class="headerlink" href="#generating-embeddings" title="Permalink to this headline">#</a></h3>
+<h3>Generating embeddings<a class="headerlink" href="#generating-embeddings" title="Link to this heading">#</a></h3>
 <p>As first the step we will need to generate embeddings with our encoder for each of the input recordings in each batch item.
 Since each batch item will contain multiple tracks (in this case 4) one option would be to loop over each track and pass them to the encoder one-by-one. However, this will create an unnecessary bottleneck. Instead, we use a small trick to compute all of the embeddings in the batch at once.</p>
 <p>We do this simply by moving all of the input recordings into the batch dimension. This will give us an effective batch size of <code class="docutils literal notranslate"><span class="pre">eff_bs</span> <span class="pre">=</span> <span class="pre">bs</span> <span class="pre">*</span> <span class="pre">num_tracks</span></code>. After moving all the recordings to the batch dimension, we can then pass them to the encoder, which expects a tensor of shape <code class="docutils literal notranslate"><span class="pre">(bs,</span> <span class="pre">seq_len)</span></code>. After generating these embeddings <code class="docutils literal notranslate"><span class="pre">e</span></code> it is simply a matter of reshaping the tensor so we can restore each embedding from the respective mix to the original dimension, which gives us a tensor of shape <code class="docutils literal notranslate"><span class="pre">(bs,</span> <span class="pre">num_tracks,</span> <span class="pre">d_embed)</span></code>.</p>
@@ -1607,7 +1389,7 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
 </div>
 </section>
 <section id="context-embedding">
-<h3>“Context” embedding<a class="headerlink" href="#context-embedding" title="Permalink to this headline">#</a></h3>
+<h3>“Context” embedding<a class="headerlink" href="#context-embedding" title="Link to this heading">#</a></h3>
 <img width= "40%" src="https://csteinmetz1.github.io/automix-toolkit/docs/assets/dmc-context.svg"/>
 <p>Key to the DMC is the concept of the “context” emebdding which enables effective cross-channel communication between the recordings within a mixture when the post-processor will make a decision about the parameters for each channel. We compute the context embedding by simply taking the mean of all the track embeddings for each batch item. We can see this in the figure about represented as <span class="math notranslate nohighlight">\(z_\mu\)</span>. After taking this mean we then copy (using <code class="docutils literal notranslate"><span class="pre">torch.repeat</span></code>) the mean embedding once for each track. This way we can then concatenate these copied embeddings with each of the track embeddings.</p>
 <p>However, recall that during training we use a fixed number of tracks and therefore some songs may have less than <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code> <em>active</em> tracks where the other tracks are simply silence. These empty tracks will corrupt our context embedding. One way to handle this is to use the <code class="docutils literal notranslate"><span class="pre">track_mask</span></code> which is also provided by the dataset. This will be a tensor of boolean values telling us which tracks are not active, and show be masked. For example, consider the case where we have four total tracks but only the first three are active in the first batch item and all are active in the second. We would use the following <code class="docutils literal notranslate"><span class="pre">track_mask</span></code>.</p>
@@ -1666,7 +1448,7 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
 </div>
 </section>
 <section id="estimate-mixing-parameters">
-<h3>Estimate mixing parameters<a class="headerlink" href="#estimate-mixing-parameters" title="Permalink to this headline">#</a></h3>
+<h3>Estimate mixing parameters<a class="headerlink" href="#estimate-mixing-parameters" title="Link to this heading">#</a></h3>
 <p>Now that we have the embeddings for ecah track we will use the Post-processor to estimate the mixing parameters (gain and panning) for each track. This will require running each of the <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code> embeddings through the Post-Processor. However, the MLP class in PyTorch enables us to compute these in parallel automatically. So by passing our final embedding tensor of shape <code class="docutils literal notranslate"><span class="pre">(bs,</span> <span class="pre">num_tracks,</span> <span class="pre">d_embed*2)</span></code> into the Post-Processor we can generate all the mixing parameters. As we see below, we will get a parameter tensor containing 2 parameters (gain and pan) for each of the <code class="docutils literal notranslate"><span class="pre">num_tracks</span></code>. Almost there, now the final step is to use these parameters and the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> to create the mix.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1684,7 +1466,7 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
 </div>
 </section>
 <section id="generate-the-mix">
-<h3>Generate the mix<a class="headerlink" href="#generate-the-mix" title="Permalink to this headline">#</a></h3>
+<h3>Generate the mix<a class="headerlink" href="#generate-the-mix" title="Link to this heading">#</a></h3>
 <p>We already discussed how the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> is implemented. Here we will call the mixer passing in the tracks as well as the parameters we just predicted. Inside the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code> these parameters will be denormalized from 0 to 1 to their full range.</p>
 <p>We can see that we get two return values from calling the <code class="docutils literal notranslate"><span class="pre">Mixer</span></code>. The first is the stereo mix, which is the same length as the inputs but has only two channels. We also get a new tensor for the parameters, which is the same shape. This tensor contains the parameter values, but in their denormalized state. This will enable us to inspect what parameters were estimated by the model in the human interpretable form.</p>
 <div class="cell docutils container">
@@ -1736,7 +1518,7 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./part_3"
         },
         predefinedOutput: true
@@ -1744,50 +1526,126 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_datasets.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Datasets for automix systems</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_datasets.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Datasets for automix systems</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="04_training.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="04_training.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Training</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Models</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#mixwaveunet">MixWaveUNet</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#downsampling-block">Downsampling Block</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#upsampling-block">Upsampling Block</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#embedding-latent">Embedding/Latent</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoder">Decoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#output">Output</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#forward">Forward</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#differentiable-mixing-console-dmc">Differentiable Mixing Console (DMC)</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processor">Post-Processor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mixer">Mixer</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generating-embeddings">Generating embeddings</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context-embedding">“Context” embedding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#estimate-mixing-parameters">Estimate mixing parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#generate-the-mix">Generate the mix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

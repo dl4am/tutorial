@@ -1,109 +1,175 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>References &#8212; Deep Learning for Automatic Mixing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'part_5/03_references';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="Conclusions" href="02_conclusion.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../landing-page.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Deep Learning for Automatic Mixing - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Deep Learning for Automatic Mixing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -112,701 +178,725 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Audio Engineering
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Audio Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_1/01_music-production.html">
-   Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_1/02_audio-effects.html">
-   Audio effects
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/01_panning.html">
-     Panning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/02_equalization.html">
-     Equalization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/03_compression.html">
-     Compression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">
-     Reverberation
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_1/01_music-production.html">Music Production</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../part_1/02_audio-effects.html">Audio effects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/01_panning.html">Panning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/02_equalization.html">Equalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/03_compression.html">Compression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">Reverberation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Automatic Mixing
- </span>
-</p>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automatic Mixing</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/01_imp.html">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/02_problem.html">
-   Problem Formulation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/03_diffsp.html">
-   Differentiable signal processing
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_2/04_methods.html">
-   Methods
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">
-     Mix-Wave-U-Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_2/methods/02_dmc.html">
-     Differentiable Mixing Console
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_2/05_loss-functions.html">
-   Loss Functions
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/01_imp.html">Intelligent Music Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/02_problem.html">Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/03_diffsp.html">Differentiable signal processing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Implementation
- </span>
-</p>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_2/05_loss-functions.html">Loss Functions</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Implementation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/01_inference.html">
-   Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/02_datasets.html">
-   Datasets for automix systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/03_models.html">
-   Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/04_training.html">
-   Training
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_3/01_inference.html">Inference</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/02_datasets.html">Datasets for automix systems</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/03_models.html">Models</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/04_training.html">Training</a></li>
+
+
+
+
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Evaluation
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/01_evaluation.html">
-   Evaluation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening Tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/03_evaluate.html">
-   Evaluation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/01_evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/02_listening-tests.html">Listening Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/03_evaluate.html">Evaluation</a></li>
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Conclusion
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Conclusion</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="01_future-directions.html">
-   Future Directions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_conclusion.html">
-   Conclusions
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="01_future-directions.html">Future Directions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_conclusion.html">Conclusions</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">References</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_5/03_references.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/part_5/03_references.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/dl4am/tutorial"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_5/03_references.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/part_5/03_references.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
+</div></div>
       
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
+    </div>
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
-</button>
-
-      </li>
-      
-    </ul>
-  </div>
 </div>
+</div>
+              
+              
 
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>References</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+        </div>
     </div>
 </div>
 
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-</div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>References</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                    </div>
-                </div>
-            </div>
-            <main id="main-content" role="main">
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="references">
-<h1>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h1>
+<h1>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h1>
 <div class="docutils container" id="id1">
-<dl class="citation">
-<dt class="label" id="id70"><span class="brackets">A+15</span></dt>
-<dd><p><strong>missing journal in tensorflow2015whitepaper</strong></p>
-</dd>
-<dt class="label" id="id122"><span class="brackets">BKK18</span></dt>
-<dd><p>Shaojie Bai, J Zico Kolter, and Vladlen Koltun. An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. <em>arXiv preprint arXiv:1803.01271</em>, 2018.</p>
-</dd>
-<dt class="label" id="id111"><span class="brackets">BZSH21a</span></dt>
-<dd><p>Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. <em>Journal of Open Research Software</em>, 2021. URL: <a class="reference external" href="http://doi.org/10.5334/jors.361">http://doi.org/10.5334/jors.361</a>.</p>
-</dd>
-<dt class="label" id="id133"><span class="brackets">BZSH21b</span></dt>
-<dd><p>Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. <em>Journal of Open Research Software</em>, 2021.</p>
-</dd>
-<dt class="label" id="id22"><span class="brackets">BR17</span></dt>
-<dd><p>Adán L Benito and Joshua D Reiss. Intelligent multitrack reverberation based on hinge-loss markov random fields. In <em>Audio Engineering Society Conference: 2017 AES International Conference on Semantic Audio</em>. Audio Engineering Society, 2017.</p>
-</dd>
-<dt class="label" id="id125"><span class="brackets">Bil09</span></dt>
-<dd><p>Stefan Bilbao. <em>Numerical sound synthesis: finite difference schemes and simulation in musical acoustics</em>. John Wiley and Sons, 2009.</p>
-</dd>
-<dt class="label" id="id71"><span class="brackets">BFH+18</span></dt>
-<dd><p><strong>missing journal in jax2018github</strong></p>
-</dd>
-<dt class="label" id="id48"><span class="brackets">BHP17</span></dt>
-<dd><p>Jean-Pierre Briot, Gaëtan Hadjeres, and François-David Pachet. Deep learning techniques for music generation–a survey. <em>arXiv:1709.01620</em>, 2017.</p>
-</dd>
-<dt class="label" id="id110"><span class="brackets">BMBF18</span></dt>
-<dd><p>Gary Bromham, Dave Moffat, Mathieu Barthet, and György Fazekas. The impact of compressor ballistics on the perceived style of music. In <em>Audio Engineering Society Convention 145</em>. Audio Engineering Society, 2018.</p>
-</dd>
-<dt class="label" id="id128"><span class="brackets">BMR+20</span></dt>
-<dd><p>Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, and others. Language models are few-shot learners. <em>Advances in neural information processing systems</em>, 33:1877–1901, 2020.</p>
-</dd>
-<dt class="label" id="id56"><span class="brackets">BKBF+21</span></dt>
-<dd><p>Nick Bryan-Kinns, Berker Banar, Corey Ford, C Reed, Yixiao Zhang, Simon Colton, Jack Armitage, and others. Exploring xai for the arts: explaining latent space in generative music. In <em>1st Workshop on eXplainable AI approaches for debugging and diagnosis (XAI4Debugging&#64;NeurIPS2021)</em>. 2021.</p>
-</dd>
-<dt class="label" id="id80"><span class="brackets">CBS22</span></dt>
-<dd><p>Jonah Casebeer, Nicholas J Bryan, and Paris Smaragdis. Meta-af: meta-learning for adaptive filters. <em>arXiv preprint arXiv:2204.11942</em>, 2022.</p>
-</dd>
-<dt class="label" id="id118"><span class="brackets">Che84</span></dt>
-<dd><p>Chi-Tsong Chen. <em>Linear system theory and design</em>. Saunders college publishing, 1984.</p>
-</dd>
-<dt class="label" id="id104"><span class="brackets">CKNH20</span></dt>
-<dd><p>Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. A simple framework for contrastive learning of visual representations. In <em>International conference on machine learning</em>, 1597–1607. PMLR, 2020.</p>
-</dd>
-<dt class="label" id="id23"><span class="brackets">CR17</span></dt>
-<dd><p>Emmanouil T Chourdakis and Joshua D Reiss. A machine-learning approach to application of intelligent artificial reverberation. <em>Journal of the Audio Engineering Society</em>, 65(1/2):56–65, 2017.</p>
-</dd>
-<dt class="label" id="id24"><span class="brackets">CR16</span></dt>
-<dd><p>Emmanouil Theofanis Chourdakis and Joshua D Reiss. Automatic control of a digital reverberation effect using hybrid models. In <em>Audio Engineering Society Conference: 60th International Conference: DREAMS (Dereverberation and Reverberation of Audio, Music, and Speech)</em>. Audio Engineering Society, 2016.</p>
-</dd>
-<dt class="label" id="id91"><span class="brackets">CComunitaR22</span></dt>
-<dd><p>Joseph T Colonel, Marco Comunità, and Joshua Reiss. Reverse engineering memoryless distortion effects with differentiable waveshapers. In <em>153rd Convention of the Audio Engineering Society</em>. Audio Engineering Society, 2022.</p>
-</dd>
-<dt class="label" id="id38"><span class="brackets">CR21</span></dt>
-<dd><p>Joseph T Colonel and Joshua Reiss. Reverse engineering of a recording mix with differentiable digital signal processing. <em>The Journal of the Acoustical Society of America</em>, 150(1):608–619, 2021.</p>
-</dd>
-<dt class="label" id="id88"><span class="brackets">CSMR22</span></dt>
-<dd><p>Joseph T Colonel, Christian J Steinmetz, Marcus Michelen, and Joshua D Reiss. Direct design of biquad filter cascades with deep learning by sampling random polynomials. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 3104–3108. IEEE, 2022.</p>
-</dd>
-<dt class="label" id="id92"><span class="brackets">CR+22</span></dt>
-<dd><p>Joseph T. Colonel, Joshua D Reiss, and others. Approximating ballistics in a differentiable dynamic range compressor. In <em>153rd Convention of the Audio Engineering Society</em>. Audio Engineering Society, 2022.</p>
-</dd>
-<dt class="label" id="id119"><span class="brackets">DamskaggJValimaki+19</span></dt>
-<dd><p>Eero-Pekka Damskägg, Lauri Juvela, Vesa Välimäki, and others. Real-time modeling of audio distortion circuits with deep learning. In <em>Proc. Int. Sound and Music Computing Conf.(SMC-19), Malaga, Spain</em>, 332–339. 2019.</p>
-</dd>
-<dt class="label" id="id3"><span class="brackets">Dan18</span></dt>
-<dd><p>Roger B. Dannenberg. Loudness concepts and panning laws. <em>Introduction to Computer Music</em>, 2018.</p>
-</dd>
-<dt class="label" id="id131"><span class="brackets">DM17</span></dt>
-<dd><p>Brecht De Man. <em>Towards a better understanding of mix engineering</em>. PhD thesis, Queen Mary University of London, 2017.</p>
-</dd>
-<dt class="label" id="id39"><span class="brackets">DMR13</span></dt>
-<dd><p>Brecht De Man and Joshua D Reiss. A knowledge-engineered autonomous mixing system. In <em>135th Audio Engineering Society Convention</em>. Audio Engineering Society, 2013.</p>
-</dd>
-<dt class="label" id="id141"><span class="brackets">DMR14</span></dt>
-<dd><p>Brecht De Man and Joshua D Reiss. APE: audio perceptual evaluation toolbox for MATLAB. In <em>Audio Engineering Society Convention 136</em>. 2014.</p>
-</dd>
-<dt class="label" id="id9"><span class="brackets">DMRS17</span></dt>
-<dd><p>Brecht De Man, Joshua D Reiss, and Ryan Stables. Ten years of automatic mixing. In <em>3rd AES Workshop on Intelligent Music Production</em>. September 2017.</p>
-</dd>
-<dt class="label" id="id81"><span class="brackets">DV22</span></dt>
-<dd><p>Fotios Drakopoulos and Sarah Verhulst. A differentiable optimisation framework for the design of individualised dnn-based hearing-aid strategies. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 351–355. IEEE, 2022.</p>
-</dd>
-<dt class="label" id="id52"><span class="brackets">Dug75</span></dt>
-<dd><p>Dan Dugan. Automatic microphone mixing. In <em>151st Convention of the Audio Engineering Society</em>. Audio Engineering Society, 1975.</p>
-</dd>
-<dt class="label" id="id61"><span class="brackets">DefossezUBB19</span></dt>
-<dd><p>Alexandre Défossez, Nicolas Usunier, Léon Bottou, and Francis Bach. Music source separation in the waveform domain. <em>arXiv preprint arXiv:1911.13254</em>, 2019.</p>
-</dd>
-<dt class="label" id="id83"><span class="brackets">EHGR21</span></dt>
-<dd><p>Jesse Engel, Lamtharn Hantrakul, Chenjie Gu, and Adam Roberts. DDSP: differentiable digital signal processing. <em>ICLR</em>, 2021.</p>
-</dd>
-<dt class="label" id="id40"><span class="brackets">Far00</span></dt>
-<dd><p>Angelo Farina. Simultaneous measurement of impulse response and distortion with a swept-sine technique. In <em>Audio Engineering Society Convention 108</em>. 2000.</p>
-</dd>
-<dt class="label" id="id19"><span class="brackets">Fen18</span></dt>
-<dd><p>Steven Fenton. Automatic mixing of multitrack material using modified loudness models. In <em>Audio Engineering Society Convention 145</em>. Audio Engineering Society, 2018.</p>
-</dd>
-<dt class="label" id="id116"><span class="brackets">Gay04</span></dt>
-<dd><p>Patrick Gaydecki. <em>Foundations of digital signal processing: theory, algorithms and hardware design</em>. Volume 15. Iet, 2004.</p>
-</dd>
-<dt class="label" id="id13"><span class="brackets">GR07</span></dt>
-<dd><p>E Perez Gonzalez and Joshua D Reiss. Automatic mixing: live downmixing stereo panner. In <em>Proceedings of the 7th International Conference on Digital Audio Effects (DAFx’07)</em>, 63–68. 2007.</p>
-</dd>
-<dt class="label" id="id117"><span class="brackets">GBC16</span></dt>
-<dd><p>Ian Goodfellow, Yoshua Bengio, and Aaron Courville. <em>Deep learning</em>. MIT press, 2016.</p>
-</dd>
-<dt class="label" id="id132"><span class="brackets">GPAM+20</span></dt>
-<dd><p>Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial networks. <em>Communications of the ACM</em>, 63(11):139–144, 2020.</p>
-</dd>
-<dt class="label" id="id69"><span class="brackets">G+89</span></dt>
-<dd><p>Andreas Griewank and others. On automatic differentiation. <em>Mathematical Programming: recent developments and applications</em>, 6(6):83–107, 1989.</p>
-</dd>
-<dt class="label" id="id126"><span class="brackets">HZRS15</span></dt>
-<dd><p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: surpassing human-level performance on imagenet classification. In <em>Proceedings of the IEEE international conference on computer vision</em>, 1026–1034. 2015.</p>
-</dd>
-<dt class="label" id="id59"><span class="brackets">HCE+17</span></dt>
-<dd><p>Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In <em>ICASSP</em>, 131–135. IEEE, 2017.</p>
-</dd>
-<dt class="label" id="id136"><span class="brackets">HJA20</span></dt>
-<dd><p>Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. <em>Advances in Neural Information Processing Systems</em>, 33:6840–6851, 2020.</p>
-</dd>
-<dt class="label" id="id78"><span class="brackets">HKNR+20</span></dt>
-<dd><p>Cheng-Zhi Anna Huang, Hendrik Vincent Koops, Ed Newton-Rex, Monica Dinculescu, and Carrie J Cai. Ai song contest: human-ai co-creation in songwriting. <em>arXiv preprint arXiv:2010.05388</em>, 2020.</p>
-</dd>
-<dt class="label" id="id54"><span class="brackets">IR11</span></dt>
-<dd><p>Rec ITU-R. Itu-r bs. 1770-2, algorithms to measure audio programme loudness and true-peak audio level. <em>International Telecommunications Union, Geneva</em>, 2011.</p>
-</dd>
-<dt class="label" id="id129"><span class="brackets">IR15</span></dt>
-<dd><p>Rec ITU-R. ITU-R BS. 1534-3, method for the subjective assessment of intermediate quality level of audio systems. <em>International Telecommunications Union, Geneva</em>, 2015.</p>
-</dd>
-<dt class="label" id="id113"><span class="brackets">JMM+15</span></dt>
-<dd><p><strong>missing journal in jillings2015web</strong></p>
-</dd>
-<dt class="label" id="id98"><span class="brackets">JS22</span></dt>
-<dd><p>Nicolas Jonason and Bob L. T. Sturm. TimbreCLIP: connecting timbre to text and images. <em>arXiv:2211.11225</em>, 2022.</p>
-</dd>
-<dt class="label" id="id73"><span class="brackets">KZRS19</span></dt>
-<dd><p>Kevin Kilgour, Mauricio Zuluaga, Dominik Roblek, and Matthew Sharifi. Fréchet audio distance: a reference-free metric for evaluating music enhancement algorithms. In <em>INTERSPEECH</em>, 2350–2354. 2019.</p>
-</dd>
-<dt class="label" id="id134"><span class="brackets">KW13</span></dt>
-<dd><p>Diederik P Kingma and Max Welling. Auto-encoding variational bayes. <em>arXiv preprint arXiv:1312.6114</em>, 2013.</p>
-</dd>
-<dt class="label" id="id76"><span class="brackets">KMartinezRamirezL+22</span></dt>
-<dd><p>Junghyun Koo, Marco A Martínez-Ramírez, Wei-Hsiang Liao, Stefan Uhlich, Kyogu Lee, and Yuki Mitsufuji. Music mixing style transfer: a contrastive learning approach to disentangle audio effects. <em>arXiv preprint arXiv:2211.02247</em>, 2022.</p>
-</dd>
-<dt class="label" id="id74"><span class="brackets">KPL22</span></dt>
-<dd><p>Junghyun Koo, Seungryeol Paik, and Kyogu Lee. End-to-end music remastering system using self-supervised and adversarial training. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 4608–4612. IEEE, 2022.</p>
-</dd>
-<dt class="label" id="id124"><span class="brackets">Kuh58</span></dt>
-<dd><p>Walter Kuhl. The acoustical and technological properties of the reverberation plate. <em>EBU Review, Part A-Technical</em>, 49:8–14, 1958.</p>
-</dd>
-<dt class="label" id="id85"><span class="brackets">KPE20</span></dt>
-<dd><p>Boris Kuznetsov, Julian D Parker, and Fabián Esqueda. Differentiable iir filters for machine learning applications. In <em>Proc. Int. Conf. Digital Audio Effects (eDAFx-20)</em>, 297–303. 2020.</p>
-</dd>
-<dt class="label" id="id94"><span class="brackets">LCL22</span></dt>
-<dd><p>Sungho Lee, Hyeong-Seok Choi, and Kyogu Lee. Differentiable artificial reverberation. <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, 30:2541–2556, 2022.</p>
-</dd>
-<dt class="label" id="id55"><span class="brackets">LBFM21</span></dt>
-<dd><p>M Nyssim Lefford, Gary Bromham, György Fazekas, and David Moffat. Context aware intelligent mixing systems. <em>Journal of the Audio Engineering Society</em>, 2021.</p>
-</dd>
-<dt class="label" id="id97"><span class="brackets">LE22</span></dt>
-<dd><p>Søren Vøgg Lyster and Cumhur Erkut. A differentiable neural network approach to parameter estimation of reverberation. In <em>19th Sound and Music Computing Conference, SMC 2022</em>, 358–364. Sound and Music Computing Network, 2022.</p>
-</dd>
-<dt class="label" id="id50"><span class="brackets">MDMP+15</span></dt>
-<dd><p>Zheng Ma, Brecht De Man, Pedro DL Pestana, Dawn AA Black, and Joshua D Reiss. Intelligent multitrack dynamic range compression. <em>Journal of the Audio Engineering Society</em>, 63(6):412–426, 2015.</p>
-</dd>
-<dt class="label" id="id101"><span class="brackets">MJZF21</span></dt>
-<dd><p>Pranay Manocha, Zeyu Jin, Richard Zhang, and Adam Finkelstein. Cdpam: contrastive learning for perceptual audio similarity. In <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 196–200. IEEE, 2021.</p>
-</dd>
-<dt class="label" id="id17"><span class="brackets">MFR12</span></dt>
-<dd><p>Stuart Mansbridge, Saoirse Finn, and Joshua D Reiss. Implementation and evaluation of autonomous multi-track fader control. In <em>Audio Engineering Society Convention 132</em>. Audio Engineering Society, 2012.</p>
-</dd>
-<dt class="label" id="id7"><span class="brackets">MartinezRamirez20</span></dt>
-<dd><p>Marco A Martínez-Ramírez. <em>Deep learning for audio effects modeling</em>. PhD thesis, Queen Mary University of London, 2020.</p>
-</dd>
-<dt class="label" id="id75"><span class="brackets">MartinezRamirezLF+22</span></dt>
-<dd><p>Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In <em>ISMIR</em>. 2022.</p>
-</dd>
-<dt class="label" id="id34"><span class="brackets">MartinezRamirezSM21</span></dt>
-<dd><p>Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. <em>Journal of the Audio Engineering Society</em>, 2021.</p>
-</dd>
-<dt class="label" id="id84"><span class="brackets">MartinezRamirezWSB21</span></dt>
-<dd><p>Marco A Martínez-Ramírez, Oliver Wang, Paris Smaragdis, and Nicholas J Bryan. Differentiable signal processing with black-box audio effects. In <em>ICASSP</em>, 66–70. IEEE, 2021.</p>
-</dd>
-<dt class="label" id="id86"><span class="brackets">MS21</span></dt>
-<dd><p>Naotake Masuda and Daisuke Saito. Synthesizer sound matching with differentiable dsp. In <em>ISMIR</em>, 428–434. 2021.</p>
-</dd>
-<dt class="label" id="id27"><span class="brackets">MBS20</span></dt>
-<dd><p>Stylianos I Mimilakis, Nicholas J Bryan, and Paris Smaragdis. One-shot parametric audio production style transfer with application to frequency equalization. In <em>ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 256–260. IEEE, 2020.</p>
-</dd>
-<dt class="label" id="id32"><span class="brackets">MS19a</span></dt>
-<dd><p>Dave Moffat and Mark Sandler. Machine learning multitrack gain mixing of drums. In <em>147th Audio Engineering Society Convention</em>. 2019.</p>
-</dd>
-<dt class="label" id="id11"><span class="brackets">MS19b</span></dt>
-<dd><p>David Moffat and Mark B Sandler. Approaches in intelligent music production. <em>Arts</em>, 8(5):14, September 2019.</p>
-</dd>
-<dt class="label" id="id20"><span class="brackets">MS19c</span></dt>
-<dd><p>David Moffat and Mark B Sandler. Approaches in intelligent music production. In <em>Arts</em>, volume 8, 125. MDPI, 2019.</p>
-</dd>
-<dt class="label" id="id89"><span class="brackets">Ner20</span></dt>
-<dd><p>Shahan Nercessian. Neural parametric equalizer matching using differentiable biquads. In <em>Proc. Int. Conf. Digital Audio Effects (eDAFx-20)</em>, 265–272. 2020.</p>
-</dd>
-<dt class="label" id="id12"><span class="brackets">PD00</span></dt>
-<dd><p>François Pachet and Olivier Delerue. On-the-fly multi-track mixing. In <em>109th Convention of the Audio Engineering Society</em>. Audio Engineering Society, 2000.</p>
-</dd>
-<dt class="label" id="id4"><span class="brackets">PB09</span></dt>
-<dd><p>Julian Parker and Stefan Bilbao. Spring reverberation: a physical perspective. In <em>12th International Conference on Digital Audio Effects (DAFx-09)</em>. 2009.</p>
-</dd>
-<dt class="label" id="id68"><span class="brackets">PGM+19</span></dt>
-<dd><p>Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, and others. Pytorch: an imperative style, high-performance deep learning library. <em>Advances in neural information processing systems</em>, 2019.</p>
-</dd>
-<dt class="label" id="id127"><span class="brackets">Pee04</span></dt>
-<dd><p>Geoffroy Peeters. A large set of audio features for sound description (similarity and classification) in the CUIDADO project. <em>Analysis/Synthesis Team. IRCAM, Paris, France</em>, 54(0):1–25, 2004.</p>
-</dd>
-<dt class="label" id="id72"><span class="brackets">PSDV+18</span></dt>
-<dd><p>Ethan Perez, Florian Strub, Harm De Vries, Vincent Dumoulin, and Aaron Courville. Film: visual reasoning with a general conditioning layer. In <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, volume 32. 2018.</p>
-</dd>
-<dt class="label" id="id14"><span class="brackets">PGR08</span></dt>
-<dd><p>Enrique Perez Gonzalez and Joshua Reiss. Determination and correction of individual channel time offsets for signals involved in an audio mixture. In <em>Audio Engineering Society Convention 125</em>. Audio Engineering Society, 2008.</p>
-</dd>
-<dt class="label" id="id16"><span class="brackets">PGR09</span></dt>
-<dd><p>Enrique Perez-Gonzalez and Joshua Reiss. Automatic gain and fader control for live mixing. In <em>2009 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics</em>, 1–4. IEEE, 2009.</p>
-</dd>
-<dt class="label" id="id15"><span class="brackets">pgr09</span></dt>
-<dd><p>enrique perez-gonzalez and joshua reiss. Automatic equalization of multichannel audio using cross-adaptive methods. <em>journal of the audio engineering society</em>, ():, october 2009. <a class="reference external" href="https://doi.org/">doi:</a>.</p>
-</dd>
-<dt class="label" id="id29"><span class="brackets">PR14</span></dt>
-<dd><p>Pedro D Pestana and Joshua D Reiss. A cross-adaptive dynamic spectral panning technique. In <em>DAFx</em>, 303–307. Erlangen, 2014.</p>
-</dd>
-<dt class="label" id="id120"><span class="brackets">PRB17</span></dt>
-<dd><p>Pedro Duarte Pestana, Joshua D Reiss, and Álvaro Barbosa. User preference on artificial reverberation and delay time parameters. <em>Journal of the Audio Engineering Society</em>, 65(1/2):100–107, 2017.</p>
-</dd>
-<dt class="label" id="id103"><span class="brackets">RKH+21</span></dt>
-<dd><p>Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, and others. Learning transferable visual models from natural language supervision. In <em>International Conference on Machine Learning</em>, 8748–8763. PMLR, 2021.</p>
-</dd>
-<dt class="label" id="id36"><span class="brackets">RamirezR18</span></dt>
-<dd><p>Marco A Martínez Ramírez and Joshua D Reiss. End-to-end equalization with convolutional neural networks. In <em>21st International Conference on Digital Audio Effects (DAFx-18)</em>. 2018.</p>
-</dd>
-<dt class="label" id="id31"><span class="brackets">RM14</span></dt>
-<dd><p>Joshua D Reiss and Andrew McPherson. <em>Audio effects: theory, implementation and application</em>. CRC Press, 2014.</p>
-</dd>
-<dt class="label" id="id138"><span class="brackets">RM15</span></dt>
-<dd><p>Danilo Rezende and Shakir Mohamed. Variational inference with normalizing flows. In <em>International conference on machine learning</em>, 1530–1538. PMLR, 2015.</p>
-</dd>
-<dt class="label" id="id93"><span class="brackets">RFB15</span></dt>
-<dd><p>Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. In <em>International Conference on Medical image computing and computer-assisted intervention</em>, 234–241. Springer, 2015.</p>
-</dd>
-<dt class="label" id="id112"><span class="brackets">SBStoter+18</span></dt>
-<dd><p>Michael Schoeffler, Sarah Bartoschek, Fabian-Robert Stöter, Marlene Roess, Susanne Westphal, Bernd Edler, and Jürgen Herre. Webmushra—a comprehensive framework for web-based listening tests. <em>Journal of Open Research Software</em>, 2018.</p>
-</dd>
-<dt class="label" id="id123"><span class="brackets">SL61</span></dt>
-<dd><p>Manfred R Schroeder and Benjamin F Logan. Colorless artificial reverberation. <em>IRE Transactions on Audio</em>, pages 209–214, 1961.</p>
-</dd>
-<dt class="label" id="id21"><span class="brackets">SPSK11</span></dt>
-<dd><p>Jeffrey Scott, Matthew Prockup, Erik M Schmidt, and Youngmoo E Kim. Automatic multi-track mixing using linear dynamical systems. In <em>Proceedings of the 8th Sound and Music Computing Conference, Padova, Italy</em>, 12. Citeseer, 2011.</p>
-</dd>
-<dt class="label" id="id144"><span class="brackets">SerraPP21</span></dt>
-<dd><p>Joan Serrà, Jordi Pons, and Santiago Pascual. Sesqa: semi-supervised learning for speech quality assessment. In <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 381–385. IEEE, 2021.</p>
-</dd>
-<dt class="label" id="id87"><span class="brackets">SHC+22</span></dt>
-<dd><p>Siyuan Shan, Lamtharn Hantrakul, Jitong Chen, Matt Avent, and David Trevelyan. Differentiable wavetable synthesis. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 4598–4602. IEEE, 2022.</p>
-</dd>
-<dt class="label" id="id37"><span class="brackets">SF19</span></dt>
-<dd><p>Di Sheng and György Fazekas. A feature learning siamese model for intelligent control of the dynamic range compressor. In <em>2019 International Joint Conference on Neural Networks (IJCNN)</em>, 1–8. IEEE, 2019.</p>
-</dd>
-<dt class="label" id="id130"><span class="brackets">Sko16</span></dt>
-<dd><p>Esben Skovenborg. Development of semantic scales for music mastering. In <em>Audio Engineering Society Convention 141</em>. 2016.</p>
-</dd>
-<dt class="label" id="id137"><span class="brackets">SDWMG15</span></dt>
-<dd><p>Jascha Sohl-Dickstein, Eric Weiss, Niru Maheswaranathan, and Surya Ganguli. Deep unsupervised learning using nonequilibrium thermodynamics. In <em>International Conference on Machine Learning</em>, 2256–2265. PMLR, 2015.</p>
-</dd>
-<dt class="label" id="id135"><span class="brackets">SE19</span></dt>
-<dd><p>Yang Song and Stefano Ermon. Generative modeling by estimating gradients of the data distribution. <em>Advances in Neural Information Processing Systems</em>, 2019.</p>
-</dd>
-<dt class="label" id="id82"><span class="brackets">Spa97</span></dt>
-<dd><p>James C Spall. A one-measurement form of simultaneous perturbation stochastic approximation. <em>Automatica</em>, 33(1):109–112, 1997.</p>
-</dd>
-<dt class="label" id="id142"><span class="brackets">SB21</span></dt>
-<dd><p>Janne Spijkervet and John Ashley Burgoyne. Contrastive learning of musical representations. <em>arXiv preprint arXiv:2103.09410</em>, 2021.</p>
-</dd>
-<dt class="label" id="id10"><span class="brackets">SRDM19</span></dt>
-<dd><p>Ryan Stables, Joshua D. Reiss, and Brecht De Man. <em>Intelligent Music Production</em>. Focal Press, 2019.</p>
-</dd>
-<dt class="label" id="id26"><span class="brackets">SBR22</span></dt>
-<dd><p>Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. <em>arXiv preprint arXiv:2207.08759</em>, 2022.</p>
-</dd>
-<dt class="label" id="id95"><span class="brackets">SIC21</span></dt>
-<dd><p>Christian J Steinmetz, Vamsi Krishna Ithapu, and Paul Calamia. Filtered noise shaping for time domain room impulse response estimation from reverberant speech. In <em>2021 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)</em>, 221–225. IEEE, 2021.</p>
-</dd>
-<dt class="label" id="id35"><span class="brackets">SPPSerra21</span></dt>
-<dd><p>Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In <em>ICASSP</em>. IEEE, 2021.</p>
-</dd>
-<dt class="label" id="id64"><span class="brackets">SR20</span></dt>
-<dd><p>Christian J Steinmetz and Joshua D Reiss. Auraloss: audio focused loss functions in pytorch. In <em>Digital Music Research Network One-day Workshop</em>. 2020.</p>
-</dd>
-<dt class="label" id="id139"><span class="brackets">SPPS21</span></dt>
-<dd><p>Christian J. Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In <em>IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)</em>. 2021.</p>
-</dd>
-<dt class="label" id="id60"><span class="brackets">SED18</span></dt>
-<dd><p>Daniel Stoller, Sebastian Ewert, and Simon Dixon. Wave-u-net: a multi-scale neural network for end-to-end audio source separation. <em>ISMIR</em>, 2018.</p>
-</dd>
-<dt class="label" id="id47"><span class="brackets">StoterULM19</span></dt>
-<dd><p>Fabian-Robert Stöter, Stefan Uhlich, Antoine Liutkus, and Yuki Mitsufuji. Open-unmix-a reference implementation for music source separation. <em>Journal of Open Source Software</em>, 4(41):1667, 2019.</p>
-</dd>
-<dt class="label" id="id79"><span class="brackets">TMB21</span></dt>
-<dd><p>Zehai Tu, Ning Ma, and Jon Barker. Dhasp: differentiable hearing aid speech processing. In <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 296–300. IEEE, 2021.</p>
-</dd>
-<dt class="label" id="id102"><span class="brackets">TSK+22</span></dt>
-<dd><p>Joseph Turian, Jordie Shier, Humair Raj Khan, Bhiksha Raj, Björn W Schuller, Christian J Steinmetz, Colin Malloy, George Tzanetakis, Gissel Velarde, Kirk McNally, and others. Hear: holistic evaluation of audio representations. In <em>NeurIPS 2021 Competitions and Demonstrations Track</em>, 125–145. PMLR, 2022.</p>
-</dd>
-<dt class="label" id="id51"><span class="brackets">TJM07</span></dt>
-<dd><p>George Tzanetakis, Randy Jones, and Kirk McNally. Stereo panning features for classifying recording production style. In <em>ISMIR</em>, 441–444. 2007.</p>
-</dd>
-<dt class="label" id="id5"><span class="brackets">VZolzerA06</span></dt>
-<dd><p>Vincent Verfaille, U. Zölzer, and Daniel Arfib. Adaptive digital audio effects (A-DAFx): a new class of sound transformations. <em>IEEE Transactions on Audio, Speech and Language Processing</em>, 14(5):1817–1831, 2006.</p>
-</dd>
-<dt class="label" id="id121"><span class="brackets">ValimakiPS+12</span></dt>
-<dd><p>Vesa Välimäki, Julian D Parker, Lauri Savioja, Julius O Smith, and Jonathan S Abel. Fifty years of artificial reverberation. <em>IEEE Transactions on Audio, Speech, and Language Processing</em>, 20(5):1421–1448, 2012.</p>
-</dd>
-<dt class="label" id="id8"><span class="brackets">ValimakiR16</span></dt>
-<dd><p>Vesa Välimäki and Joshua D Reiss. All about audio equalization: solutions and frontiers. <em>Applied Sciences</em>, 6(5):129, 2016.</p>
-</dd>
-<dt class="label" id="id18"><span class="brackets">WRA12</span></dt>
-<dd><p>Dominic Ward, Joshua D Reiss, and Cham Athwal. Multitrack mixing using a model of loudness and partial loudness. In <em>Audio Engineering Society Convention 133</em>. Audio Engineering Society, 2012.</p>
-</dd>
-<dt class="label" id="id105"><span class="brackets">WWM+17</span></dt>
-<dd><p>Dominic Ward, Hagen Wierstorf, Russell Mason, Mark Plumbley, and Christopher Hummersone. Estimating the loudness balance of musical mixtures using audio source separation. In <em>Proceedings of the 3rd Workshop on Intelligent Music Production (WIMP)</em>. 2017.</p>
-</dd>
-<dt class="label" id="id33"><span class="brackets">WMMS20</span></dt>
-<dd><p>Thomas Wilmering, David Moffat, Alessia Milo, and Mark B Sandler. A history of audio effects. <em>Applied Sciences</em>, 10(3):791, 2020.</p>
-</dd>
-<dt class="label" id="id49"><span class="brackets">WFBS20</span></dt>
-<dd><p>Minz Won, Andres Ferraro, Dmitry Bogdanov, and Xavier Serra. Evaluation of cnn-based automatic music tagging models. In <em>Proc. of 17th Sound and Music Computing</em>. 2020.</p>
-</dd>
-<dt class="label" id="id90"><span class="brackets">WValimaki+22</span></dt>
-<dd><p>Alec Wright, Vesa Välimäki, and others. Grey-box modelling of dynamic range compression. In <em>Proc. Int. Conf. Digital Audio Effects (DAFX), Vienna, Austria</em>, 304–311. 2022.</p>
-</dd>
-<dt class="label" id="id143"><span class="brackets">WCZ+22</span></dt>
-<dd><p>Yusong Wu, Ke Chen, Tianyu Zhang, Yuchen Hui, Taylor Berg-Kirkpatrick, and Shlomo Dubnov. Large-scale contrastive language-audio pretraining with feature fusion and keyword-to-caption augmentation. <em>arXiv preprint arXiv:2211.06687</em>, 2022.</p>
-</dd>
-<dt class="label" id="id62"><span class="brackets">YSK20</span></dt>
-<dd><p>Ryuichi Yamamoto, Eunwoo Song, and Jae-Min Kim. Parallel wavegan: a fast waveform generation model based on generative adversarial networks with multi-resolution spectrogram. In <em>ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 6199–6203. IEEE, 2020.</p>
-</dd>
-<dt class="label" id="id2"><span class="brackets">Zolzer11</span></dt>
-<dd><p>Udo Zölzer. <em>DAFX: digital audio effects</em>. John Wiley and Sons, 2011.</p>
-</dd>
-<dt class="label" id="id30"><span class="brackets">ZolzerAA+02</span></dt>
-<dd><p>Udo Zölzer, Xavier Amatriain, Daniel Arfib, Jordi Bonada, Giovanni De Poli, Pierre Dutilleux, Gianpaolo Evangelista, Florian Keiler, Alex Loscos, Davide Rocchesso, and others. <em>DAFX-Digital audio effects</em>. John Wiley and Sons, 2002.</p>
-</dd>
-</dl>
+<div role="list" class="citation-list">
+<div class="citation" id="id70" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>A+15<span class="fn-bracket">]</span></span>
+<p><strong>missing journal in tensorflow2015whitepaper</strong></p>
+</div>
+<div class="citation" id="id122" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BKK18<span class="fn-bracket">]</span></span>
+<p>Shaojie Bai, J Zico Kolter, and Vladlen Koltun. An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. <em>arXiv preprint arXiv:1803.01271</em>, 2018.</p>
+</div>
+<div class="citation" id="id111" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BZSH21a<span class="fn-bracket">]</span></span>
+<p>Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. <em>Journal of Open Research Software</em>, 2021. URL: <a class="reference external" href="http://doi.org/10.5334/jors.361">http://doi.org/10.5334/jors.361</a>.</p>
+</div>
+<div class="citation" id="id133" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BZSH21b<span class="fn-bracket">]</span></span>
+<p>Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. <em>Journal of Open Research Software</em>, 2021.</p>
+</div>
+<div class="citation" id="id22" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BR17<span class="fn-bracket">]</span></span>
+<p>Adán L Benito and Joshua D Reiss. Intelligent multitrack reverberation based on hinge-loss markov random fields. In <em>Audio Engineering Society Conference: 2017 AES International Conference on Semantic Audio</em>. Audio Engineering Society, 2017.</p>
+</div>
+<div class="citation" id="id125" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Bil09<span class="fn-bracket">]</span></span>
+<p>Stefan Bilbao. <em>Numerical sound synthesis: finite difference schemes and simulation in musical acoustics</em>. John Wiley and Sons, 2009.</p>
+</div>
+<div class="citation" id="id71" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BFH+18<span class="fn-bracket">]</span></span>
+<p><strong>missing journal in jax2018github</strong></p>
+</div>
+<div class="citation" id="id48" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BHP17<span class="fn-bracket">]</span></span>
+<p>Jean-Pierre Briot, Gaëtan Hadjeres, and François-David Pachet. Deep learning techniques for music generation–a survey. <em>arXiv:1709.01620</em>, 2017.</p>
+</div>
+<div class="citation" id="id110" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BMBF18<span class="fn-bracket">]</span></span>
+<p>Gary Bromham, Dave Moffat, Mathieu Barthet, and György Fazekas. The impact of compressor ballistics on the perceived style of music. In <em>Audio Engineering Society Convention 145</em>. Audio Engineering Society, 2018.</p>
+</div>
+<div class="citation" id="id128" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BMR+20<span class="fn-bracket">]</span></span>
+<p>Tom Brown, Benjamin Mann, Nick Ryder, Melanie Subbiah, Jared D Kaplan, Prafulla Dhariwal, Arvind Neelakantan, Pranav Shyam, Girish Sastry, Amanda Askell, and others. Language models are few-shot learners. <em>Advances in neural information processing systems</em>, 33:1877–1901, 2020.</p>
+</div>
+<div class="citation" id="id56" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>BKBF+21<span class="fn-bracket">]</span></span>
+<p>Nick Bryan-Kinns, Berker Banar, Corey Ford, C Reed, Yixiao Zhang, Simon Colton, Jack Armitage, and others. Exploring xai for the arts: explaining latent space in generative music. In <em>1st Workshop on eXplainable AI approaches for debugging and diagnosis (XAI4Debugging&#64;NeurIPS2021)</em>. 2021.</p>
+</div>
+<div class="citation" id="id80" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CBS22<span class="fn-bracket">]</span></span>
+<p>Jonah Casebeer, Nicholas J Bryan, and Paris Smaragdis. Meta-af: meta-learning for adaptive filters. <em>arXiv preprint arXiv:2204.11942</em>, 2022.</p>
+</div>
+<div class="citation" id="id118" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Che84<span class="fn-bracket">]</span></span>
+<p>Chi-Tsong Chen. <em>Linear system theory and design</em>. Saunders college publishing, 1984.</p>
+</div>
+<div class="citation" id="id104" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CKNH20<span class="fn-bracket">]</span></span>
+<p>Ting Chen, Simon Kornblith, Mohammad Norouzi, and Geoffrey Hinton. A simple framework for contrastive learning of visual representations. In <em>International conference on machine learning</em>, 1597–1607. PMLR, 2020.</p>
+</div>
+<div class="citation" id="id23" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CR17<span class="fn-bracket">]</span></span>
+<p>Emmanouil T Chourdakis and Joshua D Reiss. A machine-learning approach to application of intelligent artificial reverberation. <em>Journal of the Audio Engineering Society</em>, 65(1/2):56–65, 2017.</p>
+</div>
+<div class="citation" id="id24" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CR16<span class="fn-bracket">]</span></span>
+<p>Emmanouil Theofanis Chourdakis and Joshua D Reiss. Automatic control of a digital reverberation effect using hybrid models. In <em>Audio Engineering Society Conference: 60th International Conference: DREAMS (Dereverberation and Reverberation of Audio, Music, and Speech)</em>. Audio Engineering Society, 2016.</p>
+</div>
+<div class="citation" id="id91" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CComunitaR22<span class="fn-bracket">]</span></span>
+<p>Joseph T Colonel, Marco Comunità, and Joshua Reiss. Reverse engineering memoryless distortion effects with differentiable waveshapers. In <em>153rd Convention of the Audio Engineering Society</em>. Audio Engineering Society, 2022.</p>
+</div>
+<div class="citation" id="id38" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CR21<span class="fn-bracket">]</span></span>
+<p>Joseph T Colonel and Joshua Reiss. Reverse engineering of a recording mix with differentiable digital signal processing. <em>The Journal of the Acoustical Society of America</em>, 150(1):608–619, 2021.</p>
+</div>
+<div class="citation" id="id88" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CSMR22<span class="fn-bracket">]</span></span>
+<p>Joseph T Colonel, Christian J Steinmetz, Marcus Michelen, and Joshua D Reiss. Direct design of biquad filter cascades with deep learning by sampling random polynomials. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 3104–3108. IEEE, 2022.</p>
+</div>
+<div class="citation" id="id92" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>CR+22<span class="fn-bracket">]</span></span>
+<p>Joseph T. Colonel, Joshua D Reiss, and others. Approximating ballistics in a differentiable dynamic range compressor. In <em>153rd Convention of the Audio Engineering Society</em>. Audio Engineering Society, 2022.</p>
+</div>
+<div class="citation" id="id119" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DamskaggJValimaki+19<span class="fn-bracket">]</span></span>
+<p>Eero-Pekka Damskägg, Lauri Juvela, Vesa Välimäki, and others. Real-time modeling of audio distortion circuits with deep learning. In <em>Proc. Int. Sound and Music Computing Conf.(SMC-19), Malaga, Spain</em>, 332–339. 2019.</p>
+</div>
+<div class="citation" id="id3" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Dan18<span class="fn-bracket">]</span></span>
+<p>Roger B. Dannenberg. Loudness concepts and panning laws. <em>Introduction to Computer Music</em>, 2018.</p>
+</div>
+<div class="citation" id="id131" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DM17<span class="fn-bracket">]</span></span>
+<p>Brecht De Man. <em>Towards a better understanding of mix engineering</em>. PhD thesis, Queen Mary University of London, 2017.</p>
+</div>
+<div class="citation" id="id39" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DMR13<span class="fn-bracket">]</span></span>
+<p>Brecht De Man and Joshua D Reiss. A knowledge-engineered autonomous mixing system. In <em>135th Audio Engineering Society Convention</em>. Audio Engineering Society, 2013.</p>
+</div>
+<div class="citation" id="id141" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DMR14<span class="fn-bracket">]</span></span>
+<p>Brecht De Man and Joshua D Reiss. APE: audio perceptual evaluation toolbox for MATLAB. In <em>Audio Engineering Society Convention 136</em>. 2014.</p>
+</div>
+<div class="citation" id="id9" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DMRS17<span class="fn-bracket">]</span></span>
+<p>Brecht De Man, Joshua D Reiss, and Ryan Stables. Ten years of automatic mixing. In <em>3rd AES Workshop on Intelligent Music Production</em>. September 2017.</p>
+</div>
+<div class="citation" id="id81" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DV22<span class="fn-bracket">]</span></span>
+<p>Fotios Drakopoulos and Sarah Verhulst. A differentiable optimisation framework for the design of individualised dnn-based hearing-aid strategies. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 351–355. IEEE, 2022.</p>
+</div>
+<div class="citation" id="id52" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Dug75<span class="fn-bracket">]</span></span>
+<p>Dan Dugan. Automatic microphone mixing. In <em>151st Convention of the Audio Engineering Society</em>. Audio Engineering Society, 1975.</p>
+</div>
+<div class="citation" id="id61" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>DefossezUBB19<span class="fn-bracket">]</span></span>
+<p>Alexandre Défossez, Nicolas Usunier, Léon Bottou, and Francis Bach. Music source separation in the waveform domain. <em>arXiv preprint arXiv:1911.13254</em>, 2019.</p>
+</div>
+<div class="citation" id="id83" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>EHGR21<span class="fn-bracket">]</span></span>
+<p>Jesse Engel, Lamtharn Hantrakul, Chenjie Gu, and Adam Roberts. DDSP: differentiable digital signal processing. <em>ICLR</em>, 2021.</p>
+</div>
+<div class="citation" id="id40" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Far00<span class="fn-bracket">]</span></span>
+<p>Angelo Farina. Simultaneous measurement of impulse response and distortion with a swept-sine technique. In <em>Audio Engineering Society Convention 108</em>. 2000.</p>
+</div>
+<div class="citation" id="id19" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Fen18<span class="fn-bracket">]</span></span>
+<p>Steven Fenton. Automatic mixing of multitrack material using modified loudness models. In <em>Audio Engineering Society Convention 145</em>. Audio Engineering Society, 2018.</p>
+</div>
+<div class="citation" id="id116" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Gay04<span class="fn-bracket">]</span></span>
+<p>Patrick Gaydecki. <em>Foundations of digital signal processing: theory, algorithms and hardware design</em>. Volume 15. Iet, 2004.</p>
+</div>
+<div class="citation" id="id13" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GR07<span class="fn-bracket">]</span></span>
+<p>E Perez Gonzalez and Joshua D Reiss. Automatic mixing: live downmixing stereo panner. In <em>Proceedings of the 7th International Conference on Digital Audio Effects (DAFx’07)</em>, 63–68. 2007.</p>
+</div>
+<div class="citation" id="id117" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GBC16<span class="fn-bracket">]</span></span>
+<p>Ian Goodfellow, Yoshua Bengio, and Aaron Courville. <em>Deep learning</em>. MIT press, 2016.</p>
+</div>
+<div class="citation" id="id132" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>GPAM+20<span class="fn-bracket">]</span></span>
+<p>Ian Goodfellow, Jean Pouget-Abadie, Mehdi Mirza, Bing Xu, David Warde-Farley, Sherjil Ozair, Aaron Courville, and Yoshua Bengio. Generative adversarial networks. <em>Communications of the ACM</em>, 63(11):139–144, 2020.</p>
+</div>
+<div class="citation" id="id69" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>G+89<span class="fn-bracket">]</span></span>
+<p>Andreas Griewank and others. On automatic differentiation. <em>Mathematical Programming: recent developments and applications</em>, 6(6):83–107, 1989.</p>
+</div>
+<div class="citation" id="id126" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HZRS15<span class="fn-bracket">]</span></span>
+<p>Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: surpassing human-level performance on imagenet classification. In <em>Proceedings of the IEEE international conference on computer vision</em>, 1026–1034. 2015.</p>
+</div>
+<div class="citation" id="id59" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HCE+17<span class="fn-bracket">]</span></span>
+<p>Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In <em>ICASSP</em>, 131–135. IEEE, 2017.</p>
+</div>
+<div class="citation" id="id136" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HJA20<span class="fn-bracket">]</span></span>
+<p>Jonathan Ho, Ajay Jain, and Pieter Abbeel. Denoising diffusion probabilistic models. <em>Advances in Neural Information Processing Systems</em>, 33:6840–6851, 2020.</p>
+</div>
+<div class="citation" id="id78" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>HKNR+20<span class="fn-bracket">]</span></span>
+<p>Cheng-Zhi Anna Huang, Hendrik Vincent Koops, Ed Newton-Rex, Monica Dinculescu, and Carrie J Cai. Ai song contest: human-ai co-creation in songwriting. <em>arXiv preprint arXiv:2010.05388</em>, 2020.</p>
+</div>
+<div class="citation" id="id54" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>IR11<span class="fn-bracket">]</span></span>
+<p>Rec ITU-R. Itu-r bs. 1770-2, algorithms to measure audio programme loudness and true-peak audio level. <em>International Telecommunications Union, Geneva</em>, 2011.</p>
+</div>
+<div class="citation" id="id129" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>IR15<span class="fn-bracket">]</span></span>
+<p>Rec ITU-R. ITU-R BS. 1534-3, method for the subjective assessment of intermediate quality level of audio systems. <em>International Telecommunications Union, Geneva</em>, 2015.</p>
+</div>
+<div class="citation" id="id113" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JMM+15<span class="fn-bracket">]</span></span>
+<p><strong>missing journal in jillings2015web</strong></p>
+</div>
+<div class="citation" id="id98" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>JS22<span class="fn-bracket">]</span></span>
+<p>Nicolas Jonason and Bob L. T. Sturm. TimbreCLIP: connecting timbre to text and images. <em>arXiv:2211.11225</em>, 2022.</p>
+</div>
+<div class="citation" id="id73" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KZRS19<span class="fn-bracket">]</span></span>
+<p>Kevin Kilgour, Mauricio Zuluaga, Dominik Roblek, and Matthew Sharifi. Fréchet audio distance: a reference-free metric for evaluating music enhancement algorithms. In <em>INTERSPEECH</em>, 2350–2354. 2019.</p>
+</div>
+<div class="citation" id="id134" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KW13<span class="fn-bracket">]</span></span>
+<p>Diederik P Kingma and Max Welling. Auto-encoding variational bayes. <em>arXiv preprint arXiv:1312.6114</em>, 2013.</p>
+</div>
+<div class="citation" id="id76" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KMartinezRamirezL+22<span class="fn-bracket">]</span></span>
+<p>Junghyun Koo, Marco A Martínez-Ramírez, Wei-Hsiang Liao, Stefan Uhlich, Kyogu Lee, and Yuki Mitsufuji. Music mixing style transfer: a contrastive learning approach to disentangle audio effects. <em>arXiv preprint arXiv:2211.02247</em>, 2022.</p>
+</div>
+<div class="citation" id="id74" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KPL22<span class="fn-bracket">]</span></span>
+<p>Junghyun Koo, Seungryeol Paik, and Kyogu Lee. End-to-end music remastering system using self-supervised and adversarial training. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 4608–4612. IEEE, 2022.</p>
+</div>
+<div class="citation" id="id124" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Kuh58<span class="fn-bracket">]</span></span>
+<p>Walter Kuhl. The acoustical and technological properties of the reverberation plate. <em>EBU Review, Part A-Technical</em>, 49:8–14, 1958.</p>
+</div>
+<div class="citation" id="id85" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>KPE20<span class="fn-bracket">]</span></span>
+<p>Boris Kuznetsov, Julian D Parker, and Fabián Esqueda. Differentiable iir filters for machine learning applications. In <em>Proc. Int. Conf. Digital Audio Effects (eDAFx-20)</em>, 297–303. 2020.</p>
+</div>
+<div class="citation" id="id94" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LCL22<span class="fn-bracket">]</span></span>
+<p>Sungho Lee, Hyeong-Seok Choi, and Kyogu Lee. Differentiable artificial reverberation. <em>IEEE/ACM Transactions on Audio, Speech, and Language Processing</em>, 30:2541–2556, 2022.</p>
+</div>
+<div class="citation" id="id55" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LBFM21<span class="fn-bracket">]</span></span>
+<p>M Nyssim Lefford, Gary Bromham, György Fazekas, and David Moffat. Context aware intelligent mixing systems. <em>Journal of the Audio Engineering Society</em>, 2021.</p>
+</div>
+<div class="citation" id="id97" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>LE22<span class="fn-bracket">]</span></span>
+<p>Søren Vøgg Lyster and Cumhur Erkut. A differentiable neural network approach to parameter estimation of reverberation. In <em>19th Sound and Music Computing Conference, SMC 2022</em>, 358–364. Sound and Music Computing Network, 2022.</p>
+</div>
+<div class="citation" id="id50" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MDMP+15<span class="fn-bracket">]</span></span>
+<p>Zheng Ma, Brecht De Man, Pedro DL Pestana, Dawn AA Black, and Joshua D Reiss. Intelligent multitrack dynamic range compression. <em>Journal of the Audio Engineering Society</em>, 63(6):412–426, 2015.</p>
+</div>
+<div class="citation" id="id101" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MJZF21<span class="fn-bracket">]</span></span>
+<p>Pranay Manocha, Zeyu Jin, Richard Zhang, and Adam Finkelstein. Cdpam: contrastive learning for perceptual audio similarity. In <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 196–200. IEEE, 2021.</p>
+</div>
+<div class="citation" id="id17" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MFR12<span class="fn-bracket">]</span></span>
+<p>Stuart Mansbridge, Saoirse Finn, and Joshua D Reiss. Implementation and evaluation of autonomous multi-track fader control. In <em>Audio Engineering Society Convention 132</em>. Audio Engineering Society, 2012.</p>
+</div>
+<div class="citation" id="id7" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MartinezRamirez20<span class="fn-bracket">]</span></span>
+<p>Marco A Martínez-Ramírez. <em>Deep learning for audio effects modeling</em>. PhD thesis, Queen Mary University of London, 2020.</p>
+</div>
+<div class="citation" id="id75" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MartinezRamirezLF+22<span class="fn-bracket">]</span></span>
+<p>Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In <em>ISMIR</em>. 2022.</p>
+</div>
+<div class="citation" id="id34" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MartinezRamirezSM21<span class="fn-bracket">]</span></span>
+<p>Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. <em>Journal of the Audio Engineering Society</em>, 2021.</p>
+</div>
+<div class="citation" id="id84" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MartinezRamirezWSB21<span class="fn-bracket">]</span></span>
+<p>Marco A Martínez-Ramírez, Oliver Wang, Paris Smaragdis, and Nicholas J Bryan. Differentiable signal processing with black-box audio effects. In <em>ICASSP</em>, 66–70. IEEE, 2021.</p>
+</div>
+<div class="citation" id="id86" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MS21<span class="fn-bracket">]</span></span>
+<p>Naotake Masuda and Daisuke Saito. Synthesizer sound matching with differentiable dsp. In <em>ISMIR</em>, 428–434. 2021.</p>
+</div>
+<div class="citation" id="id27" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MBS20<span class="fn-bracket">]</span></span>
+<p>Stylianos I Mimilakis, Nicholas J Bryan, and Paris Smaragdis. One-shot parametric audio production style transfer with application to frequency equalization. In <em>ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 256–260. IEEE, 2020.</p>
+</div>
+<div class="citation" id="id32" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MS19a<span class="fn-bracket">]</span></span>
+<p>Dave Moffat and Mark Sandler. Machine learning multitrack gain mixing of drums. In <em>147th Audio Engineering Society Convention</em>. 2019.</p>
+</div>
+<div class="citation" id="id11" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MS19b<span class="fn-bracket">]</span></span>
+<p>David Moffat and Mark B Sandler. Approaches in intelligent music production. <em>Arts</em>, 8(5):14, September 2019.</p>
+</div>
+<div class="citation" id="id20" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>MS19c<span class="fn-bracket">]</span></span>
+<p>David Moffat and Mark B Sandler. Approaches in intelligent music production. In <em>Arts</em>, volume 8, 125. MDPI, 2019.</p>
+</div>
+<div class="citation" id="id89" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Ner20<span class="fn-bracket">]</span></span>
+<p>Shahan Nercessian. Neural parametric equalizer matching using differentiable biquads. In <em>Proc. Int. Conf. Digital Audio Effects (eDAFx-20)</em>, 265–272. 2020.</p>
+</div>
+<div class="citation" id="id12" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PD00<span class="fn-bracket">]</span></span>
+<p>François Pachet and Olivier Delerue. On-the-fly multi-track mixing. In <em>109th Convention of the Audio Engineering Society</em>. Audio Engineering Society, 2000.</p>
+</div>
+<div class="citation" id="id4" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PB09<span class="fn-bracket">]</span></span>
+<p>Julian Parker and Stefan Bilbao. Spring reverberation: a physical perspective. In <em>12th International Conference on Digital Audio Effects (DAFx-09)</em>. 2009.</p>
+</div>
+<div class="citation" id="id68" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PGM+19<span class="fn-bracket">]</span></span>
+<p>Adam Paszke, Sam Gross, Francisco Massa, Adam Lerer, James Bradbury, Gregory Chanan, Trevor Killeen, Zeming Lin, Natalia Gimelshein, Luca Antiga, and others. Pytorch: an imperative style, high-performance deep learning library. <em>Advances in neural information processing systems</em>, 2019.</p>
+</div>
+<div class="citation" id="id127" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Pee04<span class="fn-bracket">]</span></span>
+<p>Geoffroy Peeters. A large set of audio features for sound description (similarity and classification) in the CUIDADO project. <em>Analysis/Synthesis Team. IRCAM, Paris, France</em>, 54(0):1–25, 2004.</p>
+</div>
+<div class="citation" id="id72" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PSDV+18<span class="fn-bracket">]</span></span>
+<p>Ethan Perez, Florian Strub, Harm De Vries, Vincent Dumoulin, and Aaron Courville. Film: visual reasoning with a general conditioning layer. In <em>Proceedings of the AAAI Conference on Artificial Intelligence</em>, volume 32. 2018.</p>
+</div>
+<div class="citation" id="id14" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PGR08<span class="fn-bracket">]</span></span>
+<p>Enrique Perez Gonzalez and Joshua Reiss. Determination and correction of individual channel time offsets for signals involved in an audio mixture. In <em>Audio Engineering Society Convention 125</em>. Audio Engineering Society, 2008.</p>
+</div>
+<div class="citation" id="id16" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PGR09<span class="fn-bracket">]</span></span>
+<p>Enrique Perez-Gonzalez and Joshua Reiss. Automatic gain and fader control for live mixing. In <em>2009 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics</em>, 1–4. IEEE, 2009.</p>
+</div>
+<div class="citation" id="id15" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>pgr09<span class="fn-bracket">]</span></span>
+<p>enrique perez-gonzalez and joshua reiss. Automatic equalization of multichannel audio using cross-adaptive methods. <em>journal of the audio engineering society</em>, ():, october 2009. <a class="reference external" href="https://doi.org/">doi:</a>.</p>
+</div>
+<div class="citation" id="id29" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PR14<span class="fn-bracket">]</span></span>
+<p>Pedro D Pestana and Joshua D Reiss. A cross-adaptive dynamic spectral panning technique. In <em>DAFx</em>, 303–307. Erlangen, 2014.</p>
+</div>
+<div class="citation" id="id120" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>PRB17<span class="fn-bracket">]</span></span>
+<p>Pedro Duarte Pestana, Joshua D Reiss, and Álvaro Barbosa. User preference on artificial reverberation and delay time parameters. <em>Journal of the Audio Engineering Society</em>, 65(1/2):100–107, 2017.</p>
+</div>
+<div class="citation" id="id103" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RKH+21<span class="fn-bracket">]</span></span>
+<p>Alec Radford, Jong Wook Kim, Chris Hallacy, Aditya Ramesh, Gabriel Goh, Sandhini Agarwal, Girish Sastry, Amanda Askell, Pamela Mishkin, Jack Clark, and others. Learning transferable visual models from natural language supervision. In <em>International Conference on Machine Learning</em>, 8748–8763. PMLR, 2021.</p>
+</div>
+<div class="citation" id="id36" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RamirezR18<span class="fn-bracket">]</span></span>
+<p>Marco A Martínez Ramírez and Joshua D Reiss. End-to-end equalization with convolutional neural networks. In <em>21st International Conference on Digital Audio Effects (DAFx-18)</em>. 2018.</p>
+</div>
+<div class="citation" id="id31" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RM14<span class="fn-bracket">]</span></span>
+<p>Joshua D Reiss and Andrew McPherson. <em>Audio effects: theory, implementation and application</em>. CRC Press, 2014.</p>
+</div>
+<div class="citation" id="id138" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RM15<span class="fn-bracket">]</span></span>
+<p>Danilo Rezende and Shakir Mohamed. Variational inference with normalizing flows. In <em>International conference on machine learning</em>, 1530–1538. PMLR, 2015.</p>
+</div>
+<div class="citation" id="id93" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>RFB15<span class="fn-bracket">]</span></span>
+<p>Olaf Ronneberger, Philipp Fischer, and Thomas Brox. U-net: convolutional networks for biomedical image segmentation. In <em>International Conference on Medical image computing and computer-assisted intervention</em>, 234–241. Springer, 2015.</p>
+</div>
+<div class="citation" id="id112" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SBStoter+18<span class="fn-bracket">]</span></span>
+<p>Michael Schoeffler, Sarah Bartoschek, Fabian-Robert Stöter, Marlene Roess, Susanne Westphal, Bernd Edler, and Jürgen Herre. Webmushra—a comprehensive framework for web-based listening tests. <em>Journal of Open Research Software</em>, 2018.</p>
+</div>
+<div class="citation" id="id123" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SL61<span class="fn-bracket">]</span></span>
+<p>Manfred R Schroeder and Benjamin F Logan. Colorless artificial reverberation. <em>IRE Transactions on Audio</em>, pages 209–214, 1961.</p>
+</div>
+<div class="citation" id="id21" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SPSK11<span class="fn-bracket">]</span></span>
+<p>Jeffrey Scott, Matthew Prockup, Erik M Schmidt, and Youngmoo E Kim. Automatic multi-track mixing using linear dynamical systems. In <em>Proceedings of the 8th Sound and Music Computing Conference, Padova, Italy</em>, 12. Citeseer, 2011.</p>
+</div>
+<div class="citation" id="id144" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SerraPP21<span class="fn-bracket">]</span></span>
+<p>Joan Serrà, Jordi Pons, and Santiago Pascual. Sesqa: semi-supervised learning for speech quality assessment. In <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 381–385. IEEE, 2021.</p>
+</div>
+<div class="citation" id="id87" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SHC+22<span class="fn-bracket">]</span></span>
+<p>Siyuan Shan, Lamtharn Hantrakul, Jitong Chen, Matt Avent, and David Trevelyan. Differentiable wavetable synthesis. In <em>ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 4598–4602. IEEE, 2022.</p>
+</div>
+<div class="citation" id="id37" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SF19<span class="fn-bracket">]</span></span>
+<p>Di Sheng and György Fazekas. A feature learning siamese model for intelligent control of the dynamic range compressor. In <em>2019 International Joint Conference on Neural Networks (IJCNN)</em>, 1–8. IEEE, 2019.</p>
+</div>
+<div class="citation" id="id130" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Sko16<span class="fn-bracket">]</span></span>
+<p>Esben Skovenborg. Development of semantic scales for music mastering. In <em>Audio Engineering Society Convention 141</em>. 2016.</p>
+</div>
+<div class="citation" id="id137" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SDWMG15<span class="fn-bracket">]</span></span>
+<p>Jascha Sohl-Dickstein, Eric Weiss, Niru Maheswaranathan, and Surya Ganguli. Deep unsupervised learning using nonequilibrium thermodynamics. In <em>International Conference on Machine Learning</em>, 2256–2265. PMLR, 2015.</p>
+</div>
+<div class="citation" id="id135" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SE19<span class="fn-bracket">]</span></span>
+<p>Yang Song and Stefano Ermon. Generative modeling by estimating gradients of the data distribution. <em>Advances in Neural Information Processing Systems</em>, 2019.</p>
+</div>
+<div class="citation" id="id82" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Spa97<span class="fn-bracket">]</span></span>
+<p>James C Spall. A one-measurement form of simultaneous perturbation stochastic approximation. <em>Automatica</em>, 33(1):109–112, 1997.</p>
+</div>
+<div class="citation" id="id142" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SB21<span class="fn-bracket">]</span></span>
+<p>Janne Spijkervet and John Ashley Burgoyne. Contrastive learning of musical representations. <em>arXiv preprint arXiv:2103.09410</em>, 2021.</p>
+</div>
+<div class="citation" id="id10" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SRDM19<span class="fn-bracket">]</span></span>
+<p>Ryan Stables, Joshua D. Reiss, and Brecht De Man. <em>Intelligent Music Production</em>. Focal Press, 2019.</p>
+</div>
+<div class="citation" id="id26" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SBR22<span class="fn-bracket">]</span></span>
+<p>Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. <em>arXiv preprint arXiv:2207.08759</em>, 2022.</p>
+</div>
+<div class="citation" id="id95" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SIC21<span class="fn-bracket">]</span></span>
+<p>Christian J Steinmetz, Vamsi Krishna Ithapu, and Paul Calamia. Filtered noise shaping for time domain room impulse response estimation from reverberant speech. In <em>2021 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics (WASPAA)</em>, 221–225. IEEE, 2021.</p>
+</div>
+<div class="citation" id="id35" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SPPSerra21<span class="fn-bracket">]</span></span>
+<p>Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In <em>ICASSP</em>. IEEE, 2021.</p>
+</div>
+<div class="citation" id="id64" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SR20<span class="fn-bracket">]</span></span>
+<p>Christian J Steinmetz and Joshua D Reiss. Auraloss: audio focused loss functions in pytorch. In <em>Digital Music Research Network One-day Workshop</em>. 2020.</p>
+</div>
+<div class="citation" id="id139" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SPPS21<span class="fn-bracket">]</span></span>
+<p>Christian J. Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In <em>IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)</em>. 2021.</p>
+</div>
+<div class="citation" id="id60" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>SED18<span class="fn-bracket">]</span></span>
+<p>Daniel Stoller, Sebastian Ewert, and Simon Dixon. Wave-u-net: a multi-scale neural network for end-to-end audio source separation. <em>ISMIR</em>, 2018.</p>
+</div>
+<div class="citation" id="id47" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>StoterULM19<span class="fn-bracket">]</span></span>
+<p>Fabian-Robert Stöter, Stefan Uhlich, Antoine Liutkus, and Yuki Mitsufuji. Open-unmix-a reference implementation for music source separation. <em>Journal of Open Source Software</em>, 4(41):1667, 2019.</p>
+</div>
+<div class="citation" id="id79" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TMB21<span class="fn-bracket">]</span></span>
+<p>Zehai Tu, Ning Ma, and Jon Barker. Dhasp: differentiable hearing aid speech processing. In <em>ICASSP 2021-2021 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 296–300. IEEE, 2021.</p>
+</div>
+<div class="citation" id="id102" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TSK+22<span class="fn-bracket">]</span></span>
+<p>Joseph Turian, Jordie Shier, Humair Raj Khan, Bhiksha Raj, Björn W Schuller, Christian J Steinmetz, Colin Malloy, George Tzanetakis, Gissel Velarde, Kirk McNally, and others. Hear: holistic evaluation of audio representations. In <em>NeurIPS 2021 Competitions and Demonstrations Track</em>, 125–145. PMLR, 2022.</p>
+</div>
+<div class="citation" id="id51" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>TJM07<span class="fn-bracket">]</span></span>
+<p>George Tzanetakis, Randy Jones, and Kirk McNally. Stereo panning features for classifying recording production style. In <em>ISMIR</em>, 441–444. 2007.</p>
+</div>
+<div class="citation" id="id5" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>VZolzerA06<span class="fn-bracket">]</span></span>
+<p>Vincent Verfaille, U. Zölzer, and Daniel Arfib. Adaptive digital audio effects (A-DAFx): a new class of sound transformations. <em>IEEE Transactions on Audio, Speech and Language Processing</em>, 14(5):1817–1831, 2006.</p>
+</div>
+<div class="citation" id="id121" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ValimakiPS+12<span class="fn-bracket">]</span></span>
+<p>Vesa Välimäki, Julian D Parker, Lauri Savioja, Julius O Smith, and Jonathan S Abel. Fifty years of artificial reverberation. <em>IEEE Transactions on Audio, Speech, and Language Processing</em>, 20(5):1421–1448, 2012.</p>
+</div>
+<div class="citation" id="id8" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ValimakiR16<span class="fn-bracket">]</span></span>
+<p>Vesa Välimäki and Joshua D Reiss. All about audio equalization: solutions and frontiers. <em>Applied Sciences</em>, 6(5):129, 2016.</p>
+</div>
+<div class="citation" id="id18" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WRA12<span class="fn-bracket">]</span></span>
+<p>Dominic Ward, Joshua D Reiss, and Cham Athwal. Multitrack mixing using a model of loudness and partial loudness. In <em>Audio Engineering Society Convention 133</em>. Audio Engineering Society, 2012.</p>
+</div>
+<div class="citation" id="id105" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WWM+17<span class="fn-bracket">]</span></span>
+<p>Dominic Ward, Hagen Wierstorf, Russell Mason, Mark Plumbley, and Christopher Hummersone. Estimating the loudness balance of musical mixtures using audio source separation. In <em>Proceedings of the 3rd Workshop on Intelligent Music Production (WIMP)</em>. 2017.</p>
+</div>
+<div class="citation" id="id33" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WMMS20<span class="fn-bracket">]</span></span>
+<p>Thomas Wilmering, David Moffat, Alessia Milo, and Mark B Sandler. A history of audio effects. <em>Applied Sciences</em>, 10(3):791, 2020.</p>
+</div>
+<div class="citation" id="id49" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WFBS20<span class="fn-bracket">]</span></span>
+<p>Minz Won, Andres Ferraro, Dmitry Bogdanov, and Xavier Serra. Evaluation of cnn-based automatic music tagging models. In <em>Proc. of 17th Sound and Music Computing</em>. 2020.</p>
+</div>
+<div class="citation" id="id90" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WValimaki+22<span class="fn-bracket">]</span></span>
+<p>Alec Wright, Vesa Välimäki, and others. Grey-box modelling of dynamic range compression. In <em>Proc. Int. Conf. Digital Audio Effects (DAFX), Vienna, Austria</em>, 304–311. 2022.</p>
+</div>
+<div class="citation" id="id143" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>WCZ+22<span class="fn-bracket">]</span></span>
+<p>Yusong Wu, Ke Chen, Tianyu Zhang, Yuchen Hui, Taylor Berg-Kirkpatrick, and Shlomo Dubnov. Large-scale contrastive language-audio pretraining with feature fusion and keyword-to-caption augmentation. <em>arXiv preprint arXiv:2211.06687</em>, 2022.</p>
+</div>
+<div class="citation" id="id62" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>YSK20<span class="fn-bracket">]</span></span>
+<p>Ryuichi Yamamoto, Eunwoo Song, and Jae-Min Kim. Parallel wavegan: a fast waveform generation model based on generative adversarial networks with multi-resolution spectrogram. In <em>ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)</em>, 6199–6203. IEEE, 2020.</p>
+</div>
+<div class="citation" id="id2" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>Zolzer11<span class="fn-bracket">]</span></span>
+<p>Udo Zölzer. <em>DAFX: digital audio effects</em>. John Wiley and Sons, 2011.</p>
+</div>
+<div class="citation" id="id30" role="doc-biblioentry">
+<span class="label"><span class="fn-bracket">[</span>ZolzerAA+02<span class="fn-bracket">]</span></span>
+<p>Udo Zölzer, Xavier Amatriain, Daniel Arfib, Jordi Bonada, Giovanni De Poli, Pierre Dutilleux, Gianpaolo Evangelista, Florian Keiler, Alex Loscos, Davide Rocchesso, and others. <em>DAFX-Digital audio effects</em>. John Wiley and Sons, 2002.</p>
+</div>
+</div>
 </div>
 </section>
 
@@ -822,7 +912,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./part_5"
         },
         predefinedOutput: true
@@ -830,43 +920,79 @@ title="Print to PDF"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_conclusion.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Conclusions</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="02_conclusion.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Conclusions</p>
+      </div>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

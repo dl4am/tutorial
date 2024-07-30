@@ -1,112 +1,178 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Differentiable Mixing Console &#8212; Deep Learning for Automatic Mixing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/jquery.js"></script>
-    <script src="../../_static/underscore.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/clipboard.min.js"></script>
-    <script src="../../_static/copybutton.js"></script>
-    <script src="../../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../../_static/copybutton.js?v=f281be69"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script src="../../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'part_2/methods/02_dmc';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Loss Functions" href="../05_loss-functions.html" />
+    <link rel="next" title="Differentable Mixing Style transfer" href="03_diffmst.html" />
     <link rel="prev" title="Mix-Wave-U-Net" href="01_mixwaveunet.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../../landing-page.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../../_static/logo.png" class="logo__image only-light" alt="Deep Learning for Automatic Mixing - Home"/>
+    <script>document.write(`<img src="../../_static/logo.png" class="logo__image only-dark" alt="Deep Learning for Automatic Mixing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -115,438 +181,304 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Audio Engineering
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Audio Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_1/01_music-production.html">
-   Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../../part_1/02_audio-effects.html">
-   Audio effects
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/audio-effects/01_panning.html">
-     Panning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/audio-effects/02_equalization.html">
-     Equalization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/audio-effects/03_compression.html">
-     Compression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../../part_1/audio-effects/04_reverberation.html">
-     Reverberation
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_1/01_music-production.html">Music Production</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../../part_1/02_audio-effects.html">Audio effects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../part_1/audio-effects/01_panning.html">Panning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_1/audio-effects/02_equalization.html">Equalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_1/audio-effects/03_compression.html">Compression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_1/audio-effects/04_reverberation.html">Reverberation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Automatic Mixing
- </span>
-</p>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automatic Mixing</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../01_imp.html">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../02_problem.html">
-   Problem Formulation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../03_diffsp.html">
-   Differentiable signal processing
-  </a>
- </li>
- <li class="toctree-l1 current active has-children">
-  <a class="reference internal" href="../04_methods.html">
-   Methods
-  </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul class="current">
-   <li class="toctree-l2">
-    <a class="reference internal" href="01_mixwaveunet.html">
-     Mix-Wave-U-Net
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     Differentiable Mixing Console
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../05_loss-functions.html">
-   Loss Functions
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../01_imp.html">Intelligent Music Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../02_problem.html">Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../03_diffsp.html">Differentiable signal processing</a></li>
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="../04_methods.html">Methods</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Differentiable Mixing Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Implementation
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_3/01_inference.html">
-   Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_3/02_datasets.html">
-   Datasets for automix systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_3/03_models.html">
-   Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_3/04_training.html">
-   Training
-  </a>
- </li>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="../05_loss-functions.html">Loss Functions</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Evaluation
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Implementation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/01_evaluation.html">
-   Evaluation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/02_listening-tests.html">
-   Listening Tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_4/03_evaluate.html">
-   Evaluation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_3/01_inference.html">Inference</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../../part_3/02_datasets.html">Datasets for automix systems</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../part_3/03_models.html">Models</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../../part_3/04_training.html">Training</a></li>
+
+
+
+
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Conclusion
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_5/01_future-directions.html">
-   Future Directions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_5/02_conclusion.html">
-   Conclusions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../../part_5/03_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_4/01_evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_4/02_listening-tests.html">Listening Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_4/03_evaluate.html">Evaluation</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Conclusion</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../../part_5/01_future-directions.html">Future Directions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_5/02_conclusion.html">Conclusions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../part_5/03_references.html">References</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/methods/02_dmc.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../../_sources/part_2/methods/02_dmc.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/dl4am/tutorial"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/methods/02_dmc.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../../_sources/part_2/methods/02_dmc.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#encoder">
-   Encoder
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#post-processor">
-   Post-processor
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformation-network">
-   Transformation network
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Differentiable Mixing Console</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#encoder">
-   Encoder
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#post-processor">
-   Post-processor
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#transformation-network">
-   Transformation network
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Differentiable Mixing Console</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processor">Post-processor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-network">Transformation network</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="differentiable-mixing-console">
-<h1>Differentiable Mixing Console<a class="headerlink" href="#differentiable-mixing-console" title="Permalink to this headline">#</a></h1>
+<h1>Differentiable Mixing Console<a class="headerlink" href="#differentiable-mixing-console" title="Link to this heading">#</a></h1>
 <p>In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span>. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.</p>
 <figure class="align-center" id="dmc">
-<img alt="../../_images/dmc.svg" src="../../_images/dmc.svg" /><figcaption>
-<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Complete Differentiable Mixing Console with subsystems</span><a class="headerlink" href="#dmc" title="Permalink to this image">#</a></p>
+<img alt="../../_images/dmc.svg" src="../../_images/dmc.svg" />
+<figcaption>
+<p><span class="caption-number">Fig. 21 </span><span class="caption-text">Complete Differentiable Mixing Console with subsystems</span><a class="headerlink" href="#dmc" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>The differentiable mixing console (DMC) is comprised of three main subsystems, each implemented as a separate neural network module. To construct the complete system, the same instance of these modules are applied to each input recording, enabling weight sharing, which treats the input recordings as an unordered set. The encoder is tasked with extracting relevant features from each input recording. These embeddings are then combined to create a context embedding that captures information across all input recordings in a single embedding. Each input embedding is combined with the context embedding and passed to the post-processor that maps these inputs to the control parameter space of the mixing console for the respective channel of the mixing console. Finally, a transformation network takes the audio signal from the respective input recording along with the predicted parameters to process the manipulated recording. The final stereo mixture is then created by the summation of all of the manipulated recordings.</p>
 <p>This provides a number of unique benefits, namely permutation invariance with respect to the ordering of the input recordings, but more importantly the ability to adapt to a variable number of tracks and no assumed taxonomy for the input sources. This means that the system is capable of adapting to real-world scenarios wherein the number of inputs and their identity is highly variable. This contrasts with Mix-Wave-U-Net which accepts a fixed number and ordering of the input tracks. While this works in cases where the training dataset obeys a strict structure, it places a limitation on scenarios where the model can be applied. Now we will walk through each of the subsystems describing the overall operation of the system.</p>
 <section id="encoder">
-<h2>Encoder<a class="headerlink" href="#encoder" title="Permalink to this headline">#</a></h2>
+<h2>Encoder<a class="headerlink" href="#encoder" title="Link to this heading">#</a></h2>
 <p>In order to estimate mixing parameters for each input recording the model must first extract relevant information from each recording. To achieve this, DMC utilizes a standard CNN operating on spectrograms, in this case the VGGish architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id59" title="Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In ICASSP, 131–135. IEEE, 2017.">HCE+17</a>]</span>. This encoder produces one embedding for approximately each second of the input signal. This means that a series of embeddings will be produced for each input recording. To aggregate information over time the mean of these embeddings is computed, which equally weights each time step. More sophisticated temporal aggregation approaches could be considered here, however the original implementation considers the mean as it is the simplest aggregation method.</p>
 <p>It is important to note that the parameter estimation is a cross-dependant process that must consider the content of all other tracks when making a decision about the parameters for a single track. To address this DMC introduces a context embedding. The context embedding is simply the mean across all aggregated input recording embeddings. This creates a representation that captures all of the content present within the mix. Again more sophisticated aggregation methodologies could be considered, however the mean represents one of the most straightforward methods for permutation invariant aggregation. After computing the embedding for each input recording and using these embeddings to produce the context embedding (there is only a single context embedding for each mix), this set of embeddings will be passed on to the post-processor module in order to project the embeddings from each track into the parameter space of each channel of the mixing console.</p>
 </section>
 <section id="post-processor">
-<h2>Post-processor<a class="headerlink" href="#post-processor" title="Permalink to this headline">#</a></h2>
+<h2>Post-processor<a class="headerlink" href="#post-processor" title="Link to this heading">#</a></h2>
 <p>Once the input embeddings and context embedding have been generated, it is the task of the post-processor to map these embeddings to the control parameters for each effect that will operate on each input recording. Again, the weights of the post-process are shared across all input recordings. In effect this means that the post-processor, which is implemented as a multi-layer perception (MLP) will be run once for each input recording, where the input to the post-processor is the concatenation of the respective input embedding along with the global content embedding. Each time the post-processor is called one set of control parameters is generated, which will then be passed onto the differentiable mixing console in order to generate the mix.</p>
 </section>
 <section id="transformation-network">
-<h2>Transformation network<a class="headerlink" href="#transformation-network" title="Permalink to this headline">#</a></h2>
+<h2>Transformation network<a class="headerlink" href="#transformation-network" title="Link to this heading">#</a></h2>
 <p>One key contribution of this work was the introduction of the concept of <em>proxy networks</em>. Since our goal is to train an automatic mixing system in an end-to-end fashion using a loss computed in the audio domain (as opposed to the parameter space), this requires a method for computing gradients through each operation of the mixing console. In practice this entails computing gradients for potentially complex signal processing devices such as dynamic range compressors and artificial reverberators, which either might not be differentiable, have intractable gradients, or be black-box in nature. The proxy network approach provides an alternative by first training a neural network to emulate the behavior of the mixing console, which can then be used as a proxy during optimization.</p>
 <figure class="align-center" id="channel-strip">
-<img alt="../../_images/channel-strip.svg" src="../../_images/channel-strip.svg" /><figcaption>
-<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Audio effects and their control parameters in the proposed transformation network.</span><a class="headerlink" href="#channel-strip" title="Permalink to this image">#</a></p>
+<img alt="../../_images/channel-strip.svg" src="../../_images/channel-strip.svg" />
+<figcaption>
+<p><span class="caption-number">Fig. 22 </span><span class="caption-text">Audio effects and their control parameters in the proposed transformation network.</span><a class="headerlink" href="#channel-strip" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>In the original work, the authors construct two variants of what they call the transformation network, which is tasked with emulating the set of effects in each channel of the mixing console.
 In the first case, they use a simple transformation network that consists of only gain and panning, which can be implemented as differentiable components.
 In the second formulation they leverage a pretrained neural network that was trained to emulate the behavior of a chain of audio effects (equalisation, compression, and reverberation), as a function of their control parameters. This formulation is shown in <a class="reference internal" href="#channel-strip"><span class="std std-numref">Fig. 22</span></a>.</p>
 <figure class="align-center" id="proxy-network">
-<img alt="../../_images/proxy-network.svg" src="../../_images/proxy-network.svg" /><figcaption>
-<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Proxy network architecture implemented as a temporal convolution network (TCN)</span><a class="headerlink" href="#proxy-network" title="Permalink to this image">#</a></p>
+<img alt="../../_images/proxy-network.svg" src="../../_images/proxy-network.svg" />
+<figcaption>
+<p><span class="caption-number">Fig. 23 </span><span class="caption-text">Proxy network architecture implemented as a temporal convolution network (TCN)</span><a class="headerlink" href="#proxy-network" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <p>To construct the proxy networks they leverage recent work in neural audio effects <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id119" title="Eero-Pekka Damskägg, Lauri Juvela, Vesa Välimäki, and others. Real-time modeling of audio distortion circuits with deep learning. In Proc. Int. Sound and Music Computing Conf.(SMC-19), Malaga, Spain, 332–339. 2019.">DamskaggJValimaki+19</a>]</span>.
@@ -571,7 +503,7 @@ This modulation technique is shown in <a class="reference internal" href="#proxy
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./part_2/methods"
         },
         predefinedOutput: true
@@ -579,50 +511,105 @@ This modulation technique is shown in <a class="reference internal" href="#proxy
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="01_mixwaveunet.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Mix-Wave-U-Net</p>
-        </div>
-    </a>
-    <a class='right-next' id="next-link" href="../05_loss-functions.html" title="next page">
-    <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Loss Functions</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
-    </a>
-</div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
-  
-    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
-    
-</div>
 
-
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="01_mixwaveunet.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Mix-Wave-U-Net</p>
       </div>
+    </a>
+    <a class="right-next"
+       href="03_diffmst.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Differentable Mixing Style transfer</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#encoder">Encoder</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#post-processor">Post-processor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#transformation-network">Transformation network</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>

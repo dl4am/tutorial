@@ -1,110 +1,176 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Intelligent Music Production &#8212; Deep Learning for Automatic Mixing</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+  
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'part_2/01_imp';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Problem Formulation" href="02_problem.html" />
     <link rel="prev" title="Reverberation" href="../part_1/audio-effects/04_reverberation.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
-    
-    <div class="container-fluid" id="banner"></div>
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
 
-    
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../landing-page.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">Deep Learning for Automatic Mixing</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="Deep Learning for Automatic Mixing - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="Deep Learning for Automatic Mixing - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -113,515 +179,284 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Audio Engineering
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Audio Engineering</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_1/01_music-production.html">
-   Music Production
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="../part_1/02_audio-effects.html">
-   Audio effects
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/01_panning.html">
-     Panning
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/02_equalization.html">
-     Equalization
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/03_compression.html">
-     Compression
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">
-     Reverberation
-    </a>
-   </li>
-  </ul>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_1/01_music-production.html">Music Production</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../part_1/02_audio-effects.html">Audio effects</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/01_panning.html">Panning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/02_equalization.html">Equalization</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/03_compression.html">Compression</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_1/audio-effects/04_reverberation.html">Reverberation</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Automatic Mixing
- </span>
-</p>
+</details></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Automatic Mixing</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   Intelligent Music Production
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="02_problem.html">
-   Problem Formulation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="03_diffsp.html">
-   Differentiable signal processing
-  </a>
- </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="04_methods.html">
-   Methods
-  </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
-  <label for="toctree-checkbox-2">
-   <i class="fas fa-chevron-down">
-   </i>
-  </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="methods/01_mixwaveunet.html">
-     Mix-Wave-U-Net
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="methods/02_dmc.html">
-     Differentiable Mixing Console
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="05_loss-functions.html">
-   Loss Functions
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Intelligent Music Production</a></li>
+<li class="toctree-l1"><a class="reference internal" href="02_problem.html">Problem Formulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="03_diffsp.html">Differentiable signal processing</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
+<li class="toctree-l2"><a class="reference internal" href="methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods/02_dmc.html">Differentiable Mixing Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Implementation
- </span>
-</p>
-<ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/01_inference.html">
-   Inference
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/02_datasets.html">
-   Datasets for automix systems
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/03_models.html">
-   Models
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_3/04_training.html">
-   Training
-  </a>
- </li>
+</details></li>
+<li class="toctree-l1"><a class="reference internal" href="05_loss-functions.html">Loss Functions</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Evaluation
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Implementation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/01_evaluation.html">
-   Evaluation
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/02_listening-tests.html">
-   Listening Tests
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_4/03_evaluate.html">
-   Evaluation
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_3/01_inference.html">Inference</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/02_datasets.html">Datasets for automix systems</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/03_models.html">Models</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/04_training.html">Training</a></li>
+
+
+
+
+
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Conclusion
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_5/01_future-directions.html">
-   Future Directions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_5/02_conclusion.html">
-   Conclusions
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../part_5/03_references.html">
-   References
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/01_evaluation.html">Evaluation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/02_listening-tests.html">Listening Tests</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_4/03_evaluate.html">Evaluation</a></li>
+
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Conclusion</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../part_5/01_future-directions.html">Future Directions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_5/02_conclusion.html">Conclusions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../part_5/03_references.html">References</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/01_imp.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/part_2/01_imp.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/dl4am/tutorial"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
+`);
+</script>
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/dl4am/tutorial/issues/new?title=Issue%20on%20page%20%2Fpart_2/01_imp.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
   </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/part_2/01_imp.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
 </button>
-
-      </li>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#knowledge-based-systems">
-   Knowledge-based Systems
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#classical-machine-learning">
-   Classical Machine Learning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#deep-learning-systems">
-   Deep Learning Systems
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#style-transfer">
-     Style transfer
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#considerations">
-   Considerations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretability">
-     Interpretability
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#controllability">
-     Controllability
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#context">
-     Context
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#permutation-invariance">
-     Permutation invariance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#input-taxonomy">
-     Input taxonomy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#number-of-inputs">
-     Number of inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fidelity">
-     Fidelity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expressivity">
-     Expressivity
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Intelligent Music Production</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#knowledge-based-systems">
-   Knowledge-based Systems
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#classical-machine-learning">
-   Classical Machine Learning
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#deep-learning-systems">
-   Deep Learning Systems
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#style-transfer">
-     Style transfer
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#considerations">
-   Considerations
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#interpretability">
-     Interpretability
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#controllability">
-     Controllability
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#context">
-     Context
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#permutation-invariance">
-     Permutation invariance
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#input-taxonomy">
-     Input taxonomy
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#number-of-inputs">
-     Number of inputs
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#fidelity">
-     Fidelity
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#expressivity">
-     Expressivity
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Intelligent Music Production</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-based-systems">Knowledge-based Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-machine-learning">Classical Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-systems">Deep Learning Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#style-transfer">Style transfer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considerations">Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability">Interpretability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controllability">Controllability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-invariance">Permutation invariance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-taxonomy">Input taxonomy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-inputs">Number of inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fidelity">Fidelity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expressivity">Expressivity</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="intelligent-music-production">
-<h1>Intelligent Music Production<a class="headerlink" href="#intelligent-music-production" title="Permalink to this headline">#</a></h1>
+<h1>Intelligent Music Production<a class="headerlink" href="#intelligent-music-production" title="Link to this heading">#</a></h1>
 <p>Intelligent music production is concerned with the design of systems that provide assistance in the process of creating an audio production <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>.
 As introduced in the previous section, the music production process encompasses a wide range of tasks and often places a significant burden on the creator with regards to their knowledge in using the available tools.
 Even for expert users the process of creating a professional production is often time consuming. This reality motivates intelligent music production.
@@ -629,17 +464,17 @@ These systems can provide assistance in many different ways, for example by simp
 <p>For nearly 50 years there has been an interest in the creation of systems capable of automating aspects of audio engineering. One of the earliest such systems was presented in 1975 at the AES Convention in Los Angeles <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id52" title="Dan Dugan. Automatic microphone mixing. In 151st Convention of the Audio Engineering Society. Audio Engineering Society, 1975.">Dug75</a>]</span>. This work presented a system for automatic microphone mixing that aimed to control the gain of multiple microphones for speech adaptively by monitoring the level of other microphones with the goal of reducing feedback. These mixers, which have developed through the years and are still in use in the industry, are intended to give straightforward control over the volume of several channels in situations where a skilled audio engineer is not necessary. The limited control and versatility of these early automatic leveling systems left open the question of how to construct more powerful systems capable of automating more aspects of the music production process.</p>
 <p>Interest in this area was renewed many years layer when <span id="id4">[<a class="reference internal" href="../part_5/03_references.html#id12" title="François Pachet and Olivier Delerue. On-the-fly multi-track mixing. In 109th Convention of the Audio Engineering Society. Audio Engineering Society, 2000.">PD00</a>]</span> proposed a system that allowed listeners to adjust the spatialization of a multitrack mix while meeting a set of constraints set by the audio engineer. This work framed multitrack mixing as an optimization problem, which is a paradigm that has remained influential in the field. As research has developed in intelligent music production, existing approaches are often categorized into three predominant approaches namely, knowledge-based systems, machine learning-based systems and deep learning-based systems <span id="id5">[<a class="reference internal" href="../part_5/03_references.html#id20" title="David Moffat and Mark B Sandler. Approaches in intelligent music production. In Arts, volume 8, 125. MDPI, 2019.">MS19c</a>]</span>.</p>
 <section id="knowledge-based-systems">
-<h2>Knowledge-based Systems<a class="headerlink" href="#knowledge-based-systems" title="Permalink to this headline">#</a></h2>
+<h2>Knowledge-based Systems<a class="headerlink" href="#knowledge-based-systems" title="Link to this heading">#</a></h2>
 <p>The earliest works posed various multitrack mixing tasks as an optimisation problem that aimed at reducing perceptual masking. The expert knowledge was used to define certain rules that controlled the system to function in the desired manner as shown in figure\ref{fig:knowledge_based}. Most of these systems had two signal paths: the main signal path, which applied the transformation, and the side-chain, that aimed at analysing and extracting features from the incoming signal and generating conditional information that directed the main signal path to apply the transformation in a specific manner. The main signal path was optimised based on an optimisation algorithm or a rule base. Most of these systems were based on the assumption that perceptual models used for masking were representative of human perception and the set of underlying rules and constraints truly aligned with the internal goal of mixing engineers.</p>
 <p>In 2007, an autonomous system for panning multitracks in a multitrack mixture was proposed <span id="id6">[<a class="reference internal" href="../part_5/03_references.html#id13" title="E Perez Gonzalez and Joshua D Reiss. Automatic mixing: live downmixing stereo panner. In Proceedings of the 7th International Conference on Digital Audio Effects (DAFx’07), 63–68. 2007.">GR07</a>]</span>. Through a straightforward prioritisation structure and a filter bank of K filters that assess the energy inside each band of each input, this method seeks to lessen spectral masking among K input tracks. With the intention of eliminating spectral masking by spacing apart sources with comparable spectral content, these values are then utilised to guide the panning of each source over various panning steps in the stereo field. Thereafter, other tasks associated with multitrack mixing like balance <span id="id7">[<a class="reference internal" href="../part_5/03_references.html#id16" title="Enrique Perez-Gonzalez and Joshua Reiss. Automatic gain and fader control for live mixing. In 2009 IEEE Workshop on Applications of Signal Processing to Audio and Acoustics, 1–4. IEEE, 2009.">PGR09</a>]</span> equalisaion <span id="id8">[<a class="reference internal" href="../part_5/03_references.html#id15" title="enrique perez-gonzalez and joshua reiss. Automatic equalization of multichannel audio using cross-adaptive methods. journal of the audio engineering society, ():, october 2009. doi:.">pgr09</a>]</span>, delay correction <span id="id9">[<a class="reference internal" href="../part_5/03_references.html#id14" title="Enrique Perez Gonzalez and Joshua Reiss. Determination and correction of individual channel time offsets for signals involved in an audio mixture. In Audio Engineering Society Convention 125. Audio Engineering Society, 2008.">PGR08</a>]</span> were also optimised in a similar way. Though these systems were state-of-the-art at that time, they still lacked versatility to be able to cater to the entire spectrum of the real world projects and were very sensitive to parameter tuning.</p>
 <p>The next few years saw attempts in improving the performance and accuracy of perceptual models. Some researchers also examined approaches that sought to achieve an equal loudness criteria across input channels were also examined, in addition to the objective of decreasing spectral masking within a mix <span id="id10">[<a class="reference internal" href="../part_5/03_references.html#id19" title="Steven Fenton. Automatic mixing of multitrack material using modified loudness models. In Audio Engineering Society Convention 145. Audio Engineering Society, 2018.">Fen18</a>, <a class="reference internal" href="../part_5/03_references.html#id17" title="Stuart Mansbridge, Saoirse Finn, and Joshua D Reiss. Implementation and evaluation of autonomous multi-track fader control. In Audio Engineering Society Convention 132. Audio Engineering Society, 2012.">MFR12</a>, <a class="reference internal" href="../part_5/03_references.html#id15" title="enrique perez-gonzalez and joshua reiss. Automatic equalization of multichannel audio using cross-adaptive methods. journal of the audio engineering society, ():, october 2009. doi:.">pgr09</a>, <a class="reference internal" href="../part_5/03_references.html#id18" title="Dominic Ward, Joshua D Reiss, and Cham Athwal. Multitrack mixing using a model of loudness and partial loudness. In Audio Engineering Society Convention 133. Audio Engineering Society, 2012.">WRA12</a>]</span>. More thorough examination of the mixing practices were also conducted by some researchers to improve the rule base, thus improving the performance of knowledge-based systems <span id="id11">[<a class="reference internal" href="../part_5/03_references.html#id20" title="David Moffat and Mark B Sandler. Approaches in intelligent music production. In Arts, volume 8, 125. MDPI, 2019.">MS19c</a>]</span>. All in all, these systems produced explainable results but could not adapt well to the complexities of real world projects.</p>
 </section>
 <section id="classical-machine-learning">
-<h2>Classical Machine Learning<a class="headerlink" href="#classical-machine-learning" title="Permalink to this headline">#</a></h2>
+<h2>Classical Machine Learning<a class="headerlink" href="#classical-machine-learning" title="Link to this heading">#</a></h2>
 <p>With the popularity of machine learning in the early 21st century, some researchers began to explore these directions for multitrack mixing systems. These systems leverage large amounts of parametric data collected from pros to train systems to do a specific task. \citet{kolasinski2008framework} utilised genetic algorithm and extracted audio features for leveling tracks. Scott et al utilized linear dynamical systems to predict time varying gains based on extracted audio features and a dataset of mutlitrack mixes <span id="id12">[<a class="reference internal" href="../part_5/03_references.html#id21" title="Jeffrey Scott, Matthew Prockup, Erik M Schmidt, and Youngmoo E Kim. Automatic multi-track mixing using linear dynamical systems. In Proceedings of the 8th Sound and Music Computing Conference, Padova, Italy, 12. Citeseer, 2011.">SPSK11</a>]</span>. Investigations were also made into designing more complex processing units like dynamic range compression <span id="id13">[<a class="reference internal" href="../part_5/03_references.html#id36" title="Marco A Martínez Ramírez and Joshua D Reiss. End-to-end equalization with convolutional neural networks. In 21st International Conference on Digital Audio Effects (DAFx-18). 2018.">RamirezR18</a>, <a class="reference internal" href="../part_5/03_references.html#id37" title="Di Sheng and György Fazekas. A feature learning siamese model for intelligent control of the dynamic range compressor. In 2019 International Joint Conference on Neural Networks (IJCNN), 1–8. IEEE, 2019.">SF19</a>]</span>, reverberation <span id="id14">[<a class="reference internal" href="../part_5/03_references.html#id22" title="Adán L Benito and Joshua D Reiss. Intelligent multitrack reverberation based on hinge-loss markov random fields. In Audio Engineering Society Conference: 2017 AES International Conference on Semantic Audio. Audio Engineering Society, 2017.">BR17</a>, <a class="reference internal" href="../part_5/03_references.html#id23" title="Emmanouil T Chourdakis and Joshua D Reiss. A machine-learning approach to application of intelligent artificial reverberation. Journal of the Audio Engineering Society, 65(1/2):56–65, 2017.">CR17</a>, <a class="reference internal" href="../part_5/03_references.html#id24" title="Emmanouil Theofanis Chourdakis and Joshua D Reiss. Automatic control of a digital reverberation effect using hybrid models. In Audio Engineering Society Conference: 60th International Conference: DREAMS (Dereverberation and Reverberation of Audio, Music, and Speech). Audio Engineering Society, 2016.">CR16</a>]</span>, and equalisation <span id="id15">[<a class="reference internal" href="../part_5/03_references.html#id27" title="Stylianos I Mimilakis, Nicholas J Bryan, and Paris Smaragdis. One-shot parametric audio production style transfer with application to frequency equalization. In ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 256–260. IEEE, 2020.">MBS20</a>]</span> which was not possible with knowledge-based systems. However, the lack of availability of enough parametric data (parameter values for the processor along with the dry and processed audio) proved to be a limitation in the further development of this field.</p>
 </section>
 <section id="deep-learning-systems">
-<h2>Deep Learning Systems<a class="headerlink" href="#deep-learning-systems" title="Permalink to this headline">#</a></h2>
+<h2>Deep Learning Systems<a class="headerlink" href="#deep-learning-systems" title="Link to this heading">#</a></h2>
 <p>The advancement of deep learning has provided a new framework for approaching the multitrack mixing problem.
 Through the use of several layers of parameterized computations, deep learning offers a framework for learning complicated, nonlinear mappings directly from high-dimensional data.
 These methods are often characterised by the use of neural networks with many layers, which is optimized using an appropriate loss function with stochastic gradient descent and backpropagation <span id="id16">[<a class="reference internal" href="../part_5/03_references.html#id117" title="Ian Goodfellow, Yoshua Bengio, and Aaron Courville. Deep learning. MIT press, 2016.">GBC16</a>]</span>. This enables that constructing representations that are tailored for the task at hand instead of employing features that are hand-crafted for each sort of input data and task as in earlier machine learning approaches.
@@ -649,45 +484,45 @@ Recent work has demonstrated how to recover the mixing parameters for a multitra
 In the case of producing mixes, a end-to-end drum mixing system involved re-purposing the well known source separation model architecture of Wave-U-Net to generate drum mixes in time domain <span id="id18">[<a class="reference internal" href="../part_5/03_references.html#id34" title="Marco A Martínez-Ramírez, Daniel Stoller, and David Moffat. A deep learning approach to intelligent drum mixing with the Wave-U-Net. Journal of the Audio Engineering Society, 2021.">MartinezRamirezSM21</a>]</span>. At the same time, <span id="id19">[<a class="reference internal" href="../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span> proposed a differentiable mixing console where they implemented neural proxies of a chain of audio processing units that predict parameters for the mixing console controls and are then applied to individual stems and summed to generate a mix. This model was the first to be able to generate mixes for complete songs with any number of stems. However, it still didn’t always produce mixes in sub par with what a human engineer can, which is potentially due to the limited availability of training data.</p>
 <p><span id="id20">[<a class="reference internal" href="../part_5/03_references.html#id75" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>]</span> propose the idea of using out-of-domain and source separation dataset to train a model to mix. They use wet or processed stems that are easily available and propose a pipeline to normalise the wet audio using effect normalisation schemes that they propose for dynamic range compressor, EQ, Reverb, pan and gain. They then use an adaptive front end to predict the latent representation and feature map of the frequency band which is fed into a latent space mixer, which predicts the mixing mask which is then upsampled to generate the mix. It is noteworthy to mention that they also design a stereo-invariant, perceptually-motivated loss function using a pre-emphasis filter pre-processing which has been found to be very crucial for the mixing task.</p>
 <section id="style-transfer">
-<h3>Style transfer<a class="headerlink" href="#style-transfer" title="Permalink to this headline">#</a></h3>
+<h3>Style transfer<a class="headerlink" href="#style-transfer" title="Link to this heading">#</a></h3>
 <p>Music mixing is a one-to-many problem. There are various acceptable mixes possible for a given set of stems. Most often a mix engineer communicates with the client to understand what they are looking for in a mix and creates a mix that satisfies these conditions. However, a model trained on a multitrack dataset will generate a mix from the dataset mix distribution and it has no way to know what the client wants. Therefore, an intention-driven music mixing system is crucial to the success of these systems.</p>
 <p>Style transfer has been proposed as one method to enable intention-driven intelligent music production.
 Recent systems have used style transfer, where the user provides a reference recording to guide the process, for tasks such as music mastering <span id="id21">[<a class="reference internal" href="../part_5/03_references.html#id74" title="Junghyun Koo, Seungryeol Paik, and Kyogu Lee. End-to-end music remastering system using self-supervised and adversarial training. In ICASSP 2022-2022 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 4608–4612. IEEE, 2022.">KPL22</a>]</span>, control of audio effects <span id="id22">[<a class="reference internal" href="../part_5/03_references.html#id26" title="Christian J Steinmetz, Nicholas J Bryan, and Joshua D Reiss. Style transfer of audio effects with differentiable signal processing. arXiv preprint arXiv:2207.08759, 2022.">SBR22</a>]</span>, as well as mixing {cite}`koo2022music} propose a mixing style transfer system that uses a reference mix to inform the system of the client intention.</p>
 </section>
 </section>
 <section id="considerations">
-<h2>Considerations<a class="headerlink" href="#considerations" title="Permalink to this headline">#</a></h2>
+<h2>Considerations<a class="headerlink" href="#considerations" title="Link to this heading">#</a></h2>
 <p>Some important considerations for an automatic mixing system include interpretability, controllability, efficiency, permutation invariance, the requirement for specific input taxonomy, ability to handle a varying number of input recordings, fidelity, and the expressivity of the signal manipulation in mix creation. There are a lot of details to unpack there. Let’s introduce these eight considerations as we will keep them in mind as we discuss the details of different approaches in the following sections.</p>
 <section id="interpretability">
-<h3>Interpretability<a class="headerlink" href="#interpretability" title="Permalink to this headline">#</a></h3>
+<h3>Interpretability<a class="headerlink" href="#interpretability" title="Link to this heading">#</a></h3>
 <p>While it might not be critical to have a fully explainable model in the XAI sense <span id="id23">[<a class="reference internal" href="../part_5/03_references.html#id56" title="Nick Bryan-Kinns, Berker Banar, Corey Ford, C Reed, Yixiao Zhang, Simon Colton, Jack Armitage, and others. Exploring xai for the arts: explaining latent space in generative music. In 1st Workshop on eXplainable AI approaches for debugging and diagnosis (XAI4Debugging&#64;NeurIPS2021). 2021.">BKBF+21</a>]</span>, it is often desirable for an automatic mixing system to convey what kind of manipulation is applied to each input recording in the creation of the mix. For example, this can easily be achieved by parameter estimation approaches, but is somewhat problematic for direct transformation approaches.</p>
 </section>
 <section id="controllability">
-<h3>Controllability<a class="headerlink" href="#controllability" title="Permalink to this headline">#</a></h3>
+<h3>Controllability<a class="headerlink" href="#controllability" title="Link to this heading">#</a></h3>
 <p>Similar to interpretability, a system with a level of controllability will enable the user to not only understand what signal transformations have been applied, but also enable adjustment of these transformations <span id="id24">[<a class="reference internal" href="../part_5/03_references.html#id78" title="Cheng-Zhi Anna Huang, Hendrik Vincent Koops, Ed Newton-Rex, Monica Dinculescu, and Carrie J Cai. Ai song contest: human-ai co-creation in songwriting. arXiv preprint arXiv:2010.05388, 2020.">HKNR+20</a>]</span>. Again, parameter estimation approaches enable this behavior by default, but direct transformation methods could also achieve controllability if they incorporate specialized conditioning mechanisms in the model.</p>
 </section>
 <section id="context">
-<h3>Context<a class="headerlink" href="#context" title="Permalink to this headline">#</a></h3>
+<h3>Context<a class="headerlink" href="#context" title="Link to this heading">#</a></h3>
 <p>Closely related to controllability, although distinct, is the notion of context, or context-aware systems <span id="id25">[<a class="reference internal" href="../part_5/03_references.html#id55" title="M Nyssim Lefford, Gary Bromham, György Fazekas, and David Moffat. Context aware intelligent mixing systems. Journal of the Audio Engineering Society, 2021.">LBFM21</a>]</span>. As discussed in Section 1, context plays a central role in shaping the final outcome in the audio production process. As a result, it is important to consider to what degree an automatic mixing system is capable of understanding and adapting to the context.</p>
 </section>
 <section id="permutation-invariance">
-<h3>Permutation invariance<a class="headerlink" href="#permutation-invariance" title="Permalink to this headline">#</a></h3>
+<h3>Permutation invariance<a class="headerlink" href="#permutation-invariance" title="Link to this heading">#</a></h3>
 <p>An important realization is that the input recordings provided to the system are an unordered set. This means that the order in which the recordings are provided to our system should ideally not change the results. Some systems address this by adopting a fixed input taxonomy, but this restricts the system flexibility. Other approaches might deal with this by treating the input recordings as a set, often achieving this with weight sharing across the input recordings. We will discuss this further in the following sections.</p>
 </section>
 <section id="input-taxonomy">
-<h3>Input taxonomy<a class="headerlink" href="#input-taxonomy" title="Permalink to this headline">#</a></h3>
+<h3>Input taxonomy<a class="headerlink" href="#input-taxonomy" title="Link to this heading">#</a></h3>
 <p>As alluded to in the previous point, it is often beneficial to define a fixed input taxonomy. This means the system is trained using a dataset and model where the kind and number of sources that are passed to the system are fixed during training and inference. For example, in a system that mixes drum recordings, the inputs might always be presented to the system as an ordered set: “kick, snare, hi-hat, overhead left, overhead right, tom 1, tom 2”. While this often makes the process of creating an automatic mixing system simpler, it limits the ability of the system to be deployed in real-world scenarios wherein there exists limited structure with regards to the input recordings.</p>
 </section>
 <section id="number-of-inputs">
-<h3>Number of inputs<a class="headerlink" href="#number-of-inputs" title="Permalink to this headline">#</a></h3>
+<h3>Number of inputs<a class="headerlink" href="#number-of-inputs" title="Link to this heading">#</a></h3>
 <p>Closely related to the input taxonomy is how the system handles a variable number of input recordings. Some systems might handle this by simply defining a maximum number of input recordings, inserting silence when an example contains fewer than the maximum. Other approaches that utilize weight sharing can potentially work around this and adapt to a variable number of sources, even those greater than seen during training since they treat the input recordings as a set and not a fixed vector.</p>
 </section>
 <section id="fidelity">
-<h3>Fidelity<a class="headerlink" href="#fidelity" title="Permalink to this headline">#</a></h3>
+<h3>Fidelity<a class="headerlink" href="#fidelity" title="Link to this heading">#</a></h3>
 <p>In audio engineering providing transformations to the sound that limit noise and distortion is critical. While noise, distortion, and other destructive transformations have applications in music production, the default assumption is that systems for processing audio signals will not impact unwanted artifacts. This is an important consideration as the utility of our automatic mixing system is largely dependent on the ability to produce a desirable mixture to the user that contains no audible artifacts.</p>
 </section>
 <section id="expressivity">
-<h3>Expressivity<a class="headerlink" href="#expressivity" title="Permalink to this headline">#</a></h3>
+<h3>Expressivity<a class="headerlink" href="#expressivity" title="Link to this heading">#</a></h3>
 <p>An important consideration is to ensure that the process employed to create a mixture in the automatic mixing system is capable of producing the mix in the dataset. This can be a challenge for parameter estimation models.</p>
 </section>
 </section>
@@ -705,7 +540,7 @@ Recent systems have used style transfer, where the user provides a reference rec
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./part_2"
         },
         predefinedOutput: true
@@ -713,50 +548,119 @@ Recent systems have used style transfer, where the user provides a reference rec
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../part_1/audio-effects/04_reverberation.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Reverberation</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../part_1/audio-effects/04_reverberation.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reverberation</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="02_problem.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="02_problem.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Problem Formulation</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#knowledge-based-systems">Knowledge-based Systems</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#classical-machine-learning">Classical Machine Learning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#deep-learning-systems">Deep Learning Systems</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#style-transfer">Style transfer</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#considerations">Considerations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#interpretability">Interpretability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#controllability">Controllability</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#context">Context</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#permutation-invariance">Permutation invariance</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#input-taxonomy">Input taxonomy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#number-of-inputs">Number of inputs</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fidelity">Fidelity</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#expressivity">Expressivity</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Christian J. Steinmetz, Soumya Sai Vanka, Marco Martínez, Gary Bromham
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
