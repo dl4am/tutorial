@@ -1,4 +1,4 @@
-# Fx-Normalization: A Novel Approach to Automatic Music Mixing
+# Fx-Normalization
 
 ## Introduction
 
@@ -57,7 +57,7 @@ Block diagram of the proposed model
 The paper proposes a new architecture based on models from audio effects modeling and source separation. It consists of:
 
 1. Adaptive Front-end: Learns a filter-bank and frequency decomposition.
-2. Latent-space Mixer0: Uses stacked TCNs and BLSTMs to learn a mixing mask.
+2. Latent-space Mixer: Uses stacked TCNs and BLSTMs to learn a mixing mask.
 3. Mixing Back-End: Applies the mask, performs dynamic equalization and reverberation filtering, and uses a Squeeze-and-Excitation Block for loudness and panning.
 
 ## Loss Function
@@ -69,7 +69,6 @@ The paper explores variations of a stereo-invariant loss function, incorporating
 The study uses both small (MUSDB18) and large (PrivateDataSet + MUSDB18) datasets of wet stems for training and validation. A private set of 18 dry multitrack songs is used for testing.
 
 ## Listening Test
-
 
 ```{figure} /assets/figures/fxnorm/fxnorm_listening_test_results.png
 :name: fxnorm_listening_test_results
