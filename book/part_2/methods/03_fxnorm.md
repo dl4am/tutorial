@@ -70,14 +70,6 @@ The study uses both small (MUSDB18) and large (PrivateDataSet + MUSDB18) dataset
 
 ## Listening Test
 
-```{figure} /assets/figures/fxnorm/fxnorm_listening_test_ui.png
-:name: fxnorm_listening_test_ui
-:align: center
-
-Listening test user interface.
-
-```
-
 ```{figure} /assets/figures/fxnorm/fxnorm_listening_test_results.png
 :name: fxnorm_listening_test_results
 :align: center
