@@ -1,4 +1,4 @@
-# Fx-Normalization: A Novel Approach to Automatic Music Mixing
+# Fx-Normalization
 
 ## Introduction
 
