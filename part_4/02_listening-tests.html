@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -198,7 +198,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../part_2/05_loss-functions.html">Loss Functions</a></li>
@@ -464,12 +465,12 @@ document.write(`
 </section>
 <section id="types-of-tests">
 <h2>Types of Tests<a class="headerlink" href="#types-of-tests" title="Link to this heading">#</a></h2>
-<p>Multi-stimulus tests are often preferred over pairwise or single stimulus tests. Single stimulus tests, such as the Mean Opinion Score (MOS) test, are generally used to rate the overall quality of a stimulus, thus focusing on the content properties of the source material. Conversely, when evaluating the production quality of various mixes, it is preferable for participants to focus on the contrasting mix properties between mixes rather than on the content material of the mixes <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id130" title="Esben Skovenborg. Development of semantic scales for music mastering. In Audio Engineering Society Convention 141. 2016.">Sko16</a>]</span>. Also, as the number of mixtures to be compared increases, it has been found that pairwise tests tend to be less reliable and discriminatory <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>.</p>
+<p>Multi-stimulus tests are often preferred over pairwise or single stimulus tests. Single stimulus tests, such as the Mean Opinion Score (MOS) test, are generally used to rate the overall quality of a stimulus, thus focusing on the content properties of the source material. Conversely, when evaluating the production quality of various mixes, it is preferable for participants to focus on the contrasting mix properties between mixes rather than on the content material of the mixes <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id131" title="Esben Skovenborg. Development of semantic scales for music mastering. In Audio Engineering Society Convention 141. 2016.">Sko16</a>]</span>. Also, as the number of mixtures to be compared increases, it has been found that pairwise tests tend to be less reliable and discriminatory <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>.</p>
 <p>The most common types of multi-stimulus tests are the following:</p>
 <section id="mushra">
 <h3>MUSHRA<a class="headerlink" href="#mushra" title="Link to this heading">#</a></h3>
 <p>Multiple Stimuli with Hidden Reference and Anchor (MUSHRA) is a well-known testing method initially designed for measuring the perceptual quality of audio codecs. Although this method is widely used in various audio and music perception tasks, the inherent design constraints of the method represent several limitations when evaluating music mixes.</p>
-<p>For instance, given the subjective task at hand, having a professional human-made mix as reference can be problematic, as even commercial mixes made by renown engineers are not always rated highly <span id="id4">[<a class="reference internal" href="../part_5/03_references.html#id131" title="Brecht De Man. Towards a better understanding of mix engineering. PhD thesis, Queen Mary University of London, 2017.">DM17</a>, <a class="reference internal" href="../part_5/03_references.html#id75" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>, <a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>. Thus, when the stimulus has the potential to outperform the reference or hidden anchor, the MUSHRA methodology is not recommended <span id="id5">[<a class="reference internal" href="../part_5/03_references.html#id129" title="Rec ITU-R. ITU-R BS. 1534-3, method for the subjective assessment of intermediate quality level of audio systems. International Telecommunications Union, Geneva, 2015.">IR15</a>]</span>.
+<p>For instance, given the subjective task at hand, having a professional human-made mix as reference can be problematic, as even commercial mixes made by renown engineers are not always rated highly <span id="id4">[<a class="reference internal" href="../part_5/03_references.html#id132" title="Brecht De Man. Towards a better understanding of mix engineering. PhD thesis, Queen Mary University of London, 2017.">DM17</a>, <a class="reference internal" href="../part_5/03_references.html#id76" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>, <a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>. Thus, when the stimulus has the potential to outperform the reference or hidden anchor, the MUSHRA methodology is not recommended <span id="id5">[<a class="reference internal" href="../part_5/03_references.html#id130" title="Rec ITU-R. ITU-R BS. 1534-3, method for the subjective assessment of intermediate quality level of audio systems. International Telecommunications Union, Geneva, 2015.">IR15</a>]</span>.
 Furthermore, we often test mixes for overall production quality or technical preference and not for their similarity to a reference mix, hence rendering the use of a hidden anchor reference as unnecessary.</p>
 <p>Regarding the use of low and mid anchors, when the participants are experts, the use of such anchors might have a negative impact on the test results. This is due to the critical listening skills of experts, whose discrimination of a low anchor, such as a monaural or random processed mix, is trivial. Thus, the presence of a low anchor will tend to compress the ratings of the other stimuli and could distract participants from focusing on the significant contrastive differences within the mixtures <span id="id6">[<a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>. Another argument for not including the anchor is to reduce the number of stimuli and thus allowing tests with a larger number of mixtures to be tested. It should be noted that when the participants are not exclusively experts, the use of low and mid anchors can serve its beneficial original purpose within the test.</p>
 <p>Finally, the MUSHRA method recommends using stimuli of no more than 12 seconds, which, based on empirical data, we have found that experts consider this duration to be too short to adequately assess quality within a set of mixtures.</p>
@@ -477,37 +478,37 @@ Furthermore, we often test mixes for overall production quality or technical pre
 <figure class="align-center" id="webmushra">
 <a class="reference internal image-reference" href="../_images/webmushra.svg"><img alt="../_images/webmushra.svg" src="../_images/webmushra.svg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 27 </span><span class="caption-text">MUSHRA test implemented with webMUSHRA <span id="id7">[<a class="reference internal" href="../part_5/03_references.html#id112" title="Michael Schoeffler, Sarah Bartoschek, Fabian-Robert Stöter, Marlene Roess, Susanne Westphal, Bernd Edler, and Jürgen Herre. Webmushra—a comprehensive framework for web-based listening tests. Journal of Open Research Software, 2018.">SBStoter+18</a>]</span>.</span><a class="headerlink" href="#webmushra" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 30 </span><span class="caption-text">MUSHRA test implemented with webMUSHRA <span id="id7">[<a class="reference internal" href="../part_5/03_references.html#id113" title="Michael Schoeffler, Sarah Bartoschek, Fabian-Robert Stöter, Marlene Roess, Susanne Westphal, Bernd Edler, and Jürgen Herre. Webmushra—a comprehensive framework for web-based listening tests. Journal of Open Research Software, 2018.">SBStoter+18</a>]</span>.</span><a class="headerlink" href="#webmushra" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="go-listen">
 <a class="reference internal image-reference" href="../_images/go-listen.svg"><img alt="../_images/go-listen.svg" src="../_images/go-listen.svg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 28 </span><span class="caption-text">MUSHRA test implemented with goListen <span id="id8">[<a class="reference internal" href="../part_5/03_references.html#id133" title="Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. Journal of Open Research Software, 2021.">BZSH21b</a>]</span>.</span><a class="headerlink" href="#go-listen" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 31 </span><span class="caption-text">MUSHRA test implemented with goListen <span id="id8">[<a class="reference internal" href="../part_5/03_references.html#id134" title="Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. Journal of Open Research Software, 2021.">BZSH21b</a>]</span>.</span><a class="headerlink" href="#go-listen" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
 <section id="ape">
 <h3>APE<a class="headerlink" href="#ape" title="Link to this heading">#</a></h3>
-<p>As an alternative for multi-stimulus testing the Audio Perceptual Evaluation (APE) was proposed by <span id="id9">[<a class="reference internal" href="../part_5/03_references.html#id141" title="Brecht De Man and Joshua D Reiss. APE: audio perceptual evaluation toolbox for MATLAB. In Audio Engineering Society Convention 136. 2014.">DMR14</a>]</span>.
+<p>As an alternative for multi-stimulus testing the Audio Perceptual Evaluation (APE) was proposed by <span id="id9">[<a class="reference internal" href="../part_5/03_references.html#id142" title="Brecht De Man and Joshua D Reiss. APE: audio perceptual evaluation toolbox for MATLAB. In Audio Engineering Society Convention 136. 2014.">DMR14</a>]</span>.
 The main difference with the MUSHRA method is that all the stimuli are placed under the same continuous horizontal line, thus allowing instant visualization of the ratings. Also, the use of reference and anchor is optional as well as the maximum length of the stimuli.
 Examples of APE testing interface used in recent automatic music mixing systems:</p>
 <figure class="align-center" id="ape-dmc">
 <a class="reference internal image-reference" href="../_images/APE_DMC.svg"><img alt="../_images/APE_DMC.svg" src="../_images/APE_DMC.svg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 29 </span><span class="caption-text">APE test from <span id="id10">[<a class="reference internal" href="../part_5/03_references.html#id139" title="Christian J. Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP). 2021.">SPPS21</a>]</span>.</span><a class="headerlink" href="#ape-dmc" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 32 </span><span class="caption-text">APE test from <span id="id10">[<a class="reference internal" href="../part_5/03_references.html#id140" title="Christian J. Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP). 2021.">SPPS21</a>]</span>.</span><a class="headerlink" href="#ape-dmc" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="ape-wun-drums">
 <a class="reference internal image-reference" href="../_images/APE_WaveUNet_Drums.svg"><img alt="../_images/APE_WaveUNet_Drums.svg" src="../_images/APE_WaveUNet_Drums.svg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 30 </span><span class="caption-text">APE test from {cite}`martinez2021deep.</span><a class="headerlink" href="#ape-wun-drums" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 33 </span><span class="caption-text">APE test from {cite}`martinez2021deep.</span><a class="headerlink" href="#ape-wun-drums" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 <figure class="align-center" id="ape-fxnorm">
 <a class="reference internal image-reference" href="../_images/APE_FxNorm.svg"><img alt="../_images/APE_FxNorm.svg" src="../_images/APE_FxNorm.svg" style="width: 70%;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 31 </span><span class="caption-text">APE test from~\cite{martinez2022automatic}. For this test, dry stems were used as references. This is based on feedback from pilot tests and was proposed by the expert participants.</span><a class="headerlink" href="#ape-fxnorm" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 34 </span><span class="caption-text">APE test from~\cite{martinez2022automatic}. For this test, dry stems were used as references. This is based on feedback from pilot tests and was proposed by the expert participants.</span><a class="headerlink" href="#ape-fxnorm" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </section>
@@ -515,7 +516,7 @@ Examples of APE testing interface used in recent automatic music mixing systems:
 <section id="criteria">
 <h2>Criteria<a class="headerlink" href="#criteria" title="Link to this heading">#</a></h2>
 <p>The most common criterion used in multi-stimulus testing is to ask participants to rate various mixes according to their overall preference. This encompasses both technical and subjective criteria and is often based on a scale from 0 to 1 or from 0 to 100, with or without the use of semantic labels associated with a certain range of the numerical scale <span id="id11">[<a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>.</p>
-<p>When looking for more detailed and discriminatory perceptual ratings, the general preference criterion can be divided into Production Value, Clarity and Excitement as shown in <span id="id12">[<a class="reference internal" href="../part_5/03_references.html#id75" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>, <a class="reference internal" href="../part_5/03_references.html#id29" title="Pedro D Pestana and Joshua D Reiss. A cross-adaptive dynamic spectral panning technique. In DAFx, 303–307. Erlangen, 2014.">PR14</a>]</span>, which are defined as follows:</p>
+<p>When looking for more detailed and discriminatory perceptual ratings, the general preference criterion can be divided into Production Value, Clarity and Excitement as shown in <span id="id12">[<a class="reference internal" href="../part_5/03_references.html#id76" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>, <a class="reference internal" href="../part_5/03_references.html#id29" title="Pedro D Pestana and Joshua D Reiss. A cross-adaptive dynamic spectral panning technique. In DAFx, 303–307. Erlangen, 2014.">PR14</a>]</span>, which are defined as follows:</p>
 <ul class="simple">
 <li><p><strong>Production Value</strong>: Technical quality of the mix. This corresponds to subjective preferences related to the overall technical quality of the mix, considering all the audio mixing characteristics; such as dynamics, EQ, balance, and stereo image.</p></li>
 <li><p><strong>Clarity</strong>: Ability to differentiate musical sources. This is entirely objective and corresponds to the perceived presence or absence of masking.</p></li>
@@ -551,7 +552,7 @@ Examples of APE testing interface used in recent automatic music mixing systems:
 <p>The following are the most common used platforms for perceptual listening tests:</p>
 <section id="web-audio-evaluation-tool">
 <h3>Web Audio Evaluation Tool<a class="headerlink" href="#web-audio-evaluation-tool" title="Link to this heading">#</a></h3>
-<p><span id="id14">[<a class="reference internal" href="../part_5/03_references.html#id113">JMM+15</a>]</span></p>
+<p><span id="id14">[<a class="reference internal" href="../part_5/03_references.html#id114">JMM+15</a>]</span></p>
 <ul class="simple">
 <li><p>APE and MUSHRA</p></li>
 <li><p>Reference is optional</p></li>
@@ -563,7 +564,7 @@ Examples of APE testing interface used in recent automatic music mixing systems:
 </section>
 <section id="id15">
 <h3>webMUSHRA<a class="headerlink" href="#id15" title="Link to this heading">#</a></h3>
-<p><span id="id16">[<a class="reference internal" href="../part_5/03_references.html#id112" title="Michael Schoeffler, Sarah Bartoschek, Fabian-Robert Stöter, Marlene Roess, Susanne Westphal, Bernd Edler, and Jürgen Herre. Webmushra—a comprehensive framework for web-based listening tests. Journal of Open Research Software, 2018.">SBStoter+18</a>]</span></p>
+<p><span id="id16">[<a class="reference internal" href="../part_5/03_references.html#id113" title="Michael Schoeffler, Sarah Bartoschek, Fabian-Robert Stöter, Marlene Roess, Susanne Westphal, Bernd Edler, and Jürgen Herre. Webmushra—a comprehensive framework for web-based listening tests. Journal of Open Research Software, 2018.">SBStoter+18</a>]</span></p>
 <ul class="simple">
 <li><p>MUSHRA</p></li>
 <li><p>Training stage is possible</p></li>
@@ -574,7 +575,7 @@ Examples of APE testing interface used in recent automatic music mixing systems:
 </section>
 <section id="golisten">
 <h3>goListen<a class="headerlink" href="#golisten" title="Link to this heading">#</a></h3>
-<p><span id="id17">[<a class="reference internal" href="../part_5/03_references.html#id111" title="Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. Journal of Open Research Software, 2021. URL: http://doi.org/10.5334/jors.361.">BZSH21a</a>]</span></p>
+<p><span id="id17">[<a class="reference internal" href="../part_5/03_references.html#id112" title="Dan Barry, Qijian Zhang, Pheobe Wenyi Sun, and Andrew Hines. Go listen: an end-to-end online listening test platform. Journal of Open Research Software, 2021. URL: http://doi.org/10.5334/jors.361.">BZSH21a</a>]</span></p>
 <ul class="simple">
 <li><p>MUSHRA</p></li>
 <li><p>Reference is optional</p></li>

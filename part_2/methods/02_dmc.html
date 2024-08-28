@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -62,7 +62,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'part_2/methods/02_dmc';</script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Differentable Mixing Style transfer" href="03_diffmst.html" />
+    <link rel="next" title="Fx-Normalization: A Novel Approach to Automatic Music Mixing" href="03_fxnorm.html" />
     <link rel="prev" title="Mix-Wave-U-Net" href="01_mixwaveunet.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -200,7 +200,8 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../04_methods.html">Methods</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2 current active"><a class="current reference internal" href="#">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="03_diffmst.html">Differentable Mixing Style transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../05_loss-functions.html">Loss Functions</a></li>
@@ -445,7 +446,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="differentiable-mixing-console">
 <h1>Differentiable Mixing Console<a class="headerlink" href="#differentiable-mixing-console" title="Link to this heading">#</a></h1>
-<p>In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span>. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.</p>
+<p>In contrast to Mix-Wave-U-Net, the Differentiable Mixing Console (DMC) is a parameter estimation approach that explicitly defines the structure of a mixing console and uses a neural network to predict the configuration based on an analysis of the input recordings <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id36" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>]</span>. The main architecture consists of three subsystems, an encoder, post-processor, and transformation network. A unique property of this system is that weight-sharing is heavily utilized such that one instance of each of these subsystems is used to produce mixing parameters for each input recording and a context embedding is used to signal to the weight-shared networks the content of the other input when selecting the parameters for a specific input.</p>
 <figure class="align-center" id="dmc">
 <img alt="../../_images/dmc.svg" src="../../_images/dmc.svg" />
 <figcaption>
@@ -456,7 +457,7 @@ document.write(`
 <p>This provides a number of unique benefits, namely permutation invariance with respect to the ordering of the input recordings, but more importantly the ability to adapt to a variable number of tracks and no assumed taxonomy for the input sources. This means that the system is capable of adapting to real-world scenarios wherein the number of inputs and their identity is highly variable. This contrasts with Mix-Wave-U-Net which accepts a fixed number and ordering of the input tracks. While this works in cases where the training dataset obeys a strict structure, it places a limitation on scenarios where the model can be applied. Now we will walk through each of the subsystems describing the overall operation of the system.</p>
 <section id="encoder">
 <h2>Encoder<a class="headerlink" href="#encoder" title="Link to this heading">#</a></h2>
-<p>In order to estimate mixing parameters for each input recording the model must first extract relevant information from each recording. To achieve this, DMC utilizes a standard CNN operating on spectrograms, in this case the VGGish architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id59" title="Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In ICASSP, 131–135. IEEE, 2017.">HCE+17</a>]</span>. This encoder produces one embedding for approximately each second of the input signal. This means that a series of embeddings will be produced for each input recording. To aggregate information over time the mean of these embeddings is computed, which equally weights each time step. More sophisticated temporal aggregation approaches could be considered here, however the original implementation considers the mean as it is the simplest aggregation method.</p>
+<p>In order to estimate mixing parameters for each input recording the model must first extract relevant information from each recording. To achieve this, DMC utilizes a standard CNN operating on spectrograms, in this case the VGGish architecture <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id60" title="Shawn Hershey, Sourish Chaudhuri, Daniel PW Ellis, Jort F Gemmeke, Aren Jansen, R Channing Moore, Manoj Plakal, Devin Platt, Rif A Saurous, Bryan Seybold, and others. Cnn architectures for large-scale audio classification. In ICASSP, 131–135. IEEE, 2017.">HCE+17</a>]</span>. This encoder produces one embedding for approximately each second of the input signal. This means that a series of embeddings will be produced for each input recording. To aggregate information over time the mean of these embeddings is computed, which equally weights each time step. More sophisticated temporal aggregation approaches could be considered here, however the original implementation considers the mean as it is the simplest aggregation method.</p>
 <p>It is important to note that the parameter estimation is a cross-dependant process that must consider the content of all other tracks when making a decision about the parameters for a single track. To address this DMC introduces a context embedding. The context embedding is simply the mean across all aggregated input recording embeddings. This creates a representation that captures all of the content present within the mix. Again more sophisticated aggregation methodologies could be considered, however the mean represents one of the most straightforward methods for permutation invariant aggregation. After computing the embedding for each input recording and using these embeddings to produce the context embedding (there is only a single context embedding for each mix), this set of embeddings will be passed on to the post-processor module in order to project the embeddings from each track into the parameter space of each channel of the mixing console.</p>
 </section>
 <section id="post-processor">
@@ -481,13 +482,13 @@ In the second formulation they leverage a pretrained neural network that was tra
 <p><span class="caption-number">Fig. 23 </span><span class="caption-text">Proxy network architecture implemented as a temporal convolution network (TCN)</span><a class="headerlink" href="#proxy-network" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>To construct the proxy networks they leverage recent work in neural audio effects <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id119" title="Eero-Pekka Damskägg, Lauri Juvela, Vesa Välimäki, and others. Real-time modeling of audio distortion circuits with deep learning. In Proc. Int. Sound and Music Computing Conf.(SMC-19), Malaga, Spain, 332–339. 2019.">DamskaggJValimaki+19</a>]</span>.
+<p>To construct the proxy networks they leverage recent work in neural audio effects <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id120" title="Eero-Pekka Damskägg, Lauri Juvela, Vesa Välimäki, and others. Real-time modeling of audio distortion circuits with deep learning. In Proc. Int. Sound and Music Computing Conf.(SMC-19), Malaga, Spain, 332–339. 2019.">DamskaggJValimaki+19</a>]</span>.
 The basic architecture is shown in <a class="reference internal" href="#proxy-network"><span class="std std-numref">Fig. 23</span></a>.
-At the high level (left) the network is composed of a number of temporal convolutional network (TCN) <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id122" title="Shaojie Bai, J Zico Kolter, and Vladlen Koltun. An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. arXiv preprint arXiv:1803.01271, 2018.">BKK18</a>]</span> blocks along with a conditioning network implemented with an MLP.
+At the high level (left) the network is composed of a number of temporal convolutional network (TCN) <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id123" title="Shaojie Bai, J Zico Kolter, and Vladlen Koltun. An empirical evaluation of generic convolutional and recurrent networks for sequence modeling. arXiv preprint arXiv:1803.01271, 2018.">BKK18</a>]</span> blocks along with a conditioning network implemented with an MLP.
 Each TCN block consists of a 1-d convolution, batch normalization, and a nonlinear activation function.
-In order to adapt the behavior of the network as a function of the control parameters feature-wise linear modulation <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id72" title="Ethan Perez, Florian Strub, Harm De Vries, Vincent Dumoulin, and Aaron Courville. Film: visual reasoning with a general conditioning layer. In Proceedings of the AAAI Conference on Artificial Intelligence, volume 32. 2018.">PSDV+18</a>]</span> is used.
+In order to adapt the behavior of the network as a function of the control parameters feature-wise linear modulation <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id73" title="Ethan Perez, Florian Strub, Harm De Vries, Vincent Dumoulin, and Aaron Courville. Film: visual reasoning with a general conditioning layer. In Proceedings of the AAAI Conference on Artificial Intelligence, volume 32. 2018.">PSDV+18</a>]</span> is used.
 This technique enables adaptation by dynamically shifting and scaling the intermediate activations of the network as a function of the control parameters <span class="math notranslate nohighlight">\(\mathbf{p}\)</span>.
-This modulation technique is shown in <a class="reference internal" href="#proxy-network"><span class="std std-numref">Fig. 23</span></a> (right), where the latent embedding <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> produced by the MLP is projected to a set of scaling <span class="math notranslate nohighlight">\(\bm{\gamma}_n\)</span> and shifting <span class="math notranslate nohighlight">\(\bm{\beta}_n\)</span> parameters. These parameters operate on the output of the batch normalized signal to produce a modulated signal before passing through the nonlinearaity, which is implemented with a Parametric ReLU <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id126" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: surpassing human-level performance on imagenet classification. In Proceedings of the IEEE international conference on computer vision, 1026–1034. 2015.">HZRS15</a>]</span>.</p>
+This modulation technique is shown in <a class="reference internal" href="#proxy-network"><span class="std std-numref">Fig. 23</span></a> (right), where the latent embedding <span class="math notranslate nohighlight">\(\mathbf{z}\)</span> produced by the MLP is projected to a set of scaling <span class="math notranslate nohighlight">\(\bm{\gamma}_n\)</span> and shifting <span class="math notranslate nohighlight">\(\bm{\beta}_n\)</span> parameters. These parameters operate on the output of the batch normalized signal to produce a modulated signal before passing through the nonlinearaity, which is implemented with a Parametric ReLU <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id127" title="Kaiming He, Xiangyu Zhang, Shaoqing Ren, and Jian Sun. Delving deep into rectifiers: surpassing human-level performance on imagenet classification. In Proceedings of the IEEE international conference on computer vision, 1026–1034. 2015.">HZRS15</a>]</span>.</p>
 </section>
 </section>
 
@@ -531,11 +532,11 @@ This modulation technique is shown in <a class="reference internal" href="#proxy
       </div>
     </a>
     <a class="right-next"
-       href="03_diffmst.html"
+       href="03_fxnorm.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Differentable Mixing Style transfer</p>
+        <p class="prev-next-title">Fx-Normalization: A Novel Approach to Automatic Music Mixing</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -200,7 +200,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../part_2/05_loss-functions.html">Loss Functions</a></li>
@@ -450,7 +451,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="compression">
 <h1>Compression<a class="headerlink" href="#compression" title="Link to this heading">#</a></h1>
-<p>Dynamic Range Compression is a nonlinear audio effect that is generally used to control the dynamic range of a sound or combination of sounds. The history of the dynamic range compressor is inextricably linked to changes in trends and styles in popular music production<span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id110" title="Gary Bromham, Dave Moffat, Mathieu Barthet, and György Fazekas. The impact of compressor ballistics on the perceived style of music. In Audio Engineering Society Convention 145. Audio Engineering Society, 2018.">BMBF18</a>]</span>. In our videos compression is used to add bite to the kick drum and also control the level of bass in a subsequent video which also demonstrates how sidechaining works. Fig. \ref{kickbass} depicts the mixing session, and the following sections explain the technical concepts behind nonlinear audio effects and dynamic range compression.</p>
+<p>Dynamic Range Compression is a nonlinear audio effect that is generally used to control the dynamic range of a sound or combination of sounds. The history of the dynamic range compressor is inextricably linked to changes in trends and styles in popular music production<span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id111" title="Gary Bromham, Dave Moffat, Mathieu Barthet, and György Fazekas. The impact of compressor ballistics on the perceived style of music. In Audio Engineering Society Convention 145. Audio Engineering Society, 2018.">BMBF18</a>]</span>. In our videos compression is used to add bite to the kick drum and also control the level of bass in a subsequent video which also demonstrates how sidechaining works. Fig. \ref{kickbass} depicts the mixing session, and the following sections explain the technical concepts behind nonlinear audio effects and dynamic range compression.</p>
 <figure class="align-center" id="kickbass">
 <a class="reference internal image-reference" href="../../_images/Flare-Kick-Bass-Sidechaining.png"><img alt="../../_images/Flare-Kick-Bass-Sidechaining.png" src="../../_images/Flare-Kick-Bass-Sidechaining.png" style="width: 100%;" /></a>
 <figcaption>
@@ -459,7 +460,7 @@ document.write(`
 </figure>
 <section id="nonlinear-effects">
 <h2>Nonlinear effects<a class="headerlink" href="#nonlinear-effects" title="Link to this heading">#</a></h2>
-<p>Nonlinear processors correspond to all the signal processing systems that do not satisfy the linearity condition, i.e. systems that do not have the homogeneous or additive property<span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id118" title="Chi-Tsong Chen. Linear system theory and design. Saunders college publishing, 1984.">Che84</a>]</span>.
+<p>Nonlinear processors correspond to all the signal processing systems that do not satisfy the linearity condition, i.e. systems that do not have the homogeneous or additive property<span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id119" title="Chi-Tsong Chen. Linear system theory and design. Saunders college publishing, 1984.">Che84</a>]</span>.
 These systems have a purposeful or unintentional insertion of harmonic or inharmonic frequency components that are not present in the input signal, which is known as a harmonic and intermodulation distortion<span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>.
 When the system introduces energy at each harmonic or multiple of the input frequency, harmonic distortion occurs. When the system adds or subtracts frequencies between the frequency components of the input signal, intermodulation distortion results<span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>]</span>.
 In the case of musical signals, due to aesthetic reasons, harmonic distortion is a desirable property of nonlinear audio processors, while intermodulation distortion is generally avoided<span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id31" title="Joshua D Reiss and Andrew McPherson. Audio effects: theory, implementation and application. CRC Press, 2014.">RM14</a>]</span>.</p>

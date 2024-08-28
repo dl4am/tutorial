@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -200,7 +200,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1"><a class="reference internal" href="../../part_2/05_loss-functions.html">Loss Functions</a></li>
@@ -458,7 +459,7 @@ document.write(`
 </figure>
 <p>equalizer is normally implemented via a filter bank whose coefficients are obtained from the designed cut-off frequency <span class="math notranslate nohighlight">\(f_{c}\)</span> and quality factor <span class="math notranslate nohighlight">\(Q\)</span>.
 EQ can be implemented in both the time-domain and the frequency-domain and is often performed through a gain <span class="math notranslate nohighlight">\(G\)</span> at a given <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id5" title="Vincent Verfaille, U. Zölzer, and Daniel Arfib. Adaptive digital audio effects (A-DAFx): a new class of sound transformations. IEEE Transactions on Audio, Speech and Language Processing, 14(5):1817-1831, 2006.">VZolzerA06</a>]</span>.</p>
-<p>The filter bank consists of Finite Impulse Response (FIR) or Infinite Impulse Response (IIR) filters, whose main difference corresponds to the absence or presence of feedback loops <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id116" title="Patrick Gaydecki. Foundations of digital signal processing: theory, algorithms and hardware design. Volume 15. Iet, 2004.">Gay04</a>]</span>. The non-recursive FIR discrete difference equation is</p>
+<p>The filter bank consists of Finite Impulse Response (FIR) or Infinite Impulse Response (IIR) filters, whose main difference corresponds to the absence or presence of feedback loops <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id117" title="Patrick Gaydecki. Foundations of digital signal processing: theory, algorithms and hardware design. Volume 15. Iet, 2004.">Gay04</a>]</span>. The non-recursive FIR discrete difference equation is</p>
 <div class="math notranslate nohighlight">
 \[
 y(n) = \sum_{k=0}^{M-1} a_{k} \cdot x(n-k)

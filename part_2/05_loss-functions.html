@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
@@ -63,7 +63,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Inference" href="../part_3/01_inference.html" />
-    <link rel="prev" title="Differentable Mixing Style transfer" href="methods/03_diffmst.html" />
+    <link rel="prev" title="Differentable Mixing Style transfer" href="methods/04_diffmst.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -200,7 +200,8 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="methods/03_diffmst.html">Differentable Mixing Style transfer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Loss Functions</a></li>
@@ -468,7 +469,7 @@ Then we measure the mean-squared (<span class="math notranslate nohighlight">\(L
 \]</div>
 <p>xw
 However, using a single configuration of transform parameters (window size, hop size, etc.) is known to bias this error measurement due to the fixed time-frequency resolution.
-To address this, recent approaches have adopted the multi-resolution or multi-scale STFT loss function <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id83" title="Jesse Engel, Lamtharn Hantrakul, Chenjie Gu, and Adam Roberts. DDSP: differentiable digital signal processing. ICLR, 2021.">EHGR21</a>, <a class="reference internal" href="../part_5/03_references.html#id62" title="Ryuichi Yamamoto, Eunwoo Song, and Jae-Min Kim. Parallel wavegan: a fast waveform generation model based on generative adversarial networks with multi-resolution spectrogram. In ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 6199–6203. IEEE, 2020.">YSK20</a>]</span>.
+To address this, recent approaches have adopted the multi-resolution or multi-scale STFT loss function <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id84" title="Jesse Engel, Lamtharn Hantrakul, Chenjie Gu, and Adam Roberts. DDSP: differentiable digital signal processing. ICLR, 2021.">EHGR21</a>, <a class="reference internal" href="../part_5/03_references.html#id63" title="Ryuichi Yamamoto, Eunwoo Song, and Jae-Min Kim. Parallel wavegan: a fast waveform generation model based on generative adversarial networks with multi-resolution spectrogram. In ICASSP 2020-2020 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP), 6199–6203. IEEE, 2020.">YSK20</a>]</span>.
 This approach extends the existing frequency domain loss function by consider the average error across a range of different time-frequency resolutions.
 We can achieve this by computing the average error at <span class="math notranslate nohighlight">\(M\)</span> time-frequency resolutions</p>
 <div class="math notranslate nohighlight">
@@ -487,7 +488,7 @@ As already discussed, existing loss functions that operate in the time or freque
 However, reversing the left and right orientation often results in an mix that is perceived relatively the similarly by a human listener.
 Furthermore, we can see that reconstructing the exact panning from a mix is often an ill-posed problem as knowing a priori if a certain source will be panned left or right is often not possible.</p>
 <p>This motivates specialized stereophonic loss functions that are invariant to the absolute ordering of the channels.
-The sum and difference loss function, introduced in <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id35" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>, <a class="reference internal" href="../part_5/03_references.html#id64" title="Christian J Steinmetz and Joshua D Reiss. Auraloss: audio focused loss functions in pytorch. In Digital Music Research Network One-day Workshop. 2020.">SR20</a>]</span> uses the sum and difference signals to enable computing an error on the mid and side part of the mix independently.
+The sum and difference loss function, introduced in <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id36" title="Christian J Steinmetz, Jordi Pons, Santiago Pascual, and Joan Serrà. Automatic multitrack mixing with a differentiable mixing console of neural audio effects. In ICASSP. IEEE, 2021.">SPPSerra21</a>, <a class="reference internal" href="../part_5/03_references.html#id65" title="Christian J Steinmetz and Joshua D Reiss. Auraloss: audio focused loss functions in pytorch. In Digital Music Research Network One-day Workshop. 2020.">SR20</a>]</span> uses the sum and difference signals to enable computing an error on the mid and side part of the mix independently.
 First we compute the sum and difference signals in the time domain</p>
 <div class="math notranslate nohighlight">
 \[
@@ -536,7 +537,7 @@ The final loss is computed by measuring the multi-resolution STFT of these sum a
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="methods/03_diffmst.html"
+       href="methods/04_diffmst.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
