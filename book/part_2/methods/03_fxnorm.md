@@ -57,7 +57,7 @@ Block diagram of the proposed model
 The paper proposes a new architecture based on models from audio effects modeling and source separation. It consists of:
 
 1. Adaptive Front-end: Learns a filter-bank and frequency decomposition.
-2. Latent-space Mixer0: Uses stacked TCNs and BLSTMs to learn a mixing mask.
+2. Latent-space Mixer: Uses stacked TCNs and BLSTMs to learn a mixing mask.
 3. Mixing Back-End: Applies the mask, performs dynamic equalization and reverberation filtering, and uses a Squeeze-and-Excitation Block for loudness and panning.
 
 ## Loss Function
