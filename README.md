@@ -12,7 +12,7 @@
  [Marco A. Martínez-Ramírez](https://m-marco.com/)<sup>2</sup>, and [Gary Bromham](https://c4dm.eecs.qmul.ac.uk/)<sup>1</sup>
 
 <sup>1</sup> Centre for Digital Music, Queen Mary University of London<br>
-<sup>2</sup> Sony Group Corporation, Tokyo, Japan <br>
+<sup>2</sup> Sony AI, Tokyo, Japan <br>
 
 </div>
 
@@ -30,7 +30,7 @@ We will then discuss a series of recent deep learning approaches and relevant da
 
 ```
 @book{deeplearning_auto_mix:book,
-    Author = {Steinmetz,Christian and Vanka, Soumya Sai and Martínez, Marco and Bromham, Gary},
+    Author = {Steinmetz, Christian and Vanka, Soumya Sai and Martínez-Ramírez, Marco A. and Bromham, Gary},
     Month = Dec.,
     Publisher = {https://dl4am.github.io/tutorial},
     Title = {Deep Learning for Automatic Mixing},
