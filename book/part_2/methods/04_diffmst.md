@@ -22,7 +22,7 @@ Multitrack mixing involves applying a series of audio effects, termed a channel 
 
 ```{figure} /assets/figures/diffmst-dmc.jpg
 :name: DMC
-:alt: DMC
+:alt: DMConsole
 :align: center
 
 Differentiable Mixing Console
@@ -34,7 +34,7 @@ The style of a mix can be broadly captured using features that describe its dyna
 
 **Audio Feature (AF) loss**: This loss comprises traditional MIR audio feature transforms. These features include the root mean square (RMS) and crest factor (CF), stereo width (SW), stereo imbalance (SI), and barkspectrum (BS) corresponding to the dynamics, spatialization, and spectral attributes, respectively. The system is optimized by calculating the weighted average of the mean squared error on the audio features that minimizes the distance between predicted mix and the reference song. For more information, refer to the paper. 
 
-**MRSTFT loss**: The multi-resolution short-time Fourier transform loss {cite} `engel2020ddsp` {cite}`steinmetz2020auraloss` is the sum of $L_1$ distance between STFT of ground truth and estimated waveforms measured in both log and linear domains at multiple resolutions, with window sizes $W \in [512, 2048,8192]$ and hop sizes $H =W/2$. This is a full-reference metric meaning that the two input signals must contain the same content.
+**MRSTFT loss**: The multi-resolution short-time Fourier transform loss {cite}`steinmetz2020auraloss` {cite}`engel2020ddsp` is the sum of $L_1$ distance between STFT of ground truth and estimated waveforms measured in both log and linear domains at multiple resolutions, with window sizes $W \in [512, 2048,8192]$ and hop sizes $H =W/2$. This is a full-reference metric meaning that the two input signals must contain the same content.
 
 ## Training
 
