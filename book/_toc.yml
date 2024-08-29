@@ -33,6 +33,7 @@ parts:
     - file: part_3/02_datasets.ipynb
     - file: part_3/03_models.ipynb
     - file: part_3/04_training.ipynb
+    - file: part_3/05_evaluate.ipynb
 
   - caption: Evaluation # part 4
     chapters:
