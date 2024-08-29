@@ -200,7 +200,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/03_fxnorm.html">Fx-Normalization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../part_2/methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
@@ -221,6 +221,8 @@
 
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="../../part_3/05_evaluate.html">Evaluation</a></li>
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
@@ -448,8 +450,8 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="equalization">
 <h1>Equalization<a class="headerlink" href="#equalization" title="Link to this heading">#</a></h1>
-<p>EQ is an integral part of music production and widely used in the production and consumption of music, where a filter bank is used as a corrective filter to reduce masking <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id8" title="Vesa Välimäki and Joshua D Reiss. All about audio equalization: solutions and frontiers. Applied Sciences, 6(5):129, 2016.">ValimakiR16</a>]</span>, i.e. overlapping of sound sources, or as a creative tool to shape sonic characteristics <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>. It consists of the modification of frequency content through positive or negative gains which change the harmonic and timbral characteristics of the audio.</p>
-<p>This is done for a variety of reasons, such as a corrective or technical filter to lessen masking within mixes, to change a speaker system’s frequency response, or as an artistic or creative tool while recording a particular audio source <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>EQ is an integral part of music production and widely used in the production and consumption of music, where a filter bank is used as a corrective filter to reduce masking <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id9" title="Vesa Välimäki and Joshua D Reiss. All about audio equalization: solutions and frontiers. Applied Sciences, 6(5):129, 2016.">ValimakiR16</a>]</span>, i.e. overlapping of sound sources, or as a creative tool to shape sonic characteristics <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id11" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>. It consists of the modification of frequency content through positive or negative gains which change the harmonic and timbral characteristics of the audio.</p>
+<p>This is done for a variety of reasons, such as a corrective or technical filter to lessen masking within mixes, to change a speaker system’s frequency response, or as an artistic or creative tool while recording a particular audio source <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id8" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
 <p>Thus, EQ is the process of altering or adjusting the amplitude of various frequencies of a sound. It can be used to enhance or sculpt a sound adding character or removing imperfections. In our video we show how equalisation of the vocal sound is used to add clarity and presence in the higher frequencies, around 3 kHz, along with warmth in the lower frequencies around 250 Hz (see Fig. \ref{snareeq}). The use of semantic descriptors to articulate technical changes is key to the process.</p>
 <figure class="align-center" id="snareeq">
 <img alt="Snare EQ" src="../../_images/Flare-Snare-Processing-2.png" />
@@ -459,7 +461,7 @@ document.write(`
 </figure>
 <p>equalizer is normally implemented via a filter bank whose coefficients are obtained from the designed cut-off frequency <span class="math notranslate nohighlight">\(f_{c}\)</span> and quality factor <span class="math notranslate nohighlight">\(Q\)</span>.
 EQ can be implemented in both the time-domain and the frequency-domain and is often performed through a gain <span class="math notranslate nohighlight">\(G\)</span> at a given <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span> <span id="id4">[<a class="reference internal" href="../../part_5/03_references.html#id5" title="Vincent Verfaille, U. Zölzer, and Daniel Arfib. Adaptive digital audio effects (A-DAFx): a new class of sound transformations. IEEE Transactions on Audio, Speech and Language Processing, 14(5):1817-1831, 2006.">VZolzerA06</a>]</span>.</p>
-<p>The filter bank consists of Finite Impulse Response (FIR) or Infinite Impulse Response (IIR) filters, whose main difference corresponds to the absence or presence of feedback loops <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id117" title="Patrick Gaydecki. Foundations of digital signal processing: theory, algorithms and hardware design. Volume 15. Iet, 2004.">Gay04</a>]</span>. The non-recursive FIR discrete difference equation is</p>
+<p>The filter bank consists of Finite Impulse Response (FIR) or Infinite Impulse Response (IIR) filters, whose main difference corresponds to the absence or presence of feedback loops <span id="id5">[<a class="reference internal" href="../../part_5/03_references.html#id118" title="Patrick Gaydecki. Foundations of digital signal processing: theory, algorithms and hardware design. Volume 15. Iet, 2004.">Gay04</a>]</span>. The non-recursive FIR discrete difference equation is</p>
 <div class="math notranslate nohighlight">
 \[
 y(n) = \sum_{k=0}^{M-1} a_{k} \cdot x(n-k)
@@ -470,7 +472,7 @@ The recursive IIR discrete difference equation is</p>
 \[
 y(n) = \sum_{k=0}^{M-1} a_{k} \cdot x(n-k) - \sum_{k=1}^{N} b_{k} \cdot y(n-k)
 \]</div>
-<p>The IIR systems are characterized by a weighted sum of delayed inputs and outputs. This feedback system consists of an input delay line of <span class="math notranslate nohighlight">\(M-\)</span>1 elements and an output delay line of <span class="math notranslate nohighlight">\(N\)</span> elements. The recursive coefficients are <span class="math notranslate nohighlight">\(b_{k}\)</span>.% <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
+<p>The IIR systems are characterized by a weighted sum of delayed inputs and outputs. This feedback system consists of an input delay line of <span class="math notranslate nohighlight">\(M-\)</span>1 elements and an output delay line of <span class="math notranslate nohighlight">\(N\)</span> elements. The recursive coefficients are <span class="math notranslate nohighlight">\(b_{k}\)</span>.% <span id="id6">[<a class="reference internal" href="../../part_5/03_references.html#id8" title="Marco A Martínez-Ramírez. Deep learning for audio effects modeling. PhD thesis, Queen Mary University of London, 2020.">MartinezRamirez20</a>]</span>.</p>
 <p>The various types of filters can be classified into the following classes <span id="id7">[<a class="reference internal" href="../../part_5/03_references.html#id2" title="Udo Zölzer. DAFX: digital audio effects. John Wiley and Sons, 2011.">Zolzer11</a>]</span>. These types of filters can be implemented via FIR or IIR filters whose coefficients determine <span class="math notranslate nohighlight">\(G\)</span>, <span class="math notranslate nohighlight">\(f_{c}\)</span> and <span class="math notranslate nohighlight">\(Q\)</span>. Most of the widely used EQs are based on the following filter types.</p>
 <section id="lowpass">
 <h2>Lowpass<a class="headerlink" href="#lowpass" title="Link to this heading">#</a></h2>

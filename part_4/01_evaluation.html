@@ -61,7 +61,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Listening Tests" href="02_listening-tests.html" />
-    <link rel="prev" title="Training" href="../part_3/04_training.html" />
+    <link rel="prev" title="Evaluation" href="../part_3/05_evaluate.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -198,7 +198,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_fxnorm.html">Fx-Normalization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
@@ -219,6 +219,8 @@
 
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="../part_3/05_evaluate.html">Evaluation</a></li>
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
@@ -449,16 +451,16 @@ Thus, perceptual listening tests have become the conventional way to evaluate th
 <h2>Objective Metrics<a class="headerlink" href="#objective-metrics" title="Link to this heading">#</a></h2>
 <p>Objective evaluation of music production tasks is not a straightforward task and remains an open field of research. For instance, no audio feature, loss function or deep learning embedding have yet been found that fully represent solely the mixing, post-production, or audio effects processing of an input audio. The existence of such a metric has the potential to significantly reduce the research and development time of automatic mixing systems. This, since in comparison with perceptual tests, the evaluation through metrics requires less time and effort.</p>
 <p>With this in mind, we can approximate the objective evaluation of automatic mixing systems through audio features that relate to the most common audio effects used during mixing. Since audio effects generally manipulate audio characteristics such as frequency content, dynamics, spatialization, timbre, or pitch, we can use audio features that are associated with these audio characteristics as a way to numerically evaluate mixes.</p>
-<p>Considering the shortcomings of an objective evaluation when comparing mixtures, these features should only be taken as an indicator of performance when testing our models. An example of such flaws is a lack of ability to capture production quality or aesthetic improvements, or a lack of evidence of artifacts within the mix <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id10" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>.</p>
-<p>We can use the following audio features <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id39" title="Joseph T Colonel and Joshua Reiss. Reverse engineering of a recording mix with differentiable digital signal processing. The Journal of the Acoustical Society of America, 150(1):608–619, 2021.">CR21</a>]</span>:</p>
+<p>Considering the shortcomings of an objective evaluation when comparing mixtures, these features should only be taken as an indicator of performance when testing our models. An example of such flaws is a lack of ability to capture production quality or aesthetic improvements, or a lack of evidence of artifacts within the mix <span id="id1">[<a class="reference internal" href="../part_5/03_references.html#id11" title="Ryan Stables, Joshua D. Reiss, and Brecht De Man. Intelligent Music Production. Focal Press, 2019.">SRDM19</a>]</span>.</p>
+<p>We can use the following audio features <span id="id2">[<a class="reference internal" href="../part_5/03_references.html#id40" title="Joseph T Colonel and Joshua Reiss. Reverse engineering of a recording mix with differentiable digital signal processing. The Journal of the Acoustical Society of America, 150(1):608–619, 2021.">CR21</a>]</span>:</p>
 <ul class="simple">
-<li><p><strong>Spectral features</strong> for EQ and reverberation: centroid, bandwidth, contrast, flatness, and roll-off <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id128" title="Geoffroy Peeters. A large set of audio features for sound description (similarity and classification) in the CUIDADO project. Analysis/Synthesis Team. IRCAM, Paris, France, 54(0):1–25, 2004.">Pee04</a>]</span></p></li>
-<li><p><strong>Spatialisation features</strong> for panning: the Panning Root Mean Square (RMS) <span id="id4">[<a class="reference internal" href="../part_5/03_references.html#id52" title="George Tzanetakis, Randy Jones, and Kirk McNally. Stereo panning features for classifying recording production style. In ISMIR, 441–444. 2007.">TJM07</a>]</span></p></li>
-<li><p><strong>Dynamic features</strong> for dynamic range processors: RMS level, dynamic spread and crest factor <span id="id5">[<a class="reference internal" href="../part_5/03_references.html#id51" title="Zheng Ma, Brecht De Man, Pedro DL Pestana, Dawn AA Black, and Joshua D Reiss. Intelligent multitrack dynamic range compression. Journal of the Audio Engineering Society, 63(6):412–426, 2015.">MDMP+15</a>]</span></p></li>
-<li><p><strong>Loudness features</strong> the integrated loudness level (LUFS) and peak loudness <span id="id6">[<a class="reference internal" href="../part_5/03_references.html#id55" title="Rec ITU-R. Itu-r bs. 1770-2, algorithms to measure audio programme loudness and true-peak audio level. International Telecommunications Union, Geneva, 2011.">IR11</a>]</span></p></li>
+<li><p><strong>Spectral features</strong> for EQ and reverberation: centroid, bandwidth, contrast, flatness, and roll-off <span id="id3">[<a class="reference internal" href="../part_5/03_references.html#id129" title="Geoffroy Peeters. A large set of audio features for sound description (similarity and classification) in the CUIDADO project. Analysis/Synthesis Team. IRCAM, Paris, France, 54(0):1–25, 2004.">Pee04</a>]</span></p></li>
+<li><p><strong>Spatialisation features</strong> for panning: the Panning Root Mean Square (RMS) <span id="id4">[<a class="reference internal" href="../part_5/03_references.html#id53" title="George Tzanetakis, Randy Jones, and Kirk McNally. Stereo panning features for classifying recording production style. In ISMIR, 441–444. 2007.">TJM07</a>]</span></p></li>
+<li><p><strong>Dynamic features</strong> for dynamic range processors: RMS level, dynamic spread and crest factor <span id="id5">[<a class="reference internal" href="../part_5/03_references.html#id52" title="Zheng Ma, Brecht De Man, Pedro DL Pestana, Dawn AA Black, and Joshua D Reiss. Intelligent multitrack dynamic range compression. Journal of the Audio Engineering Society, 63(6):412–426, 2015.">MDMP+15</a>]</span></p></li>
+<li><p><strong>Loudness features</strong> the integrated loudness level (LUFS) and peak loudness <span id="id6">[<a class="reference internal" href="../part_5/03_references.html#id56" title="Rec ITU-R. Itu-r bs. 1770-2, algorithms to measure audio programme loudness and true-peak audio level. International Telecommunications Union, Geneva, 2011.">IR11</a>]</span></p></li>
 </ul>
-<p>To capture the dynamics of audio effects information we can compute the running mean over a fixed number of past frames <span id="id7">[<a class="reference internal" href="../part_5/03_references.html#id52" title="George Tzanetakis, Randy Jones, and Kirk McNally. Stereo panning features for classifying recording production style. In ISMIR, 441–444. 2007.">TJM07</a>]</span>. We can calculate the mean absolute percentage error between the target and output features to get a better understanding of the overall relative error.</p>
-<p>Deep features such as the embedding output of the Fx encoder proposed in <span id="id8">[<a class="reference internal" href="../part_5/03_references.html#id77" title="Junghyun Koo, Marco A Martínez-Ramírez, Wei-Hsiang Liao, Stefan Uhlich, Kyogu Lee, and Yuki Mitsufuji. Music mixing style transfer: a contrastive learning approach to disentangle audio effects. arXiv preprint arXiv:2211.02247, 2022.">KMartinezRamirezL+22</a>]</span> could also be used as an indicator of similarity for audio effect information, although a further analysis of such embeddings is required. Likewise, this applies to general purpose deep features related to audio perception, such as the Fréchet Audio Distance <span id="id9">[<a class="reference internal" href="../part_5/03_references.html#id74" title="Kevin Kilgour, Mauricio Zuluaga, Dominik Roblek, and Matthew Sharifi. Fréchet audio distance: a reference-free metric for evaluating music enhancement algorithms. In INTERSPEECH, 2350–2354. 2019.">KZRS19</a>]</span>.</p>
+<p>To capture the dynamics of audio effects information we can compute the running mean over a fixed number of past frames <span id="id7">[<a class="reference internal" href="../part_5/03_references.html#id53" title="George Tzanetakis, Randy Jones, and Kirk McNally. Stereo panning features for classifying recording production style. In ISMIR, 441–444. 2007.">TJM07</a>]</span>. We can calculate the mean absolute percentage error between the target and output features to get a better understanding of the overall relative error.</p>
+<p>Deep features such as the embedding output of the Fx encoder proposed in <span id="id8">[<a class="reference internal" href="../part_5/03_references.html#id78" title="Junghyun Koo, Marco A Martínez-Ramírez, Wei-Hsiang Liao, Stefan Uhlich, Kyogu Lee, and Yuki Mitsufuji. Music mixing style transfer: a contrastive learning approach to disentangle audio effects. arXiv preprint arXiv:2211.02247, 2022.">KMartinezRamirezL+22</a>]</span> could also be used as an indicator of similarity for audio effect information, although a further analysis of such embeddings is required. Likewise, this applies to general purpose deep features related to audio perception, such as the Fréchet Audio Distance <span id="id9">[<a class="reference internal" href="../part_5/03_references.html#id75" title="Kevin Kilgour, Mauricio Zuluaga, Dominik Roblek, and Matthew Sharifi. Fréchet audio distance: a reference-free metric for evaluating music enhancement algorithms. In INTERSPEECH, 2350–2354. 2019.">KZRS19</a>]</span>.</p>
 </section>
 </section>
 
@@ -493,12 +495,12 @@ Thus, perceptual listening tests have become the conventional way to evaluate th
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../part_3/04_training.html"
+       href="../part_3/05_evaluate.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Training</p>
+        <p class="prev-next-title">Evaluation</p>
       </div>
     </a>
     <a class="right-next"

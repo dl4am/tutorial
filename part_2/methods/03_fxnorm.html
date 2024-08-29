@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Fx-Normalization: A Novel Approach to Automatic Music Mixing &#8212; Deep Learning for Automatic Mixing</title>
+    <title>Fx-Normalization &#8212; Deep Learning for Automatic Mixing</title>
   
   
   
@@ -198,7 +198,7 @@
 <li class="toctree-l1 current active has-children"><a class="reference internal" href="../04_methods.html">Methods</a><details open="open"><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2 current active"><a class="current reference internal" href="#">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2 current active"><a class="current reference internal" href="#">Fx-Normalization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
@@ -219,6 +219,8 @@
 
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="../../part_3/05_evaluate.html">Evaluation</a></li>
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
@@ -418,7 +420,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Fx-Normalization: A Novel Approach to Automatic Music Mixing</h1>
+    <h1>Fx-Normalization</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -432,7 +434,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#research-question">Research Question</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fx-normalization-method">The Fx-Normalization Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fx-normalization-process">Fx-Normalization Process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crafx2-architecture">CRAFx2 - Architecture</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listening-test">Listening Test</a></li>
@@ -448,8 +450,8 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="fx-normalization-a-novel-approach-to-automatic-music-mixing">
-<h1>Fx-Normalization: A Novel Approach to Automatic Music Mixing<a class="headerlink" href="#fx-normalization-a-novel-approach-to-automatic-music-mixing" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="fx-normalization">
+<h1>Fx-Normalization<a class="headerlink" href="#fx-normalization" title="Link to this heading">#</a></h1>
 <section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
 <p>Automatic music mixing using deep learning has shown promise, but previous methods have not yet achieved the level of professional audio engineers. While it’s been hypothesized that a large enough dataset could resolve this performance bottleneck, collecting dry (unprocessed) audio data is challenging, as it is unusual for musicians and record labels to provide multitrack dry recordings. Thus, it is believed that this limitation has affected the performance of existing models.</p>
@@ -466,7 +468,7 @@ document.write(`
 <p><span class="caption-number">Fig. 24 </span><span class="caption-text">Fx-Normalization for automatic music mixing</span><a class="headerlink" href="#fxnorm-diagram1" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The paper “Automatic music mixing with deep learning and out-of-domain data” introduces Fx-Normalization, a novel data preprocessing method that allows the use of out-of-domain data (wet multitrack recordings) to train supervised deep learning models for automatic mixing.</p>
+<p>The paper “Automatic music mixing with deep learning and out-of-domain data” <span id="id1">[<a class="reference internal" href="../../part_5/03_references.html#id77" title="Marco A Martínez-Ramírez, Wei-Hsiang Liao, Giorgio Fabbro, Stefan Uhlich, Chihiro Nagashima, and Yuki Mitsufuji. Automatic music mixing with deep learning and out-of-domain data. In ISMIR. 2022.">MartinezRamirezLF+22</a>]</span> introduces Fx-Normalization, a novel data preprocessing method that allows the use of out-of-domain data (wet multitrack recordings) to train supervised deep learning models for automatic mixing.</p>
 <p>The method can be summarized as follows:</p>
 <ol class="arabic simple">
 <li><p>Data preprocessing: The system analyzes a dataset of wet multitrack recordings, computing average statistics/features related to various audio effects.</p></li>
@@ -488,18 +490,18 @@ document.write(`
 <li><p>Reverberation: Use data augmentation to add reverberation stochastically. Thus, the process of learning to “get reverberation right” is carried out by the network as it learns to filter out the additional reverberation.</p></li>
 </ul>
 </section>
-<section id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Link to this heading">#</a></h2>
+<section id="crafx2-architecture">
+<h2>CRAFx2 - Architecture<a class="headerlink" href="#crafx2-architecture" title="Link to this heading">#</a></h2>
 <figure class="align-center" id="crafx2">
 <img alt="../../_images/crafx2.png" src="../../_images/crafx2.png" />
 <figcaption>
-<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Block diagram of the proposed model</span><a class="headerlink" href="#crafx2" title="Link to this image">#</a></p>
+<p><span class="caption-number">Fig. 25 </span><span class="caption-text">Block diagram of CRAFx2</span><a class="headerlink" href="#crafx2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
-<p>The paper proposes a new architecture based on models from audio effects modeling and source separation. It consists of:</p>
+<p>The paper proposes a new architecture, henceforth referred to as CRAFx2, which combines models from audio effects modeling and source separation. Specifically, it integrates the convolutional and recurrent audio effects modeling architecture (CRAFx) from <span id="id2">[<a class="reference internal" href="../../part_5/03_references.html#id6" title="Marco A Martínez-Ramírez, Emmanouil Benetos, and Joshua D Reiss. Deep learning for black-box modeling of audio effects. Applied Sciences, 10(2):638, 2020.">MartinezRamirezBR20</a>]</span> and Conv-TasNet <span id="id3">[<a class="reference internal" href="../../part_5/03_references.html#id7" title="Yi Luo and Nima Mesgarani. Conv-tasnet: surpassing ideal time–frequency magnitude masking for speech separation. IEEE/ACM transactions on audio, speech, and language processing, 27(8):1256–1266, 2019.">LM19</a>]</span>. It consists of:</p>
 <ol class="arabic simple">
 <li><p>Adaptive Front-end: Learns a filter-bank and frequency decomposition.</p></li>
-<li><p>Latent-space Mixer0: Uses stacked TCNs and BLSTMs to learn a mixing mask.</p></li>
+<li><p>Latent-space Mixer: Uses stacked TCNs and BLSTMs to learn a mixing mask.</p></li>
 <li><p>Mixing Back-End: Applies the mask, performs dynamic equalization and reverberation filtering, and uses a Squeeze-and-Excitation Block for loudness and panning.</p></li>
 </ol>
 </section>
@@ -596,7 +598,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#research-question">Research Question</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-fx-normalization-method">The Fx-Normalization Method</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#fx-normalization-process">Fx-Normalization Process</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#architecture">Architecture</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#crafx2-architecture">CRAFx2 - Architecture</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#loss-function">Loss Function</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#listening-test">Listening Test</a></li>

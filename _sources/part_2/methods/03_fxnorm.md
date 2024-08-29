@@ -1,4 +1,4 @@
-# Fx-Normalization: A Novel Approach to Automatic Music Mixing
+# Fx-Normalization
 
 ## Introduction
 
@@ -18,7 +18,7 @@ Fx-Normalization for automatic music mixing
 
 ```
 
-The paper "Automatic music mixing with deep learning and out-of-domain data" introduces Fx-Normalization, a novel data preprocessing method that allows the use of out-of-domain data (wet multitrack recordings) to train supervised deep learning models for automatic mixing.
+The paper "Automatic music mixing with deep learning and out-of-domain data" {cite}`martinez2022automatic` introduces Fx-Normalization, a novel data preprocessing method that allows the use of out-of-domain data (wet multitrack recordings) to train supervised deep learning models for automatic mixing.
 
 The method can be summarized as follows:
 
@@ -44,20 +44,19 @@ The method can be summarized as follows:
 - Dynamic Range Compression: Compute average onset peak level and standard deviation, then based on these values, apply further compression to upper-bound the peak levels of the stems.
 - Reverberation: Use data augmentation to add reverberation stochastically. Thus, the process of learning to "get reverberation right" is carried out by the network as it learns to filter out the additional reverberation.
 
-## Architecture
+## CRAFx2 - Architecture
 
 ```{figure} /assets/figures/fxnorm/crafx2.png
 :name: crafx2
 :align: center
 
-Block diagram of the proposed model
+Block diagram of CRAFx2
 
 ```
-
-The paper proposes a new architecture based on models from audio effects modeling and source separation. It consists of:
+The paper proposes a new architecture, henceforth referred to as CRAFx2, which combines models from audio effects modeling and source separation. Specifically, it integrates the convolutional and recurrent audio effects modeling architecture (CRAFx) from {cite}`martinez2020deep` and Conv-TasNet {cite}`luo2019conv`. It consists of:
 
 1. Adaptive Front-end: Learns a filter-bank and frequency decomposition.
-2. Latent-space Mixer0: Uses stacked TCNs and BLSTMs to learn a mixing mask.
+2. Latent-space Mixer: Uses stacked TCNs and BLSTMs to learn a mixing mask.
 3. Mixing Back-End: Applies the mask, performs dynamic equalization and reverberation filtering, and uses a Squeeze-and-Excitation Block for loudness and panning.
 
 ## Loss Function
@@ -69,7 +68,6 @@ The paper explores variations of a stereo-invariant loss function, incorporating
 The study uses both small (MUSDB18) and large (PrivateDataSet + MUSDB18) datasets of wet stems for training and validation. A private set of 18 dry multitrack songs is used for testing.
 
 ## Listening Test
-
 
 ```{figure} /assets/figures/fxnorm/fxnorm_listening_test_results.png
 :name: fxnorm_listening_test_results

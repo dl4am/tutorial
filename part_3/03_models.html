@@ -200,7 +200,7 @@
 <li class="toctree-l1 has-children"><a class="reference internal" href="../part_2/04_methods.html">Methods</a><details><summary><span class="toctree-toggle" role="presentation"><i class="fa-solid fa-chevron-down"></i></span></summary><ul>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/01_mixwaveunet.html">Mix-Wave-U-Net</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/02_dmc.html">Differentiable Mixing Console</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_fxnorm.html">Fx-Normalization: A Novel Approach to Automatic Music Mixing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../part_2/methods/03_fxnorm.html">Fx-Normalization</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../part_2/methods/04_diffmst.html">Differentable Mixing Style transfer</a></li>
 </ul>
 </details></li>
@@ -221,6 +221,8 @@
 
 
 
+
+<li class="toctree-l1"><a class="reference internal" href="05_evaluate.html">Evaluation</a></li>
 
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Evaluation</span></p>
@@ -504,74 +506,6 @@ If not you can do it with the following command:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/csteinmetz1/automix-toolkit
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Looking in indexes: https://pypi.org/simple, https://us-python.pkg.dev/colab-wheels/public/simple/
-Collecting git+https://github.com/csteinmetz1/automix-toolkit
-  Cloning https://github.com/csteinmetz1/automix-toolkit to /tmp/pip-req-build-1oqnd8_1
-  Running command git clone -q https://github.com/csteinmetz1/automix-toolkit /tmp/pip-req-build-1oqnd8_1
-Requirement already satisfied: torch in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.12.1+cu113)
-Requirement already satisfied: torchvision in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.13.1+cu113)
-Requirement already satisfied: torchaudio in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.12.1+cu113)
-Requirement already satisfied: pytorch_lightning in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.8.3.post1)
-Requirement already satisfied: tqdm in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (4.64.1)
-Requirement already satisfied: numpy in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.21.6)
-Requirement already satisfied: matplotlib in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (3.2.2)
-Requirement already satisfied: pedalboard in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.6.6)
-Requirement already satisfied: scipy in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (1.7.3)
-Requirement already satisfied: auraloss in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.2.2)
-Requirement already satisfied: wget in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (3.2)
-Requirement already satisfied: pyloudnorm in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.1.0)
-Requirement already satisfied: sklearn in /usr/local/lib/python3.8/dist-packages (from automix-toolkit==0.0.1) (0.0.post1)
-Requirement already satisfied: librosa in /usr/local/lib/python3.8/dist-packages (from auraloss-&gt;automix-toolkit==0.0.1) (0.8.1)
-Requirement already satisfied: pooch&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.6.0)
-Requirement already satisfied: packaging&gt;=20.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (21.3)
-Requirement already satisfied: joblib&gt;=0.14 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.2.0)
-Requirement already satisfied: soundfile&gt;=0.10.2 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.11.0)
-Requirement already satisfied: decorator&gt;=3.0.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (4.4.2)
-Requirement already satisfied: scikit-learn!=0.19.0,&gt;=0.14.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.0.2)
-Requirement already satisfied: resampy&gt;=0.2.2 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.4.2)
-Requirement already satisfied: numba&gt;=0.43.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.56.4)
-Requirement already satisfied: audioread&gt;=2.0.0 in /usr/local/lib/python3.8/dist-packages (from librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.0)
-Requirement already satisfied: setuptools in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (57.4.0)
-Requirement already satisfied: llvmlite&lt;0.40,&gt;=0.39.0dev0 in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (0.39.1)
-Requirement already satisfied: importlib-metadata in /usr/local/lib/python3.8/dist-packages (from numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (4.13.0)
-Requirement already satisfied: pyparsing!=3.0.5,&gt;=2.0.2 in /usr/local/lib/python3.8/dist-packages (from packaging&gt;=20.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.9)
-Requirement already satisfied: appdirs&gt;=1.3.0 in /usr/local/lib/python3.8/dist-packages (from pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.4.4)
-Requirement already satisfied: requests&gt;=2.19.0 in /usr/local/lib/python3.8/dist-packages (from pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.23.0)
-Requirement already satisfied: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.24.3)
-Requirement already satisfied: idna&lt;3,&gt;=2.5 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.10)
-Requirement already satisfied: certifi&gt;=2017.4.17 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2022.9.24)
-Requirement already satisfied: chardet&lt;4,&gt;=3.0.2 in /usr/local/lib/python3.8/dist-packages (from requests&gt;=2.19.0-&gt;pooch&gt;=1.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.0.4)
-Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /usr/local/lib/python3.8/dist-packages (from scikit-learn!=0.19.0,&gt;=0.14.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.1.0)
-Requirement already satisfied: cffi&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from soundfile&gt;=0.10.2-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (1.15.1)
-Requirement already satisfied: pycparser in /usr/local/lib/python3.8/dist-packages (from cffi&gt;=1.0-&gt;soundfile&gt;=0.10.2-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (2.21)
-Requirement already satisfied: zipp&gt;=0.5 in /usr/local/lib/python3.8/dist-packages (from importlib-metadata-&gt;numba&gt;=0.43.0-&gt;librosa-&gt;auraloss-&gt;automix-toolkit==0.0.1) (3.10.0)
-Requirement already satisfied: python-dateutil&gt;=2.1 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (2.8.2)
-Requirement already satisfied: kiwisolver&gt;=1.0.1 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (1.4.4)
-Requirement already satisfied: cycler&gt;=0.10 in /usr/local/lib/python3.8/dist-packages (from matplotlib-&gt;automix-toolkit==0.0.1) (0.11.0)
-Requirement already satisfied: six&gt;=1.5 in /usr/local/lib/python3.8/dist-packages (from python-dateutil&gt;=2.1-&gt;matplotlib-&gt;automix-toolkit==0.0.1) (1.15.0)
-Requirement already satisfied: future&gt;=0.16.0 in /usr/local/lib/python3.8/dist-packages (from pyloudnorm-&gt;automix-toolkit==0.0.1) (0.16.0)
-Requirement already satisfied: lightning-utilities==0.3.* in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.3.0)
-Requirement already satisfied: PyYAML&gt;=5.4 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (6.0)
-Requirement already satisfied: fsspec[http]&gt;2021.06.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (2022.11.0)
-Requirement already satisfied: typing-extensions&gt;=4.0.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (4.1.1)
-Requirement already satisfied: torchmetrics&gt;=0.7.0 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.11.0)
-Requirement already satisfied: tensorboardX&gt;=2.2 in /usr/local/lib/python3.8/dist-packages (from pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.5.1)
-Requirement already satisfied: fire in /usr/local/lib/python3.8/dist-packages (from lightning-utilities==0.3.*-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (0.4.0)
-Requirement already satisfied: aiohttp!=4.0.0a0,!=4.0.0a1 in /usr/local/lib/python3.8/dist-packages (from fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (3.8.3)
-Requirement already satisfied: aiosignal&gt;=1.1.2 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.3.1)
-Requirement already satisfied: async-timeout&lt;5.0,&gt;=4.0.0a3 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (4.0.2)
-Requirement already satisfied: attrs&gt;=17.3.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (22.1.0)
-Requirement already satisfied: multidict&lt;7.0,&gt;=4.5 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (6.0.2)
-Requirement already satisfied: frozenlist&gt;=1.1.1 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.3.3)
-Requirement already satisfied: yarl&lt;2.0,&gt;=1.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (1.8.1)
-Requirement already satisfied: charset-normalizer&lt;3.0,&gt;=2.0 in /usr/local/lib/python3.8/dist-packages (from aiohttp!=4.0.0a0,!=4.0.0a1-&gt;fsspec[http]&gt;2021.06.0-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.1.1)
-Requirement already satisfied: protobuf&lt;=3.20.1,&gt;=3.8.0 in /usr/local/lib/python3.8/dist-packages (from tensorboardX&gt;=2.2-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (3.19.6)
-Requirement already satisfied: termcolor in /usr/local/lib/python3.8/dist-packages (from fire-&gt;lightning-utilities==0.3.*-&gt;pytorch_lightning-&gt;automix-toolkit==0.0.1) (2.1.1)
-Requirement already satisfied: pillow!=8.3.*,&gt;=5.3.0 in /usr/local/lib/python3.8/dist-packages (from torchvision-&gt;automix-toolkit==0.0.1) (7.1.2)
 </pre></div>
 </div>
 </div>
@@ -945,73 +879,73 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
     (conv): Conv1d(576, 264, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(264, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=264)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (1): UpsamplingBlock(
     (conv): Conv1d(528, 240, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(240, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=240)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (2): UpsamplingBlock(
     (conv): Conv1d(480, 216, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(216, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=216)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (3): UpsamplingBlock(
     (conv): Conv1d(432, 192, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(192, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=192)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (4): UpsamplingBlock(
     (conv): Conv1d(384, 168, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(168, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=168)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (5): UpsamplingBlock(
     (conv): Conv1d(336, 144, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(144, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=144)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (6): UpsamplingBlock(
     (conv): Conv1d(288, 120, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(120, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=120)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (7): UpsamplingBlock(
     (conv): Conv1d(240, 96, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(96, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=96)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (8): UpsamplingBlock(
     (conv): Conv1d(192, 72, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(72, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=72)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (9): UpsamplingBlock(
     (conv): Conv1d(144, 48, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(48, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=48)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (10): UpsamplingBlock(
     (conv): Conv1d(96, 24, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=24)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
   (11): UpsamplingBlock(
     (conv): Conv1d(48, 24, kernel_size=(13,), stride=(1,), padding=(6,))
     (bn): BatchNorm1d(24, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
     (prelu): PReLU(num_parameters=24)
-    (us): Upsample(scale_factor=2.0, mode=nearest)
+    (us): Upsample(scale_factor=2.0, mode=&#39;nearest&#39;)
   )
 )
 </pre></div>
@@ -1114,21 +1048,21 @@ It is composed of a few basic submodules. It starts with a <code class="docutils
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2022-12-01 17:45:50--  https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/encoder.ckpt
-Resolving huggingface.co (huggingface.co)... 54.147.99.175, 34.227.196.80, 2600:1f18:147f:e800:3df1:c2fc:20aa:9b45, ...
-Connecting to huggingface.co (huggingface.co)|54.147.99.175|:443... connected.
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2024-08-29 16:41:32--  https://huggingface.co/csteinmetz1/automix-toolkit/resolve/main/encoder.ckpt
+Resolving huggingface.co (huggingface.co)... 2600:9000:2751:e200:17:b174:6d00:93a1, 2600:9000:2751:9e00:17:b174:6d00:93a1, 2600:9000:2751:cc00:17:b174:6d00:93a1, ...
+Connecting to huggingface.co (huggingface.co)|2600:9000:2751:e200:17:b174:6d00:93a1|:443... connected.
 HTTP request sent, awaiting response... 302 Found
-Location: https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/90c13ab981715e1fc1ae079f15fb6da36d61d6aad29ae5dddd4d3bfd4594546a?response-content-disposition=attachment%3B%20filename%3D%22encoder.ckpt%22&amp;Expires=1670165721&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4tbGZzLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2VjL2VlL2VjZWUzOGRmMDQ3ZTNmMmRiMWJkOGMzMWE3NDJmM2EwOGY1NTc0NzBjZDY3Y2I0ODc0MDJhOWMzZWQ5MWI1ZWEvOTBjMTNhYjk4MTcxNWUxZmMxYWUwNzlmMTVmYjZkYTM2ZDYxZDZhYWQyOWFlNWRkZGQ0ZDNiZmQ0NTk0NTQ2YT9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmVuY29kZXIuY2twdCUyMiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY3MDE2NTcyMX19fV19&amp;Signature=OM9U4xAha2LJ6ZlsIeMttFhCj0R1H7lbUc8upKhS8ugMNRRLzV4mtBnpou568p0cIPK~VEXdd45hc45nhhMI548-IDjjiKglfp72TzTQ4mPQbJJplnDHHUuVoFM8mjgTnvik21kuvzllGxED0x0Pomf7RC4sa1GNpadwgL~YiPzL-12i2SfO72zlhEJt03PpVBpDzOGUu-QUK1uQZR1myWnK1B2F--SaEmz7JZ~04pmNjmQ5Rspn-GkSxtRI0oUBrenC5V7SBpWoZx53i2ESsxl9gIFuOS~5AJStW-LdgdHsUOeg44vW5svmGwJbmg48MxqbopcYWJx6-2LVOSZwjA__&amp;Key-Pair-Id=KVTP0A1DKRTAX [following]
---2022-12-01 17:45:50--  https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/90c13ab981715e1fc1ae079f15fb6da36d61d6aad29ae5dddd4d3bfd4594546a?response-content-disposition=attachment%3B%20filename%3D%22encoder.ckpt%22&amp;Expires=1670165721&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9jZG4tbGZzLmh1Z2dpbmdmYWNlLmNvL3JlcG9zL2VjL2VlL2VjZWUzOGRmMDQ3ZTNmMmRiMWJkOGMzMWE3NDJmM2EwOGY1NTc0NzBjZDY3Y2I0ODc0MDJhOWMzZWQ5MWI1ZWEvOTBjMTNhYjk4MTcxNWUxZmMxYWUwNzlmMTVmYjZkYTM2ZDYxZDZhYWQyOWFlNWRkZGQ0ZDNiZmQ0NTk0NTQ2YT9yZXNwb25zZS1jb250ZW50LWRpc3Bvc2l0aW9uPWF0dGFjaG1lbnQlM0IlMjBmaWxlbmFtZSUzRCUyMmVuY29kZXIuY2twdCUyMiIsIkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTY3MDE2NTcyMX19fV19&amp;Signature=OM9U4xAha2LJ6ZlsIeMttFhCj0R1H7lbUc8upKhS8ugMNRRLzV4mtBnpou568p0cIPK~VEXdd45hc45nhhMI548-IDjjiKglfp72TzTQ4mPQbJJplnDHHUuVoFM8mjgTnvik21kuvzllGxED0x0Pomf7RC4sa1GNpadwgL~YiPzL-12i2SfO72zlhEJt03PpVBpDzOGUu-QUK1uQZR1myWnK1B2F--SaEmz7JZ~04pmNjmQ5Rspn-GkSxtRI0oUBrenC5V7SBpWoZx53i2ESsxl9gIFuOS~5AJStW-LdgdHsUOeg44vW5svmGwJbmg48MxqbopcYWJx6-2LVOSZwjA__&amp;Key-Pair-Id=KVTP0A1DKRTAX
-Resolving cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)... 13.249.85.23, 13.249.85.12, 13.249.85.116, ...
-Connecting to cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)|13.249.85.23|:443... connected.
+Location: https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/90c13ab981715e1fc1ae079f15fb6da36d61d6aad29ae5dddd4d3bfd4594546a?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27encoder.ckpt%3B+filename%3D%22encoder.ckpt%22%3B&amp;Expires=1725176471&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNTE3NjQ3MX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9yZXBvcy9lYy9lZS9lY2VlMzhkZjA0N2UzZjJkYjFiZDhjMzFhNzQyZjNhMDhmNTU3NDcwY2Q2N2NiNDg3NDAyYTljM2VkOTFiNWVhLzkwYzEzYWI5ODE3MTVlMWZjMWFlMDc5ZjE1ZmI2ZGEzNmQ2MWQ2YWFkMjlhZTVkZGRkNGQzYmZkNDU5NDU0NmE%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&amp;Signature=DwbNKNJC-jgNqziEOYqUuU4t0i0T-3ZRH3Zx0fmO-TRwLD8HFSKZSg0PFpu%7ExmbakSF0d%7EfTRIsNq7Q5qi0saUswTUWQSEELZB%7EVOTBBe5IY10rYFOUjSaaOPsMj%7EFes52vicMWcRD1dWaGgoqxY98RyT1DtcIoGFp-FC9QAYYrHK-vHV8P7ZD9jDKptlAaIWv9MG9TLtJSSVIFz3iEkWrdCy5ylklwijgSrENluSiefNmStg4z9T8j5Or42F4-KsLE2zmn8jyvRoMOa8ClxlzlhJ5PCx2lxL5VxC%7En7vZDAQyIuM7BSj4rPueylWxaDOXtHXgf84oHsNdPTRzTyrA__&amp;Key-Pair-Id=K3ESJI6DHPFC7 [following]
+--2024-08-29 16:41:32--  https://cdn-lfs.huggingface.co/repos/ec/ee/ecee38df047e3f2db1bd8c31a742f3a08f557470cd67cb487402a9c3ed91b5ea/90c13ab981715e1fc1ae079f15fb6da36d61d6aad29ae5dddd4d3bfd4594546a?response-content-disposition=inline%3B+filename*%3DUTF-8%27%27encoder.ckpt%3B+filename%3D%22encoder.ckpt%22%3B&amp;Expires=1725176471&amp;Policy=eyJTdGF0ZW1lbnQiOlt7IkNvbmRpdGlvbiI6eyJEYXRlTGVzc1RoYW4iOnsiQVdTOkVwb2NoVGltZSI6MTcyNTE3NjQ3MX19LCJSZXNvdXJjZSI6Imh0dHBzOi8vY2RuLWxmcy5odWdnaW5nZmFjZS5jby9yZXBvcy9lYy9lZS9lY2VlMzhkZjA0N2UzZjJkYjFiZDhjMzFhNzQyZjNhMDhmNTU3NDcwY2Q2N2NiNDg3NDAyYTljM2VkOTFiNWVhLzkwYzEzYWI5ODE3MTVlMWZjMWFlMDc5ZjE1ZmI2ZGEzNmQ2MWQ2YWFkMjlhZTVkZGRkNGQzYmZkNDU5NDU0NmE%7EcmVzcG9uc2UtY29udGVudC1kaXNwb3NpdGlvbj0qIn1dfQ__&amp;Signature=DwbNKNJC-jgNqziEOYqUuU4t0i0T-3ZRH3Zx0fmO-TRwLD8HFSKZSg0PFpu%7ExmbakSF0d%7EfTRIsNq7Q5qi0saUswTUWQSEELZB%7EVOTBBe5IY10rYFOUjSaaOPsMj%7EFes52vicMWcRD1dWaGgoqxY98RyT1DtcIoGFp-FC9QAYYrHK-vHV8P7ZD9jDKptlAaIWv9MG9TLtJSSVIFz3iEkWrdCy5ylklwijgSrENluSiefNmStg4z9T8j5Or42F4-KsLE2zmn8jyvRoMOa8ClxlzlhJ5PCx2lxL5VxC%7En7vZDAQyIuM7BSj4rPueylWxaDOXtHXgf84oHsNdPTRzTyrA__&amp;Key-Pair-Id=K3ESJI6DHPFC7
+Resolving cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)... 2600:9000:20c4:4800:11:f807:5180:93a1, 2600:9000:20c4:b000:11:f807:5180:93a1, 2600:9000:20c4:8400:11:f807:5180:93a1, ...
+Connecting to cdn-lfs.huggingface.co (cdn-lfs.huggingface.co)|2600:9000:20c4:4800:11:f807:5180:93a1|:443... connected.
 HTTP request sent, awaiting response... 200 OK
 Length: 48624134 (46M) [binary/octet-stream]
 Saving to: ‘encoder.ckpt’
 
-encoder.ckpt        100%[===================&gt;]  46.37M  29.7MB/s    in 1.6s    
+encoder.ckpt        100%[===================&gt;]  46.37M  15.3MB/s    in 3.0s    
 
-2022-12-01 17:45:52 (29.7 MB/s) - ‘encoder.ckpt’ saved [48624134/48624134]
+2024-08-29 16:41:37 (15.3 MB/s) - ‘encoder.ckpt’ saved [48624134/48624134]
 </pre></div>
 </div>
 </div>
@@ -1224,6 +1158,10 @@ ShortChunkCNN_Res(
   (relu): ReLU()
   (resample): Resample()
 )
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/home/martinez/Documents/anaconda3/envs/dafx24/lib/python3.9/site-packages/torchaudio/functional/functional.py:584: UserWarning: At least one mel filterbank has all zero values. The value for `n_mels` (128) may be set too high. Or, the value for `n_freqs` (257) may be set too low.
+  warnings.warn(
 </pre></div>
 </div>
 </div>
@@ -1494,10 +1432,10 @@ We get 4 embeddings of size 512: torch.Size([2, 4, 512])
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 gain dB:-11.366  pan:0.511
-1 gain dB:-11.391  pan:0.510
-2 gain dB:-11.411  pan:0.513
-3 gain dB:-11.231  pan:0.509
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 gain dB:-11.733  pan:0.504
+1 gain dB:-11.911  pan:0.509
+2 gain dB:-11.903  pan:0.509
+3 gain dB:-11.732  pan:0.505
 </pre></div>
 </div>
 </div>
